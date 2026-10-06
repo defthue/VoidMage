@@ -1,0 +1,115 @@
+{
+  "kind": "wasp",
+  "title": "Wasp",
+  "blend": "C:\\Users\\skipp\\Desktop\\Speelboord Studios\\Easy Animated Enemy Pack - Jan 2019\\Easy Animated Enemy Pack - Jan 2019\\Blends\\Wasp.blend",
+  "fps": 24.0,
+  "armature": "Armature",
+  "root_bone": "Root",
+  "bones": [
+    "Root",
+    "Body",
+    "Thorax",
+    "Neck",
+    "Head",
+    "Wing.R",
+    "Wing.L",
+    "Abdomen",
+    "Abdomen2",
+    "Abdomen3",
+    "Sting",
+    "BottomLeg1.R",
+    "BottomLeg2.R",
+    "BottomLeg3.R",
+    "MidLeg1.R",
+    "MidLeg2.R",
+    "MidLeg3.R",
+    "TopLeg1.R",
+    "TopLeg2.R",
+    "TopLeg3.R",
+    "BottomLeg1.L",
+    "BottomLeg2.L",
+    "BottomLeg3.L",
+    "MidLeg1.L",
+    "MidLeg2.L",
+    "MidLeg3.L",
+    "TopLeg1.L",
+    "TopLeg2.L",
+    "TopLeg3.L"
+  ],
+  "body_mesh": "Wasp",
+  "outline_mesh": "Wasp_Outline",
+  "materials": {
+    "MonsterWaspYellow": {
+      "pack_slot": "Yellow",
+      "linear": [
+        0.8,
+        0.543913,
+        0.111491
+      ]
+    },
+    "MonsterWaspBlack": {
+      "pack_slot": "Black",
+      "linear": [
+        0.03741,
+        0.03741,
+        0.03741
+      ]
+    },
+    "MonsterWaspLightBlue": {
+      "pack_slot": "LightBlue",
+      "linear": [
+        0.330437,
+        0.688818,
+        0.8
+      ]
+    },
+    "MonsterWaspOrange": {
+      "pack_slot": "Orange",
+      "linear": [
+        0.615173,
+        0.090984,
+        0.007396
+      ]
+    }
+  },
+  "mat_prefix": "MonsterWasp",
+  "rest_min": [
+    -1.2153,
+    -2.6034,
+    0.8597
+  ],
+  "rest_max": [
+    1.2764,
+    1.2525,
+    3.5283
+  ],
+  "rest_size": [
+    2.4918,
+    3.8559,
+    2.6685
+  ],
+  "rest_max_dim": 3.8559,
+  "clips": [
+    {
+      "name": "attack",
+      "action": "Wasp_Attack",
+      "start": 0,
+      "end": 18,
+      "seconds": 0.75
+    },
+    {
+      "name": "death",
+      "action": "Wasp_Death",
+      "start": 0,
+      "end": 18,
+      "seconds": 0.75
+    },
+    {
+      "name": "flying",
+      "action": "Wasp_Flying",
+      "start": 0,
+      "end": 36,
+      "seconds": 1.5
+    }
+  ]
+}

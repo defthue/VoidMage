@@ -1,0 +1,6 @@
+// A skeleton under an ice shard's slow: a cold blue unlit tint while the slow lasts. Placeholder.
+Layer0
+{
+	shader "shaders/white_unlit.shader"
+	g_vFlashColor "[0.450000 0.700000 1.200000 0.000000]"
+}

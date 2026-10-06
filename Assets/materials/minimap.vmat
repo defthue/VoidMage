@@ -1,0 +1,16 @@
+// The minimap slabs (Code/UI/DungeonMinimap.cs): flat vertex colour, unlit, no fog. Every texture
+// input is filled explicitly: a slot left empty on a custom shader binds the purple error texture.
+Layer0
+{
+	shader "shaders/minimap_unlit.shader"
+
+	TextureColor "[1.000000 1.000000 1.000000 1.000000]"
+	TextureNormal "[0.500000 0.500000 1.000000 1.000000]"
+	TextureMetalness "[0.000000 0.000000 0.000000 0.000000]"
+	TextureRoughness "[1.000000 1.000000 1.000000 1.000000]"
+	TextureAmbientOcclusion "[1.000000 1.000000 1.000000 1.000000]"
+
+	g_flMinimapShadeMin "0.420000"
+	g_flMinimapEdgeStart "0.400000"
+	g_flMinimapEdgeEnd "0.490000"
+}

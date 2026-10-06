@@ -1,0 +1,98 @@
+// The staff's big gem: the sword gem recipe scaled up, slowly alive inside, overbright core so it
+// reads in a black corridor and feeds bloom.
+
+Layer0
+{
+	shader "shaders/heden_gem.shader"
+
+	//---- Albedo ----
+	F_USE_TEXTURE 1
+
+	//---- Toon Lighting ----
+	F_USE_RAMP 1
+
+	//---- Albedo ----
+	AlbedoTexture "textures/dungeontextures/dungeons_texture_01.png"
+	g_vTextureTint "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Debug ----
+	g_flDebugMode "0.000"
+
+	//---- Dynamic Lights ----
+	g_flDynamicLightBands "4.000"
+	g_flDynamicLightBandSoftness "0.080"
+	g_flDynamicLightOuterBandScale "1.000"
+	g_flDynamicLightOuterSoftness "0.400"
+	g_flDynamicLightStrength "1.000"
+	g_flDynamicLightWrap "1.000"
+
+	//---- Rim Light ----
+	g_flRimStrength "0.000"
+
+	//---- Ice ----
+	IceNoise "materials/water_noise_01.png"
+
+	//---- Ice Interior ----
+	g_flIceDepth "10.000"
+	g_flInteriorScale "14.000"
+	g_vInteriorTint "[1.000000 0.450000 0.200000 0.000000]"
+	g_flInteriorStrength "0.750"
+	g_flInteriorThreshold "0.550"
+	g_flInteriorSoftness "0.060"
+	g_flInteriorRidge "0.600"
+	g_flInteriorReplace "1.000"
+	g_flInteriorDrift "0.300"
+	g_flInteriorStretch "1.500"
+	g_flInteriorStreaks "0.000"
+	g_flInteriorAngle "0.000"
+	g_flInteriorFollowAxis "0.000"
+
+	//---- Ice Gloss ----
+	g_flGlossStrength "0.000"
+
+	//---- Ice Glint ----
+	g_vGlintTint "[1.000000 0.950000 0.900000 0.000000]"
+	g_flGlintIntensity "1.300"
+	g_flGlintPower "28.000"
+	g_flGlintThreshold "0.450"
+	g_flGlintSoftness "0.080"
+
+	//---- Gem ----
+	g_flPatternObjectSpace "1.000"
+	g_flRefraction "0.600"
+	g_vEdgeTint "[0.350000 0.020000 0.060000 0.000000]"
+	g_flEdgeStrength "0.800"
+	g_flEdgePower "2.000"
+	g_vCoreColor "[1.000000 0.250000 0.150000 0.000000]"
+	g_flCoreGlow "1.300"
+	g_flCoreFocus "2.000"
+	g_flTwinkle "0.400"
+	g_flTwinkleSpeed "0.300"
+
+	//---- Style Test ----
+	DetailTexture "materials/style_detail/detail_paper.png"
+	g_flCrushHuePreserve "0.500"
+	g_flCrushLevels "64.000"
+	g_flDetailObjectSpace "1.000"
+	g_flDetailScale "16.000"
+	g_flDetailStrength "0.000"
+	g_flDetailWobble "0.000"
+	g_flDetailWobbleScale "16.000"
+
+	//---- Toon Lighting ----
+	g_flAmbientFloor "0.150"
+	g_flAmbientLift "0.150"
+	g_flBandSoftness "0.005"
+	g_flBandThreshold "0.500"
+	g_flCrispSunShadows "1.000"
+	g_flShadowBandSoftness "0.030"
+	g_flShadowNormalOffset "2.000"
+	g_flShadowSmoothing "1.500"
+	g_flSunColorInfluence "0.400"
+
+	//---- Toon Ramp ----
+	g_flRampBrightness "1.000"
+	g_flRampShadowPoint "0.250"
+	ToonRamp "materials/heden_ramp_day.png"
+	ToonRampNight "materials/heden_ramp_night.png"
+}

@@ -1,0 +1,61 @@
+@using System
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Boss
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( Shown )
+	{
+		<div class="boss @( Dying ? "dying" : "" )">
+			<div class="name">The Bone Colossus</div>
+			<div class="row">
+				<div class="pips">
+					<div class="pip @( Guarded ? "" : "gone" )"></div>
+					<div class="pip"></div>
+				</div>
+				<div class="skull @( Guarded ? "guarded" : "" )">
+					<div class="dfk dfk-bar-20"></div>
+					<div class="fill" style="width: @SkullPercent%"></div>
+					<div class="guard" style="width: @GuardPercent%"></div>
+				</div>
+			</div>
+			<div class="hands">
+				<div class="hand left @( HandL is { Dead: true } ? "dead" : "" )">
+					<div class="dfk dfk-bar-11"></div>
+					<div class="fill" style="width: @Percent( HandL )%"></div>
+				</div>
+				<div class="hand right @( HandR is { Dead: true } ? "dead" : "" )">
+					<div class="dfk dfk-bar-11"></div>
+					<div class="fill" style="width: @Percent( HandR )%"></div>
+				</div>
+			</div>
+		</div>
+	}
+</root>
+
+@code {
+	// The boss's bars: the skull's across the top in two layers (the bone-white first layer drains over the red
+	// health under it; it goes whole when both hands are destroyed, and its loss is phase 2; two pips count the
+	// layers left), and one bar per hand. Fed by the synced fields, so every peer's HUD agrees.
+	private BossBrain Brain => BossBrain.Current;
+	private BossPart Skull => Brain?.Skull;
+	private BossPart HandL => Brain?.HandL;
+	private BossPart HandR => Brain?.HandR;
+
+	private bool Shown => Brain.IsValid() && Brain.Phase is not BossPhase.Dormant && Brain.Phase is not BossPhase.Waking && Skull.IsValid();
+	private bool Dying => Brain.IsValid() && Brain.Phase == BossPhase.Dead;
+	private bool Guarded => Skull is { Guarded: true };
+	private int SkullPercent => Percent( Skull );
+	private int GuardPercent => Skull.IsValid() ? (int)MathF.Round( Skull.Guard01 * 100f ) : 0;
+
+	private static int Percent( BossPart p ) => p.IsValid() ? (int)MathF.Round( p.Health01 * 100f ) : 0;
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Shown, Dying, Guarded, SkullPercent, GuardPercent,
+			HashCode.Combine( Percent( HandL ), HandL is { Dead: true }, Percent( HandR ), HandR is { Dead: true } ) );
+	}
+}

@@ -1,0 +1,62 @@
+@using System
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Run
+@using VoidMage.Village
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( Visible )
+	{
+		<div class="prompt @( Full ? "full" : "" ) @( Refused ? "refused" : "" )">
+			<div class="dfk dfk-plate-40"></div>
+			<div class="key"><div class="dfk dfk-key"></div><div class="cap">E</div></div>
+			<div class="text">@Label</div>
+			@if ( ForSale.IsValid() )
+			{
+				<div class="price"><div class="gem">◆</div><div class="amount">@ForSale.Price</div></div>
+			}
+			@if ( Full )
+			{
+				<div class="note">@Note</div>
+			}
+		</div>
+	}
+</root>
+
+@code {
+	// The pickup the local player looks at (ScrollPickup / PotionPickup.UpdateFocus, run by PotionDrinker): the key and
+	// its name under the crosshair, "full" when a potion slot cannot take another. A scroll the player has never had
+	// reads only "Break the seal"; a known one names itself and its one line, with the reason beside it when the staff
+	// cannot take it (three copies, the spell already held). On the shop's table it reads "Buy Scroll of Hound ◆ 40", with the reason
+	// beside it when the sale would be refused.
+	private ShopItem ForSale => VillageShop.Focused;
+	private Shopkeeper Keeper => Shopkeeper.Focused;
+	private SkinPickup Weapon => SkinPickup.Focused;
+	private ScrollPickup Scroll => ScrollPickup.Focused;
+	private VoidMage.Npc.CritterPickup Frog => VoidMage.Npc.CritterPickup.Focused;
+	private VoidMage.Dungeon.ManaShrine Shrine => VoidMage.Dungeon.ManaShrine.Focused;
+	private PotionPickup Focused => PotionPickup.Focused;
+	private PlayerPotions Potions => PlayerPotions.Local;
+	private PotionDrinker Drinker => PotionDrinker.Local;
+
+	private bool AnyFocus => ForSale.IsValid() || Keeper.IsValid() || Weapon.IsValid() || Scroll.IsValid() || Frog.IsValid() || Shrine.IsValid() || Focused.IsValid();
+	private bool Visible => AnyFocus && !PotionDrinker.IsDrinking && !SpellLoadout.IsOpen && !ShopkeeperChat.IsOpen && !RunUi.Blocking;
+	private string Label => ForSale.IsValid() ? $"Buy {ForSale.Label}" : Keeper.IsValid() ? Keeper.Label : Weapon.IsValid() ? Weapon.Label : Scroll.IsValid() ? Scroll.Label : Frog.IsValid() ? Frog.Label : Shrine.IsValid() ? Shrine.Label : Focused?.Label ?? "";
+	// why E would do nothing: the shop's reason (no shards, no room), a topped-up staff at a shrine, a full potion slot
+	private string Note => ForSale.IsValid() ? VillageShop.WhyNot( ForSale ) : Scroll.IsValid() ? Scroll.WhyNot : Full ? "full" : "";
+	private bool Full => ForSale.IsValid() ? VillageShop.WhyNot( ForSale ) != ""
+		: Keeper.IsValid() ? false
+		: Shrine.IsValid() ? VoidMage.Dungeon.ManaShrine.PlayerIsFull
+		: Scroll.IsValid() ? Scroll.WhyNot != ""
+		: !Weapon.IsValid() && !Scroll.IsValid() && !Frog.IsValid() && Focused.IsValid() && Potions is not null && Potions.IsFull( Focused.Kind );
+	private bool Refused => (Drinker is not null && Time.Now - Drinker.LastRefusedAt < 0.3f) || Time.Now - VillageShop.LastRefusedAt < 0.3f || Time.Now - ScrollPickup.LastRefusedAt < 0.3f;
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Visible, Label, Full, Refused, Note, ForSale?.Price );
+	}
+}

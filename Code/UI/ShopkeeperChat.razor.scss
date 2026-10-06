@@ -1,0 +1,240 @@
+@import "Themes/_iron_kit.scss";
+
+// Placeholder look (the full UI design sweep replaces it): the inventory's colours and boxes. All motion is set inline
+// from the razor; this file only says where things sit.
+
+ShopkeeperChat {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	justify-content: center;
+	align-items: flex-end;
+	font-family: $df-body;
+	font-weight: 600;
+	color: $df-text;
+	text-shadow: 0px 1px 2px rgba( 0, 0, 0, 0.9 );
+
+	.box {
+		position: relative;
+		pointer-events: all;
+		flex-direction: row;
+		// one size, always: nothing inside may push it about. It was 1040 wide and centred; it grew 40 to the LEFT only
+		// (the right margin pulls the centred box over by half of it), so his antlers sit inside it and nothing else moved.
+		width: 1080px;
+		height: 422px;
+		flex-shrink: 0;
+		margin-right: 40px;
+		margin-bottom: 64px;
+		padding: 18px 24px 18px 0px;
+		background-color: #121318f2;
+		border: 1px solid #3e4350;
+		border-radius: 8px;
+		box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.7);
+	}
+
+	// ---------------------------------------------------------------- his face, over the box's top left corner
+
+	.side {
+		position: relative;
+		width: 290px;
+		flex-shrink: 0;
+	}
+
+	// no frame of its own: the render is transparent around him, so he stands on the box and out over its edge
+	.portrait {
+		position: absolute;
+		// the render is 896 x 640 (wider than it was, for the antlers) shown at the old height, its middle where it was
+		left: -76px;
+		top: -120px;
+		width: 476px;
+		height: 340px;
+		background-size: contain;
+		pointer-events: none;
+	}
+
+	.nameplate {
+		position: absolute;
+		left: 40px;
+		top: 232px;
+		width: 250px;
+		flex-direction: column;
+		align-items: center;
+
+		.who {
+			font-size: 28px;
+			font-weight: 700;
+			color: #e8d9a8;
+			text-shadow: 0px 2px 6px #000;
+		}
+
+		.role {
+			font-size: 13px;
+			color: #8a867c;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+		}
+	}
+
+	// ---------------------------------------------------------------- what he says, what you can say
+
+	.main {
+		flex-grow: 1;
+		flex-direction: column;
+	}
+
+	.speech {
+		flex-direction: column;
+		justify-content: flex-start;
+		height: 112px;
+		flex-shrink: 0;
+		overflow: hidden;
+		padding: 4px 6px 0px 6px;
+		cursor: pointer;
+
+		.said {
+			font-size: 15px;
+			font-style: italic;
+			color: #7a766c;
+			margin-bottom: 6px;
+		}
+
+		.line {
+			font-size: 25px;
+			color: #ece7d8;
+		}
+	}
+
+	.divider {
+		height: 1px;
+		margin: 6px 0px 10px 0px;
+		background-color: #2c3038;
+	}
+
+	.options {
+		flex-direction: column;
+		height: 256px;
+		flex-shrink: 0;
+	}
+
+	.option {
+		flex-direction: row;
+		align-items: center;
+		height: 32px;
+		padding: 0px 10px;
+		border-radius: 4px;
+		cursor: pointer;
+
+		.marker {
+			width: 22px;
+			font-size: 16px;
+			color: #5a5668;
+		}
+
+		.words {
+			font-size: 18px;
+			color: #c8c4b8;
+			white-space: nowrap;
+		}
+
+		&:hover {
+			background-color: #1c1e26;
+
+			.marker, .words {
+				color: #e8d9a8;
+			}
+		}
+
+		// already asked: still there to ask again, only quieter
+		&.asked .words {
+			color: #6a665c;
+		}
+
+		&.leave .words {
+			color: #8a849a;
+			font-style: italic;
+		}
+	}
+
+	// ================================================================ Wrought Iron (2026-09-19)
+	// Overrides, last so they win; the motion is still the panel's own C# timeline. The box is 24 px taller than it
+	// was: the iron frame's top and bottom rails take that much, the speech and the eight options keep their room.
+
+	.box {
+		height: 446px;
+		padding: 28px 34px 28px 0px;
+		background-color: transparent;
+		border-width: 0px;
+		border-radius: 0px;
+		box-shadow: none;
+	}
+
+	.nameplate {
+		.who {
+			font-family: $df-head;
+			font-weight: 400;
+			font-size: 36px;
+			color: $df-gold;
+		}
+
+		.role {
+			font-size: 17px;
+			letter-spacing: 2px;
+			color: $df-dim;
+		}
+	}
+
+	.speech {
+		.said {
+			font-size: 18px;
+			color: $df-dim;
+		}
+
+		.line {
+			font-size: 27px;
+			color: $df-text;
+		}
+	}
+
+	.divider {
+		height: 14px;
+		margin: 2px 0px 4px 0px;
+		background-color: transparent;
+		background-image: url("ui/darkfantasy/kit/divider.png");
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		opacity: 0.8;
+	}
+
+	.option {
+		border-radius: 0px;
+
+		.marker {
+			font-size: 18px;
+			color: $df-dim;
+		}
+
+		.words {
+			font-size: 21px;
+			color: $df-label;
+		}
+
+		&:hover {
+			background-color: rgba( 230, 217, 173, 0.08 );
+
+			.marker, .words {
+				color: $df-gold;
+			}
+		}
+
+		&.asked .words {
+			color: #77748a;
+		}
+
+		&.leave .words {
+			color: $df-dim;
+		}
+	}
+}

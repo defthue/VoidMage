@@ -1,0 +1,139 @@
+{
+  "kind": "snake_angry",
+  "title": "SnakeAngry",
+  "blend": "C:\\Users\\skipp\\Desktop\\Speelboord Studios\\Easy Animated Enemy Pack - Jan 2019\\Easy Animated Enemy Pack - Jan 2019\\Blends\\Snake_Angry.blend",
+  "fps": 24.0,
+  "armature": "SnakeArmature",
+  "root_bone": "Root",
+  "bones": [
+    "Root",
+    "Body",
+    "Chest",
+    "Neck",
+    "Head",
+    "Tail",
+    "Tail1",
+    "Tail2",
+    "Tail3",
+    "PoleTarget",
+    "Mouth",
+    "LowerMouth",
+    "Tongue1",
+    "Tongue2",
+    "Tongue3"
+  ],
+  "body_mesh": "SnakeAngry",
+  "outline_mesh": "SnakeAngry_Outline",
+  "materials": {
+    "MonsterSnakeDarkGreen": {
+      "pack_slot": "DarkGreen",
+      "linear": [
+        0.191894,
+        0.486891,
+        0.331816
+      ]
+    },
+    "MonsterSnakeLightGreen": {
+      "pack_slot": "LightGreen",
+      "linear": [
+        0.377977,
+        0.603811,
+        0.449013
+      ]
+    },
+    "MonsterSnakeYellow": {
+      "pack_slot": "Yellow",
+      "linear": [
+        1.0,
+        0.601638,
+        0.094031
+      ]
+    },
+    "MonsterSnakeDarkRed": {
+      "pack_slot": "DarkRed",
+      "linear": [
+        0.486891,
+        0.091405,
+        0.067428
+      ]
+    },
+    "MonsterSnakeRed": {
+      "pack_slot": "Red",
+      "linear": [
+        1.0,
+        0.103496,
+        0.15611
+      ]
+    },
+    "MonsterSnakeTeeth": {
+      "pack_slot": "Teeth",
+      "linear": [
+        1.0,
+        0.626,
+        0.385387
+      ]
+    },
+    "MonsterSnakePurple": {
+      "pack_slot": "Purple",
+      "linear": [
+        0.167946,
+        0.053576,
+        0.10568
+      ]
+    }
+  },
+  "mat_prefix": "MonsterSnake",
+  "rest_min": [
+    -0.5808,
+    -1.676,
+    -0.0027
+  ],
+  "rest_max": [
+    0.4727,
+    1.1313,
+    3.1483
+  ],
+  "rest_size": [
+    1.0535,
+    2.8073,
+    3.1511
+  ],
+  "rest_max_dim": 3.1511,
+  "clips": [
+    {
+      "name": "attack",
+      "action": "Snake_Attack",
+      "start": 0,
+      "end": 16,
+      "seconds": 0.667
+    },
+    {
+      "name": "death",
+      "action": "Snake_Death",
+      "start": 0,
+      "end": 20,
+      "seconds": 0.833
+    },
+    {
+      "name": "idle",
+      "action": "Snake_Idle",
+      "start": 0,
+      "end": 50,
+      "seconds": 2.083
+    },
+    {
+      "name": "jump",
+      "action": "Snake_Jump",
+      "start": 0,
+      "end": 23,
+      "seconds": 0.958
+    },
+    {
+      "name": "walk",
+      "action": "Snake_Walk",
+      "start": 0,
+      "end": 20,
+      "seconds": 0.833
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc30:version{8c2d7a91-9c42-4bf0-883a-5a3b1762d4f1} -->
+{
+	rootNode =
+	{
+		_class = "RootNode"
+		children =
+		[
+			{
+				_class = "MaterialGroupList"
+				children =
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps =
+						[
+							{
+								from = "darkfantasyshader.vmat"
+								to = "shaders/darkfantasyshader.vmat"
+							},
+							{
+								from = "darkfantasybricksmall01.vmat"
+								to = "shaders/darkfantasybricksmall01.vmat"
+							},
+							{
+								from = "darkfantasywindow01.vmat"
+								to = "shaders/darkfantasywindow01.vmat"
+							},
+							{
+								from = "fantasykingdomoutline.vmat"
+								to = "shaders/darkfantasyoutline.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = "materials/default.vmat"
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children =
+				[
+					{
+						_class = "PhysicsMeshFile"
+						filename = "darkfantasy/sm_bld_base_wall_window_double_01.fbx"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.3937
+						import_filter =
+						{
+							exclude_by_default = true
+							exception_list =
+							[
+								"SM_Bld_Base_Wall_Window_Double_01",
+								"SM_Bld_Base_Wall_Window_Double_01_Glass",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children =
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "darkfantasy/sm_bld_base_wall_window_double_01.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.3937
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter =
+						{
+							exclude_by_default = true
+							exception_list =
+							[
+								"SM_Bld_Base_Wall_Window_Double_01_Outline",
+								"SM_Bld_Base_Wall_Window_Double_01",
+								"SM_Bld_Base_Wall_Window_Double_01_Glass",
+							]
+						}
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}

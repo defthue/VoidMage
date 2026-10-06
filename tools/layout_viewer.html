@@ -1,0 +1,227 @@
+<title>Void Mage Layout Viewer</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:wght@700&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: a one-screen tool. Control bar on top, the 3D view filling the rest, a legend and an info card floating over it. Dark by design: it is a scene viewer. */
+:root{
+  --bg:#141319; --panel:#1f1d27; --fg:#e6e2da; --muted:#9a96a4; --line:#36323f; --accent:#b48cf0;
+  --spawn:#6fd68a; --exit:#c08cff; --loot:#e2b04a; --shrine:#5fb8e0; --ambush:#e07070; --spur:#55596a; --door:#7fe3e9; --stair:#b8b0a0;
+  --display:"Almendra",Georgia,serif; --body:"Alegreya Sans",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;display:flex;flex-direction:column;overflow:hidden}
+.bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:8px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
+.bar h1{font-family:var(--display);font-size:1.25rem;margin:0 8px 0 0;font-weight:700}
+.bar label{display:flex;align-items:center;gap:5px;font-size:.9rem;color:var(--muted)}
+select,input[type=range],button{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:3px 8px}
+select{max-width:52vw}
+button{cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+input[type=checkbox]{accent-color:var(--accent)}
+.stage{position:relative;flex:1;min-height:0}
+canvas{display:block;width:100%;height:100%}
+.legend{position:absolute;left:16px;bottom:16px;background:rgba(31,29,39,.92);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:.82rem;display:grid;grid-template-columns:auto auto;gap:3px 10px;max-width:calc(100vw - 32px)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-2px;margin-right:6px}
+.info{position:absolute;right:16px;top:12px;width:min(320px,calc(100vw - 32px));background:rgba(31,29,39,.94);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-size:.88rem}
+.info h2{font-family:var(--display);font-size:1.1rem;margin:0 0 4px}
+.info p{margin:2px 0;color:var(--muted)}
+.info b{color:var(--fg);font-weight:500}
+.hint{position:absolute;left:16px;top:12px;color:var(--muted);font-size:.8rem;background:rgba(20,19,25,.7);padding:4px 8px;border-radius:5px}
+.stats{padding:4px 16px;border-top:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:.78rem;white-space:nowrap;overflow-x:auto}
+@media (max-width:600px){.legend{font-size:.74rem}.info{top:auto;bottom:16px;right:16px}}
+</style>
+
+<div class="bar">
+  <h1>Layout Viewer</h1>
+  <label>Floor <select id="floor"></select></label>
+  <label>Colour <select id="mode"><option value="spine">spine order</option><option value="kind">tier kind</option><option value="level">level</option></select></label>
+  <label><input type="checkbox" id="tags" checked> room tags</label>
+  <label><input type="checkbox" id="nums"> spine numbers</label>
+  <label><input type="checkbox" id="roles"> decor roles</label>
+  <label><input type="checkbox" id="doors" checked> doorways</label>
+  <label><input type="checkbox" id="chests" checked> chests</label>
+  <label>Height <input type="range" id="height" min="0.3" max="1.6" step="0.1" value="0.6"></label>
+  <button id="top">Top view</button>
+  <button id="iso">Isometric</button>
+</div>
+<div class="stage" id="stage">
+  <div class="hint">Drag to orbit · right-drag or shift-drag to pan · wheel to zoom · click a tier for details</div>
+  <div class="legend" id="legend"></div>
+  <div class="info" id="info"><h2>Click a tier</h2><p>Spine tiers run light to dark from spawn to exit. Spurs are grey.</p></div>
+</div>
+<div class="stats" id="stats"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const DATA = /*__DATA__*/{"floors":[]};
+
+const TAGC = { Spawn:0x6fd68a, Exit:0xc08cff, Loot:0xe2b04a, Shrine:0x5fb8e0, Ambush:0xe07070, Secret:0xff9ad5 };
+const KINDC = { Corridor:0x7a7f93, Room:0x4e8fbf, Hall:0xc58a3c, Tower:0x9d6fd1 };
+const LEVELC = [0x2b2f5a,0x37477f,0x4262a0,0x4f7fb8,0x5f9cc8,0x78b7d0,0x95cfd4,0xb6e3d6,0xd9f2dc];
+const SPUR = 0x55596a, STAIR = 0xb8b0a0, LANDING = 0x8c877d, DOOR = 0x7fe3e9, CHEST = 0xe2b04a;
+const H = { level: 0.6 };
+
+// ---------- three.js scene with hand-rolled orbit controls (no examples/ folder on the CDN)
+const stage = document.getElementById("stage");
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+stage.insertBefore(renderer.domElement, stage.firstChild);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x141319);
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 2000);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x404060, 0.9));
+const sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.position.set(30, 60, 20); scene.add(sun);
+
+const orbit = { target: new THREE.Vector3(), dist: 60, az: 0.8, pol: 0.95 };
+function placeCamera(){
+  const p = orbit.pol, a = orbit.az, d = orbit.dist;
+  camera.position.set(orbit.target.x + d * Math.sin(p) * Math.sin(a), orbit.target.y + d * Math.cos(p), orbit.target.z + d * Math.sin(p) * Math.cos(a));
+  camera.lookAt(orbit.target);
+}
+let drag = null, moved = false;
+const el = renderer.domElement;
+el.addEventListener("contextmenu", e => e.preventDefault());
+el.addEventListener("pointerdown", e => { drag = { x: e.clientX, y: e.clientY, pan: e.button === 2 || e.shiftKey }; moved = false; el.setPointerCapture(e.pointerId); });
+el.addEventListener("pointermove", e => {
+  if(!drag) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY;
+  if(Math.abs(dx) + Math.abs(dy) > 2) moved = true;
+  if(drag.pan){
+    const right = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 0);
+    const up = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 1);
+    const k = orbit.dist * 0.0016;
+    orbit.target.addScaledVector(right, -dx * k).addScaledVector(up, dy * k);
+  } else {
+    orbit.az -= dx * 0.006; orbit.pol = Math.min(1.55, Math.max(0.05, orbit.pol - dy * 0.006));
+  }
+  placeCamera();
+});
+el.addEventListener("pointerup", e => { if(drag && !moved) pick(e); drag = null; });
+el.addEventListener("wheel", e => { e.preventDefault(); orbit.dist = Math.min(400, Math.max(5, orbit.dist * (e.deltaY > 0 ? 1.12 : 0.89))); placeCamera(); }, { passive: false });
+
+function resize(){
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false); camera.aspect = w / Math.max(1, h); camera.updateProjectionMatrix();
+}
+window.addEventListener("resize", resize);
+
+// ---------- building a floor
+let group = null, tierMesh = null, tierOfInstance = [], floor = null, labels = [];
+function clearGroup(){ if(group){ scene.remove(group); group.traverse(o => { if(o.geometry) o.geometry.dispose(); if(o.material && o.material.map) o.material.map.dispose(); if(o.material) o.material.dispose(); }); } group = new THREE.Group(); scene.add(group); labels = []; }
+
+function spineShade(i, n){ // light at spawn, dark at exit
+  const t = n <= 1 ? 0 : i / (n - 1);
+  return new THREE.Color().setHSL(0.72 - 0.08 * t, 0.35, 0.78 - 0.5 * t);
+}
+function tierColor(t, mode, n){
+  if(mode === "spine"){
+    if(TAGC[t.tag] !== undefined) return new THREE.Color(TAGC[t.tag]);
+    return t.spine >= 0 ? spineShade(t.spine, n) : new THREE.Color(SPUR);
+  }
+  if(mode === "kind"){ return new THREE.Color(TAGC[t.tag] !== undefined ? TAGC[t.tag] : (KINDC[t.kind] || 0x888888)); }
+  return new THREE.Color(LEVELC[Math.min(8, Math.max(0, t.level))]);
+}
+
+function label(text, x, y, z, color, size){
+  const c = document.createElement("canvas"); c.width = 256; c.height = 64;
+  const g = c.getContext("2d"); g.font = "bold 36px Alegreya Sans, sans-serif"; g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillStyle = "rgba(20,19,25,0.75)"; const w = Math.min(250, g.measureText(text).width + 24); g.fillRect(128 - w / 2, 8, w, 48);
+  g.fillStyle = color; g.fillText(text, 128, 32);
+  const tex = new THREE.CanvasTexture(c); tex.minFilter = THREE.LinearFilter;
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true }));
+  s.position.set(x, y, z); s.scale.set(size * 4, size, 1); group.add(s); labels.push(s); return s;
+}
+
+function build(){
+  clearGroup();
+  if(!floor) return;
+  const mode = document.getElementById("mode").value;
+  const lh = H.level;
+  const n = Math.max(1, ...floor.tiers.map(t => t.spine + 1));
+  const tierById = Object.fromEntries(floor.tiers.map(t => [t.id, t]));
+  // tier cells as one instanced mesh
+  const cells = []; tierOfInstance = [];
+  floor.tiers.forEach(t => t.cells.forEach(c => { cells.push({ x: c[0], z: c[1], l: t.level, t }); }));
+  const geo = new THREE.BoxGeometry(0.94, 0.14, 0.94);
+  const mat = new THREE.MeshLambertMaterial({ vertexColors: false });
+  tierMesh = new THREE.InstancedMesh(geo, mat, cells.length);
+  const m = new THREE.Matrix4();
+  cells.forEach((c, i) => {
+    m.makeTranslation(c.x, c.l * lh, c.z); tierMesh.setMatrixAt(i, m);
+    tierMesh.setColorAt(i, tierColor(c.t, mode, n)); tierOfInstance[i] = c.t;
+  });
+  tierMesh.instanceMatrix.needsUpdate = true; if(tierMesh.instanceColor) tierMesh.instanceColor.needsUpdate = true;
+  group.add(tierMesh);
+  // landings and stairs
+  const lgeo = new THREE.BoxGeometry(0.94, 0.14, 0.94), lmat = new THREE.MeshLambertMaterial({ color: LANDING });
+  floor.landings.forEach(([x, z, l]) => { const b = new THREE.Mesh(lgeo, lmat); b.position.set(x, l * lh, z); group.add(b); });
+  const smat = new THREE.MeshLambertMaterial({ color: STAIR });
+  const run = Math.sqrt(1 + lh * lh), sgeo = new THREE.BoxGeometry(0.9, 0.1, run);
+  floor.stairs.forEach(([x, z, l, d]) => {
+    const s = new THREE.Mesh(sgeo, smat);
+    s.position.set(x, l * lh + lh / 2, z);
+    const yaw = d === "N" ? 0 : d === "S" ? Math.PI : d === "E" ? Math.PI / 2 : -Math.PI / 2;   // local +Z is the rising end; +pi/2 about Y turns it to +X (east)
+    s.rotation.set(0, yaw, 0); s.rotateX(-Math.atan2(lh, 1));
+    group.add(s);
+  });
+  // doorways: a post between the two cells
+  if(document.getElementById("doors").checked){
+    const dgeo = new THREE.BoxGeometry(0.35, 0.5, 0.35), dmat = new THREE.MeshLambertMaterial({ color: DOOR });
+    floor.doors.forEach(([x, z, l, x2, z2, l2]) => { const b = new THREE.Mesh(dgeo, dmat); b.position.set((x + x2) / 2, l * lh + 0.3, (z + z2) / 2); group.add(b); });
+  }
+  if(document.getElementById("chests").checked){
+    const cgeo = new THREE.BoxGeometry(0.5, 0.35, 0.35), cmat = new THREE.MeshLambertMaterial({ color: CHEST });
+    floor.chests.forEach(([x, z, tid]) => { const t = tierById[tid]; if(!t) return; const b = new THREE.Mesh(cgeo, cmat); b.position.set(x, t.level * lh + 0.25, z); group.add(b); });
+  }
+  // labels
+  const showTags = document.getElementById("tags").checked, showNums = document.getElementById("nums").checked, showRoles = document.getElementById("roles").checked;
+  floor.tiers.forEach(t => {
+    const cx = t.cells.reduce((a, c) => a + c[0], 0) / t.cells.length, cz = t.cells.reduce((a, c) => a + c[1], 0) / t.cells.length;
+    const y = t.level * lh + 0.9;
+    const parts = [];
+    if(showTags && t.tag !== "None") parts.push(t.tag.toUpperCase());
+    if(showNums && t.spine >= 0) parts.push("#" + (t.spine + 1));
+    if(showRoles && t.role !== "None") parts.push(t.role);
+    if(parts.length) label(parts.join(" "), cx, y, cz, t.tag !== "None" ? "#" + (TAGC[t.tag] || 0xffffff).toString(16).padStart(6, "0") : "#e6e2da", t.tag !== "None" ? 1.1 : 0.8);
+  });
+  // frame the floor
+  const box = new THREE.Box3().setFromObject(group);
+  const size = box.getSize(new THREE.Vector3()), centre = box.getCenter(new THREE.Vector3());
+  orbit.target.copy(centre); orbit.dist = Math.max(size.x, size.z) * 1.35 + 8; placeCamera();
+  document.getElementById("stats").textContent = floor.stats;
+}
+
+function pick(e){
+  if(!tierMesh) return;
+  const r = el.getBoundingClientRect();
+  const mouse = new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  const ray = new THREE.Raycaster(); ray.setFromCamera(mouse, camera);
+  const hits = ray.intersectObject(tierMesh);
+  if(!hits.length) return;
+  const t = tierOfInstance[hits[0].instanceId];
+  const links = floor.doors.filter(d => floor.tiers.some(o => o.id === t.id && o.cells.some(c => (c[0] === d[0] && c[1] === d[1] && o.level === d[2]) || (c[0] === d[3] && c[1] === d[4] && o.level === d[5])))).length;
+  document.getElementById("info").innerHTML = `<h2>${t.tag !== "None" ? t.tag + " " : ""}${t.kind} ${t.id}</h2>
+    <p>Level <b>${t.level}</b> · ${t.cells.length} cells · ${t.spur ? "<b>spur</b>" : t.spine >= 0 ? "spine beat <b>" + (t.spine + 1) + "</b>" : "off spine"}</p>
+    <p>Doorways <b>${links}</b> · decor role <b>${t.role}</b></p>`;
+}
+
+// ---------- ui
+const floorSel = document.getElementById("floor");
+DATA.floors.forEach((f, i) => { const o = document.createElement("option"); o.value = i; o.textContent = f.name; floorSel.appendChild(o); });
+function load(i){ floor = DATA.floors[i] || null; build(); }
+floorSel.addEventListener("change", () => load(+floorSel.value));
+["mode","tags","nums","roles","doors","chests"].forEach(id => document.getElementById(id).addEventListener("change", build));
+document.getElementById("height").addEventListener("input", e => { H.level = +e.target.value; build(); });
+document.getElementById("top").addEventListener("click", () => { orbit.pol = 0.06; placeCamera(); });
+document.getElementById("iso").addEventListener("click", () => { orbit.pol = 0.95; orbit.az = 0.8; placeCamera(); });
+
+document.getElementById("legend").innerHTML = [
+  ["#c9c3f0","spine, near spawn"],["#3d3466","spine, near exit"],["#55596a","spur (pocket)"],["#b8b0a0","stairs and landings"],
+  ["#6fd68a","spawn"],["#c08cff","exit"],["#e2b04a","loot / chest"],["#5fb8e0","shrine"],["#e07070","ambush"],["#7fe3e9","doorway"]
+].map(([c, t]) => `<span><i style="background:${c}"></i>${t}</span>`).join("");
+
+resize();
+load(0);
+(function frame(){ requestAnimationFrame(frame); renderer.render(scene, camera); })();
+</script>

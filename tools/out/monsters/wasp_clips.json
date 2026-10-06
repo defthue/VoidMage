@@ -1,0 +1,56 @@
+{
+  "kind": "wasp",
+  "fps": 24.0,
+  "root_bone": "Root",
+  "strike_bone": "Sting",
+  "feet": [],
+  "forward": [
+    0.9995,
+    0.0318,
+    0.0
+  ],
+  "clips": {
+    "attack": {
+      "frames": [
+        0,
+        18
+      ],
+      "seconds": 0.75,
+      "hit_frame": 8,
+      "hit_time": 0.333,
+      "reach": 1.1192,
+      "peak_speed_time": 0.292,
+      "peak_speed": 38.058,
+      "reach_at_peak_speed": 0.5092,
+      "body_rise": 0.1441
+    },
+    "death": {
+      "frames": [
+        0,
+        18
+      ],
+      "seconds": 0.75,
+      "hit_frame": 18,
+      "hit_time": 0.75,
+      "reach": 0.479,
+      "peak_speed_time": 0.5,
+      "peak_speed": 1.372,
+      "reach_at_peak_speed": 0.3489,
+      "body_rise": 0.2228
+    },
+    "flying": {
+      "frames": [
+        0,
+        36
+      ],
+      "seconds": 1.5,
+      "hit_frame": 18,
+      "hit_time": 0.75,
+      "reach": 0.5397,
+      "peak_speed_time": 0.375,
+      "peak_speed": 0.54,
+      "reach_at_peak_speed": 0.4235,
+      "body_rise": 0.1901
+    }
+  }
+}

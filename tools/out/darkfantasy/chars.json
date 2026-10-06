@@ -1,0 +1,1727 @@
+{
+"SK_Chr_Attach_Hair_Demon_01.fbx": {
+"ok": true,
+"mode": "smooth",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Attach_Hair_Demon_01",
+"outline": "SM_Chr_Attach_Hair_Demon_01_Outline",
+"polys": 234,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 234
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"clavicle_r",
+"upperarm_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-0.1588,
+-0.0757,
+1.2899
+],
+"rest_max_m": [
+0.1487,
+0.2105,
+1.7859
+],
+"out": "attach_hair_demon_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Attach_Hair_Demon_01.fbx"
+},
+"SK_Chr_Attach_Hair_Hunter_Female_01.fbx": {
+"ok": true,
+"mode": "smooth",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Attach_Hair_Hunter_Female_01",
+"outline": "SM_Chr_Attach_Hair_Hunter_Female_01_Outline",
+"polys": 263,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 263
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"clavicle_r",
+"upperarm_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-0.1741,
+-0.1216,
+1.1701
+],
+"rest_max_m": [
+0.1741,
+0.2627,
+1.8027
+],
+"out": "attach_hair_hunter_female_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Attach_Hair_Hunter_Female_01.fbx"
+},
+"SK_Chr_Attach_Hair_Witch_01.fbx": {
+"ok": true,
+"mode": "smooth",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Attach_Hair_Witch_01",
+"outline": "SM_Chr_Attach_Hair_Witch_01_Outline",
+"polys": 523,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 523
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"clavicle_r",
+"upperarm_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-0.142,
+-0.137,
+1.2315
+],
+"rest_max_m": [
+0.142,
+0.236,
+1.8024
+],
+"out": "attach_hair_witch_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Attach_Hair_Witch_01.fbx"
+},
+"SK_Chr_Attach_Hood_Skeleton_Ranger_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Attach_Hood_Skeleton_Ranger_01",
+"outline": "SM_Chr_Attach_Hood_Skeleton_Ranger_01_Outline",
+"polys": 411,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 411
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"clavicle_r",
+"upperarm_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-0.1572,
+-0.1788,
+1.3752
+],
+"rest_max_m": [
+0.1572,
+0.1866,
+1.8465
+],
+"out": "attach_hood_skeleton_ranger_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Attach_Hood_Skeleton_Ranger_01.fbx"
+},
+"SK_Chr_Attach_Priest_Veil_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Attach_Priest_Veil_01",
+"outline": "SM_Chr_Attach_Priest_Veil_01_Outline",
+"polys": 323,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 323
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"clavicle_r",
+"upperarm_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"thigh_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-0.2499,
+-0.1574,
+0.9704
+],
+"rest_max_m": [
+0.2499,
+0.2396,
+1.8
+],
+"out": "attach_priest_veil_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Attach_Priest_Veil_01.fbx"
+},
+"SK_Chr_DarkLord_Male_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_DarkLord_Male_01",
+"outline": "SM_Chr_DarkLord_Male_01_Outline",
+"polys": 3723,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 3723
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0238,
+-0.2107,
+-0.008
+],
+"rest_max_m": [
+1.0238,
+0.2256,
+1.8351
+],
+"out": "darklord_male_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_DarkLord_Male_01.fbx"
+},
+"SK_Chr_Demon_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Demon_01",
+"outline": "SM_Chr_Demon_01_Outline",
+"polys": 3554,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 3554
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"Belly_01",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.5284,
+-0.3651,
+-0.0171
+],
+"rest_max_m": [
+1.5284,
+0.3174,
+1.8919
+],
+"out": "demon_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Demon_01.fbx"
+},
+"SK_Chr_Demon_Male_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Demon_Male_01",
+"outline": "SM_Chr_Demon_Male_01_Outline",
+"polys": 3233,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 3233
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0477,
+-0.2706,
+-0.0028
+],
+"rest_max_m": [
+1.0477,
+0.1655,
+2.1425
+],
+"out": "demon_male_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Demon_Male_01.fbx"
+},
+"SK_Chr_Gargoyle_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Gargoyle_01",
+"outline": "SM_Chr_Gargoyle_01_Outline",
+"polys": 3094,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 3094
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"Belly_01",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.5284,
+-0.3458,
+-0.0171
+],
+"rest_max_m": [
+1.5284,
+0.3044,
+1.8872
+],
+"out": "gargoyle_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Gargoyle_01.fbx"
+},
+"SK_Chr_Gravedigger_Male_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Gravedigger_Male_01",
+"outline": "SM_Chr_Gravedigger_Male_01_Outline",
+"polys": 2732,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 2732
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0238,
+-0.1963,
+-0.0
+],
+"rest_max_m": [
+1.0238,
+0.2112,
+1.7967
+],
+"out": "gravedigger_male_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Gravedigger_Male_01.fbx"
+},
+"SK_Chr_Hunter_Female_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Hunter_Female_01",
+"outline": "SM_Chr_Hunter_Female_01_Outline",
+"polys": 2183,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 2183
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0207,
+-0.1858,
+-0.003
+],
+"rest_max_m": [
+1.0207,
+0.1727,
+1.7885
+],
+"out": "hunter_female_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Hunter_Female_01.fbx"
+},
+"SK_Chr_Hunter_Male_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Hunter_Male_01",
+"outline": "SM_Chr_Hunter_Male_01_Outline",
+"polys": 1730,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 1730
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0238,
+-0.1595,
+-0.003
+],
+"rest_max_m": [
+1.0238,
+0.1765,
+1.7881
+],
+"out": "hunter_male_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Hunter_Male_01.fbx"
+},
+"SK_Chr_PlagueDoctor_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_PlagueDoctor_01",
+"outline": "SM_Chr_PlagueDoctor_01_Outline",
+"polys": 1954,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 1954
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0238,
+-0.1511,
+-0.003
+],
+"rest_max_m": [
+1.0238,
+0.2206,
+1.7881
+],
+"out": "plaguedoctor_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_PlagueDoctor_01.fbx"
+},
+"SK_Chr_Priest_Female_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Priest_Female_01",
+"outline": "SM_Chr_Priest_Female_01_Outline",
+"polys": 1527,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 1527
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0207,
+-0.1609,
+-0.003
+],
+"rest_max_m": [
+1.0207,
+0.2015,
+1.7885
+],
+"out": "priest_female_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Priest_Female_01.fbx"
+},
+"SK_Chr_Skeleton_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Skeleton_01",
+"outline": "SM_Chr_Skeleton_01_Outline",
+"polys": 2479,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 2479
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0195,
+-0.1407,
+-0.0029
+],
+"rest_max_m": [
+1.0195,
+0.1588,
+1.7924
+],
+"out": "skeleton_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Skeleton_01.fbx"
+},
+"SK_Chr_Skeleton_Flesh_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Skeleton_Flesh_01",
+"outline": "SM_Chr_Skeleton_Flesh_01_Outline",
+"polys": 3058,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 3058
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0195,
+-0.1407,
+-0.0088
+],
+"rest_max_m": [
+1.0195,
+0.1662,
+1.7942
+],
+"out": "skeleton_flesh_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Skeleton_Flesh_01.fbx"
+},
+"SK_Chr_Skeleton_HeavyArmor_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Skeleton_HeavyArmor_01",
+"outline": "SM_Chr_Skeleton_HeavyArmor_01_Outline",
+"polys": 4333,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 4333
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0238,
+-0.1942,
+-0.0031
+],
+"rest_max_m": [
+1.0238,
+0.2169,
+1.7924
+],
+"out": "skeleton_heavyarmor_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Skeleton_HeavyArmor_01.fbx"
+},
+"SK_Chr_Skeleton_LightArmor_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Skeleton_LightArmor_01",
+"outline": "SM_Chr_Skeleton_LightArmor_01_Outline",
+"polys": 4235,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 4235
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0195,
+-0.1751,
+-0.0029
+],
+"rest_max_m": [
+1.0195,
+0.2187,
+1.7924
+],
+"out": "skeleton_lightarmor_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Skeleton_LightArmor_01.fbx"
+},
+"SK_Chr_Skeleton_Ranger_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Skeleton_Ranger_01",
+"outline": "SM_Chr_Skeleton_Ranger_01_Outline",
+"polys": 3779,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 3779
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0238,
+-0.1681,
+-0.0049
+],
+"rest_max_m": [
+1.0238,
+0.2088,
+1.7924
+],
+"out": "skeleton_ranger_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Skeleton_Ranger_01.fbx"
+},
+"SK_Chr_Witch_Female_01.fbx": {
+"ok": true,
+"mode": "auto",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Witch_Female_01",
+"outline": "SM_Chr_Witch_Female_01_Outline",
+"polys": 1994,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 1994
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"pelvis",
+"spine_01",
+"spine_02",
+"spine_03",
+"clavicle_l",
+"upperarm_l",
+"lowerarm_l",
+"hand_l",
+"index_01_l",
+"index_02_l",
+"index_03_l",
+"middle_01_l",
+"middle_02_l",
+"middle_03_l",
+"thumb_01_l",
+"thumb_02_l",
+"thumb_03_l",
+"clavicle_r",
+"upperarm_r",
+"lowerarm_r",
+"hand_r",
+"index_01_r",
+"index_02_r",
+"index_03_r",
+"middle_01_r",
+"middle_02_r",
+"middle_03_r",
+"thumb_01_r",
+"thumb_02_r",
+"thumb_03_r",
+"neck_01",
+"head",
+"jaw",
+"eyes",
+"eyebrows",
+"thigh_l",
+"calf_l",
+"foot_l",
+"ball_l",
+"thigh_r",
+"calf_r",
+"foot_r",
+"ball_r",
+"ik_foot_root",
+"ik_foot_l",
+"ik_foot_r",
+"ik_hand_root",
+"ik_hand_gun",
+"ik_hand_l",
+"ik_hand_r"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-1.0207,
+-0.1485,
+-0.003
+],
+"rest_max_m": [
+1.0207,
+0.1845,
+1.7885
+],
+"out": "witch_female_01.fbx",
+"src": "FBX\\Characters\\Unreal_Characters\\SK_Chr_Witch_Female_01.fbx"
+},
+"Capes.fbx": {
+"ok": true,
+"mode": "smooth",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "SM_Chr_Attach_Hunter_Cape_01",
+"outline": "SM_Chr_Attach_Hunter_Cape_01_Outline",
+"polys": 180,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 180
+},
+{
+"name": "SM_Chr_Attach_Skeleton_Ranger_Cape_01",
+"outline": "SM_Chr_Attach_Skeleton_Ranger_Cape_01_Outline",
+"polys": 209,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 209
+},
+{
+"name": "SM_Chr_Attach_DarkLord_Cape_01",
+"outline": "SM_Chr_Attach_DarkLord_Cape_01_Outline",
+"polys": 237,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 237
+},
+{
+"name": "SM_Chr_Attach_PlagueDoctor_Cape_01",
+"outline": "SM_Chr_Attach_PlagueDoctor_Cape_01_Outline",
+"polys": 266,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 266
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"Cape_Rig",
+"Cape_01",
+"Cape_02",
+"Cape_03",
+"Cape_04",
+"Cape_05",
+"Cape_06"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-0.4212,
+0.0052,
+-1.3045
+],
+"rest_max_m": [
+0.4205,
+0.2854,
+0.1477
+],
+"out": "capes.fbx",
+"src": "FBX\\Characters\\Attachments\\Capes.fbx"
+},
+"Tail_Rig_01.fbx": {
+"ok": true,
+"mode": "smooth",
+"slot": "DarkFantasyShader",
+"parts": [
+{
+"name": "Gargoyle_Tail_Mesh",
+"outline": "Gargoyle_Tail_Mesh_Outline",
+"polys": 120,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 120
+},
+{
+"name": "Demon_Tail_Mesh",
+"outline": "Demon_Tail_Mesh_Outline",
+"polys": 143,
+"slots": [
+"DarkFantasyShader"
+],
+"outline_polys": 143
+}
+],
+"armature": "Armature",
+"bones": [
+"root",
+"Tail_01",
+"Tail_02",
+"Tail_03",
+"Tail_04",
+"Tail_05"
+],
+"root_bone": "root",
+"root_added": true,
+"armature_scale": [
+0.01,
+0.01,
+0.01
+],
+"rest_min_m": [
+-0.0607,
+-0.0365,
+-0.5853
+],
+"rest_max_m": [
+0.0607,
+0.7469,
+0.0936
+],
+"out": "tail_rig_01.fbx",
+"src": "FBX\\Characters\\Attachments\\Tail_Rig_01.fbx"
+}
+}

@@ -1,0 +1,115 @@
+@using System
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( Drinker is not null && Drinker.Tuning && Arms is not null )
+	{
+		<div class="window">
+			<div class="row title">
+				<div class="heading">Bottle grip</div>
+				<div class="spacer"></div>
+				<div class="button @( Mana ? "" : "on" )" onclick=@( () => Drinker.TuneBottle( PlayerPotions.Kind.Heal ) )>Healing</div>
+				<div class="button @( Mana ? "on" : "" )" onclick=@( () => Drinker.TuneBottle( PlayerPotions.Kind.Mana ) )>Mana</div>
+			</div>
+
+			<div class="row steps">
+				<div class="label">Move step</div>
+				@foreach ( var s in MoveSteps )
+				{
+					var step = s;
+					<div class="button small @( _move == step ? "on" : "" )" onclick=@( () => _move = step )>@step in</div>
+				}
+				<div class="spacer"></div>
+				<div class="label">Turn step</div>
+				@foreach ( var s in TurnSteps )
+				{
+					var step = s;
+					<div class="button small @( _turn == step ? "on" : "" )" onclick=@( () => _turn = step )>@step°</div>
+				}
+			</div>
+
+			<div class="row axis">
+				<div class="name">Along the fingers</div>
+				<div class="button" onclick=@( () => Move( new Vector3( -_move, 0, 0 ) ) )>−</div>
+				<div class="value">@Offset.x.ToString( "0.00" )</div>
+				<div class="button" onclick=@( () => Move( new Vector3( _move, 0, 0 ) ) )>+</div>
+			</div>
+			<div class="row axis">
+				<div class="name">Into the palm</div>
+				<div class="button" onclick=@( () => Move( new Vector3( 0, -_move, 0 ) ) )>−</div>
+				<div class="value">@Offset.y.ToString( "0.00" )</div>
+				<div class="button" onclick=@( () => Move( new Vector3( 0, _move, 0 ) ) )>+</div>
+			</div>
+			<div class="row axis">
+				<div class="name">Along the bottle</div>
+				<div class="button" onclick=@( () => Move( new Vector3( 0, 0, -_move ) ) )>−</div>
+				<div class="value">@Offset.z.ToString( "0.00" )</div>
+				<div class="button" onclick=@( () => Move( new Vector3( 0, 0, _move ) ) )>+</div>
+			</div>
+			<div class="row axis">
+				<div class="name">Pitch</div>
+				<div class="button" onclick=@( () => Turn( new Angles( -_turn, 0, 0 ) ) )>−</div>
+				<div class="value">@Rotation.pitch.ToString( "0.0" )</div>
+				<div class="button" onclick=@( () => Turn( new Angles( _turn, 0, 0 ) ) )>+</div>
+			</div>
+			<div class="row axis">
+				<div class="name">Yaw</div>
+				<div class="button" onclick=@( () => Turn( new Angles( 0, -_turn, 0 ) ) )>−</div>
+				<div class="value">@Rotation.yaw.ToString( "0.0" )</div>
+				<div class="button" onclick=@( () => Turn( new Angles( 0, _turn, 0 ) ) )>+</div>
+			</div>
+			<div class="row axis">
+				<div class="name">Roll</div>
+				<div class="button" onclick=@( () => Turn( new Angles( 0, 0, -_turn ) ) )>−</div>
+				<div class="value">@Rotation.roll.ToString( "0.0" )</div>
+				<div class="button" onclick=@( () => Turn( new Angles( 0, 0, _turn ) ) )>+</div>
+			</div>
+
+			<div class="row actions">
+				<div class="button" onclick=@( Reset )>Reset</div>
+				<div class="spacer"></div>
+				<div class="button" onclick=@( () => Drinker.PrintGrip() )>Print to console</div>
+				<div class="button" onclick=@( () => Drinker.StopTuning() )>Done</div>
+			</div>
+			<div class="row hint">V front view (third person) · C third person · Q cursor / look around · the values last until you stop playing: Print, then paste the line</div>
+		</div>
+	}
+</root>
+
+@code {
+	// Live grip tuning for the drink's bottle (PotionDrinker.StartTuning freezes the pose on the hold). Offsets are the
+	// fist's frame in inches, measured from the bottle's own centre; angles trim the bottle in that frame.
+	private static readonly float[] MoveSteps = { 0.1f, 0.5f, 1f };
+	private static readonly float[] TurnSteps = { 1f, 5f, 15f };
+	private float _move = 0.5f;
+	private float _turn = 5f;
+
+	private PotionDrinker Drinker => PotionDrinker.Local;
+	private FirstPersonArms Arms => Drinker?.Components.Get<FirstPersonArms>( FindMode.EverythingInSelfAndDescendants );
+	private bool Mana => Drinker is not null && Drinker.Kind == PlayerPotions.Kind.Mana;
+	private Vector3 Offset => Arms is null ? default : Mana ? Arms.ManaGripOffset : Arms.PotionGripOffset;
+	private Angles Rotation => Arms is null ? default : Mana ? Arms.ManaRotationOffset : Arms.PotionRotationOffset;
+
+	private void Move( Vector3 by ) => Arms?.NudgePotionGrip( Mana, by, default );
+	private void Turn( Angles by ) => Arms?.NudgePotionGrip( Mana, Vector3.Zero, by );
+
+	private void Reset()
+	{
+		var a = Arms;
+		if ( a is null ) return;
+		// back to the grips tuned in game on 2026-09-16 (the prefab's values)
+		if ( Mana ) { a.ManaGripOffset = new Vector3( 4.1f, 2.7f, -4.5f ); a.ManaRotationOffset = new Angles( 10f, 0f, 0f ); }
+		else { a.PotionGripOffset = new Vector3( 5.1f, 5.2f, -4.5f ); a.PotionRotationOffset = new Angles( 0f, 0f, 10f ); }
+	}
+
+	protected override int BuildHash()
+	{
+		var d = Drinker;
+		return HashCode.Combine( d?.Tuning, Mana, Offset, Rotation, _move, _turn );
+	}
+}

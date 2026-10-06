@@ -1,0 +1,184 @@
+@using System
+@using System.Collections.Generic
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Spells
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	<div class="vignette" style="opacity: @Opacity"></div>
+	@if ( Health is not null )
+	{
+		// A glass tube of the healing potion's own red (user, 2026-09-19: the flat bars read as paint). The ghost is
+		// the same width on a slower, later transition, so a hit shows the slice it took for a moment.
+		<div class="bar health @( Low ? "low" : "" ) @( Wrath ? "wrath" : "" )" style="width: @( TrackWidth )px">
+			<div class="dfk dfk-bar-26"></div>
+			<div class="tube">
+				<div class="ghost" style="width: @Percent%"></div>
+				<div class="liquid" style="width: @Percent%">
+					<div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div>
+					<div class="bubble b4"></div><div class="bubble b5"></div><div class="bubble b6"></div>
+				</div>
+				<div class="surface" style="left: @Percent%"><div class="blob up"></div><div class="blob down"></div></div>
+				@if ( HollowCostPercent > 0 )
+				{
+					<div class="cost" style="left: @( Math.Max( 0, Percent - HollowCostPercent ) )%; width: @HollowCostPercent%"></div>
+				}
+				<div class="glass"></div>
+			</div>
+			<div class="dfk dfk-bar-26-rails"></div>
+			<div class="num">@( $"{HealthNow} / {HealthMax}" )</div>
+		</div>
+	}
+	@if ( Mana is not null )
+	{
+		<div class="bar mana @( Hollow ? "hollow" : "" ) @( Insufficient ? "insufficient" : "" ) @( Full ? "full" : "" )">
+			<div class="dfk dfk-bar-26"></div>
+			<div class="tube">
+				<div class="ghost" style="width: @ManaPercent%"></div>
+				<div class="liquid" style="width: @ManaPercent%">
+					<div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div>
+					<div class="bubble b4"></div><div class="bubble b5"></div><div class="bubble b6"></div>
+				</div>
+				<div class="surface" style="left: @ManaPercent%"><div class="blob up"></div><div class="blob down"></div></div>
+				<div class="glass"></div>
+			</div>
+			<div class="dfk dfk-bar-26-rails"></div>
+			<div class="num">@( PlayerMana.Infinite ? "∞" : $"{(int)Mana.Mana} / {(int)Mana.EffectiveMaxMana}" )</div>
+		</div>
+	}
+	@if ( Shards is not null )
+	{
+		<div class="shards @( ShardPulse ? "pulse" : "" )">
+			<div class="gem">◆</div>
+			<div class="carried">@Shards.Carried</div>
+			<div class="banked">@( $"{Banked} banked" )</div>
+		</div>
+	}
+	@foreach ( var e in _taken )
+	{
+		// what that hit cost, climbing off the health bar. The anchor never moves, so unlike the world numbers
+		// (DamageNumbers) nothing is recomputed per frame: the climb and the fade are stylesheet animations
+		// started once at spawn, and the sideways offset is baked into `left` so a flurry fans out.
+		<div class="taken @e.Kind" style="left: @( e.X )px;">@e.Text</div>
+	}
+</root>
+
+@code {
+	private const int FullTrackWidth = 320;
+
+	// ---------------------------------------------------------------- damage taken
+	//
+	// What each hit took off YOU, popping off the health bar: the world numbers (DamageNumbers) are enemies-only
+	// on purpose, and a vignette and a shake never said how much. Posted by PlayerHealth.TakeHit on the owner
+	// after the boons and the test clamps have had their say, so it is what actually came off the bar.
+
+	/// <summary>Seconds a number lives; every keyframe in HitVignette.razor.scss is timed to this.</summary>
+	public const float TakenLifetimeSeconds = 0.9f;
+	/// <summary>How far along the 220 px bar a number may spawn, so a flurry fans out instead of stacking.</summary>
+	private const float TakenSpreadPixels = 230f;
+	/// <summary>Numbers on screen at once; a trap ticking in a swarm cannot bury the HUD.</summary>
+	private const int MaxTaken = 6;
+
+	private sealed class Taken
+	{
+		public string Text;
+		public string Kind;      // "hit" or "trap"
+		public int X;
+		public float SpawnTime;
+	}
+
+	private static HitVignette _current;
+	private readonly List<Taken> _taken = new();
+	private int _takenVersion;
+
+	/// <summary>Post what a hit took. A no-op when there is no HUD (a dedicated host) or the damage rounds to nothing.</summary>
+	public static void PushTaken( float damage, bool trap )
+	{
+		var panel = _current;
+		if ( !panel.IsValid() || damage <= 0f ) return;
+		var shown = (int)MathF.Max( 1f, MathF.Round( damage ) );   // a scratch still reads as 1, never "-0"
+		if ( panel._taken.Count >= MaxTaken ) panel._taken.RemoveAt( 0 );
+		panel._taken.Add( new Taken
+		{
+			Text = $"-{shown}",
+			Kind = trap ? "trap" : "hit",
+			X = 76 + (int)Game.Random.Float( 0f, TakenSpreadPixels ),
+			SpawnTime = Time.Now,
+		} );
+		panel._takenVersion++;
+		panel.StateHasChanged();
+	}
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+		_current = this;
+	}
+
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
+		if ( _current == this ) _current = null;
+		_taken.Clear();
+	}
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+		// only when one actually expires: the climb and the fade are the stylesheet's, not a per-frame rebuild
+		var expiry = Time.Now - TakenLifetimeSeconds;
+		var removed = false;
+		for ( var i = _taken.Count - 1; i >= 0; i-- )
+		{
+			if ( _taken[i].SpawnTime > expiry ) continue;
+			_taken.RemoveAt( i );
+			removed = true;
+		}
+		if ( removed ) { _takenVersion++; StateHasChanged(); }
+	}
+
+	private PlayerHealth Health => PlayerHealth.Local;
+	private PlayerMana Mana => PlayerMana.Local;
+	private StaffLoadout Loadout => StaffLoadout.Local;
+	private PlayerShards Shards => PlayerShards.Local;
+	private int Banked => VoidMage.Run.RunSave.Data.BankedShards;
+	private bool ShardPulse => Shards is not null && Time.Now - Shards.LastPickupAt < 0.25f;
+
+	private float Flash => Health?.HitFlash01 ?? 0f;
+	private float Opacity => MathF.Round( Flash * 0.85f, 2 );
+	private int Percent => (int)( ( Health?.Health01 ?? 0f ) * 100f );
+	private int HealthNow => (int)MathF.Ceiling( Health?.Health ?? 0f );
+	private int HealthMax => (int)MathF.Round( Health?.EffectiveMaxHealth ?? 0f );
+	private int ManaNow => (int)( Mana?.Mana ?? 0f );
+	private bool Low => ( Health?.Health01 ?? 1f ) < 0.3f;
+	private int ManaPercent => (int)( ( Mana?.Mana01 ?? 0f ) * 100f );
+	private bool Full => ( Mana?.Mana01 ?? 0f ) >= 0.999f;
+	private bool Hollow => Loadout?.HasModifier( ModifierId.Hollow ) ?? false;
+	private bool Wrath => Loadout?.HasModifier( ModifierId.Wrath ) ?? false;
+	// Wrath shrinks the cap: the track itself gets shorter so the missing max is visible, not just a fuller bar
+	private int TrackWidth => (int)MathF.Round( FullTrackWidth * ( Health?.MaxHealthScale ?? 1f ) );
+
+	// what the next cast of the active spell takes: a slice of the health bar under The Hollow, a red frame when the pool cannot cover it
+	private ResolvedCast Preview
+	{
+		get
+		{
+			var l = Loadout;
+			if ( l is null || l.ActiveSpell is null ) return default;
+			var caster = SpellCaster.Local;
+			return ResolvedCast.Preview( l.ActiveSpell, l.Stacks, Shards?.Carried ?? 0, caster?.KindlingActive ?? false, Health is not null ? 1f - Health.Health01 : 0f );
+		}
+	}
+
+	private int HollowCostPercent => Hollow && Health is not null && Health.EffectiveMaxHealth > 0f ? (int)MathF.Ceiling( Preview.HealthCost / Health.EffectiveMaxHealth * 100f ) : 0;
+	private bool Insufficient => !Hollow && Mana is not null && !PlayerMana.Infinite && Preview.ManaCost > Mana.Mana + 0.01f && Loadout?.ActiveSpell is not null;
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( (int)( Flash * 50f ), Percent, Low, ManaPercent, Hollow, HollowCostPercent, Insufficient, HashCode.Combine( PlayerMana.Infinite, TrackWidth, Wrath, Shards?.Carried, Banked, ShardPulse, _takenVersion, HashCode.Combine( HealthNow, HealthMax, ManaNow, Full ) ) );
+	}
+}

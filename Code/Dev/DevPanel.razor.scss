@@ -1,0 +1,189 @@
+DevPanel {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	font-family: Almendra;
+	color: #d8d4c8;
+
+	// the director's window: the left edge, the whole height, folding sections in a scroll. Rows never wrap
+	// (wrapped rows got no height here), so it is wide enough for a row of six or seven small buttons.
+	.window {
+		position: absolute;
+		left: 18px;
+		top: 18px;
+		bottom: 18px;
+		width: 820px;
+		pointer-events: all;
+		flex-direction: column;
+		background-color: #14161aee;
+		border: 1px solid #4a4f58;
+		border-radius: 6px;
+		padding: 10px 12px;
+	}
+
+	.scroll {
+		flex-grow: 1;
+		flex-direction: column;
+		overflow-y: scroll;
+		padding-right: 6px;
+	}
+
+	.row {
+		flex-direction: row;
+		flex-shrink: 0;
+		align-items: center;
+		height: 28px;
+		margin-bottom: 3px;
+	}
+
+	.head {
+		height: 34px;
+		margin-bottom: 2px;
+	}
+
+	.spacer {
+		flex-grow: 1;
+	}
+
+	.heading {
+		font-weight: 700;
+		font-size: 24px;
+		color: #e8d9a8;
+	}
+
+	.state {
+		font-size: 13px;
+		color: #ffd76a;
+		margin-right: 10px;
+	}
+
+	.hint {
+		font-size: 11px;
+		color: #8a867c;
+		height: 16px;
+		flex-shrink: 0;
+		margin-bottom: 4px;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	.label {
+		font-size: 12px;
+		color: #9a968c;
+		margin: 0 4px 0 2px;
+		white-space: nowrap;
+	}
+
+	.value {
+		font-size: 14px;
+		color: #f2f5f8;
+		margin: 0 6px 0 2px;
+		min-width: 40px;
+		justify-content: center;
+		white-space: nowrap;
+	}
+
+	.readout {
+		font-family: Consolas, monospace;
+		font-size: 12px;
+		color: #b8c4d0;
+		background-color: #0e1013;
+		padding: 6px 8px;
+		border-radius: 4px;
+		margin-bottom: 4px;
+		height: 24px;
+		flex-shrink: 0;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	.sec {
+		flex-direction: column;
+		flex-shrink: 0;
+		margin-bottom: 6px;
+		padding-bottom: 4px;
+		border-bottom: 1px solid #2a2e35;
+	}
+
+	.sechead {
+		font-size: 17px;
+		font-weight: 700;
+		color: #e0d6bc;
+		height: 24px;
+		flex-shrink: 0;
+		margin-bottom: 4px;
+		cursor: pointer;
+		white-space: nowrap;
+
+		&:hover {
+			color: #fff3cf;
+		}
+
+		.dim {
+			font-size: 12px;
+			font-weight: 400;
+			color: #8a867c;
+			margin-left: 6px;
+		}
+	}
+
+	.button {
+		font-size: 15px;
+		height: 24px;
+		min-width: 28px;
+		padding: 0 9px;
+		margin-right: 4px;
+		align-items: center;
+		justify-content: center;
+		white-space: nowrap;
+		flex-shrink: 0;
+		background-color: #22262ccc;
+		border: 1px solid #4a4f58;
+		border-radius: 4px;
+		cursor: pointer;
+
+		&:hover {
+			border-color: #8a8f98;
+			background-color: #2c313acc;
+		}
+
+		&.on {
+			border-color: #ffd76a;
+			background-color: #3a3626cc;
+			color: #ffd76a;
+		}
+
+		&.small {
+			font-size: 12px;
+			height: 22px;
+			padding: 0 6px;
+		}
+	}
+
+	// the letterbox bars
+	.bar {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		background-color: #000;
+
+		&.top { top: 0; }
+		&.bottom { bottom: 0; }
+	}
+
+	// the dock: a one-line state while the panel is closed and something is on
+	.dock {
+		position: absolute;
+		left: 18px;
+		top: 18px;
+		padding: 3px 10px;
+		font-size: 13px;
+		color: #ffd76a;
+		background-color: #14161aaa;
+		border: 1px solid #4a4f58;
+		border-radius: 4px;
+	}
+}

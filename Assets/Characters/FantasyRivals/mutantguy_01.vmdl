@@ -1,0 +1,441 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc30:version{8c2d7a91-9c42-4bf0-883a-5a3b1762d4f1} -->
+{
+	rootNode =
+	{
+		_class = "RootNode"
+		children =
+		[
+			{
+				_class = "MaterialGroupList"
+				children =
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps =
+						[
+						{
+								from = "fantasyrivalsshader.vmat"
+								to = "shaders/fantasyrivalsshader.vmat"
+							},
+						{
+								from = "fantasykingdomoutline.vmat"
+								to = "shaders/fantasyrivalsoutline.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = "materials/default.vmat"
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children =
+				[
+				{
+						_class = "RenderMeshFile"
+						name = "body"
+						filename = "characters/fantasyrivals/mutantguy_01.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter =
+						{
+							exclude_by_default = true
+							exception_list =
+							[
+								"SK_BR_Character_MutantGuy_01",
+								"SK_BR_Character_MutantGuy_01_Outline",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children =
+				[
+				]
+				default_root_bone_name = "root"
+			},
+			{
+				_class = "BoneMarkupList"
+				children =
+				[
+				{
+						_class = "BoneMarkup"
+						target_bone = "root"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "pelvis"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "spine_01"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "spine_02"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "spine_03"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "clavicle_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "upperarm_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "lowerarm_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "hand_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "index_01_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "index_02_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "index_03_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "middle_01_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "middle_02_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "thumb_01_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "thumb_02_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "thumb_03_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "clavicle_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "upperarm_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "lowerarm_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "hand_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "index_01_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "index_02_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "index_03_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "middle_01_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "middle_02_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "middle_03_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "thumb_01_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "thumb_02_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "thumb_03_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "neck_01"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "head"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "eyes"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "eyebrows"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Belly_01"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "thigh_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "calf_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "foot_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "ball_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "thigh_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "calf_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "foot_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "ball_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "ik_foot_root"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "ik_foot_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "ik_foot_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "ik_hand_root"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "ik_hand_gun"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "ik_hand_l"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "ik_hand_r"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				]
+			},
+			{
+				_class = "ModelModifierList"
+				children =
+				[
+					{
+						_class = "ModelModifier_ScaleAndMirror"
+						scale = 0.393700
+						mirror_x = false
+						mirror_y = false
+						mirror_z = false
+						flip_bone_forward = false
+						swap_left_and_right_bones = false
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}

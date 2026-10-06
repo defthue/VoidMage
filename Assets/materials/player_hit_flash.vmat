@@ -1,0 +1,6 @@
+// Solid red unlit flash, swapped onto the player's renderers (first-person arms included) for the frames of an
+// incoming hit (heden's CharacterAnimator mechanism: the toon shader ignores Tint, so a material override it is).
+Layer0
+{
+	shader "shaders/red_unlit.shader"
+}

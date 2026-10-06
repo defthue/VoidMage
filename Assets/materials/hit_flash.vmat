@@ -1,0 +1,5 @@
+// Solid white unlit flash, swapped onto a body for the few frames of a hit flash.
+Layer0
+{
+	shader "shaders/white_unlit.shader"
+}

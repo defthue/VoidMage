@@ -1,0 +1,14 @@
+// The laser ribbon material — one material for the firing beam and the thin aim laser
+// (width and tint differ from code). The whole look lives in heden_beam.shader's
+// cross-width profile; every texture input is filled explicitly because an empty slot on
+// a custom shader binds the purple error texture.
+Layer0
+{
+	shader "shaders/heden_beam.shader"
+
+	TextureColor            "[1.000000 1.000000 1.000000 1.000000]"
+	TextureNormal           "[0.500000 0.500000 1.000000 1.000000]"
+	TextureMetalness        "[0.000000 0.000000 0.000000 0.000000]"
+	TextureRoughness        "[1.000000 1.000000 1.000000 1.000000]"
+	TextureAmbientOcclusion "[1.000000 1.000000 1.000000 1.000000]"
+}

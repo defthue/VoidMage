@@ -1,0 +1,302 @@
+@using System
+@using System.Collections.Generic
+@using System.Linq
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Run
+@inherits Panel
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( Look is not null )
+	{
+		<div class="doll">
+			<div class="stage-row">
+				<div class="slots">
+					@foreach ( var slot in LeftSlots )
+					{
+						var s = slot;
+						var worn = AppearanceOptions.Get( Worn( s ) );
+						<div class="slot-btn @( _slot == s ? "selected" : "" )" onclick=@( () => SelectSlot( s ) )>
+							<div class="dfk dfk-tile"></div>
+							<div class="thumb">
+								@if ( IconFor( worn ) is { } tex )
+								{
+									<Image class="icon" Texture=@tex></Image>
+								}
+								else
+								{
+									<div class="bare">—</div>
+								}
+							</div>
+							<div class="slot-name">@ShortName( s )</div>
+						</div>
+					}
+				</div>
+
+				<div class="figure">
+					<div class="dfk dfk-panel"></div>
+					<WardrobePreview @ref=Preview class="preview"></WardrobePreview>
+					<div class="figure-hint">drag to turn · wheel to zoom</div>
+				</div>
+
+				<div class="slots">
+					@foreach ( var slot in RightSlots )
+					{
+						var s = slot;
+						var worn = AppearanceOptions.Get( Worn( s ) );
+						<div class="slot-btn @( _slot == s ? "selected" : "" )" onclick=@( () => SelectSlot( s ) )>
+							<div class="dfk dfk-tile"></div>
+							<div class="thumb">
+								@if ( IconFor( worn ) is { } tex )
+								{
+									<Image class="icon" Texture=@tex></Image>
+								}
+								else
+								{
+									<div class="bare">—</div>
+								}
+							</div>
+							<div class="slot-name">@ShortName( s )</div>
+						</div>
+					}
+				</div>
+			</div>
+
+			<div class="dress">
+				<div class="dress-row">
+					<div class="dress-label">Outfits</div>
+					<div class="chips">
+						@foreach ( var preset in AppearanceOptions.Presets )
+						{
+							var p = preset;
+							<div class="chip" onclick=@( () => WearPreset( p ) )>@PresetLabel( p )</div>
+						}
+						<div class="chip dim" onclick=@Strip>Strip</div>
+					</div>
+				</div>
+				<div class="dress-row">
+					<div class="dress-label">Colours</div>
+					<div class="chips">
+						@foreach ( var option in AppearanceOptions.For( AppearanceSlot.Palette ) )
+						{
+							var id = option.Id;
+							<div class="palette @( Worn( AppearanceSlot.Palette ) == id ? "selected" : "" )" onclick=@( () => Pick( AppearanceSlot.Palette, id ) )>
+								@foreach ( var colour in PaletteColours( option ) )
+								{
+									<div class="stripe" style="background-color: @colour;"></div>
+								}
+							</div>
+						}
+					</div>
+				</div>
+				<div class="dress-row">
+					<div class="dress-label">Hair</div>
+					<div class="chips">
+						@foreach ( var (name, tint) in AppearanceOptions.HairTints )
+						{
+							var t = tint;
+							<div class="hair @( Look.TintFor( AppearanceOptions.TintParts.Hair ) == t ? "selected" : "" )" style="background-color: @TintCss( t );" onclick=@( () => PickHairTint( t ) )></div>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="catalogue">
+			<div class="title">
+				<div class="title-name">@AppearanceOptions.DisplayName( _slot )</div>
+				<div class="title-worn">@WornLabel( _slot, AppearanceOptions.Get( Worn( _slot ) ) )</div>
+			</div>
+			<div class="dfk-divider"></div>
+			<div class="tiles">
+				@foreach ( var option in AppearanceOptions.For( _slot ) )
+				{
+					var id = option.Id;
+					var tex = IconFor( option );
+					<div class="tile @( Worn( _slot ) == id ? "selected" : "" )" onclick=@( () => Pick( _slot, id ) )>
+						<div class="dfk dfk-tile"></div>
+						<div class="thumb">
+							@if ( tex is not null )
+							{
+								<Image class="icon" Texture=@tex></Image>
+							}
+							else if ( option.IsNone )
+							{
+								<div class="bare">None</div>
+							}
+							else
+							{
+								<div class="bare">...</div>
+							}
+						</div>
+						<div class="tile-name">@option.Name</div>
+					</div>
+				}
+			</div>
+		</div>
+	}
+</root>
+
+@code {
+	// The character customizer as a page of the inventory (user, 2026-09-19: it was its own window on the B key; now
+	// it is the Wardrobe tab, B opens the inventory on it). Laid out as a paper doll: the figure in the middle, the
+	// pieces it wears down both sides of it on the side of the body they sit on (the figure faces you, so ITS left is
+	// on your right), what dresses the whole body underneath, and the chosen slot's catalogue on the right.
+	// A plain Panel, not a component: SpellLoadout makes it while the tab is up and the stage goes when it does.
+
+	private static readonly AppearanceSlot[] LeftSlots = { AppearanceSlot.Hat, AppearanceSlot.Hair, AppearanceSlot.FacialHair, AppearanceSlot.ShoulderRight, AppearanceSlot.HipRight };
+	private static readonly AppearanceSlot[] RightSlots = { AppearanceSlot.Torso, AppearanceSlot.Legs, AppearanceSlot.Shoes, AppearanceSlot.ShoulderLeft, AppearanceSlot.HipLeft };
+
+	private WardrobePreview Preview { get; set; }
+
+	private WardrobeStage Stage { get; set; }
+	private AppearanceData Look { get; set; }
+	private AppearanceSlot _slot = AppearanceSlot.Torso;
+	private bool _mannequinDressed;
+	// Every change to Look goes through Apply (or the open), which bumps this.
+	private int _lookVersion;
+
+	private static CharacterAppearance PlayerLook
+	{
+		get
+		{
+			var health = PlayerHealth.Local;
+			return health.IsValid() ? health.Components.Get<CharacterAppearance>( FindMode.EverythingInSelfAndAncestors ) : null;
+		}
+	}
+
+	private string Worn( AppearanceSlot slot ) => Look?.OptionFor( slot ) ?? "";
+
+	private bool HatWorn => AppearanceOptions.Get( Worn( AppearanceSlot.Hat ) ) is { IsNone: false };
+
+	private static string ShortName( AppearanceSlot slot ) => slot switch
+	{
+		AppearanceSlot.FacialHair => "Beard",
+		AppearanceSlot.ShoulderLeft or AppearanceSlot.ShoulderRight => "Shoulder",
+		AppearanceSlot.HipLeft or AppearanceSlot.HipRight => "Hip",
+		_ => slot.ToString(),
+	};
+
+	private static string PresetLabel( SorcererCatalogue.Preset preset )
+	{
+		// "Fantasy Sorcerers 03" is a catalogue name, not a label: the number is what tells them apart
+		var digits = new string( (preset.Name ?? "").Where( char.IsDigit ).ToArray() ).TrimStart( '0' );
+		return digits.Length > 0 ? digits : preset.Name;
+	}
+
+	private string WornLabel( AppearanceSlot slot, AppearanceOption worn )
+	{
+		if ( worn is null || worn.IsNone ) return "nothing worn";
+		return slot == AppearanceSlot.Hair && HatWorn ? $"{worn.Name} · hidden under the hat" : worn.Name;
+	}
+
+	private Texture IconFor( AppearanceOption option )
+	{
+		if ( option is null || option.IsNone || !Stage.IsValid() ) return null;
+		return Stage.Icon( option.Id );
+	}
+
+	private static string[] PaletteColours( AppearanceOption option )
+	{
+		return SorcererCatalogue.PaletteSwatches.TryGetValue( option.MaterialGroup ?? "", out var colours ) ? colours : new[] { "#555" };
+	}
+
+	private static string TintCss( string tint )
+	{
+		if ( !AppearanceData.TryParseTint( tint, out var r, out var g, out var b ) ) return "#888";
+		return $"rgb({(int)( r * 255 )},{(int)( g * 255 )},{(int)( b * 255 )})";
+	}
+
+	// ------------------------------------------------------------------ picking
+
+	private void Apply()
+	{
+		if ( Look is null ) return;
+		_lookVersion++;
+		Look.Normalize();
+		Stage?.Mannequin?.SetLook( Look.Clone() );
+		PlayerLook?.ChangeLook( Look.Clone() );
+		RunSave.Data.Appearance = Look.ToJson();
+		RunSave.Save();
+	}
+
+	private void SelectSlot( AppearanceSlot slot )
+	{
+		_slot = slot;
+		_lookVersion++;
+	}
+
+	private void Pick( AppearanceSlot slot, string id )
+	{
+		if ( Look is null ) return;
+		Look.Options[slot.ToString()] = id;
+		Apply();
+	}
+
+	private void PickHairTint( string tint )
+	{
+		if ( Look is null ) return;
+		Look.Tints[AppearanceOptions.TintParts.Hair] = tint;
+		Apply();
+	}
+
+	private void WearPreset( SorcererCatalogue.Preset preset )
+	{
+		if ( Look is null ) return;
+		AppearanceOptions.WearPreset( Look, preset );
+		Apply();
+	}
+
+	private void Strip()
+	{
+		Look = AppearanceOptions.BareLook( Look );
+		Apply();
+	}
+
+	// ------------------------------------------------------------------ lifetime
+
+	public override void Tick()
+	{
+		base.Tick();
+		var scene = Game.ActiveScene;
+		if ( scene is null ) return;
+
+		if ( !Stage.IsValid() )
+		{
+			Stage = WardrobeStage.Ensure( scene );
+			Look = ( PlayerLook?.Current ?? AppearanceOptions.DefaultLook() ).Clone();
+			_lookVersion++;
+			_mannequinDressed = false;
+		}
+		if ( !_mannequinDressed && Stage.Mannequin.IsValid() )
+		{
+			Stage.Mannequin.SetLook( Look.Clone() );
+			_mannequinDressed = true;
+		}
+
+		if ( Preview is null ) return;
+		if ( Preview.Box.Rect.Width > 0f ) Stage.SetPanelSize( Preview.Box.Rect.Size );
+		// the render target can be replaced (panel resize): rebind it whenever it differs
+		if ( Stage.PreviewTexture is { } tex && Preview.Style.BackgroundImage != tex ) Preview.Style.BackgroundImage = tex;
+		Preview.Wheel ??= delta => Stage?.Zoom( -delta * 0.25f );
+		// held mouse on the figure turns it: :active stays on the preview until the button is released, even off it
+		if ( Preview.HasActive ) Stage.Turn( Mouse.Delta.x );
+	}
+
+	/// <summary>The tab was left or the inventory closed: the stage (mannequin, lights, cameras, icon rig) goes with the page.</summary>
+	public override void OnDeleted()
+	{
+		base.OnDeleted();
+		if ( Stage.IsValid() ) Stage.GameObject.Destroy();
+		Stage = null;
+		Look = null;
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( _slot, _lookVersion, WardrobeStage.IconVersion, Stage.IsValid(), Look is not null );
+	}
+}

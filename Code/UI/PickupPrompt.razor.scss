@@ -1,0 +1,85 @@
+@import "Themes/_iron_kit.scss";
+
+// "E  Pick up ..." under the crosshair, Wrought Iron (2026-09-19): an iron plate behind the words so they read over a
+// bright room, the key as a little framed cap. It only fades in: `.refused` owns the transform.
+PickupPrompt {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	justify-content: center;
+	align-items: center;
+
+	.prompt {
+		position: absolute;
+		top: 56%;
+		height: 40px;
+		padding: 0px 34px 0px 30px;
+		flex-direction: row;
+		align-items: center;
+		font-family: $df-body;
+		font-weight: 600;
+		text-shadow: 0px 1px 2px #000;
+		transition: transform 0.1s ease;
+		animation: df-fade 0.16s ease-out 1;
+
+		.key {
+			position: relative;
+			width: 28px;
+			height: 28px;
+			justify-content: center;
+			align-items: center;
+			margin-right: 12px;
+
+			.cap {
+				font-family: $df-head;
+				font-weight: 400;
+				font-size: 19px;
+				color: $df-gold;
+			}
+		}
+
+		.text {
+			font-size: 21px;
+			color: $df-text;
+		}
+
+		.price {
+			font-size: 21px;
+			color: #d9b8ff;
+			margin-left: 14px;
+			flex-direction: row;
+			align-items: center;
+
+			.gem {
+				font-size: 13px;
+				color: $df-void;
+				margin-right: 5px;
+			}
+		}
+
+		&.full .price {
+			color: #ff9a6a;
+
+			.gem { color: #ff9a6a; }
+		}
+
+		.note {
+			font-size: 18px;
+			color: #ff9a6a;
+			margin-left: 12px;
+		}
+
+		&.full .key .cap {
+			color: #ff9a6a;
+		}
+
+		&.full .key .dfk {
+			border-image-tint: #ff9a6a;
+		}
+
+		&.refused {
+			transform: scale( 1.12 );
+		}
+	}
+}

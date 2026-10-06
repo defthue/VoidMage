@@ -1,0 +1,55 @@
+{
+  "UI": false,
+  "Volume": "0.45",
+  "Pitch": "1",
+  "Decibels": 68,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/cracklingfire.vsnd"
+  ],
+  "OcclusionEnabled": false,
+  "Occlusion": false,
+  "ReverbEnabled": true,
+  "Reflections": true,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 32,
+  "DistanceAttenuation": true,
+  "Distance": 600,
+  "Falloff": [
+    {
+      "x": 0,
+      "y": 1,
+      "in": 0,
+      "out": -0.8,
+      "mode": "Mirrored"
+    },
+    {
+      "x": 0.35,
+      "y": 0.55,
+      "in": -1.2,
+      "out": -1.2,
+      "mode": "Mirrored"
+    },
+    {
+      "x": 0.75,
+      "y": 0.12,
+      "in": -0.6,
+      "out": -0.6,
+      "mode": "Mirrored"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "in": 0,
+      "out": 0,
+      "mode": "Mirrored"
+    }
+  ],
+  "DefaultMixer": {
+    "Name": "unknown",
+    "Id": "00000000-0000-0000-0000-000000000000"
+  },
+  "__references": [],
+  "__version": 1
+}

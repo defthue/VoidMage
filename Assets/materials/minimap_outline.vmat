@@ -1,0 +1,16 @@
+// The minimap slab outlines (Code/UI/DungeonMinimap.cs): inverted hull, front faces culled. Every
+// texture input is filled explicitly: a slot left empty on a custom shader binds the error texture.
+Layer0
+{
+	shader "shaders/minimap_outline.shader"
+
+	TextureColor "[1.000000 1.000000 1.000000 1.000000]"
+	TextureNormal "[0.500000 0.500000 1.000000 1.000000]"
+	TextureMetalness "[0.000000 0.000000 0.000000 0.000000]"
+	TextureRoughness "[1.000000 1.000000 1.000000 1.000000]"
+	TextureAmbientOcclusion "[1.000000 1.000000 1.000000 1.000000]"
+
+	g_vMinimapOutlineColor "[0.030000 0.020000 0.050000]"
+	g_flMinimapEdgeStart "0.400000"
+	g_flMinimapEdgeEnd "0.490000"
+}

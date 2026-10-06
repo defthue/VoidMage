@@ -1,0 +1,56 @@
+// Hand-maintained. The six SM_Env_SpiderWeb_* meshes, which are flat quads whose shape lives
+// entirely in the texture's alpha -- so they need the foliage shader (alpha cutout, two-sided),
+// not the toon surface shader the rest of the pack uses. On heden_toon they would render as
+// solid grey rectangles.
+//
+// Synty gives the webs their own 2048 texture rather than a slot on the pack atlas; the same
+// file feeds the colour; the cutout mask is its alpha saved as a separate grayscale
+// spiderweb_01_alpha.png, because the shader's opacity input reads colour, not alpha, and this
+// source is pure white (it drew solid white cards, 2026-09-16). gen_pack_assets.py writes the remap that
+// points at this file but never writes the file itself -- see PACKS['realms']['specials'].
+
+Layer0
+{
+	shader "shaders/heden_foliage.shader"
+
+	//---- Albedo ----
+	F_USE_TEXTURE 1
+
+	//---- Toon Lighting ----
+	F_USE_RAMP 1
+
+	//---- Albedo ----
+	AlbedoTexture "textures/dungeonrealmstextures/spiderweb_01.png"
+	OpacityTexture "textures/dungeonrealmstextures/spiderweb_01_alpha.png"
+
+	//---- Foliage ----
+	g_flAlphaCutoff "0.400"
+	g_vFoliageTint "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Debug ----
+	g_flDebugMode "0.000"
+
+	//---- Dynamic Lights ----
+	g_flDynamicLightBands "4.000"
+	g_flDynamicLightBandSoftness "0.080"
+	g_flDynamicLightOuterBandScale "1.000"
+	g_flDynamicLightOuterSoftness "0.400"
+	g_flDynamicLightStrength "1.000"
+
+	//---- Toon Lighting ----
+	g_flAmbientFloor "0.100"
+	g_flAmbientLift "0.150"
+	g_flBandSoftness "0.005"
+	g_flBandThreshold "0.500"
+	g_flCrispSunShadows "1.000"
+	g_flShadowBandSoftness "0.030"
+	g_flShadowNormalOffset "2.000"
+	g_flShadowSmoothing "1.500"
+	g_flSunColorInfluence "0.400"
+
+	//---- Toon Ramp ----
+	g_flRampBrightness "1.000"
+	g_flRampShadowPoint "0.250"
+	ToonRamp "materials/heden_ramp_day.png"
+	ToonRampNight "materials/heden_ramp_night.png"
+}

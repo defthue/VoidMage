@@ -1,0 +1,42 @@
+// The Bone Colossus's eye sockets: heden's Abyssium boss eye (heden_boss_eye.shader, compiled here already),
+// re-coloured hellfire. A target-centred slit that scans, flickers and pulses; the skull's eye lights flare with it.
+
+Layer0
+{
+	shader "shaders/heden_boss_eye.shader"
+
+	//---- Eye ----
+	F_EYE_STYLE 1 // Abyssium (target-centred slit eye)
+
+	//---- Abyssium ----
+	g_flScanAmount "0.400"
+	g_flFibreScale "9.000"
+	g_flFibreSpeed "1.600"
+	g_flFibreStretch "1.500"
+	g_flFibreWarp "0.250"
+	g_flFlicker "0.320"
+	g_flHaloWidth "0.060"
+	g_flIrisRadius "0.930"
+	g_flLimbusWidth "0.060"
+	g_flSlitHeight "0.640"
+	g_flSlitTaper "1.400"
+	g_flSlitWidth "0.110"
+	g_vColorLimbus "[0.160000 0.020000 0.000000 0.000000]"
+	g_vColorPupil "[0.020000 0.000000 0.000000 0.000000]"
+	g_vColorSclera "[0.080000 0.008000 0.000000 0.000000]"
+
+	//---- Bands ----
+	g_flCoreBrightness "2.000"
+	g_flStep1 "0.200"
+	g_flStep2 "0.520"
+	g_flStep3 "0.840"
+	g_flStepSoftness "0.008"
+	g_vColorCore "[1.000000 0.900000 0.450000 0.000000]"
+	g_vColorEdge "[0.350000 0.020000 0.000000 0.000000]"
+	g_vColorInner "[1.000000 0.450000 0.050000 0.000000]"
+	g_vColorOuter "[0.850000 0.150000 0.010000 0.000000]"
+
+	//---- Pulse ----
+	g_flPulseAmount "0.040"
+	g_flPulseSpeed "0.700"
+}

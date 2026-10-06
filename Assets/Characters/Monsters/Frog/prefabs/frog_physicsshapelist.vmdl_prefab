@@ -1,0 +1,167 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode =
+	{
+		_class = "RootNode"
+		children =
+		[
+			{
+				_class = "PhysicsShapeList"
+				children =
+				[
+					{
+						_class = "Folder"
+						name = "PhysicsBody"
+						children =
+						[
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Body"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 28.012211
+								point0 = [ 8.469281, -14.117815, 10.651468 ]
+								point1 = [ 34.703174, -57.848239, 43.644759 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "FrontLeg_L"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 11.003879
+								point0 = [ 0.000000, 4.401552, 0.000000 ]
+								point1 = [ 0.000000, 14.305042, 0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "FrontUpLeg_L"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 9.738295
+								point0 = [ 0.000000, 6.816807, -0.000000 ]
+								point1 = [ 0.000002, 83.895576, -0.000003 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "FrontLowLeg_L"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 28.012211
+								point0 = [ 0.000000, 18.142478, -0.000001 ]
+								point1 = [ 0.000001, 71.103847, -0.000002 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Shoulders"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 11.717365
+								point0 = [ -0.000000, 4.686946, 0.000002 ]
+								point1 = [ -0.000000, 15.232575, 0.000008 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Neck"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 14.417106
+								point0 = [ 0.000000, 5.766842, 0.000000 ]
+								point1 = [ 0.000000, 18.742236, 0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Head"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 14.417111
+								point0 = [ -0.000000, 5.766844, 0.000000 ]
+								point1 = [ -0.000000, 18.742244, 0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "BackHip_L"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 11.304683
+								point0 = [ 0.000002, 4.521873, 0.000000 ]
+								point1 = [ 0.000008, 14.696088, 0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "BackLeg_L"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 12.262601
+								point0 = [ 0.000000, 8.583821, 0.000000 ]
+								point1 = [ 0.000001, 82.333779, 0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "BackUpLeg_L"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 9.662770
+								point0 = [ -0.000000, 6.763939, 0.000000 ]
+								point1 = [ -0.000000, 106.612444, 0.000004 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "FrontLeg_L_001"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 11.003888
+								point0 = [ 0.000000, 4.401555, 0.000000 ]
+								point1 = [ 0.000000, 14.305054, 0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "FrontUpLeg_R"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 9.972153
+								point0 = [ -0.000001, 6.980507, -0.000000 ]
+								point1 = [ -0.000007, 83.731848, -0.000001 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "FrontLowLeg_R"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 28.012211
+								point0 = [ -0.000000, 18.142472, 0.000000 ]
+								point1 = [ -0.000001, 71.103817, 0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "BackHip_R"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 11.304688
+								point0 = [ -0.000002, 4.521875, -0.000000 ]
+								point1 = [ -0.000008, 14.696094, -0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "BackLeg_R"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 12.416866
+								point0 = [ -0.000000, 8.691806, 0.000001 ]
+								point1 = [ -0.000003, 82.225788, 0.000006 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "BackUpLeg_R"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 9.499417
+								point0 = [ -0.000000, 6.649593, -0.000001 ]
+								point1 = [ -0.000003, 106.726754, -0.000022 ]
+							},
+						]
+					},
+				]
+			},
+		]
+	}
+}

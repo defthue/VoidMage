@@ -1,0 +1,7 @@
+// A raised minion (The Turncoat): the whole body in a violet-gold unlit tint for its borrowed life. Placeholder:
+// the bespoke pass wants a tinted toon variant so the skeleton keeps its shading.
+Layer0
+{
+	shader "shaders/white_unlit.shader"
+	g_vFlashColor "[0.900000 0.600000 1.400000 0.000000]"
+}

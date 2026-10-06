@@ -1,0 +1,87 @@
+@import "Themes/_iron_kit.scss";
+
+// "Weapon unlocked / spell learned / scroll picked up", Wrought Iron (2026-09-19). The motion is the C# timeline it
+// always had (NoticeStyle and friends). The kit frame hangs outside the card, so the card no longer clips: the sheen
+// sweeps inside its own clipped layer instead.
+UnlockNotice {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	justify-content: center;
+	align-items: flex-start;
+
+	.notice {
+		position: absolute;
+		top: 12%;
+		flex-direction: row;
+		align-items: center;
+		padding: 14px 34px 14px 26px;
+		font-family: $df-body;
+		font-weight: 600;
+
+		// what kind of find it is: the card's own colour, a short bar down the left inside the frame
+		.accent {
+			position: absolute;
+			left: 12px;
+			top: 18px;
+			bottom: 18px;
+			width: 3px;
+		}
+
+		.clip {
+			position: absolute;
+			left: 6px;
+			top: 6px;
+			right: 6px;
+			bottom: 6px;
+			overflow: hidden;
+			pointer-events: none;
+		}
+
+		.rune {
+			font-family: "Noto Sans Runic";
+			font-size: 42px;
+			color: #ffd76a;
+			width: 56px;
+			justify-content: center;
+			align-items: center;
+			text-shadow: 0px 0px 10px #ffb43c88;
+		}
+
+		.text {
+			flex-direction: column;
+			margin-left: 8px;
+
+			.kicker {
+				font-size: 17px;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				color: $df-label;
+			}
+
+			.name {
+				font-family: $df-head;
+				font-weight: 400;
+				font-size: 32px;
+				color: $df-gold;
+				text-shadow: 0px 2px 4px #000000cc;
+			}
+
+			.hint {
+				font-size: 18px;
+				color: $df-dim;
+			}
+		}
+
+		.sheen {
+			position: absolute;
+			top: -20px;
+			left: 0;
+			width: 60px;
+			height: 180px;
+			background-color: #fff3d0;
+			opacity: 0;
+		}
+	}
+}

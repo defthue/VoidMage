@@ -1,0 +1,38 @@
+{
+  "kind": "snake_angry",
+  "bodies": [
+    "Body",
+    "Chest",
+    "Head",
+    "LowerMouth",
+    "Mouth",
+    "Neck",
+    "Root",
+    "Tail",
+    "Tail1",
+    "Tail2",
+    "Tail3",
+    "Tongue1",
+    "Tongue2"
+  ],
+  "connectors": [
+    "Body",
+    "Root"
+  ],
+  "welds": {},
+  "verts": {
+    "Tail1": 10,
+    "Tail": 28,
+    "Chest": 37,
+    "Neck": 22,
+    "Head": 16,
+    "Mouth": 669,
+    "LowerMouth": 29,
+    "Tail3": 21,
+    "Tongue3": 15,
+    "Tongue1": 8,
+    "Tongue2": 4,
+    "Tail2": 8
+  },
+  "total_verts": 867
+}

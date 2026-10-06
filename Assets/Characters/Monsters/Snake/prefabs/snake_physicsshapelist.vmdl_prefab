@@ -1,0 +1,140 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode =
+	{
+		_class = "RootNode"
+		children =
+		[
+			{
+				_class = "PhysicsShapeList"
+				children =
+				[
+					{
+						_class = "Folder"
+						name = "PhysicsBody"
+						children =
+						[
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Root"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 24.287882
+								point0 = [ 0.032559, 16.318429, -4.770680 ]
+								point1 = [ 0.172513, 86.463547, -25.277549 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Body"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 24.287882
+								point0 = [ -0.173320, -8.354068, 14.806455 ]
+								point1 = [ -0.967791, -46.647856, 82.677019 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Chest"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 24.287882
+								point0 = [ -0.000002, 17.001517, 0.000002 ]
+								point1 = [ -0.000008, 70.888394, 0.000007 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Neck"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 24.287882
+								point0 = [ -0.000001, 16.473198, 0.000002 ]
+								point1 = [ -0.000002, 65.364468, 0.000008 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Head"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 24.287882
+								point0 = [ 0.000000, 16.473204, -0.000001 ]
+								point1 = [ 0.000001, 65.364504, -0.000004 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Tail"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 23.949580
+								point0 = [ -0.000000, 9.579832, -0.000001 ]
+								point1 = [ -0.000000, 31.134453, -0.000005 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Tail1"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 19.630688
+								point0 = [ 0.000000, 9.810229, 0.000000 ]
+								point1 = [ 0.000000, 35.309663, 0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Tail2"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 17.472156
+								point0 = [ 0.000000, 7.164238, 0.000000 ]
+								point1 = [ 0.000000, 23.590681, 0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Tail3"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 15.544142
+								point0 = [ 0.000000, 7.164235, -0.000000 ]
+								point1 = [ 0.000000, 24.940279, -0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Mouth"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 10.752676
+								point0 = [ 0.014701, 3.596431, -2.358957 ]
+								point1 = [ 0.047779, 11.688400, -7.666611 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "LowerMouth"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 16.642199
+								point0 = [ -0.000000, 6.656879, 0.000000 ]
+								point1 = [ -0.000000, 21.634859, 0.000001 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Tongue1"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 4.072038
+								point0 = [ -0.000000, 2.850427, -0.000000 ]
+								point1 = [ -0.000000, 29.110733, -0.000000 ]
+							},
+							{
+								_class = "PhysicsShapeCapsule"
+								parent_bone = "Tongue2"
+								surface_prop = "flesh"
+								collision_tags = "ragdoll"
+								radius = 3.712877
+								point0 = [ -0.000000, 2.599014, -0.000000 ]
+								point1 = [ -0.000000, 22.049859, -0.000000 ]
+							},
+						]
+					},
+				]
+			},
+		]
+	}
+}

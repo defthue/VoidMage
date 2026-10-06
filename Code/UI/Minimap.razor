@@ -1,0 +1,91 @@
+@using System.Linq
+@using Sandbox
+@using Sandbox.UI
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( Map is not null )
+	{
+		<div class="frame" style="width: @( Size )px; height: @( Size )px;">
+			<div class="map" @ref=MapPanel></div>
+			<div class="icons" @ref=IconsPanel></div>
+		</div>
+	}
+</root>
+
+@code {
+	/// <summary>Panel edge in pixels before the M-key enlargement.</summary>
+	public const int BaseSize = 280;
+
+	// The dungeon's minimap system (one per scene, on the Dungeon object); a panel in a scene with no
+	// dungeon draws nothing instead of throwing. The system only exists once a floor has been generated,
+	// so in the village the lookup finds nothing: that miss is remembered for half a second rather than
+	// walking the whole scene again every frame from BuildHash.
+	private DungeonMinimap Source
+	{
+		get
+		{
+			if ( !_source.IsValid() && Time.Now >= _nextSourceScan )
+			{
+				_nextSourceScan = Time.Now + 0.5f;
+				_source = Scene?.GetAllComponents<DungeonMinimap>().FirstOrDefault();
+			}
+			return _source;
+		}
+	}
+
+	private DungeonMinimap _source;
+	private float _nextSourceScan;
+
+	private Texture Map => Source?.MapTexture;
+
+	private int Size => (int)( BaseSize * ( Source?.PanelScale ?? 1f ) );
+
+	private Panel MapPanel { get; set; }
+
+	// What still lies on the floor (DungeonMinimap.Icons). The marks move every frame the player turns, so they are
+	// not part of the razor tree (that would rebuild it every frame): a pool of plain panels under .icons, placed by
+	// hand from OnUpdate and hidden when there are fewer marks than panels.
+	private Panel IconsPanel { get; set; }
+	private readonly System.Collections.Generic.List<Panel> _iconPool = new();
+
+	private static readonly string[] IconClasses = { "enchantment", "spell", "shard", "weapon" };
+
+	protected override void OnUpdate()
+	{
+		var host = IconsPanel;
+		if ( host is null || !host.IsValid() ) { _iconPool.Clear(); return; }
+		// a rebuilt tree can bring a new .icons panel: the old pool went with the old one
+		if ( _iconPool.Count > 0 && ( !_iconPool[0].IsValid() || _iconPool[0].Parent != host ) ) _iconPool.Clear();
+
+		var icons = Source?.Icons;
+		int count = icons?.Count ?? 0;
+		for ( int i = 0; i < count; i++ )
+		{
+			if ( i >= _iconPool.Count ) _iconPool.Add( host.AddChild<Panel>( "icon" ) );
+			var icon = icons[i];
+			var panel = _iconPool[i];
+			for ( int k = 0; k < IconClasses.Length; k++ ) panel.SetClass( IconClasses[k], k == (int)icon.Kind );
+			panel.SetClass( "hidden", false );
+			panel.Style.Left = Length.Percent( icon.U * 100f );
+			panel.Style.Top = Length.Percent( icon.V * 100f );
+		}
+		for ( int i = count; i < _iconPool.Count; i++ ) _iconPool[i].SetClass( "hidden", true );
+	}
+
+	// The render target is bound as the map div's background image (a Texture, not a path); its
+	// contents change on the GPU every frame, so the tree only changes when the texture object does
+	// (first frame, resolution change, dungeon regenerate, the M-key toggle).
+	protected override void OnTreeBuilt()
+	{
+		base.OnTreeBuilt();
+		if ( MapPanel is not null && Map is not null ) MapPanel.Style.BackgroundImage = Map;
+	}
+
+	protected override int BuildHash()
+	{
+		return System.HashCode.Combine( Map?.GetHashCode() ?? 0, Size );
+	}
+}

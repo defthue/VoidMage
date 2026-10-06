@@ -1,0 +1,89 @@
+{
+  "kind": "frog",
+  "fps": 24.0,
+  "root_bone": "root",
+  "strike_bone": "Head",
+  "feet": [
+    "FrontFoot.L",
+    "BackFoot.L",
+    "FrontFoot.R",
+    "BackFoot.R"
+  ],
+  "forward": [
+    -0.0118,
+    -0.9999,
+    0.0
+  ],
+  "clips": {
+    "attack": {
+      "frames": [
+        0,
+        18
+      ],
+      "seconds": 0.75,
+      "hit_frame": 10,
+      "hit_time": 0.417,
+      "reach": 1.8998,
+      "peak_speed_time": 0.417,
+      "peak_speed": 22.711,
+      "reach_at_peak_speed": 1.8998,
+      "stance_speed": -0.0,
+      "stance_speed_peak": 14.5007,
+      "body_rise": 0.586
+    },
+    "death": {
+      "frames": [
+        0,
+        20
+      ],
+      "seconds": 0.833,
+      "hit_frame": 0,
+      "hit_time": 0.0,
+      "reach": 0.9544,
+      "peak_speed_time": 0.25,
+      "peak_speed": 1.844,
+      "reach_at_peak_speed": 0.8459,
+      "stance_speed": 3.3087,
+      "stance_speed_peak": 24.138,
+      "body_rise": 3.7265,
+      "air_start": 0.167,
+      "air_end": 0.458,
+      "foot_rise": 1.4856
+    },
+    "idle": {
+      "frames": [
+        0,
+        60
+      ],
+      "seconds": 2.5,
+      "hit_frame": 0,
+      "hit_time": 0.0,
+      "reach": 0.9544,
+      "peak_speed_time": 1.917,
+      "peak_speed": 0.134,
+      "reach_at_peak_speed": 0.9086,
+      "stance_speed": 0.0002,
+      "stance_speed_peak": 0.0004,
+      "body_rise": 0.1149
+    },
+    "jump": {
+      "frames": [
+        0,
+        21
+      ],
+      "seconds": 0.875,
+      "hit_frame": 13,
+      "hit_time": 0.542,
+      "reach": 1.4117,
+      "peak_speed_time": 0.5,
+      "peak_speed": 4.795,
+      "reach_at_peak_speed": 1.3337,
+      "stance_speed": 0.9364,
+      "stance_speed_peak": 34.8466,
+      "body_rise": 1.7251,
+      "air_start": 0.375,
+      "air_end": 0.625,
+      "foot_rise": 0.8045
+    }
+  }
+}

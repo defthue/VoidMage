@@ -1,0 +1,23 @@
+{
+  "kind": "rat",
+  "scale": 0.09460872918044196,
+  "fbx_size": [
+    148.58332989374503,
+    229.15664360971758,
+    697.610046892416
+  ],
+  "width": 14.1,
+  "height": 21.7,
+  "depth": 66.0,
+  "units_per_bu": 9.460872918044196,
+  "root_bone": "root",
+  "bones": 31,
+  "clips": [
+    "attack",
+    "death",
+    "idle",
+    "jump",
+    "run",
+    "walk"
+  ]
+}

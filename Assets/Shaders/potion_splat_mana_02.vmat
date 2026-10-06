@@ -1,0 +1,10 @@
+// A potion's splash stamped on a surface (BloodVfx.Splash for ThrownBottle): the engine's splatter silhouette in
+// white (tools/gen_blood_assets.py) printed in the liquid's colour through the soot term. Generated: edit the tool.
+Layer0
+{
+	shader "shaders/heden_ground_splat.shader"
+	TextureColor "vfx/splatter_white_02.png"
+	g_vSootColor "[0.220000 0.380000 1.000000 0.000000]"
+	g_flOpacity "0.900"
+	g_flDepthFeather "3.000"
+}

@@ -1,0 +1,17 @@
+// The laser ribbon profile with its colour taken from the line's own vertex gradient: a white-hot core over a
+// white body with a grey shade step, so a chain's arc or any palette ribbon can be tinted from code.
+Layer0
+{
+	shader "shaders/heden_beam.shader"
+
+	TextureColor            "[1.000000 1.000000 1.000000 1.000000]"
+	TextureNormal           "[0.500000 0.500000 1.000000 1.000000]"
+	TextureMetalness        "[0.000000 0.000000 0.000000 0.000000]"
+	TextureRoughness        "[1.000000 1.000000 1.000000 1.000000]"
+	TextureAmbientOcclusion "[1.000000 1.000000 1.000000 1.000000]"
+
+	g_vColorHot   "[1.000000 1.000000 1.000000]"
+	g_vColorBody  "[1.000000 1.000000 1.000000]"
+	g_vColorShade "[0.450000 0.450000 0.450000]"
+	g_flCoreBrightness "2.500000"
+}

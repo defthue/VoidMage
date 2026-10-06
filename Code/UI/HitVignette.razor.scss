@@ -1,0 +1,269 @@
+@import "Themes/_iron_kit.scss";
+
+HitVignette {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+
+	.vignette {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient( circle at center, rgba( 180, 10, 10, 0 ) 45%, rgba( 180, 10, 10, 0.9 ) 100% );
+		opacity: 0;
+	}
+
+	// Wrought Iron + liquid (2026-09-19): each bar is a glass tube in the kit's iron bar frame (its ornate ends hang
+	// outside, so the health track can still shrink under Wrath). The liquid is the potions' own two tones (ThrownBottle:
+	// bright over dark), with bubbles rising through it, a restless surface at its leading edge and a sheen on the glass.
+	// The rails are laid over the liquid again so the iron stays crisp. Looping animations say `infinite`;
+	// everything that plays once says `1` (the engine loops an animation that says neither).
+	.bar {
+		position: absolute;
+		left: 76px;
+		width: 320px;
+		height: 26px;
+
+		.tube {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.liquid {
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100%;
+			overflow: hidden;
+			transition: width 0.22s ease-out;
+		}
+
+		// what was just lost: the same width, later and slower
+		.ghost {
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100%;
+			background-color: rgba( 255, 236, 210, 0.75 );
+			transition: width 0.7s ease-in 0.35s;
+		}
+
+		.bubble {
+			position: absolute;
+			bottom: -8px;
+			border-radius: 50%;
+			background-color: rgba( 255, 255, 255, 0.4 );
+			animation: bar-bubble 2.6s linear infinite;
+
+			&.b1 { left: 7%; width: 5px; height: 5px; animation-duration: 2.3s; }
+			&.b2 { left: 22%; width: 3px; height: 3px; animation-duration: 3.1s; animation-delay: 0.7s; }
+			&.b3 { left: 41%; width: 6px; height: 6px; animation-duration: 2.7s; animation-delay: 1.4s; }
+			&.b4 { left: 58%; width: 4px; height: 4px; animation-duration: 3.4s; animation-delay: 0.3s; }
+			&.b5 { left: 74%; width: 5px; height: 5px; animation-duration: 2.5s; animation-delay: 1.9s; }
+			&.b6 { left: 90%; width: 3px; height: 3px; animation-duration: 2.9s; animation-delay: 1.1s; }
+		}
+
+		// the leading edge: a bright lip, and two blobs that ride up and down out of step so it is never a ruler line
+		.surface {
+			position: absolute;
+			top: 0;
+			width: 10px;
+			height: 100%;
+			margin-left: -7px;
+			transition: left 0.22s ease-out;
+			animation: bar-slosh 1.7s ease-in-out infinite alternate;
+
+			.blob {
+				position: absolute;
+				left: 3px;
+				width: 10px;
+				height: 14px;
+				border-radius: 50%;
+
+				&.up { top: -3px; animation: bar-blob 1.3s ease-in-out infinite alternate; }
+				&.down { bottom: -3px; animation: bar-blob 1.9s ease-in-out infinite alternate-reverse; }
+			}
+		}
+
+		// the glass: a sheen along the top, a shadow along the bottom, over the liquid and the empty tube alike
+		.glass {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient( to bottom, rgba( 255, 255, 255, 0.34 ) 0%, rgba( 255, 255, 255, 0.08 ) 28%, rgba( 0, 0, 0, 0 ) 50%, rgba( 0, 0, 0, 0.38 ) 100% );
+		}
+
+		.num {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			justify-content: center;
+			align-items: center;
+			white-space: nowrap;
+			font-family: $df-body;
+			font-weight: 600;
+			font-size: 21px;
+			letter-spacing: 1px;
+			color: #fbf6ea;
+			text-shadow: 0px 1px 2px #000, 0px 0px 5px #000;
+		}
+	}
+
+	.health {
+		bottom: 92px;
+
+		.liquid { background: linear-gradient( to bottom, #ef2f3a 0%, #c9161f 45%, #6d0a14 100% ); }
+		.surface { background: linear-gradient( to right, rgba( 255, 120, 120, 0 ), rgba( 255, 150, 140, 0.95 ), rgba( 255, 120, 120, 0 ) ); }
+		.blob { background-color: #d91f29; }
+
+		&.low {
+			.liquid { background: linear-gradient( to bottom, #ff8a3a 0%, #f0561a 45%, #8a2406 100% ); }
+			.blob { background-color: #f0561a; }
+		}
+
+		// Wrath: the cap is cut; the frame goes the colour of the debt
+		&.wrath .dfk {
+			border-image-tint: rgb( 255, 130, 100 );
+		}
+
+		// The Hollow: the slice of health the next cast spends
+		.cost {
+			position: absolute;
+			top: 0;
+			height: 100%;
+			background-color: rgba( 40, 0, 10, 0.72 );
+			border-left: 1px solid rgba( 255, 120, 140, 0.9 );
+		}
+	}
+
+	.mana {
+		bottom: 44px;
+
+		.liquid { background: linear-gradient( to bottom, #5a8cff 0%, #2f56e8 45%, #1b1a86 100% ); }
+		.surface { background: linear-gradient( to right, rgba( 150, 190, 255, 0 ), rgba( 170, 205, 255, 0.95 ), rgba( 150, 190, 255, 0 ) ); }
+		.blob { background-color: #3d68f2; }
+
+		&.full .liquid { background: linear-gradient( to bottom, #86b0ff 0%, #4a74ff 45%, #26249e 100% ); }
+
+		// The Hollow makes mana meaningless: greyed
+		&.hollow {
+			opacity: 0.35;
+		}
+
+		// the next cast costs more than the pool holds
+		&.insufficient .dfk {
+			border-image-tint: rgb( 255, 110, 110 );
+		}
+	}
+
+	// the run's currency: carried this run (big), banked at home (small)
+	.shards {
+		position: absolute;
+		left: 50px;
+		bottom: 136px;
+		flex-direction: row;
+		align-items: flex-end;
+		text-shadow: 0px 1px 3px #000;
+		transition: transform 0.15s ease;
+
+		.gem {
+			font-size: 22px;
+			color: rgb( 180, 138, 230 );
+			margin-right: 10px;
+			margin-bottom: 7px;
+		}
+
+		.carried {
+			font-family: $df-head;
+			font-weight: 400;
+			font-size: 38px;
+			color: $df-gold;
+		}
+
+		.banked {
+			font-family: $df-body;
+			font-weight: 600;
+			font-size: 21px;
+			color: $df-dim;
+			margin-left: 14px;
+			margin-bottom: 4px;
+		}
+
+		&.pulse {
+			transform: scale( 1.2 );
+		}
+	}
+
+	// What a hit took off you, climbing off the health bar. Sits above the shard counter (bottom: 72px) rather
+	// than starting on the bar itself, so a number never drifts through that line on its way up. Every duration
+	// here is HitVignette.TakenLifetimeSeconds (0.9 s); keep them in step when retuning.
+	// The same rasterising rule as DamageNumbers: the glyphs are drawn at font-size, so no transform scales past
+	// 1.0 -- the pop starts small and settles at the rest size instead of blowing a smaller bitmap up.
+	.taken {
+		position: absolute;
+		bottom: 188px;
+		pointer-events: none;
+		white-space: nowrap;
+		font-family: Almendra;
+		font-weight: 700;
+		font-smooth: auto;
+		font-size: 30px;
+		animation: taken-climb 0.9s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards, taken-fade 0.9s linear 1 forwards;
+
+		// an enemy's blow: the health bar's red, lifted enough to read against the dungeon
+		&.hit {
+			color: #e04545;
+			text-stroke: 3px #2a0707;
+		}
+
+		// a trap: the environment's orange, so a spike plate never reads as something that hit you
+		&.trap {
+			color: #e8912f;
+			text-stroke: 3px #3d2306;
+		}
+	}
+}
+
+@keyframes taken-climb {
+	0%   { transform: translateY( 0px ) scale( 0.8 ); }
+	18%  { transform: translateY( -14px ) scale( 1.0 ); }
+	100% { transform: translateY( -58px ) scale( 0.9 ); }
+}
+
+@keyframes taken-fade {
+	0%   { opacity: 0.2; }
+	12%  { opacity: 1; }
+	55%  { opacity: 1; }
+	100% { opacity: 0; }
+}
+
+// a bubble comes up through the liquid and thins out at the top
+@keyframes bar-bubble {
+	0%   { transform: translateY( 0px ); opacity: 0; }
+	15%  { opacity: 0.55; }
+	80%  { opacity: 0.4; }
+	100% { transform: translateY( -36px ); opacity: 0; }
+}
+
+@keyframes bar-slosh {
+	0%   { transform: translateX( -2px ); }
+	100% { transform: translateX( 2px ); }
+}
+
+@keyframes bar-blob {
+	0%   { transform: translateX( -5px ) translateY( 0px ); }
+	100% { transform: translateX( 1px ) translateY( 3px ); }
+}

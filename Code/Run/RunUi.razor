@@ -1,0 +1,241 @@
+@using System
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Inventory
+@using VoidMage.Spells
+@inherits PanelComponent
+@namespace VoidMage.Run
+@attribute [StyleSheet]
+
+<root>
+	<div class="iris" style="opacity: @Css( IrisAlpha )"></div>
+	<div class="fade" style="opacity: @FadeCss"></div>
+
+	@if ( Run is not null )
+	{
+		@if ( Run.State == RunState.ExitMenu || ExitCardClosing )
+		{
+			<div class="card" style="@ExitCardStyle">
+				<div class="dfk dfk-panel"></div>
+				<div class="heading">Floor @Run.Floor</div>
+				<div class="sub">@( Run.Floor >= RunManager.LastFloor ? "The Colossus waits below." : $"Below: {RunManager.FloorName( Run.Floor + 1 )}." )</div>
+				<div class="line"><div>Carrying</div><div class="shard">◆ @Carried</div><div>shards. They are yours whatever happens.</div></div>
+				<div class="buttons">
+					<div class="button go" onclick=@( () => Run.ChooseContinue() )><div class="dfk dfk-btn-52"></div><div class="t">@( Run.Floor >= RunManager.LastFloor ? "Face the Colossus" : "Go deeper" )</div></div>
+				</div>
+				<div class="button small" onclick=@( () => Run.CloseExitMenu() )><div class="dfk dfk-btn-38"></div><div class="t">Not yet</div></div>
+			</div>
+		}
+		else if ( Run.PortalBlocked )
+		{
+			<div class="card dark blocked">
+				<div class="sub">Enemies are hunting you. The portal will not open.</div>
+			</div>
+		}
+		else if ( Run.State == RunState.Descending && !Run.OfferingBoon )
+		{
+			<div class="card dark">
+				<div class="heading">@( Run.Floor >= RunManager.BossFloor ? "The Colossus" : $"Floor {Run.Floor}" )</div>
+				<div class="sub">@RunManager.FloorName( Run.Floor )</div>
+				@if ( Run.Ready )
+				{
+					<div class="button go" onclick=@( () => Run.ClickContinue() )><div class="dfk dfk-btn-52"></div><div class="t">Continue</div></div>
+				}
+				else
+				{
+					<div class="line dim">Descending…</div>
+				}
+			</div>
+		}
+		else if ( Run.State == RunState.Homeward && !Run.Died )
+		{
+			<div class="card dark">
+				<div class="heading">Home</div>
+				<div class="sub">from floor @Run.Floor</div>
+				<div class="line">@Kept</div>
+			</div>
+		}
+	}
+
+	@if ( DeathShowing )
+	{
+		<div class="death @( _deathOut ? "out" : "" )">
+			<div class="band"></div>
+			<div class="runes">ᛁᛟᚢ ᛞᛁᛖᛞ</div>
+			@if ( DeathCard )
+			{
+				<div class="info">
+					<div class="sub">on floor @Run.Floor</div>
+					<div class="line">@Kept</div>
+					@if ( Run.OfferingKeep )
+					{
+						<div class="keep">
+							<div class="ask">Keep one enchantment</div>
+							<div class="tiles">
+								@foreach ( var id in Run.KeepChoices )
+								{
+									var mod = Scroll.ForModifier( id );
+									var pick = id;
+									<div class="tile @( mod.ModifierDef is { Black: true } ? "black" : "" ) @( _keepHover == pick ? "hover" : "" )" onclick=@( () => Run.ChooseKeep( pick ) ) onmouseover=@( () => _keepHover = pick ) onmouseout=@( () => { if ( _keepHover == pick ) _keepHover = ModifierId.None; } )>
+										<div class="dfk dfk-slot"></div>
+										<Image class="icon" Texture=@ScrollText.Icon( mod )></Image>
+										<div class="glyphs" style="color: @ScrollText.Colour( mod )">@ScrollText.Runes( mod )</div>
+										<div class="name">@mod.Name</div>
+									</div>
+								}
+							</div>
+							<div class="detail @( KeepDetail.IsEmpty ? "empty" : "" )">
+								<div class="dfk dfk-panel"></div>
+								@if ( !KeepDetail.IsEmpty )
+								{
+									var d = KeepDetail;
+									var owned = PlayerInventory.Local.IsValid() ? Math.Max( 1, PlayerInventory.Local.Copies( d.Modifier ) ) : 1;
+									<div class="detail-head">
+										<div class="detail-icon">
+											<Image class="icon" Texture=@ScrollText.Icon( d )></Image>
+											<div class="glyphs" style="color: @ScrollText.Colour( d )">@ScrollText.Runes( d )</div>
+										</div>
+										<div class="detail-title">
+											<div class="detail-name">@d.Name@( owned > 1 ? " " + ScrollText.Tier( owned ) : "" )</div>
+											<div class="detail-kind">@d.KindLabel@( d.ModifierDef is { Black: true } ? " · black seal" : "" )@( d.ModifierDef is { } md ? " · " + md.Banner : "" )</div>
+										</div>
+									</div>
+									<div class="detail-desc">@ScrollText.Description( d )</div>
+									<div class="detail-line">Keeps one copy: @ScrollText.Tier( 1 )  @ScrollText.StackLine( d.Modifier, 1 )</div>
+									@if ( owned > 1 )
+									{
+										<div class="detail-line dim">You carried @ScrollText.Tier( owned ): @ScrollText.StackLine( d.Modifier, owned )</div>
+									}
+								}
+								else
+								{
+									<div class="none">Hover a scroll to read it.</div>
+								}
+							</div>
+						</div>
+					}
+					else if ( Run.KeptScroll != ModifierId.None )
+					{
+						<div class="line kept" style="color: @ScrollText.Colour( Scroll.ForModifier( Run.KeptScroll ) )">@Scroll.ForModifier( Run.KeptScroll ).Name stays on your staff.</div>
+					}
+				</div>
+			}
+		</div>
+	}
+
+	@if ( VictoryShowing )
+	{
+		<div class="death victory @( Run.State != RunState.Boss ? "out" : "" )">
+			<div class="band"></div>
+			<div class="runes">ᚲᛟᛚᛟᛋᛋᚢᛋ ᚠᛖᛚᛚᛖᛞ</div>
+		</div>
+	}
+</root>
+
+@code {
+	/// <summary>True while a run card has the screen: the caster and the sword stop reading clicks (like SpellLoadout.IsOpen).</summary>
+	public static bool Blocking { get; set; }
+
+	/// <summary>0 clear, 1 void. RunManager drives it every frame.</summary>
+	public static float FadeAlpha { get; set; }
+
+	/// <summary>0 open, 1 closed: the vignette that closes in on the centre ahead of the fade during a portal pull.</summary>
+	public static float IrisAlpha { get; set; }
+
+	/// <summary>Seconds of plain ragdoll view after death before the death screen starts coming in.</summary>
+	private const float DeathDelaySeconds = 1f;
+	/// <summary>How long the death screen keeps fading after its reason is gone (matches .death's opacity transition).</summary>
+	private const float DeathOutSeconds = 0.7f;
+	/// <summary>The exit card folding away after a choice.</summary>
+	private const float ExitOutSeconds = 0.18f;
+
+	private RunManager Run => RunManager.Instance;
+	private int Carried => PlayerShards.Local?.Carried ?? 0;
+	/// <summary>What came home with the player: "Kept 212 shards, 3 frogs."</summary>
+	private string Kept => Run.FrogsMoved > 0
+		? $"Kept {Run.ShardsMoved} shards, {Run.FrogsMoved} {( Run.FrogsMoved == 1 ? "frog" : "frogs" )}."
+		: $"Kept {Run.ShardsMoved} shards.";
+	private string FadeCss => Css( FadeAlpha );
+	private static string Css( float v ) => MathF.Round( v, 2 ).ToString( System.Globalization.CultureInfo.InvariantCulture );
+
+	/// <summary>The death screen is up from the moment the local player dies (over the death camera) through the
+	/// run's "home under black" card; it then fades out for DeathOutSeconds. 0 when it is down.</summary>
+	private float _deathAt;
+	private bool _deathOut;
+	private float _deathOutAt;
+
+	private RunState _lastState;
+	private float _exitOutAt = float.NegativeInfinity;
+
+	/// <summary>The exit menu was just left through a choice: the card is folding away.</summary>
+	private bool ExitCardClosing => Run.IsValid() && Run.State != RunState.ExitMenu && Time.Now - _exitOutAt < ExitOutSeconds;
+
+	private string ExitCardStyle
+	{
+		get
+		{
+			if ( !ExitCardClosing ) return "";
+			float p = Ease.OutCubic( (Time.Now - _exitOutAt) / ExitOutSeconds );
+			return $"opacity: {Css( 1f - p )}; transform: scale({Css( 1f - 0.05f * p )}); pointer-events: none;";
+		}
+	}
+
+	/// <summary>The run has taken over after the death camera: the floor and what was kept go under the runes.</summary>
+	private bool DeathCard => Run.IsValid() && Run.State == RunState.Homeward && Run.Died;
+
+	/// <summary>The keep tile under the mouse (None between tiles). The detail box under the tiles reads it.</summary>
+	private ModifierId _keepHover = ModifierId.None;
+	/// <summary>The last tile hovered: the detail box keeps reading it rather than blinking empty between tiles. Cleared for each new offer.</summary>
+	private ModifierId _keepShown = ModifierId.None;
+	private bool _keepWasOffering;
+
+	/// <summary>The scroll the death card's detail box reads: the hovered tile, else the last one hovered.</summary>
+	private Scroll KeepDetail
+	{
+		get
+		{
+			if ( _keepHover != ModifierId.None ) _keepShown = _keepHover;
+			return _keepShown == ModifierId.None ? Scroll.Empty : Scroll.ForModifier( _keepShown );
+		}
+	}
+
+	private bool DeathWanted => (PlayerHealth.Local.IsValid() && PlayerHealth.Local.IsDead) || DeathCard;
+
+	/// <summary>The overlay exists (and its animations start) only once the delay after death has passed.</summary>
+	private bool DeathShowing => _deathAt > 0f && Time.Now >= _deathAt + DeathDelaySeconds;
+
+	/// <summary>The Colossus is down and has lain still: the victory runes stand over it until the way home (they fade as the home card rises).</summary>
+	private bool VictoryShowing => Run.IsValid() && Run.VictoryAt > 0f;
+
+	protected override void OnUpdate()
+	{
+		var run = Run;
+		if ( run.IsValid() )
+		{
+			// Go deeper (or an abandoned run) folds the card away; "Not yet" and a death just drop it
+			if ( _lastState == RunState.ExitMenu && run.State is RunState.Descending or RunState.Homeward && !run.Died ) _exitOutAt = Time.Now;
+			_lastState = run.State;
+
+			// a fresh "keep one" offer starts with the detail box empty
+			if ( run.OfferingKeep && !_keepWasOffering ) { _keepHover = ModifierId.None; _keepShown = ModifierId.None; }
+			_keepWasOffering = run.OfferingKeep;
+		}
+
+		bool wanted = DeathWanted;
+		if ( wanted )
+		{
+			if ( _deathAt <= 0f || _deathOut ) { _deathAt = Time.Now; _deathOut = false; }
+			return;
+		}
+		if ( _deathAt <= 0f ) return;
+		if ( !_deathOut ) { _deathOut = true; _deathOutAt = Time.Now; }
+		else if ( Time.Now >= _deathOutAt + DeathOutSeconds ) _deathAt = 0f;
+	}
+
+	protected override int BuildHash()
+	{
+		var r = Run;
+		return HashCode.Combine( (int)( FadeAlpha * 100f ), (int)( IrisAlpha * 100f ), r?.State, r?.Floor, r?.Ready, r?.Died, HashCode.Combine( r?.ShardsMoved, r?.FrogsMoved, Carried, r?.PortalBlocked, r?.OfferingBoon, r?.OfferingKeep, r?.KeptScroll, HashCode.Combine( _keepHover, _keepShown ) ), HashCode.Combine( DeathShowing, _deathOut, DeathCard, VictoryShowing, ExitCardClosing ? (int)( (Time.Now - _exitOutAt) * 60f ) : -1 ) );
+	}
+}

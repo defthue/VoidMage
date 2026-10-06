@@ -1,0 +1,143 @@
+PolygonDungeonPack toonified -> heden DungeonPack format (Blender 5.0 headless, PolygonDungeonPackToonified)
+source: 797 FBX (Characters/ excluded) | toonified 794 | copied untouched (FX_*) 3 | failures 0
+normal mode: auto (30 deg smoothing groups) 684 | smooth 110
+outline: separate <name>_Outline object, FantasyKingdomOutline material, +0.02 cm shell along smooth normals, normals not flipped
+units: vertices in cm (x100 from Synty metres), Lcl Scaling 1 -> vmdl import_scale 0.3937 like the rest of DungeonPack
+checked against heden Assets/DungeonPack: 378 twins, 0 geometry/name mismatches
+
+=== base material slot per model (everything else = DungeonShader) ===
+DungeonFloor (8): SM_Env_Tiles_Texture_01, SM_Env_Tiles_Texture_02, SM_Env_Tiles_Texture_03, SM_Env_Tiles_Texture_04, SM_Env_Tiles_Texture_05, SM_Env_Tiles_Texture_06, SM_Env_Tiles_Texture_07, SM_Env_Tiles_Texture_08
+DungeonFloor2 (1): SM_Env_Tiles_Texture_09
+DungeonFloor3 (1): SM_Env_Tiles_Texture_10
+DungeonFxFlame (8): SM_Prop_Candle_Chandelier_01_Particle, SM_Prop_Candle_Chandelier_02_Particle, SM_Prop_Candle_Flame_01, SM_Prop_Candle_Stand_01_Particle, SM_Prop_Candles_01_Particle, SM_Prop_Candles_02_Particle, SM_Prop_Candles_03_Particle, SM_Prop_Candles_04_Particle
+DungeonGlass (2): SM_Prop_Tech_Chamber_Broken_Glass, SM_Prop_Tech_Chamber_Glass
+DungeonWallTiles (8): SM_Env_Wall_01_Alt_Texture, SM_Env_Wall_01_Texture, SM_Env_Wall_02_Texture, SM_Env_Wall_03_Texture, SM_Env_Wall_04_Texture, SM_Env_Wall_Alcove_Round_01_Texture, SM_Env_Wall_Pillar_Large_01_Texture, SM_Env_Wall_Round_01_Texture
+DungeonWater (2): SM_Env_Sewer_Water_01, SM_Env_Sewer_Water_Corner_01
+
+=== copied untouched (FX) ===
+FX_CubePivot
+FX_Electricity
+FX_Ring_Mesh
+
+=== smooth-mode models ===
+SM_Env_BonePile_01
+SM_Env_BonePile_02
+SM_Env_BonePile_03
+SM_Env_BonePile_Small_01
+SM_Env_BonePile_Small_02
+SM_Env_Bone_Cracked_01
+SM_Env_Bone_Cracked_02
+SM_Env_Bone_Horn_01
+SM_Env_Bone_Rib_01
+SM_Env_Bone_Rib_02
+SM_Env_Bone_Ribcage_01
+SM_Env_Bone_Ribs_01
+SM_Env_Bone_Rigcage_01
+SM_Env_Bone_Skull_01
+SM_Env_Bone_Skull_02
+SM_Env_Bone_Skull_Jaw_01
+SM_Env_Bone_Skull_Jaw_02
+SM_Env_Bone_Skull_Jaw_03a
+SM_Env_Bone_Spike_01
+SM_Env_Bone_Spike_02
+SM_Env_Bone_Spike_03
+SM_Env_Bone_Spike_04
+SM_Env_Bone_Spike_05
+SM_Env_Bone_Spine_01
+SM_Env_Bone_Spine_02
+SM_Env_Bone_Spine_03
+SM_Env_Bone_Tail_01
+SM_Env_Flowers_01
+SM_Env_Flowers_02
+SM_Env_Grass_01
+SM_Env_Grass_02
+SM_Env_Grass_03
+SM_Env_GroundMound_01
+SM_Env_GroundMound_02
+SM_Env_GroundMound_Corner_01
+SM_Env_GroundMound_Edge_01
+SM_Env_GroundMound_Edge_02
+SM_Env_GroundMound_Edge_03
+SM_Env_GroundMound_Rough_01
+SM_Env_GroundMound_Rough_02
+SM_Env_GroundMound_Rough_03
+SM_Env_GroundMound_Rough_Edge_01
+SM_Env_Moss_Patch_01
+SM_Env_Mushroom_Giant_01
+SM_Env_Mushroom_Giant_02
+SM_Env_Mushroom_Giant_03
+SM_Env_Mushroom_Giant_04
+SM_Env_Mushroom_Giant_05
+SM_Env_Mushroom_Small_01
+SM_Env_Mushroom_Small_02
+SM_Env_Mushroom_Small_03
+SM_Env_Mushroom_Small_04
+SM_Env_Mushroom_Wall_01
+SM_Env_Mushroom_Wall_02
+SM_Env_Mushroom_Wall_03
+SM_Env_Roots_01
+SM_Env_Roots_02
+SM_Env_Sewer_Water_01
+SM_Env_Sewer_Water_Corner_01
+SM_Env_Tile_Simple_01
+SM_Env_Tiles_Texture_01
+SM_Env_Tiles_Texture_02
+SM_Env_Tiles_Texture_03
+SM_Env_Tiles_Texture_04
+SM_Env_Tiles_Texture_05
+SM_Env_Tiles_Texture_06
+SM_Env_Tiles_Texture_07
+SM_Env_Tiles_Texture_08
+SM_Env_Tiles_Texture_09
+SM_Env_Tiles_Texture_10
+SM_Env_Tree_Dandelion_01
+SM_Env_Tree_Dandelion_02
+SM_Env_Tree_Dandelion_03
+SM_Env_Tree_Twisted_01
+SM_Env_Tree_Twisted_02
+SM_Env_Vine_Spikes_01
+SM_Env_Vine_Spikes_02
+SM_Env_Vine_Spikes_03
+SM_Prop_Goblin_Rotisserie_Meat_01
+SM_Prop_Goblin_Tent_01
+SM_Prop_Goblin_Tent_02
+SM_Prop_Goblin_Tent_03
+SM_Prop_Rug_01
+SM_Prop_Rug_02
+SM_Prop_Rug_03
+SM_Prop_Skeleton_01
+SM_Prop_Skeleton_Cage_01
+SM_Prop_Skeleton_Knight_Throne_01
+SM_Prop_Skeleton_Slave_Lying_01
+SM_Prop_Skeleton_Slave_Shackles_01
+SM_Prop_Skeleton_Slave_Shackles_02
+SM_Prop_Skeleton_Slave_Wall_Sitting_01
+SM_Prop_Skeleton_Table_01
+SM_Prop_Skeleton_Table_02
+SM_Prop_Wall_Banner_01
+SM_Prop_Wall_Banner_02
+SM_Prop_Wall_Banner_03
+SM_Prop_Wall_Banner_04
+SM_Prop_Wall_Banner_05
+SM_Prop_Wall_Banner_06
+SM_Wep_Banner_01
+SM_Wep_Banner_02
+SM_Wep_Banner_03
+SM_Wep_Banner_04
+SM_Wep_Banner_05
+SM_Wep_Bone_01
+SM_Wep_Bone_02
+SM_Wep_Goblin_Bone_Axe_01
+SM_Wep_Goblin_Shiv_Bone_01
+SM_Wep_Shield_Bone_01
+
+=== problems (7) ===
+SM_Env_Bone_Ribcage_01.fbx: NOTE node name differs from filename: SM_Env_Bone_Rigcage_01 (Synty naming, kept)
+SM_Env_Bone_Skull_02.fbx: poly count changed 1204 -> 1203
+SM_Env_Statue_04.fbx: poly count changed 2318 -> 2312
+SM_Env_Tiles_Texture_09.fbx: NOTE node name differs from filename: SM_Env_Tiles_Texture_X (Synty naming, kept)
+SM_Env_Tiles_Texture_10.fbx: NOTE node name differs from filename: SM_Env_Tiles_Texture_X (Synty naming, kept)
+SM_Wep_Ornate_Spear_01.fbx: poly count changed 462 -> 460
+SM_Wep_Ornate_Sword_01.fbx: poly count changed 760 -> 758
+
+=== heden twin mismatches (0) ===

@@ -1,0 +1,29 @@
+// The potion stream from the bottle's lip into the mouth (Code/Character/PotionPour.cs), on its own toon liquid
+// shader. Every texture input is filled explicitly: a slot left empty on a custom shader binds the purple error
+// texture. The potion's colour arrives as vertex colour; the look lives in the shader's Stream group.
+Layer0
+{
+	shader "shaders/potion_stream.shader"
+
+	TextureColor "[1.000000 1.000000 1.000000 1.000000]"
+	TextureNormal "[0.500000 0.500000 1.000000 1.000000]"
+	TextureMetalness "[0.000000 0.000000 0.000000 0.000000]"
+	TextureRoughness "[1.000000 1.000000 1.000000 1.000000]"
+	TextureAmbientOcclusion "[1.000000 1.000000 1.000000 1.000000]"
+
+	g_flRimWidth "0.200000"
+	g_flRimDarken "0.500000"
+	g_flLightCentre "-0.350000"
+	g_flLightWidth "0.220000"
+	g_flLightAmount "0.350000"
+	g_flGlintWidth "0.070000"
+	g_flGlintAmount "0.800000"
+	g_flFlowSpeed "14.000000"
+	g_flStreakLength "3.000000"
+	g_flStreakBreak "0.450000"
+	g_flRipple "0.070000"
+	g_flRippleLength "1.600000"
+	g_flBodyAlpha "0.940000"
+	g_flStreakSoft "0.060000"
+	g_flBreakSoft "0.140000"
+}

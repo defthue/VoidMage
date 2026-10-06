@@ -1,0 +1,56 @@
+// Hand-maintained. The POLYGON Dark Fortress cobwebs (6 SM_Env_Spiderweb_* quads, Synty's wind-shader webs),
+// shape in Spiderweb_01.png's alpha (a grey+alpha source, written as RGBA).
+// OpacityTexture must be a SEPARATE grayscale mask (heden's _alpha convention): the shader's opacity input reads the
+// file's colour, not its alpha, and this source is pure white, so pointing it at the PNG itself drew solid white
+// cards (2026-09-16). spiderweb_01_alpha.png is that alpha channel saved as L.
+//
+// Same trick as RealmsWeb.vmat: heden_foliage (alpha cutout, two-sided) reading the texture's own alpha
+// as the mask -- on heden_toon these would render as solid rectangles. gen_pack_assets.py writes the
+// remap that points here but never writes this file (PACKS['darkfortress']['specials']); the toonifier
+// cuts these faces out of the outline shell, since an inflated hull behind a flat card is a black card.
+
+Layer0
+{
+	shader "shaders/heden_foliage.shader"
+
+	//---- Albedo ----
+	F_USE_TEXTURE 1
+
+	//---- Toon Lighting ----
+	F_USE_RAMP 1
+
+	//---- Albedo ----
+	AlbedoTexture "textures/darkfortresstextures/spiderweb_01.png"
+	OpacityTexture "textures/darkfortresstextures/spiderweb_01_alpha.png"
+
+	//---- Foliage ----
+	g_flAlphaCutoff "0.400"
+	g_vFoliageTint "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Debug ----
+	g_flDebugMode "0.000"
+
+	//---- Dynamic Lights ----
+	g_flDynamicLightBands "4.000"
+	g_flDynamicLightBandSoftness "0.080"
+	g_flDynamicLightOuterBandScale "1.000"
+	g_flDynamicLightOuterSoftness "0.400"
+	g_flDynamicLightStrength "1.000"
+
+	//---- Toon Lighting ----
+	g_flAmbientFloor "0.100"
+	g_flAmbientLift "0.150"
+	g_flBandSoftness "0.005"
+	g_flBandThreshold "0.500"
+	g_flCrispSunShadows "1.000"
+	g_flShadowBandSoftness "0.030"
+	g_flShadowNormalOffset "2.000"
+	g_flShadowSmoothing "1.500"
+	g_flSunColorInfluence "0.400"
+
+	//---- Toon Ramp ----
+	g_flRampBrightness "1.000"
+	g_flRampShadowPoint "0.250"
+	ToonRamp "materials/heden_ramp_day.png"
+	ToonRampNight "materials/heden_ramp_night.png"
+}

@@ -1,0 +1,299 @@
+@using System
+@using System.Collections.Generic
+@using System.Globalization
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Run
+@using VoidMage.Village
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( _visible )
+	{
+		<div class="box" style="@BoxStyle()">
+			<div class="dfk dfk-window"></div>
+			<div class="side">
+				@if ( Portrait is { } face )
+				{
+					<Image class="portrait" style="@PortraitStyle()" Texture=@face></Image>
+				}
+				<div class="nameplate" style="@AppearStyle( 0.16f )">
+					<div class="who">@ShopkeeperDialogue.Name</div>
+					<div class="role">@ShopkeeperDialogue.Role</div>
+				</div>
+			</div>
+
+			<div class="main">
+				<div class="speech" onclick=@SkipTyping>
+					@if ( !string.IsNullOrEmpty( _said ) )
+					{
+						<div class="said" style="@SaidStyle()">@_said</div>
+					}
+					<div class="line" style="@LineStyle()">@Typed</div>
+				</div>
+
+				<div class="divider" style="@AppearStyle( 0.1f )"></div>
+
+				<div class="options">
+					@if ( _optionsShown )
+					{
+						@for ( int i = 0; i <= ShopkeeperDialogue.Topics.Length; i++ )
+						{
+							var idx = i;
+							bool leave = idx == ShopkeeperDialogue.Topics.Length;
+							<div class="option @( leave ? "leave" : "" ) @( _asked.Contains( idx ) ? "asked" : "" )" style="@OptionStyle( idx )"
+								onclick=@( () => Pick( idx ) ) onmouseover=@( () => _hover = idx ) onmouseout=@( () => { if ( _hover == idx ) _hover = -1; } )>
+								<div class="marker">▸</div>
+								<div class="words">@( leave ? ShopkeeperDialogue.Leave : ShopkeeperDialogue.Topics[idx].Ask )</div>
+							</div>
+						}
+					}
+				</div>
+			</div>
+		</div>
+	}
+</root>
+
+@code {
+	// Talking to the shopkeeper (user, 2026-09-18). PLACEHOLDER look until the UI design sweep: the point of this pass
+	// is where things sit and how they move. His face is a live render (Shopkeeper's portrait camera, transparent around
+	// him, only ever idling) laid over the box's top left corner and out over its edge, his line is typed out beside it,
+	// and what the player can say is listed under that. The box and the picture stay put at one size and only fade (user);
+	// the writing inside moves the inventory's way: one forward-only panel clock, every style computed from it in C#,
+	// text only ever moved and faded (never scaled). `chat_anim_speed 0.25` is slow motion for review.
+
+	/// <summary>Scales every timing in the panel.</summary>
+	[ConVar( "chat_anim_speed" )] public static float AnimSpeed { get; set; } = 1f;
+	/// <summary>Letters per second of his typed-out line.</summary>
+	[ConVar( "chat_type_speed" )] public static float TypeSpeed { get; set; } = 42f;
+
+	/// <summary>Open on the local screen: the caster, the sword and the E pickups stop reading input while it is.</summary>
+	public static bool IsOpen { get; private set; }
+	public static ShopkeeperChat Instance { get; private set; }
+
+	private const float OpenDuration = 0.32f;
+	private const float CloseDuration = 0.16f;
+	private const float AppearDuration = 0.3f;
+	private const float OptionStagger = 0.045f;
+	private const float OptionOut = 0.16f;
+	private const float InputGrace = 0.2f;
+
+	private Shopkeeper _keeper;
+	private bool _visible, _closing;
+	private float _t, _openAt, _closeAt;
+
+	private string _speech = "", _said = "";
+	private float _speechAt, _typeDelay;
+	private bool _optionsShown;
+	private float _optionsAt, _pickedAt = float.PositiveInfinity;
+	private int _picked = -1, _hover = -1;
+	private readonly HashSet<int> _asked = new();
+	private readonly float[] _hoverT = new float[ShopkeeperDialogue.Topics.Length + 1];
+
+	private Texture Portrait => _keeper.IsValid() ? _keeper.PortraitTexture : null;
+
+	public static void Open( Shopkeeper keeper )
+	{
+		if ( IsOpen || !keeper.IsValid() || !Instance.IsValid() || RunUi.Blocking ) return;
+		IsOpen = true;
+		MouseLock.Release = true;
+		Instance.BeginOpen( keeper );
+	}
+
+	public static void Close()
+	{
+		if ( !IsOpen ) return;
+		IsOpen = false;
+		MouseLock.Release = SpellLoadout.IsOpen;
+		if ( Instance.IsValid() ) Instance.BeginClose();
+	}
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+		Instance = this;
+	}
+
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
+		Close();
+		_visible = false;
+		if ( _keeper.IsValid() ) _keeper.SetPortrait( false );
+		if ( Instance == this ) Instance = null;
+	}
+
+	// ------------------------------------------------------------------ open / close
+
+	private void BeginOpen( Shopkeeper keeper )
+	{
+		_keeper = keeper;
+		_keeper.SetPortrait( true );
+		_visible = true;
+		_closing = false;
+		_openAt = _t;
+		_asked.Clear();
+		_said = "";
+		_hover = -1;
+		_picked = -1;
+		_pickedAt = float.PositiveInfinity;
+		_optionsShown = false;
+		Array.Clear( _hoverT );
+		Say( ShopkeeperDialogue.Greeting, 0.28f );
+		Sfx( "chat_open" );
+	}
+
+	private void BeginClose()
+	{
+		if ( !_visible ) return;
+		_closing = true;
+		_closeAt = _t;
+		Sfx( "chat_close" );
+	}
+
+	/// <summary>His next line: typed out from the start, the choices come back once it is all there.</summary>
+	private void Say( string text, float delay )
+	{
+		_speech = text ?? "";
+		_speechAt = _t;
+		_typeDelay = delay;
+	}
+
+	private int TypedCount => Math.Clamp( (int)((_t - _speechAt - _typeDelay) * MathF.Max( 1f, TypeSpeed )), 0, _speech.Length );
+	private bool TypingDone => TypedCount >= _speech.Length;
+	private string Typed => _speech.Substring( 0, TypedCount );
+	/// <summary>The choices can be clicked: all on screen, none of them picked.</summary>
+	private bool OptionsLive => _optionsShown && !_closing && float.IsPositiveInfinity( _pickedAt );
+
+	private void SkipTyping()
+	{
+		if ( _t - _openAt < InputGrace || TypingDone ) return;
+		_speechAt = _t - _typeDelay - _speech.Length / MathF.Max( 1f, TypeSpeed ) - 0.01f;
+	}
+
+	private void Pick( int idx )
+	{
+		if ( !OptionsLive || _t - _optionsAt < 0.12f ) return;
+		if ( idx >= ShopkeeperDialogue.Topics.Length ) { Close(); return; }
+		var topic = ShopkeeperDialogue.Topics[idx];
+		_picked = idx;
+		_pickedAt = _t;
+		_asked.Add( idx );
+		_said = topic.Ask;
+		Say( topic.Answer, 0.22f );
+		if ( _keeper.IsValid() ) _keeper.React( topic.Reaction );
+		Sfx( "chat_pick" );
+	}
+
+	// ------------------------------------------------------------------ clock
+
+	protected override void OnUpdate()
+	{
+		if ( !_visible ) return;
+		_t += Time.Delta * Math.Clamp( AnimSpeed, 0.05f, 4f );
+
+		if ( IsOpen )
+		{
+			if ( Input.EscapePressed )
+			{
+				// swallow Escape so the pause menu does not open on the same press
+				Input.EscapePressed = false;
+				Close();
+			}
+			// E hurries his line along (not the E that opened the box)
+			else if ( Input.Pressed( "Use" ) ) SkipTyping();
+
+			var health = PlayerHealth.Local;
+			var camera = Scene.Camera;
+			bool gone = !_keeper.IsValid() || (camera.IsValid() && _keeper.DistanceTo( camera.WorldPosition ) > Shopkeeper.TalkRange * 1.6f);
+			if ( IsOpen && (gone || RunUi.Blocking || SpellLoadout.IsOpen || (health.IsValid() && health.IsDead)) ) Close();
+			if ( IsOpen ) MouseLock.Release = true;
+		}
+
+		// the choices leave when one is picked and come back, one after another, when his answer is all typed
+		if ( TypingDone && !_closing )
+		{
+			bool outDone = float.IsPositiveInfinity( _pickedAt ) || _t - _pickedAt >= OptionOut;
+			if ( outDone && (!_optionsShown || !float.IsPositiveInfinity( _pickedAt )) )
+			{
+				_optionsShown = true;
+				_optionsAt = _t;
+				_pickedAt = float.PositiveInfinity;
+				_picked = -1;
+			}
+		}
+		else if ( _optionsShown && !float.IsPositiveInfinity( _pickedAt ) && _t - _pickedAt >= OptionOut ) _optionsShown = false;
+
+		float k = 1f - MathF.Exp( -Time.Delta * 18f );
+		for ( int i = 0; i < _hoverT.Length; i++ )
+			_hoverT[i] = MathX.Lerp( _hoverT[i], OptionsLive && _hover == i ? 1f : 0f, k );
+
+		if ( _closing && _t - _closeAt >= CloseDuration )
+		{
+			_visible = false;
+			_closing = false;
+			_optionsShown = false;
+			if ( _keeper.IsValid() ) _keeper.SetPortrait( false );
+		}
+		StateHasChanged();
+	}
+
+	protected override int BuildHash() => HashCode.Combine( _visible, _t );
+
+	// ------------------------------------------------------------------ styles
+
+	private static string F( float v ) => v.ToString( "0.###", CultureInfo.InvariantCulture );
+
+	private float CloseT => _closing ? Ease.InQuad( Ease.Window( _t, _closeAt, CloseDuration ) ) : 0f;
+
+	/// <summary>
+	/// The box and his picture only ever fade (user: the UI stays put and is always the same size): no slide, no
+	/// scale, no bob. What moves is the writing inside it.
+	/// </summary>
+	private string BoxStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _openAt, OpenDuration ) );
+		return $"opacity: {F( p * (1f - CloseT) )};";
+	}
+
+	/// <summary>A piece of the box arriving a beat after it: faded in, in place.</summary>
+	private string AppearStyle( float delay )
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _openAt + delay, AppearDuration ) );
+		return $"opacity: {F( p )};";
+	}
+
+	private string PortraitStyle() => AppearStyle( 0.08f );
+
+	private string SaidStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _speechAt, 0.22f ) );
+		return $"opacity: {F( p * 0.9f )}; transform: translateX({F( (1f - p) * 12f )}px);";
+	}
+
+	private string LineStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _speechAt + _typeDelay, 0.2f ) );
+		return $"opacity: {F( p )}; transform: translateY({F( (1f - p) * 6f )}px);";
+	}
+
+	private string OptionStyle( int idx )
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _optionsAt + idx * OptionStagger, 0.26f ) );
+		float opacity = p, tx = (1f - p) * -16f + 8f * Ease.OutCubic( _hoverT[idx] );
+		if ( !float.IsPositiveInfinity( _pickedAt ) )
+		{
+			// the one that was said steps forward as it goes, the rest step back
+			float q = Ease.InQuad( Ease.Window( _t, _pickedAt, OptionOut ) );
+			opacity *= 1f - q;
+			tx += idx == _picked ? q * 16f : q * -8f;
+		}
+		return $"opacity: {F( opacity )}; transform: translateX({F( tx )}px);";
+	}
+
+	// no sounds yet: the names are what the design sweep will hang them on
+	private static void Sfx( string name ) { }
+}

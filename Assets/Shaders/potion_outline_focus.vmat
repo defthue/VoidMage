@@ -1,0 +1,20 @@
+// The outline a potion wears while it is in pickup focus (the E prompt is up): swapped in for the model's own
+// dungeonoutline.vmat by PotionPickup. Plain white, not darkened by the zones, and a bold line (the dungeon's ink is a
+// hairline the retro filter's own black edge covers).
+
+Layer0
+{
+	shader "shaders/heden_outline.shader"
+
+	//---- Outline ----
+	g_flInteractBreatheAmount "0.000"
+	g_flInteractBreatheHz "1.000"
+	g_flInteractThicken "0.000"
+	g_flOutlineMaxWorld "2.000"
+	g_flOutlineMinWorld "0.300"
+	g_flOutlineScreenWidth "5.000"
+	g_flZoneDarknessResponse "0.000"
+	g_vInteractTint "[1.000000 1.000000 1.000000 0.000000]"
+	g_vOutlineColor "[1.000000 1.000000 1.000000 0.000000]"
+	ToonRampNight "materials/heden_ramp_night.png"
+}

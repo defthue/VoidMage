@@ -1,0 +1,294 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc30:version{8c2d7a91-9c42-4bf0-883a-5a3b1762d4f1} -->
+{
+	rootNode =
+	{
+		_class = "RootNode"
+		children =
+		[
+			{
+				_class = "MaterialGroupList"
+				children =
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps =
+						[
+						{
+								from = "fantasyrivalsshader.vmat"
+								to = "shaders/fantasyrivalsshader.vmat"
+							},
+						{
+								from = "fantasykingdomoutline.vmat"
+								to = "shaders/fantasyrivalsoutline.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = "materials/default.vmat"
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children =
+				[
+				{
+						_class = "RenderMeshFile"
+						name = "body"
+						filename = "characters/fantasyrivals/medusasnakes_01.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter =
+						{
+							exclude_by_default = true
+							exception_list =
+							[
+								"SK_Character_MedusaSnakes_01",
+								"SK_Character_MedusaSnakes_01_Outline",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children =
+				[
+				]
+				default_root_bone_name = "root"
+			},
+			{
+				_class = "BoneMarkupList"
+				children =
+				[
+				{
+						_class = "BoneMarkup"
+						target_bone = "root"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Root"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_01A"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_01B"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_01C"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_01D"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_01E"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_01F"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_02A"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_02B"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_02C"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_02D"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_02E"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_03A"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_03B"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_03C"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_03D"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_03E"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_04A"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_04B"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_04C"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_04D"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_04E"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_04F"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_05A"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_05B"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_05C"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_05D"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				{
+						_class = "BoneMarkup"
+						target_bone = "Snake_05E"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				]
+			},
+			{
+				_class = "ModelModifierList"
+				children =
+				[
+					{
+						_class = "ModelModifier_ScaleAndMirror"
+						scale = 0.393700
+						mirror_x = false
+						mirror_y = false
+						mirror_z = false
+						flip_bone_forward = false
+						swap_left_and_right_bones = false
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}

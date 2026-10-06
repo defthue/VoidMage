@@ -1,0 +1,57 @@
+{
+  "kind": "frog",
+  "bodies": [
+    "BackHip_L",
+    "BackHip_R",
+    "BackLeg_L",
+    "BackLeg_R",
+    "BackUpLeg_L",
+    "BackUpLeg_R",
+    "Body",
+    "FrontLeg_L",
+    "FrontLeg_L_001",
+    "FrontLowLeg_L",
+    "FrontLowLeg_R",
+    "FrontUpLeg_L",
+    "FrontUpLeg_R",
+    "Head",
+    "Neck",
+    "Shoulders"
+  ],
+  "connectors": [
+    "Body"
+  ],
+  "welds": {
+    "BackFoot_L": "BackLowLeg_L",
+    "BackFoot_R": "BackLowLeg_R",
+    "FrontFoot_L": "FrontLowLeg_L",
+    "FrontFoot_R": "FrontLowLeg_R"
+  },
+  "verts": {
+    "Hips": 47,
+    "Back": 35,
+    "Torso": 56,
+    "FrontLeg_L": 32,
+    "BackHip_L": 42,
+    "BackLeg_L": 56,
+    "BackUpLeg_L": 71,
+    "BackLowLeg_L": 92,
+    "BackFoot_L": 148,
+    "Shoulders": 12,
+    "Head": 841,
+    "Neck": 32,
+    "FrontLowLeg_L": 175,
+    "FrontFoot_L": 51,
+    "FrontUpLeg_L": 43,
+    "FrontLeg_L_001": 29,
+    "BackHip_R": 42,
+    "BackLeg_R": 55,
+    "BackUpLeg_R": 72,
+    "BackLowLeg_R": 70,
+    "BackFoot_R": 170,
+    "FrontLowLeg_R": 175,
+    "FrontFoot_R": 51,
+    "FrontUpLeg_R": 45
+  },
+  "total_verts": 2442
+}

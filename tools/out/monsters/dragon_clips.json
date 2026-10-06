@@ -1,0 +1,112 @@
+{
+  "kind": "dragon",
+  "fps": 24.0,
+  "root_bone": "Root",
+  "strike_bone": "Head",
+  "feet": [
+    "Feet.L",
+    "Feet.R"
+  ],
+  "forward": [
+    -0.0,
+    -1.0,
+    0.0
+  ],
+  "clips": {
+    "attack": {
+      "frames": [
+        0,
+        21
+      ],
+      "seconds": 0.875,
+      "hit_frame": 6,
+      "hit_time": 0.25,
+      "reach": 0.8794,
+      "peak_speed_time": 0.583,
+      "peak_speed": 16.792,
+      "reach_at_peak_speed": 0.1945,
+      "stance_speed": 2.2666,
+      "stance_speed_peak": 11.2331,
+      "body_rise": 0.1145,
+      "air_start": 0.0,
+      "air_end": 0.875,
+      "foot_rise": 0.1205
+    },
+    "attack2": {
+      "frames": [
+        0,
+        40
+      ],
+      "seconds": 1.667,
+      "hit_frame": 10,
+      "hit_time": 0.417,
+      "reach": 1.5007,
+      "peak_speed_time": 0.333,
+      "peak_speed": 21.154,
+      "reach_at_peak_speed": 1.0178,
+      "stance_speed": -0.0,
+      "stance_speed_peak": 4.5754,
+      "body_rise": 0.6318,
+      "air_start": 0.0,
+      "air_end": 1.667,
+      "foot_rise": 0.1574
+    },
+    "death": {
+      "frames": [
+        0,
+        29
+      ],
+      "seconds": 1.208,
+      "hit_frame": 20,
+      "hit_time": 0.833,
+      "reach": 1.1938,
+      "peak_speed_time": 0.583,
+      "peak_speed": 3.39,
+      "reach_at_peak_speed": 0.8958,
+      "stance_speed": -0.0,
+      "stance_speed_peak": 1.4456,
+      "body_rise": 1.301,
+      "air_start": 0.0,
+      "air_end": 0.625,
+      "foot_rise": 0.7816
+    },
+    "flying": {
+      "frames": [
+        0,
+        40
+      ],
+      "seconds": 1.667,
+      "hit_frame": 0,
+      "hit_time": 0.0,
+      "reach": 0.6285,
+      "peak_speed_time": 1.167,
+      "peak_speed": 0.039,
+      "reach_at_peak_speed": 0.6166,
+      "stance_speed": -0.0,
+      "stance_speed_peak": -0.0,
+      "body_rise": 0.0783,
+      "air_start": 0.167,
+      "air_end": 1.542,
+      "foot_rise": 0.0783
+    },
+    "hit": {
+      "frames": [
+        0,
+        40
+      ],
+      "seconds": 1.667,
+      "hit_frame": 0,
+      "hit_time": 0.0,
+      "reach": 0.6285,
+      "peak_speed_time": 0.333,
+      "peak_speed": 5.22,
+      "reach_at_peak_speed": 0.3681,
+      "stance_speed": -0.0,
+      "stance_speed_peak": 4.5754,
+      "body_rise": 0.1806,
+      "air_start": 0.0,
+      "air_end": 1.667,
+      "foot_rise": 0.1574
+    }
+  }
+}

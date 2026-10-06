@@ -1,0 +1,22 @@
+{
+  "kind": "snake_angry",
+  "scale": 0.11130241813002675,
+  "fbx_size": [
+    105.35167455673218,
+    305.47404603806723,
+    287.9793068748087
+  ],
+  "width": 11.7,
+  "height": 34.0,
+  "depth": 32.1,
+  "units_per_bu": 11.130241813002675,
+  "root_bone": "Root",
+  "bones": 15,
+  "clips": [
+    "attack",
+    "death",
+    "idle",
+    "jump",
+    "walk"
+  ]
+}

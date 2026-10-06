@@ -1,0 +1,22 @@
+{
+  "kind": "spider",
+  "scale": 0.10106479002745467,
+  "fbx_size": [
+    593.6785697937012,
+    194.9245953794835,
+    526.9692738531738
+  ],
+  "width": 60.0,
+  "height": 19.7,
+  "depth": 53.3,
+  "units_per_bu": 10.106479002745466,
+  "root_bone": "Root",
+  "bones": 39,
+  "clips": [
+    "attack",
+    "death",
+    "idle",
+    "jump",
+    "walk"
+  ]
+}

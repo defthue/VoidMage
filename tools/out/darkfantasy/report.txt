@@ -1,0 +1,64 @@
+POLYGON Dark Fantasy toonified (Blender 5.0 headless)
+static: source 613 FBX (after skips) | toonified 613 | normal mode auto 498 / smooth 115
+static material families: DarkFantasyBrickLarge01 5, DarkFantasyBrickLarge02 1, DarkFantasyBrickSmall01 94, DarkFantasyBrickSmall02 5, DarkFantasyDividerPattern01 2, DarkFantasyFloorTiles01 13, DarkFantasyGrunge01 12, DarkFantasyHouseWall01 2, DarkFantasyMoss01 5, DarkFantasyRoof01 26, DarkFantasyShader 569, DarkFantasyShader01B 1, DarkFantasyShader02B 3, DarkFantasyStone02 24, DarkFantasyStuccoBrown01 1, DarkFantasyStuccoBrown02 14, DarkFantasyStuccoBrown03 3, DarkFantasyVines 25, DarkFantasyWindow01 10, DarkFantasyWindow02 8, DarkFantasyWindow04 4, DarkFantasyWoodFloorBoards01 11, DarkFantasyWoodFloorBoards02 1
+characters: 22 rigged FBX, each with a coincident <mesh>_Outline shell object
+outline: exact copy, FantasyKingdomOutline material, no baked offset, smooth normals, not flipped -- heden_outline.shader inflates it
+units: source already cm (NOT scaled) -> static vmdl import_scale 0.3937, characters ScaleAndMirror 0.3937
+
+=== characters (22) ===
+capes.fbx                 8 bones  root root      125.9 cm tall   52.0 wide  slots DarkFantasyShader  (root bone added)
+attach_hair_demon_01.fbx 14 bones  root root       49.6 cm tall   30.8 wide  slots DarkFantasyShader  (root bone added)
+attach_hair_hunter_female_01.fbx 14 bones  root root       63.3 cm tall   34.8 wide  slots DarkFantasyShader  (root bone added)
+attach_hair_witch_01.fbx 14 bones  root root       57.1 cm tall   28.4 wide  slots DarkFantasyShader  (root bone added)
+attach_hood_skeleton_ranger_01.fbx 14 bones  root root       47.1 cm tall   31.4 wide  slots DarkFantasyShader  (root bone added)
+attach_priest_veil_01.fbx 16 bones  root root       83.0 cm tall   50.0 wide  slots DarkFantasyShader  (root bone added)
+darklord_male_01.fbx     51 bones  root root      184.3 cm tall  204.8 wide  slots DarkFantasyShader  (root bone added)
+demon_01.fbx             52 bones  root root      190.9 cm tall  305.7 wide  slots DarkFantasyShader  (root bone added)
+demon_male_01.fbx        51 bones  root root      214.5 cm tall  209.5 wide  slots DarkFantasyShader  (root bone added)
+gargoyle_01.fbx          52 bones  root root      190.4 cm tall  305.7 wide  slots DarkFantasyShader  (root bone added)
+gravedigger_male_01.fbx  51 bones  root root      179.7 cm tall  204.8 wide  slots DarkFantasyShader  (root bone added)
+hunter_female_01.fbx     51 bones  root root      179.2 cm tall  204.1 wide  slots DarkFantasyShader  (root bone added)
+hunter_male_01.fbx       51 bones  root root      179.1 cm tall  204.8 wide  slots DarkFantasyShader  (root bone added)
+plaguedoctor_01.fbx      51 bones  root root      179.1 cm tall  204.8 wide  slots DarkFantasyShader  (root bone added)
+priest_female_01.fbx     51 bones  root root      179.2 cm tall  204.1 wide  slots DarkFantasyShader  (root bone added)
+skeleton_01.fbx          51 bones  root root      179.5 cm tall  203.9 wide  slots DarkFantasyShader  (root bone added)
+skeleton_flesh_01.fbx    51 bones  root root      180.3 cm tall  203.9 wide  slots DarkFantasyShader  (root bone added)
+skeleton_heavyarmor_01.fbx 51 bones  root root      179.5 cm tall  204.8 wide  slots DarkFantasyShader  (root bone added)
+skeleton_lightarmor_01.fbx 51 bones  root root      179.5 cm tall  203.9 wide  slots DarkFantasyShader  (root bone added)
+skeleton_ranger_01.fbx   51 bones  root root      179.7 cm tall  204.8 wide  slots DarkFantasyShader  (root bone added)
+witch_female_01.fbx      51 bones  root root      179.2 cm tall  204.1 wide  slots DarkFantasyShader  (root bone added)
+tail_rig_01.fbx           6 bones  root root       64.6 cm tall   12.1 wide  slots DarkFantasyShader  (root bone added)
+
+=== static node names differing from filename (4) ===
+SM_Env_Ocean_01.fbx -> node ['SM_Env_Ocean_Base_01']
+SM_Prop_Gibbet_01_Damaged_01.fbx -> node ['SM_Prop_Gibbet_Cage_Broken_01']
+SM_Prop_Mug_Beer_01.fbx -> node ['SM_Prop_Beer_Mug_01']
+SM_Prop_Post_01.fbx -> node ['SM_Prop_Lamp_Post_01']
+
+=== degenerate faces dropped on import (24, harmless) ===
+SM_Bld_Fence_Cemetary_01.fbx: 1 of 682 faces dropped (1 duplicate/degenerate in the source)
+SM_Bld_Fence_Cemetary_02.fbx: 1 of 634 faces dropped (1 duplicate/degenerate in the source)
+SM_Bld_Fence_Pillar_Cemetary_01.fbx: 1 of 207 faces dropped (1 duplicate/degenerate in the source)
+SM_Bld_Wall_Archway_02.fbx: 2 of 2033 faces dropped (2 duplicate/degenerate in the source)
+SM_Bld_Wall_Window_Huge_01.fbx: 4 of 2898 faces dropped (4 duplicate/degenerate in the source)
+SM_Bld_Wall_Window_Huge_02.fbx: 4 of 2970 faces dropped (4 duplicate/degenerate in the source)
+SM_Bld_Wall_Window_Tall_01.fbx: 30 of 936 faces dropped (30 duplicate/degenerate in the source)
+SM_Bld_Wall_Window_Tall_02.fbx: 30 of 1176 faces dropped (30 duplicate/degenerate in the source)
+SM_Bld_Wall_Window_Tall_03.fbx: 30 of 1388 faces dropped (30 duplicate/degenerate in the source)
+SM_Chr_Attach_Priest_Hat_01.fbx: 1 of 320 faces dropped (1 duplicate/degenerate in the source)
+SM_Chr_Attach_Wing_03.fbx: 2 of 546 faces dropped (2 duplicate/degenerate in the source)
+SM_Env_Basalt_04.fbx: 1 of 564 faces dropped (1 duplicate/degenerate in the source)
+SM_Prop_Book_02.fbx: 2 of 549 faces dropped (2 duplicate/degenerate in the source)
+SM_Prop_Book_Open_02.fbx: 2 of 736 faces dropped (2 duplicate/degenerate in the source)
+SM_Prop_Crypt_01.fbx: 2 of 4829 faces dropped (2 duplicate/degenerate in the source)
+SM_Prop_Gargoyle_Statue_01.fbx: 94 of 6102 faces dropped (94 duplicate/degenerate in the source)
+SM_Prop_Gargoyle_Statue_Alt_01.fbx: 94 of 5556 faces dropped (94 duplicate/degenerate in the source)
+SM_Prop_Head_Mounted_01.fbx: 1 of 1089 faces dropped (1 duplicate/degenerate in the source)
+SM_Prop_Pyre_01.fbx: 8 of 4936 faces dropped (8 duplicate/degenerate in the source)
+SM_Prop_Ritual_Circle_01.fbx: 2 of 3559 faces dropped (2 duplicate/degenerate in the source)
+SM_Prop_Rug_03_Alt_01.fbx: 1 of 540 faces dropped (1 duplicate/degenerate in the source)
+SM_Prop_Shed_01.fbx: 2 of 3295 faces dropped (2 duplicate/degenerate in the source)
+SM_Wep_Axe_01.fbx: 15 of 1281 faces dropped (15 duplicate/degenerate in the source)
+SM_Wep_Sword_01.fbx: 16 of 619 faces dropped (16 duplicate/degenerate in the source)
+
+=== problems (0) ===

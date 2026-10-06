@@ -1,0 +1,6 @@
+// A skeleton burning (the void orb's zone, a fire wake): an ember-orange unlit tint while it burns. Placeholder.
+Layer0
+{
+	shader "shaders/white_unlit.shader"
+	g_vFlashColor "[1.300000 0.550000 0.200000 0.000000]"
+}

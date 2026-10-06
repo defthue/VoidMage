@@ -1,0 +1,572 @@
+@using System
+@using System.Linq
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Dungeon
+@using VoidMage.UI
+@inherits PanelComponent
+@namespace VoidMage.Run
+@attribute [StyleSheet]
+
+<root>
+	@if ( _phase is Phase.Idle or Phase.Leaving && !TrailerIntro )
+	{
+		<div class="backdrop" style="@BackdropStyle">
+			<div class="dark"></div>
+			<div class="glow"></div>
+		</div>
+		<div class="menu" style="@MenuStyle">
+			<div class="title">Void Mage</div>
+			<div class="dfk-divider rule"></div>
+			<div class="button go hit" id="play"><div class="dfk dfk-btn-52"></div><div class="t">Play</div></div>
+			<div class="button hit" id="settings"><div class="dfk dfk-btn-52"></div><div class="t">Settings</div></div>
+			<div class="button hit" id="quit"><div class="dfk dfk-btn-52"></div><div class="t">Quit</div></div>
+		</div>
+	}
+	@if ( _phase is Phase.Idle or Phase.Leaving && !TrailerIntro )
+	{
+		<div class="side"><div class="player" style="@BackdropStyle">
+			<div class="dfk dfk-panel-low"></div>
+			<div class="head">
+				<div class="now">
+					<div class="song">@( _musicDead ? "music unavailable" : Tracks[_track].Title )</div>
+					<div class="artist">@Artist</div>
+				</div>
+				<div class="ctl mute hit @( _muted ? "off" : "" )" id="mute"><div class="dfk dfk-key"></div><i class="ic">@( _muted ? "volume_off" : "volume_up" )</i></div>
+			</div>
+			<div class="controls">
+				<div class="ctl hit" id="prev"><div class="dfk dfk-key"></div><i class="ic">skip_previous</i></div>
+				<div class="ctl hit" id="pause"><div class="dfk dfk-key"></div><i class="ic">@( _paused ? "play_arrow" : "pause" )</i></div>
+				<div class="ctl hit" id="next"><div class="dfk dfk-key"></div><i class="ic">skip_next</i></div>
+				<div class="ctl spotify hit" id="spotify"><div class="dfk dfk-btn-38"></div><div class="link" @ref=LinkHost></div></div>
+			</div>
+		</div></div>
+	}
+	@if ( _phase == Phase.Idle && !TrailerIntro )
+	{
+		<div class="catch @( _hover is null ? "" : "point" )" onclick=@ClickSeen></div>
+	}
+	@if ( _phase == Phase.Approach && !TrailerIntro )
+	{
+		<div class="skip" onclick=@( () => _hurry = true )></div>
+	}
+	<div class="flash" style="opacity: @Css( _flash )"></div>
+</root>
+
+@code {
+	/// <summary>
+	/// The main menu (2026-09-21). The village on a sunny afternoon, seen from the menu camera: no player, no
+	/// portal, the campfire's smoke rising straight. Play: the buttons go, lightning takes the screen white, and
+	/// under the white the storm has broken (RunManager.StormBreaks: night, rain already falling, the portal
+	/// standing there, the fire dragged into it). The camera then travels slowly, in a straight line and without
+	/// turning (the user's rule for camera motion), to where the player's eyes will be; the player is put down
+	/// exactly there (RunManager.EnterFromMenu) and the arms and the HUD come in. A click on the way hurries it.
+	///
+	/// The two ends of the move come from the scene if the user stood them there: a GameObject named "MenuCamera"
+	/// (the menu's view; its rotation is the view for the whole move and the player's first look) and one named
+	/// "CampfireSpawn" (the player's feet). Without them both are worked out from the enter portal and the fire
+	/// next to it: the player behind the fire, looking over it at the portal, the menu view further back up the
+	/// same line.
+	/// </summary>
+	private enum Phase { Idle, Leaving, Approach, Arrive, Dive }
+
+	// ---- the trailer's intro (the director, 2026-09-23): the same sequence, but the walk does not stop at the eye and
+	// no player is put down. The camera keeps flying, straight into the portal's heart, under the portal's own pull
+	// (the veil, the pulses, the aberration, the iris), and the picture goes to black: the title card's cue. Both
+	// flags are static so a scene reload (DevActions.PlayTrailerIntro) carries them in; the menu presses Play itself.
+	/// <summary>The dive instead of the arrival.</summary>
+	public static bool TrailerIntro { get; set; }
+	/// <summary>Play pressed by the menu itself a moment after it shows (cleared once used).</summary>
+	public static bool AutoPlay { get; set; }
+	/// <summary>Seconds the menu stands before it presses Play by itself.</summary>
+	[ConVar( "dev_intro_wait" )] public static float AutoPlayWait { get; set; } = 1.5f;
+	/// <summary>How far short of the portal's heart the pull (the veil, the pulses, the iris) begins, units.</summary>
+	[ConVar( "dev_intro_pull_at" )] public static float DivePullAt { get; set; } = 260f;
+	/// <summary>Where the flight ends: this far in front of the portal's heart (right up against it; 0 goes inside the model).</summary>
+	[ConVar( "dev_intro_end" )] public static float DiveEnd { get; set; } = 30f;
+	private const float DiveAberration = 11f;
+	private const float DivePortalHeart = 70f;
+	private Vector3 _diveHeart;
+	private int _divePulses;
+	private float _bornAt = -1f;
+
+	/// <summary>The scene object whose transform is the menu's view: a plain marker. Should it carry a camera again (to preview the shot), RunManager switches that off and its FOV is used.</summary>
+	public const string CameraMarker = "MenuCamera";
+	/// <summary>The menu's lens (the 60 the user framed the shot with); it opens to the player's own FOV along the move.</summary>
+	private const float MenuFov = 60f;
+
+	/// <summary>Seconds the buttons take to go.</summary>
+	private const float LeaveSeconds = 0.4f;
+	/// <summary>Play to the strike: the camera is already creeping in when the sky goes white.</summary>
+	private const float StrikeAfter = 0.5f;
+	/// <summary>The share of the walk spent getting up to speed; the rest of it is one long slowing down.</summary>
+	private const float RampShare = 0.1f;
+	/// <summary>The white: held, then faded, with one smaller return stroke on the way down.</summary>
+	private const float FlashHold = 0.12f;
+	private const float FlashFade = 0.8f;
+	/// <summary>The camera's walk to the eye.</summary>
+	[Property, Range( 1f, 12f )] public float ApproachSeconds { get; set; } = 3.8f;
+	/// <summary>The arms rising and the HUD fading in once the player has the view.</summary>
+	[Property, Range( 0.1f, 3f )] public float ArriveSeconds { get; set; } = 0.9f;
+	/// <summary>PlayerController: BodyHeight 72 less EyeDistanceFromTop 8 (prefabs/player.prefab).</summary>
+	private const float EyeHeight = 64f;
+
+	// ---- the hint of the Colossus (user, 2026-09-23): its waking laugh WITH the strike (the user: with the lightning,
+	// not a beat later), far off and soft: risen over a second to a quarter of the fight's volume, held a moment, then
+	// let go slowly, so it is gone as the player arrives. The cave take (the fight's own event) is 4.9 s; the walk
+	// after the strike is about 4.7 s.
+	private const string LaughSound = "sounds/bonecolossuslaugh.sound";
+	private const float LaughDelay = 0f;
+	private const float LaughFadeIn = 1.0f;
+	private const float LaughPeak = 0.25f;
+	private const float LaughHold = 0.5f;
+	private const float LaughFadeOut = 2.5f;
+	private SoundHandle _laugh;
+	private float _laughAt, _laughStarted, _laughBase;
+	private bool _laughReleased;
+
+	// ---- the menu's music: three songs by a friend of the user, one after the other, through the engine's own
+	// Game.Music (one track, crossfades, the "Music" mixer, so the s&box music volume setting rules it). It belongs to
+	// the menu only: Play fades it out so the strike lands in silence. The Spotify button opens the artist's page in
+	// the user's own browser: game code has no Process.Start and the engine no OpenUrl, but a rich Label opens an
+	// http(s) anchor with the shell when it is clicked, and LinkLabel lets the whole button be that click.
+	private const string Artist = "97X";
+	private const string SpotifyUrl = "https://open.spotify.com/artist/0QX2dlw9OlGXGIVWpwbacD";
+	private static readonly (string Title, string Path)[] Tracks =
+	{
+		( "UW", "sounds/music/uw.vsnd" ),
+		( "Company", "sounds/music/company.vsnd" ),
+		( "Bound to Happen", "sounds/music/bound_to_happen.vsnd" ),
+	};
+	private int _track;
+	private bool _paused;
+	private bool _muted;
+	private bool _musicStarted;
+	private float _nextMusicTry;
+	// A song that dies as soon as it starts (the engine warns "stopped right after starting - is the sound file
+	// missing or broken?") did not load, decode or stream on this machine just then. Seen on a stream 2026-09-26:
+	// fine here, but there the player skipped to the next song every two seconds while the dungeon's own music later
+	// played fine, so it is not the files: most likely the engine's async sound streaming starving on a first run's
+	// long frames (pipeline compiles, the village loading) right when the menu starts. So a song is judged: alive for
+	// HealthySeconds means real, and its end is a normal end; dead at once means one more try, then the next song,
+	// and once every song has died in a row the player rests for RestSeconds (shown as "music unavailable") before
+	// trying again, since whatever starved it may have passed. Prev/next still work: a press is a fresh start.
+	private const float HealthySeconds = 3f;
+	private const float RestSeconds = 30f;
+	private float _playedAt;
+	private bool _healthy;
+	private bool _retried;
+	private int _deadInARow;
+	private bool _musicDead;
+	private float _restUntil;
+	private Panel LinkHost { get; set; }
+	private LinkLabel _link;
+
+	private void PlayTrack( float fade )
+	{
+		_paused = false;
+		_playedAt = Time.Now;
+		_healthy = false;
+		_nextMusicTry = Time.Now + 2f;   // a missing clip only warns; do not ask again every frame
+		Game.Music.Play( Tracks[_track].Path, fade, loop: false );
+	}
+
+	/// <summary>A button press: whatever the player concluded, try again from here.</summary>
+	private void Step( int by )
+	{
+		_deadInARow = 0;
+		_musicDead = false;
+		Advance( by );
+	}
+
+	private void Advance( int by )
+	{
+		_track = ((_track + by) % Tracks.Length + Tracks.Length) % Tracks.Length;
+		_retried = false;
+		PlayTrack( 0.6f );
+	}
+
+	private void TogglePause()
+	{
+		_paused = !_paused;
+		Game.Music.Paused = _paused;
+	}
+
+	/// <summary>The speaker on the player: the song keeps running, silently (pause is the other button). It also says where the music is coming from.</summary>
+	private void ToggleMute()
+	{
+		_muted = !_muted;
+		Game.Music.Volume = _muted ? 0f : 1f;
+	}
+
+	private void OpenSpotify() => _link?.Open();
+
+	/// <summary>
+	/// The scene's RetroFilter bends the finished frame, HUD and all, with the CRT tube (Over HUD = Curvature), and
+	/// the user wants the menu bent with it. The warp runs after the UI is drawn, so a button is SEEN somewhere other
+	/// than where the engine thinks it IS (by more the nearer the screen's edge), and the engine's own hover and
+	/// click land on the wrong spot. So no button here takes the mouse: one full-screen catcher does, and the hit
+	/// test is ours, made where the player is looking (CrtWarp.Seen turns the cursor into the UI point the tube
+	/// shows under it). Hover is a class for the same reason (`.hover`, not `:hover`).
+	/// </summary>
+	private string _hover;
+
+	private Panel SeenButton()
+	{
+		if ( Panel is null || !Panel.IsValid() ) return null;
+		var at = CrtWarp.Seen( Scene, Panel );
+		return Panel.Descendants.FirstOrDefault( p => p.HasClass( "hit" ) && p.IsVisible && p.Box.Rect.IsInside( at ) );
+	}
+
+	private void TickHover()
+	{
+		var seen = _phase == Phase.Idle ? SeenButton() : null;
+		_hover = seen?.Id;
+		if ( Panel is null || !Panel.IsValid() ) return;
+		foreach ( var p in Panel.Descendants.Where( p => p.HasClass( "hit" ) ) ) p.SetClass( "hover", p == seen );
+	}
+
+	private void ClickSeen()
+	{
+		if ( _phase != Phase.Idle ) return;
+		switch ( SeenButton()?.Id )
+		{
+			case "play": Play(); break;
+			case "settings": Game.Overlay.ShowSettingsModal(); break;
+			case "quit": Game.Close(); break;
+			case "prev": Step( -1 ); break;
+			case "pause": TogglePause(); break;
+			case "mute": ToggleMute(); break;
+			case "next": Step( 1 ); break;
+			case "spotify": OpenSpotify(); break;
+		}
+	}
+
+	private void TickMusic()
+	{
+		if ( _phase != Phase.Idle ) return;
+		if ( !_musicStarted )
+		{
+			_musicStarted = true;
+			_track = Game.Random.Int( 0, Tracks.Length - 1 );
+			PlayTrack( 2f );
+			return;
+		}
+		if ( _paused ) return;
+		if ( _musicDead )
+		{
+			// the rest is over: from the top of the cycle, quietly
+			if ( Time.Now < _restUntil ) return;
+			_musicDead = false;
+			_deadInARow = 0;
+			Advance( 1 );
+			return;
+		}
+		if ( Game.Music.IsPlaying )
+		{
+			if ( !_healthy && Time.Now - _playedAt >= HealthySeconds ) { _healthy = true; _deadInARow = 0; }
+			return;
+		}
+		if ( Time.Now < _nextMusicTry ) return;
+		// the song ran out: the next one
+		if ( _healthy ) { Advance( 1 ); return; }
+		// dead at once: once more, then on; every song dead: a rest, then the cycle again
+		if ( !_retried ) { _retried = true; PlayTrack( 0.6f ); return; }
+		if ( ++_deadInARow >= Tracks.Length )
+		{
+			_musicDead = true;
+			_restUntil = Time.Now + RestSeconds;
+			Log.Warning( $"[Menu] every song stopped as soon as it started; the music player rests {RestSeconds:0} s (prev/next tries at once)" );
+			return;
+		}
+		Advance( 1 );
+	}
+
+	protected override void OnTreeBuilt()
+	{
+		// the button's text IS the link (made in code: a Label takes its rich text as a property, not as markup)
+		if ( LinkHost is null || !LinkHost.IsValid() || LinkHost.ChildrenOfType<LinkLabel>().Any() ) return;
+		_link = LinkHost.AddChild<LinkLabel>();
+		_link.SetLink( SpotifyUrl, "Spotify" );
+	}
+
+	private Phase _phase = Phase.Idle;
+	private float _phaseAt;
+	private float _flash;
+	private float _flashAt = -1f;
+	private float _travel;
+	private bool _hurry;
+	private bool _posed;
+	private Vector3 _from;
+	private Vector3 _to;
+	private Rotation _view;
+	private float _fovFrom;
+	private ScreenPanel _hud;
+
+	private static string Css( float v ) => MathF.Round( v, 2 ).ToString( System.Globalization.CultureInfo.InvariantCulture );
+
+	private string MenuStyle
+	{
+		get
+		{
+			if ( _phase != Phase.Leaving ) return "";
+			float p = Ease.InCubic( (Time.Now - _phaseAt) / LeaveSeconds );
+			return $"opacity: {Css( 1f - p )}; transform: translateY({Css( 18f * p )}px); pointer-events: none;";
+		}
+	}
+
+	private string BackdropStyle => _phase == Phase.Leaving ? $"opacity: {Css( 1f - Ease.InCubic( (Time.Now - _phaseAt) / LeaveSeconds ) )};" : "";
+
+	/// <summary>Up to speed over the first RampShare of the time, then slowing all the way to a stop (speed is a ramp up and a longer ramp down; this is its integral, 0..1).</summary>
+	private static float Walk( float u )
+	{
+		u = Ease.Clamp01( u );
+		if ( u < RampShare ) return u * u / RampShare;
+		float rest = (1f - u) / (1f - RampShare);
+		return RampShare + (1f - RampShare) * (1f - rest * rest);
+	}
+
+	private void Play()
+	{
+		if ( _phase != Phase.Idle ) return;
+		_phase = Phase.Leaving;
+		_phaseAt = Time.Now;
+		// gone by the strike, so the thunder breaks a silence
+		Game.Music.Stop( StrikeAfter );
+	}
+
+	protected override void OnUpdate()
+	{
+		var run = RunManager.Instance;
+		if ( !run.IsValid() ) return;
+		if ( !_posed ) FindPoses( run );
+		if ( _bornAt < 0f ) _bornAt = Time.Now;
+		TickHover();
+		TickMusic();
+		TickLaugh();
+
+		// the trailer: the menu presses Play itself, and the cursor is never in the picture once it has
+		if ( AutoPlay && _phase == Phase.Idle && Time.Now - _bornAt >= AutoPlayWait ) { AutoPlay = false; Play(); }
+		if ( TrailerIntro && _phase != Phase.Idle && !VoidMage.Dev.DevPanel.IsOpen ) Mouse.Visibility = MouseVisibility.Hidden;
+
+		switch ( _phase )
+		{
+			case Phase.Leaving:
+				// the camera sets off with the click; half a second in, the strike: white first, everything changes under it
+				_travel += Time.Delta / MathF.Max( 0.5f, ApproachSeconds );
+				if ( Time.Now - _phaseAt < StrikeAfter ) break;
+				_phase = Phase.Approach;
+				_phaseAt = Time.Now;
+				_flashAt = Time.Now;
+				_flash = 1f;
+				run.StormBreaks();
+				_laughAt = Time.Now + LaughDelay;
+				TickLaugh();   // the same frame as the flash and the thunder, not the next one
+				break;
+
+			case Phase.Approach:
+				if ( TrailerIntro ) { TickTrailerFlight( run ); break; }
+				_travel += Time.Delta / MathF.Max( 0.5f, ApproachSeconds ) * (_hurry ? 7f : 1f);
+				if ( _travel < 1f ) break;
+				_travel = 1f;
+				_phase = Phase.Arrive;
+				_phaseAt = Time.Now;
+				FirstPersonArms.IntroLower = 1f;
+				run.EnterFromMenu( _to - Vector3.Up * EyeHeight, _view.Angles() );
+				_hud = run.PlayerObject.IsValid() ? run.PlayerObject.Components.GetAll<ScreenPanel>( FindMode.EverythingInDescendants ).FirstOrDefault() : null;
+				if ( _hud.IsValid() ) _hud.Opacity = 0f;
+				break;
+
+			case Phase.Arrive:
+				float p = Ease.OutCubic( (Time.Now - _phaseAt) / MathF.Max( 0.05f, ArriveSeconds ) );
+				FirstPersonArms.IntroLower = 1f - p;
+				if ( _hud.IsValid() ) _hud.Opacity = p;
+				if ( p < 1f ) break;
+				FirstPersonArms.IntroLower = 0f;
+				GameObject.Destroy();
+				return;
+
+			case Phase.Dive:
+				// inside the portal: black, held for the title card until the director reloads the scene
+				run.SetFadeNow( 1f );
+				RunUi.IrisAlpha = 1f;
+				break;
+		}
+
+		TickFlash();
+
+		// the view is ours until the player exists; from then on the controller holds the very same pose
+		if ( _phase is Phase.Arrive or Phase.Dive || (TrailerIntro && _phase == Phase.Approach) ) return;
+		var camera = Scene.Camera;
+		if ( !camera.IsValid() ) return;
+		float walked = Walk( _travel );
+		camera.WorldPosition = Vector3.Lerp( _from, _to, walked );
+		camera.WorldRotation = _view;
+		// the marker camera's lens at the start (the framing the user set up), the player's own by the time they have the view
+		camera.FieldOfView = Ease.Lerp( _fovFrom, Preferences.FieldOfView, walked );
+	}
+
+	/// <summary>When a pull pulse `n` (1-based) goes off, as PortalTransition times its own: bunching up as the pull takes hold.</summary>
+	private static float DivePulseAt( int n ) => 1f - 0.58f * MathF.Pow( 0.62f, n - 1 );
+
+	private bool _pullBegun;
+	private float _pullAt, _pullSeconds;
+
+	/// <summary>
+	/// The trailer's flight is THE INTRO'S OWN WALK (the same Walk profile, the same ApproachSeconds, the same lens
+	/// opening from the menu's to the player's), only aimed at the portal's heart and ending right up against it
+	/// instead of at the player's eye. Nothing else moves the camera or the lens (user, 2026-09-23: "make it smooth,
+	/// the same as the actual intro"). Once the camera is DivePullAt units short of the heart, the portal's pull
+	/// (the veil growing out of it, the pulses, the smeared edges, the iris) runs over what is left of the walk and
+	/// the void closes over the frame as the camera arrives. Then black, held: the title card's cue.
+	/// </summary>
+	private void TickTrailerFlight( RunManager run )
+	{
+		_travel += Time.Delta / MathF.Max( 0.5f, ApproachSeconds );
+		float u = Ease.Clamp01( _travel );
+		float walked = Walk( u );
+		var camera = Scene.Camera;
+		var pos = Vector3.Lerp( _from, _to, walked );
+		float fov = Ease.Lerp( _fovFrom, Preferences.FieldOfView, walked );
+		float remaining = pos.Distance( _diveHeart );
+		float timeLeft = (1f - u) * MathF.Max( 0.5f, ApproachSeconds );
+
+		if ( !_pullBegun && remaining <= DivePullAt )
+		{
+			_pullBegun = true;
+			_pullAt = Time.Now;
+			_pullSeconds = MathF.Max( 0.25f, timeLeft );
+			_divePulses = 1;
+			if ( camera.IsValid() ) camera.GameObject.Components.GetOrCreate<VoidMage.Rendering.PortalVeil>();
+			VoidMage.Rendering.PortalVeil.BeginPull( _diveHeart, _pullSeconds );
+			VoidMage.Rendering.RetroFilter.TriggerRipple( _diveHeart, 1.6f );
+			Log.Info( $"[Menu] trailer: the pull begins {remaining:0} u short of the portal, {_pullSeconds:0.0} s to go" );
+		}
+		if ( _pullBegun )
+		{
+			float q = Ease.Clamp01( (Time.Now - _pullAt) / _pullSeconds );
+			VoidMage.Rendering.RetroFilter.TransitionAberration = DiveAberration * Ease.InQuad( q );
+			while ( _divePulses < 4 && q >= DivePulseAt( _divePulses ) )
+			{
+				VoidMage.Rendering.RetroFilter.TriggerRipple( _diveHeart, 1.6f + _divePulses * 0.5f );
+				_divePulses++;
+			}
+			RunUi.IrisAlpha = Ease.InQuad( Ease.Window( q, 0f, 0.85f ) );
+			run.SetFadeNow( Ease.InCubic( Ease.Window( q, 0.6f, 0.4f ) ) );
+		}
+		if ( camera.IsValid() )
+		{
+			camera.WorldPosition = pos;
+			camera.WorldRotation = _view;
+			camera.FieldOfView = fov;
+		}
+		if ( u < 1f ) return;
+		// arrived: inside the portal, black
+		_phase = Phase.Dive;
+		_phaseAt = Time.Now;
+		VoidMage.Rendering.RetroFilter.TransitionAberration = 0f;
+		VoidMage.Rendering.PortalVeil.Stop();
+		run.SetFadeNow( 1f );
+		RunUi.IrisAlpha = 1f;
+	}
+
+	/// <summary>The laugh's envelope: started at its time, risen by hand, then handed to the engine's own fade to let go.</summary>
+	private void TickLaugh()
+	{
+		if ( _laughAt > 0f && Time.Now >= _laughAt )
+		{
+			_laughAt = 0f;
+			_laugh = VoidMage.Audio.GameAudio.Play2D( LaughSound );
+			if ( _laugh is null || !_laugh.IsValid() ) { _laugh = null; return; }
+			_laughStarted = Time.Now;
+			_laughBase = _laugh.Volume * LaughPeak;
+			_laughReleased = false;
+			_laugh.Volume = 0f;
+		}
+		if ( _laugh is null || !_laugh.IsValid() || _laughReleased ) return;
+		float t = Time.Now - _laughStarted;
+		if ( t < LaughFadeIn ) { _laugh.Volume = _laughBase * MathF.Sin( t / LaughFadeIn * MathF.PI * 0.5f ); return; }
+		_laugh.Volume = _laughBase;
+		if ( t < LaughFadeIn + LaughHold ) return;
+		_laughReleased = true;
+		_laugh.Stop( LaughFadeOut );
+	}
+
+	protected override void OnDestroy()
+	{
+		// the hint of the Colossus, if it is still going (a hurried walk): let go, never cut
+		if ( _laugh is not null && _laugh.IsValid() && !_laughReleased ) _laugh.Stop( 1.5f );
+		// Game.Music lives outside the scene: a menu torn down mid-song (play mode stopped) must not leave it singing
+		if ( _phase == Phase.Idle ) Game.Music.Stop( 0.3f );
+		// Game.Music outlives the scene, and so would a mute
+		Game.Music.Volume = 1f;
+		FirstPersonArms.IntroLower = 0f;
+		if ( _hud.IsValid() ) _hud.Opacity = 1f;
+		if ( _phase == Phase.Dive )
+		{
+			VoidMage.Rendering.RetroFilter.TransitionAberration = 0f;
+			VoidMage.Rendering.PortalVeil.Stop();
+			RunUi.IrisAlpha = 0f;
+		}
+	}
+
+	private void TickFlash()
+	{
+		if ( _flashAt < 0f ) return;
+		float t = Time.Now - _flashAt;
+		if ( t < FlashHold ) { _flash = 1f; return; }
+		float f = (t - FlashHold) / FlashFade;
+		if ( f >= 1f ) { _flash = 0f; _flashAt = -1f; return; }
+		// the way down, with the return stroke a bolt has: a second, smaller white a third of the way in
+		float fall = 1f - Ease.OutQuad( f );
+		float again = f is > 0.3f and < 0.42f ? 0.55f : 0f;
+		_flash = MathF.Max( fall * fall, again * (1f - f) );
+	}
+
+	private void FindPoses( RunManager run )
+	{
+		_posed = true;
+		var markCamera = Scene.Directory.FindByName( CameraMarker ).FirstOrDefault();
+		var markSpawn = Scene.Directory.FindByName( "CampfireSpawn" ).FirstOrDefault();
+
+		// worked out from the portal and the fire beside it: stand behind the fire, look over it at the portal
+		var portal = run.EnterPortalPosition ?? run.VillageSpawnPoint;
+		var fire = Scene.GetAllComponents<FireLight>()
+			.Where( f => f.IsValid() && f.WorldPosition.WithZ( 0f ).Distance( portal.WithZ( 0f ) ) < 400f )
+			.OrderBy( f => f.WorldPosition.DistanceSquared( portal ) ).FirstOrDefault();
+		var centre = fire.IsValid() ? fire.WorldPosition.WithZ( portal.z ) : portal;
+		var along = (portal - centre).WithZ( 0f );
+		along = along.LengthSquared > 1f ? along.Normal : Vector3.Forward;
+		var feet = Ground( centre - along * (fire.IsValid() ? 150f : 260f) );
+		var view = Rotation.From( 5f, MathF.Atan2( along.y, along.x ).RadianToDegree(), 0f );
+
+		if ( markSpawn.IsValid() ) feet = markSpawn.WorldPosition;
+		if ( markCamera.IsValid() ) view = markCamera.WorldRotation;
+		else if ( markSpawn.IsValid() ) view = Rotation.From( 5f, markSpawn.WorldRotation.Yaw(), 0f );
+
+		_view = view;
+		var lens = markCamera.IsValid() ? markCamera.Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants ) : null;
+		_fovFrom = lens.IsValid() ? lens.FieldOfView : MenuFov;
+		_to = feet + Vector3.Up * EyeHeight;
+		_from = markCamera.IsValid() ? markCamera.WorldPosition : _to - view.Forward.WithZ( 0f ).Normal * 430f + Vector3.Up * 75f;
+		if ( TrailerIntro )
+		{
+			// the trailer: from the menu's spot the whole flight AIMS at the portal's heart and goes straight into it
+			_diveHeart = portal + Vector3.Up * DivePortalHeart;
+			var toHeart = _diveHeart - _from;
+			if ( !toHeart.IsNearZeroLength ) _view = Rotation.LookAt( toHeart.Normal );
+			_to = _diveHeart - (toHeart.IsNearZeroLength ? Vector3.Zero : toHeart.Normal * MathF.Min( DiveEnd, toHeart.Length * 0.5f ));
+			Log.Info( $"[Menu] trailer flight {toHeart.Length:0} u to the portal over {ApproachSeconds:0.0} s (the intro's walk)" );
+		}
+		Log.Info( $"[Menu] view {_from} -> eye {_to}, yaw {view.Yaw():0} ({( markCamera.IsValid() ? "MenuCamera" : "worked out" )}, {( markSpawn.IsValid() ? "CampfireSpawn" : "worked out" )})" );
+	}
+
+	private Vector3 Ground( Vector3 at )
+	{
+		var tr = Scene.Trace.Ray( at + Vector3.Up * 150f, at - Vector3.Up * 400f ).WithoutTags( "player", "trigger", "npc" ).Run();
+		return tr.Hit ? tr.HitPosition : at;
+	}
+
+	protected override int BuildHash() => HashCode.Combine( HashCode.Combine( _track, _paused, _muted, _hover, _musicDead ), _phase, (int)( _flash * 100f ), _phase == Phase.Leaving ? (int)( MathF.Min( Time.Now - _phaseAt, LeaveSeconds ) * 60f ) : -1, TrailerIntro );
+}

@@ -1,0 +1,523 @@
+@using System
+@using System.Globalization
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Run
+@inherits PanelComponent
+@namespace VoidMage.Boons
+@attribute [StyleSheet]
+
+<root>
+	@if ( IsOpen )
+	{
+		<div class="backdrop" style="opacity: @F( _closeFade )">
+			<div class="motes">
+				@for ( int m = 0; m < MoteCount; m++ )
+				{
+					<div class="mote" style="@MoteStyle( m )"></div>
+				}
+			</div>
+
+			<div class="header" style="@HeaderStyle()">
+				<div class="title">@_title</div>
+				<div class="subtitle">@_subtitle</div>
+			</div>
+
+			<div class="row">
+				@for ( int i = 0; i < 3; i++ )
+				{
+					var idx = i;
+					var card = _cards[idx];
+					var def = card.Def;
+					<div class="slot">
+						@if ( def is not null )
+						{
+							<div class="card @FamilyClass( def ) @( card.HoverT > 0.5f ? "hover" : "" )" style="@CardStyle( idx )"
+								onclick=@( () => Pick( idx ) ) onmouseover=@( () => SetHover( idx, true ) ) onmouseout=@( () => SetHover( idx, false ) )>
+								<div class="back" style="opacity: @F( FaceShown( idx ) ? 0f : 1f )">
+									<div class="dfk dfk-panel"></div>
+									<div class="back-frame">
+										<div class="back-rune">ᛞ</div>
+									</div>
+								</div>
+								<div class="face" style="opacity: @F( FaceShown( idx ) ? 1f : 0f )">
+									<div class="dfk dfk-panel"></div>
+									<div class="glyph">@BoonDatabase.Glyph( def.Family )</div>
+									<div class="name">@def.Name</div>
+									<div class="family">@( def.IsPact ? "Pact" : def.Family.ToString() )</div>
+									<div class="divider"></div>
+									<div class="lines">
+										@for ( int k = 0; k < def.Lines.Length; k++ )
+										{
+											var line = def.Lines[k];
+											<div class="line @( line.IsCost ? "cost" : "" )" style="@LineStyle( idx, k )">@line.Text</div>
+										}
+									</div>
+									<div class="clip"><div class="sweep" style="@SweepStyle( idx )"></div></div>
+								</div>
+							</div>
+						}
+					</div>
+				}
+			</div>
+
+			<div class="footer" style="@FooterStyle()">
+				<div class="reroll @( CanAfford ? "" : "poor" )" style="transform: translateX(@F( RerollShake() )px)" onclick=@( () => Reroll() )>
+					<div class="dfk dfk-btn-52"></div>
+					<div class="t">Reroll</div><div class="t shard">◆ @BoonOffer.RerollCost</div>
+				</div>
+				<div class="carried @( Time.Now - _deniedAt < 0.5f ? "flash" : "" )"><div>Carrying</div><div class="shard">◆ @MathF.Round( _shownShards ).ToString( "0", CultureInfo.InvariantCulture )</div></div>
+			</div>
+
+			@if ( Waiting && _done )
+			{
+				<div class="waiting">
+					<div class="spinner" style="transform: rotate(@F( Time.Now * 90f % 360f )deg)">ᛟ</div>
+					<div class="waiting-text">Descending…</div>
+				</div>
+			}
+		</div>
+	}
+</root>
+
+@code {
+	// The pick between floors: boon · pact · boon. Every motion here is driven from C# on one scaled clock (_t), so
+	// a timeline can restart (a reroll) without fighting stylesheet animations, and `boon_anim_speed 0.25` slows the
+	// whole thing down for review. Text is rasterised at its font size and only ever scaled at or under 1.0 (the
+	// DamageNumbers / death screen quality rule): the pick pulse dips below 1, the fly-away shrinks.
+
+	/// <summary>Scales every timing on the screen: 0.25 is slow motion for review.</summary>
+	[ConVar( "boon_anim_speed" )] public static float AnimSpeed { get; set; } = 1f;
+
+	// ---- timings (seconds of screen time)
+	private const float HeaderIn = 0.5f;
+	private const float FirstDeal = 0.35f;
+	private const float DealStagger = 0.11f;
+	private const float DealDuration = 0.55f;
+	private const float FlipGap = 0.08f;
+	private const float FlipDuration = 0.42f;
+	private const float LineDelay = 0.12f;
+	private const float LineStagger = 0.07f;
+	private const float LineDuration = 0.2f;
+	private const float SweepDuration = 0.5f;
+	private const float PickCentre = 0.3f;
+	private const float PickFlyStart = 0.85f;
+	private const float PickFlyDuration = 0.45f;
+	private const float OthersFall = 0.42f;
+	private const float RerollFlipBack = 0.28f;
+	private const float RerollGather = 0.24f;
+	private const float RerollShuffle = 0.34f;
+	private const float RerollSpread = 0.36f;
+	private const float CloseDuration = 0.35f;
+
+	// ---- layout (px, the panel's 1080p reference)
+	private const float SlotSpacing = 340f;
+	private const float DealFromY = 760f;
+	private const int MoteCount = 22;
+
+	public static BoonScreen Instance { get; private set; }
+
+	/// <summary>The screen is up (from Open until its close fade is over).</summary>
+	public static bool IsOpen => Instance.IsValid() && Instance._open;
+	/// <summary>A card was taken and its fly-away has finished: the run may move on.</summary>
+	public static bool IsDone => Instance.IsValid() && Instance._done;
+	/// <summary>Set by the run while the floor below is still baking: the spinner shows once a card is taken.</summary>
+	public static bool Waiting { get; set; }
+
+	private sealed class CardAnim
+	{
+		public BoonDefinition Def;
+		public float DealAt;
+		public float FlipAt;
+		/// <summary>0 when the card rises from below the screen, 1 when it spreads out of the centre (a reroll's re-deal).</summary>
+		public bool FromCentre;
+		public float HoverT;
+		public bool Hovered;
+	}
+
+	private readonly CardAnim[] _cards = { new(), new(), new() };
+	private BoonOffer _offer;
+	private bool _open;
+	private bool _done;
+	private bool _devOffer;
+	private float _t;
+	private string _title = "";
+	private string _subtitle = "";
+	private int _picked = -1;
+	private float _pickAt;
+	private bool _rerolling;
+	private float _rerollAt;
+	private bool _rerollSwapped;
+	private float _deniedAt = float.NegativeInfinity;
+	private float _shownShards;
+	private bool _closing;
+	private float _closeAt;
+	private float _closeFade = 1f;
+
+	private static string F( float v ) => v.ToString( "0.###", CultureInfo.InvariantCulture );
+	private static int Carried => PlayerShards.Local?.Carried ?? 0;
+	private bool CanAfford => Carried >= BoonOffer.RerollCost;
+	private bool Busy => _picked >= 0 || _rerolling || _closing;
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+		Instance = this;
+	}
+
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
+		if ( Instance == this ) Instance = null;
+	}
+
+	// ------------------------------------------------------------------ run api
+
+	/// <summary>Deal a fresh offer. False when there is no local player to give a boon to.</summary>
+	public static bool Open( string title, string subtitle = "Choose one" )
+	{
+		var screen = Instance;
+		if ( !screen.IsValid() || !PlayerBoons.Local.IsValid() ) return false;
+		screen.Begin( title, subtitle );
+		return true;
+	}
+
+	/// <summary>Fade the screen away (the run is moving on, or it was abandoned by a death).</summary>
+	public static void Close()
+	{
+		var screen = Instance;
+		if ( !screen.IsValid() || !screen._open || screen._closing ) return;
+		screen._closing = true;
+		screen._closeAt = screen._t;
+	}
+
+	/// <summary>Gone at once, no fade (a death under the screen).</summary>
+	public static void Abort()
+	{
+		var screen = Instance;
+		if ( !screen.IsValid() ) return;
+		screen._open = false;
+		screen._done = false;
+		Waiting = false;
+	}
+
+	private void Begin( string title, string subtitle )
+	{
+		_open = true;
+		_done = false;
+		_closing = false;
+		_closeFade = 1f;
+		_t = 0f;
+		_picked = -1;
+		_rerolling = false;
+		_title = title;
+		_subtitle = subtitle;
+		_shownShards = Carried;
+		_offer = BoonOffer.Roll( PlayerBoons.Local );
+		for ( int i = 0; i < 3; i++ )
+		{
+			var c = _cards[i];
+			c.Def = _offer.Cards[i];
+			c.FromCentre = false;
+			c.Hovered = false;
+			c.HoverT = 0f;
+			// left, right, then the pact in the middle last
+			c.DealAt = FirstDeal + DealOrder( i ) * DealStagger;
+			c.FlipAt = FirstDeal + 2 * DealStagger + DealDuration + FlipGap + DealOrder( i ) * (FlipDuration * 0.55f);
+		}
+		Sfx( "boon_deal" );
+	}
+
+	private static int DealOrder( int i ) => i == 0 ? 0 : i == 2 ? 1 : 2;
+
+	// ------------------------------------------------------------------ input
+
+	private void SetHover( int i, bool on )
+	{
+		_cards[i].Hovered = on;
+		if ( on && !Busy && Revealed( i ) ) Sfx( "boon_hover" );
+	}
+
+	private bool Revealed( int i ) => _t >= _cards[i].FlipAt + FlipDuration * 0.5f;
+
+	private void Pick( int i )
+	{
+		if ( Busy || _cards[i].Def is null || !Revealed( i ) ) return;
+		var boons = PlayerBoons.Local;
+		if ( !boons.IsValid() || !boons.Grant( _cards[i].Def.Id ) ) return;
+		_picked = i;
+		_pickAt = _t;
+		_title = _cards[i].Def.Name;
+		_subtitle = _cards[i].Def.IsPact ? "The pact is sealed" : "Taken";
+		Sfx( _cards[i].Def.IsPact ? "boon_pact" : "boon_pick" );
+	}
+
+	private void Reroll()
+	{
+		if ( Busy || !Revealed( 1 ) ) return;
+		var shards = PlayerShards.Local;
+		if ( !shards.IsValid() || shards.Carried < BoonOffer.RerollCost )
+		{
+			_deniedAt = Time.Now;
+			Sfx( "boon_denied" );
+			return;
+		}
+		shards.Add( -BoonOffer.RerollCost );
+		_rerolling = true;
+		_rerollAt = _t;
+		_rerollSwapped = false;
+		Sfx( "boon_reroll" );
+	}
+
+	/// <summary>Sound hooks: no clips exist yet (the user supplies them); an event that does not resolve plays nothing.</summary>
+	private static void Sfx( string name ) { }
+
+	// ------------------------------------------------------------------ clock
+
+	protected override void OnUpdate()
+	{
+		if ( !_open ) return;
+		var dt = Time.Delta * Math.Clamp( AnimSpeed, 0.05f, 4f );
+		_t += dt;
+
+		foreach ( var c in _cards )
+		{
+			var target = c.Hovered && !Busy && c.Def is not null ? 1f : 0f;
+			c.HoverT = MathX.Approach( c.HoverT, target, dt * 7f );
+		}
+		_shownShards = MathX.Approach( _shownShards, Carried, MathF.Max( 1f, MathF.Abs( _shownShards - Carried ) ) * dt * 5f );
+
+		if ( _rerolling ) TickReroll();
+		if ( _picked >= 0 && !_done && _t >= _pickAt + PickFlyStart + PickFlyDuration + 0.1f )
+		{
+			_done = true;
+			if ( _devOffer ) Close();
+		}
+		if ( _closing )
+		{
+			_closeFade = 1f - Ease.Window( _t, _closeAt, CloseDuration );
+			if ( _closeFade <= 0f )
+			{
+				_open = false;
+				_closing = false;
+				if ( _devOffer ) EndDevOffer();
+			}
+		}
+		StateHasChanged();
+	}
+
+	private void TickReroll()
+	{
+		var rt = _t - _rerollAt;
+		var swapAt = RerollFlipBack + RerollGather + RerollShuffle;
+		if ( !_rerollSwapped && rt >= swapAt )
+		{
+			_rerollSwapped = true;
+			_offer = BoonOffer.Roll( PlayerBoons.Local, _offer );
+			for ( int i = 0; i < 3; i++ )
+			{
+				var c = _cards[i];
+				c.Def = _offer.Cards[i];
+				c.FromCentre = true;
+				c.DealAt = _rerollAt + swapAt;
+				c.FlipAt = _rerollAt + swapAt + RerollSpread + DealOrder( i ) * (FlipDuration * 0.45f);
+			}
+		}
+		if ( _rerollSwapped && _t >= _cards[1].FlipAt + FlipDuration ) _rerolling = false;
+	}
+
+	// ------------------------------------------------------------------ the motion
+
+	/// <summary>The face shows while the card's Y rotation is under 90 degrees.</summary>
+	private bool FaceShown( int i ) => CardRotY( i ) < 90f;
+
+	private float CardRotY( int i )
+	{
+		var c = _cards[i];
+		// face-down until the flip
+		float ry = 180f - 180f * Ease.InOutCubic( Ease.Window( _t, c.FlipAt, FlipDuration ) );
+		// a reroll turns the old cards back over first
+		if ( _rerolling && !_rerollSwapped )
+			ry = MathF.Max( ry, 180f * Ease.InOutCubic( Ease.Window( _t, _rerollAt, RerollFlipBack ) ) );
+		return ry;
+	}
+
+	private string CardStyle( int i )
+	{
+		var c = _cards[i];
+		float slotX = (i - 1) * SlotSpacing;   // where this slot sits relative to the centre
+		float tx = 0f, ty = 0f, rz = 0f, scale = 1f, opacity = 1f;
+
+		// ---- deal
+		float deal = Ease.Window( _t, c.DealAt, c.FromCentre ? RerollSpread : DealDuration );
+		if ( c.FromCentre )
+		{
+			tx = Ease.Lerp( -slotX, 0f, Ease.OutBack( deal, 1.1f ) );
+		}
+		else
+		{
+			if ( _t < c.DealAt ) opacity = 0f;
+			ty = Ease.Lerp( DealFromY, 0f, Ease.OutBack( deal, 1.2f ) );
+			rz = Ease.Lerp( i == 0 ? -16f : i == 2 ? 16f : -6f, 0f, Ease.OutCubic( deal ) );
+			opacity *= Ease.Clamp01( deal * 5f );
+		}
+
+		// ---- idle: a slow bob once the card is face up
+		float settled = Ease.Window( _t, c.FlipAt + FlipDuration, 0.4f );
+		ty += MathF.Sin( _t * 1.7f + i * 2.1f ) * 4f * settled;
+
+		// ---- hover: lift; the other cards dim
+		ty -= 24f * Ease.OutCubic( c.HoverT );
+		float othersHover = 0f;
+		for ( int j = 0; j < 3; j++ ) if ( j != i ) othersHover = MathF.Max( othersHover, _cards[j].HoverT );
+		opacity *= 1f - 0.3f * othersHover;
+
+		// ---- reroll: gather into the middle, shuffle
+		if ( _rerolling && !_rerollSwapped )
+		{
+			float rt = _t - _rerollAt;
+			float gather = Ease.InOutCubic( Ease.Window( rt, RerollFlipBack, RerollGather ) );
+			tx = -slotX * gather;
+			float shuffle = Ease.Window( rt, RerollFlipBack + RerollGather, RerollShuffle );
+			if ( shuffle > 0f && shuffle < 1f )
+			{
+				float wobble = MathF.Sin( shuffle * MathF.PI );
+				tx += MathF.Sin( shuffle * MathF.PI * 4f + i * 2.3f ) * 26f * wobble;
+				ty += MathF.Cos( shuffle * MathF.PI * 4f + i * 1.7f ) * 8f * wobble;
+				rz += MathF.Sin( shuffle * MathF.PI * 3f + i ) * 5f * wobble;
+			}
+		}
+
+		// ---- pick
+		if ( _picked >= 0 )
+		{
+			float pt = _t - _pickAt;
+			if ( i == _picked )
+			{
+				tx = -slotX * Ease.OutCubic( Ease.Window( pt, 0f, PickCentre ) );
+				// a heartbeat that dips under 1 (never over the rasterised size)
+				float pulse = Ease.Window( pt, PickCentre, 0.3f );
+				scale *= 1f - 0.06f * MathF.Sin( pulse * MathF.PI );
+				// the card is drawn up and away into the staff (top left, where the Tab panel lists it)
+				float fly = Ease.InCubic( Ease.Window( pt, PickFlyStart, PickFlyDuration ) );
+				tx += -620f * fly;
+				ty += -520f * fly;
+				rz += -20f * fly;
+				scale *= Ease.Lerp( 1f, 0.12f, fly );
+				opacity *= 1f - fly * fly;
+			}
+			else
+			{
+				float fall = Ease.InCubic( Ease.Window( pt, 0f, OthersFall ) );
+				ty += 560f * fall;
+				rz += (i < _picked ? -1f : 1f) * 22f * fall;
+				opacity *= 1f - Ease.Clamp01( fall * 1.4f );
+			}
+		}
+
+		var ry = CardRotY( i );
+		var glow = GlowCss( i, settled );
+		return $"opacity: {F( opacity )}; transform: translateX({F( tx )}px) translateY({F( ty )}px) rotate({F( rz )}deg) perspective(1400px) rotateY({F( ry )}deg) scale({F( scale )});{glow}";
+	}
+
+	/// <summary>A pact breathes a red glow; a hovered card glows in its family colour.</summary>
+	private string GlowCss( int i, float settled )
+	{
+		var c = _cards[i];
+		if ( c.Def is null ) return "";
+		if ( c.Def.IsPact )
+		{
+			float beat = 0.5f + 0.5f * MathF.Sin( _t * (c.HoverT > 0.5f ? 5.5f : 2.4f) );
+			float a = settled * (0.25f + 0.35f * beat + 0.25f * c.HoverT);
+			return $" box-shadow: 0px 0px {F( 26f + 22f * beat )}px rgba(150, 20, 24, {F( a )});";
+		}
+		if ( c.HoverT <= 0.01f ) return "";
+		return $" box-shadow: 0px 0px {F( 34f * c.HoverT )}px rgba(232, 217, 168, {F( 0.35f * c.HoverT )});";
+	}
+
+	private string LineStyle( int i, int k )
+	{
+		var c = _cards[i];
+		float at = c.FlipAt + FlipDuration * 0.5f + LineDelay + k * LineStagger;
+		float p = Ease.OutCubic( Ease.Window( _t, at, LineDuration ) );
+		return $"opacity: {F( p )}; transform: translateX({F( (1f - p) * 14f )}px);";
+	}
+
+	private string SweepStyle( int i )
+	{
+		var c = _cards[i];
+		float p = Ease.Window( _t, c.FlipAt + FlipDuration * 0.5f + 0.04f, SweepDuration );
+		if ( p <= 0f || p >= 1f ) return "opacity: 0;";
+		float x = Ease.Lerp( -60f, 140f, Ease.InOutCubic( p ) );
+		return $"left: {F( x )}%; opacity: {F( MathF.Sin( p * MathF.PI ) * 0.55f )};";
+	}
+
+	private string HeaderStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, 0f, HeaderIn ) );
+		// the header dips out and back in when it swaps to the taken card's name
+		if ( _picked >= 0 )
+		{
+			float swap = Ease.Window( _t, _pickAt, 0.3f );
+			p *= MathF.Abs( MathF.Cos( swap * MathF.PI ) );
+		}
+		return $"opacity: {F( p )}; transform: translateY({F( (1f - p) * -18f )}px);";
+	}
+
+	private string FooterStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _cards[1].FlipAt + FlipDuration, 0.4f ) );
+		if ( _picked >= 0 ) p *= 1f - Ease.Window( _t, _pickAt, 0.25f );
+		return $"opacity: {F( p )};";
+	}
+
+	private float RerollShake()
+	{
+		float p = (Time.Now - _deniedAt) / 0.4f;
+		if ( p < 0f || p >= 1f ) return 0f;
+		return MathF.Sin( p * MathF.PI * 7f ) * 10f * (1f - p);
+	}
+
+	/// <summary>Void motes drifting up the backdrop: each has its own lane, speed and phase, all on the screen clock.</summary>
+	private string MoteStyle( int m )
+	{
+		float seed = m * 12.9898f;
+		float lane = Frac( MathF.Sin( seed ) * 43758.55f );
+		float speed = 0.035f + 0.05f * Frac( MathF.Sin( seed * 1.7f ) * 23421.63f );
+		float phase = Frac( MathF.Sin( seed * 3.1f ) * 9871.21f );
+		float size = 3f + 5f * Frac( MathF.Sin( seed * 5.3f ) * 5123.77f );
+		float y = 1f - Frac( phase + _t * speed );
+		float x = lane * 100f + MathF.Sin( _t * 0.6f + m ) * 1.5f;
+		float a = MathF.Sin( y * MathF.PI ) * 0.55f * Ease.Window( _t, 0f, 1f );
+		return $"left: {F( x )}%; top: {F( y * 100f )}%; width: {F( size )}px; height: {F( size )}px; opacity: {F( a )};";
+	}
+
+	private static float Frac( float v ) => v - MathF.Floor( v );
+
+	private static string FamilyClass( BoonDefinition def ) => def.Family.ToString().ToLowerInvariant();
+
+	// ------------------------------------------------------------------ dev
+
+	/// <summary>`boon_offer`: deal an offer in place (no floor change) to review the animation; `boon_anim_speed` slows it.</summary>
+	[ConCmd( "boon_offer" )]
+	public static void OfferCommand()
+	{
+		var screen = Instance;
+		if ( !screen.IsValid() ) { Log.Warning( "[Boons] no BoonScreen (the RunManager creates it)" ); return; }
+		if ( screen._open && !screen._devOffer ) { Log.Warning( "[Boons] the run's own offer is up" ); return; }
+		if ( !Open( "Test Offer" ) ) { Log.Warning( "[Boons] no local player" ); return; }
+		screen._devOffer = true;
+		RunUi.Blocking = true;
+		UI.MouseLock.Release = true;
+	}
+
+	private void EndDevOffer()
+	{
+		_devOffer = false;
+		RunUi.Blocking = false;
+		UI.MouseLock.Release = UI.SpellLoadout.IsOpen;
+	}
+
+	protected override int BuildHash() => HashCode.Combine( _t, _open );
+}

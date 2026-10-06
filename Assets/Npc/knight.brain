@@ -1,0 +1,23 @@
+{
+  "AttackCooldownMin": 0.12,
+  "AttackCooldownMax": 0.48,
+  "ChargeChance": 0.0,
+  "ShieldBashChance": 0.0,
+  "GuardChance": 0.0,
+  "GuardHoldMin": 1.2,
+  "GuardHoldMax": 1.8,
+  "GuardAfterHurtChance": 0.0,
+  "GuardApproachRange": 0,
+  "PreferredRange": 115,
+  "StrafeChance": 0.5,
+  "StrafeSecondsMin": 0.6,
+  "StrafeSecondsMax": 1.0,
+  "WalkWhileEngaged": false,
+  "BackOffChance": 0.1,
+  "AggroRange": 850,
+  "Wander": false,
+  "Health": 90,
+  "Jitter": 0.1,
+  "__references": [],
+  "__version": 0
+}

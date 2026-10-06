@@ -1,0 +1,26 @@
+// The Void Lance's ribbon (2026-09-21): heden_beam.shader's cross-width profile turned inside out. The core is
+// near-black instead of white-hot, the body violet, the shade step a deep purple: a line of nothing with a lit
+// rim. Alpha blended (the LineRenderer is not Additive), or the dark core would vanish. The glow around it is a
+// second, additive ribbon on beam_white.vmat (SpellVfx.BuildBeam). Every texture input is filled explicitly
+// because an empty slot on a custom shader binds the purple error texture.
+Layer0
+{
+	shader "shaders/heden_beam.shader"
+
+	TextureColor            "[1.000000 1.000000 1.000000 1.000000]"
+	TextureNormal           "[0.500000 0.500000 1.000000 1.000000]"
+	TextureMetalness        "[0.000000 0.000000 0.000000 0.000000]"
+	TextureRoughness        "[1.000000 1.000000 1.000000 1.000000]"
+	TextureAmbientOcclusion "[1.000000 1.000000 1.000000 1.000000]"
+
+	g_vColorHot   "[0.020000 0.000000 0.050000]"
+	g_vColorBody  "[0.660000 0.300000 1.000000]"
+	g_vColorShade "[0.240000 0.060000 0.480000]"
+	g_flCoreBrightness "1.000000"
+	g_flCoreWidth "0.340000"
+	g_flShadeStart "0.660000"
+	g_flEdgeFadeStart "0.720000"
+	g_flEnergyTiling "0.035000"
+	g_flEnergySpeed "9.000000"
+	g_flEnergyStrength "0.450000"
+}

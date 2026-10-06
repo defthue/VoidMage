@@ -1,0 +1,140 @@
+@import "Themes/_iron_kit.scss";
+
+// A scroll opening on screen the moment it is taken (2026-09-20). Everything that moves is set inline from the C#
+// timeline; this file only draws the pieces. It never takes the mouse and never covers the crosshair: the stage
+// sits in the upper third, its caption under it.
+ScrollReveal {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	justify-content: center;
+	align-items: flex-start;
+
+	.stage {
+		position: absolute;
+		top: 9%;
+
+		.halo {
+			position: absolute;
+			left: 30px;
+			top: 30px;
+			width: 160px;
+			height: 160px;
+			border-radius: 80px;
+		}
+
+		.spark {
+			position: absolute;
+			border-radius: 4px;
+			background-color: #ffd68a;
+		}
+
+		.closed {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.paper {
+			position: absolute;
+			top: 0;
+			height: 100%;
+			overflow: hidden;
+
+			.open {
+				position: absolute;
+				top: 0;
+			}
+		}
+
+		// the rune box sits on the paper itself, as measured on the rendered icon (see SpellLoadout.razor.scss)
+		.runes {
+			position: absolute;
+			left: 17.6%;
+			top: 20.9%;
+			width: 65.2%;
+			height: 59.4%;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.rune {
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 78px;
+			margin: 0px 2px;
+		}
+
+		.caption {
+			position: absolute;
+			left: -240px;
+			top: 214px;
+			width: 700px;
+			flex-direction: column;
+			align-items: center;
+
+			.kind {
+				font-family: $df-body;
+				font-size: 17px;
+				font-weight: 600;
+				color: #b8b2a2;
+				text-transform: uppercase;
+				letter-spacing: 3px;
+
+				&.black {
+					color: #a98cff;
+				}
+			}
+
+			.name {
+				font-family: Almendra;
+				font-size: 40px;
+				font-weight: 700;
+				text-shadow: 0px 2px 8px #000;
+			}
+
+			.line {
+				font-family: $df-body;
+				font-size: 22px;
+				font-weight: 600;
+				color: #e6dcc0;
+				text-align: center;
+				text-shadow: 0px 1px 6px #000;
+			}
+
+			// "Press Tab" under the first scrolls (until the inventory has been opened with one on the staff)
+			.tab-hint {
+				flex-direction: row;
+				align-items: center;
+				margin-top: 14px;
+
+				.word {
+					font-family: $df-body;
+					font-size: 22px;
+					font-weight: 600;
+					color: $df-gold;
+					text-shadow: 0px 1px 6px #000;
+				}
+
+				.key {
+					position: relative;
+					width: 58px;
+					height: 30px;
+					margin: 0px 10px;
+					justify-content: center;
+					align-items: center;
+
+					.cap {
+						font-family: $df-head;
+						font-weight: 400;
+						font-size: 20px;
+						color: $df-gold;
+					}
+				}
+			}
+		}
+	}
+}

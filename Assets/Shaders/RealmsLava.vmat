@@ -1,0 +1,54 @@
+// Lava for the Bone Colossus arena: the Realms atlas (the lava planes' own UVs carry the orange/black crust
+// colours) on heden_toon with the ambient floor raised to full, so the pool reads as self-lit instead of a
+// shaded orange floor, and a warm tint on top. A proper flowing lava shader is a later polish item.
+
+Layer0
+{
+	shader "shaders/heden_toon.shader"
+
+	//---- Albedo ----
+	F_USE_TEXTURE 1
+
+	//---- Toon Lighting ----
+	F_USE_RAMP 1
+
+	//---- Albedo ----
+	AlbedoTexture "textures/dungeonrealmstextures/dungeons_2_texture_01_a.png"
+	g_vTextureTint "[1.400000 0.900000 0.500000 0.000000]"
+
+	//---- Debug ----
+	g_flDebugMode "0.000"
+
+	//---- Dynamic Lights ----
+	g_flDynamicLightBands "4.000"
+	g_flDynamicLightBandSoftness "0.080"
+	g_flDynamicLightOuterBandScale "1.000"
+	g_flDynamicLightOuterSoftness "0.400"
+	g_flDynamicLightStrength "0.000"
+
+	//---- Toon Lighting ----
+	g_flAmbientFloor "1.000"
+	g_flAmbientLift "1.000"
+	g_flBandSoftness "0.005"
+	g_flBandThreshold "0.500"
+	g_flCrispSunShadows "0.000"
+	g_flShadowBandSoftness "0.030"
+	g_flShadowNormalOffset "2.000"
+	g_flShadowSmoothing "1.500"
+	g_flSunColorInfluence "0.000"
+
+	//---- Toon Ramp ----
+	g_flRampBrightness "1.000"
+	g_flRampShadowPoint "0.250"
+	ToonRamp "materials/heden_ramp_day.png"
+
+	ToonRampNight "materials/heden_ramp_night.png"
+	//---- Style Test ----
+	DetailTexture "materials/style_detail/detail_grain.png"
+	g_flCrushHuePreserve "0.500"
+	g_flCrushLevels "64.000"
+	g_flDetailScale "32.000"
+	g_flDetailStrength "0.050"
+	g_flDetailWobble "0.010"
+	g_flDetailWobbleScale "16.000"
+}

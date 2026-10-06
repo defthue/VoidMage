@@ -1,0 +1,214 @@
+POLYGON Dungeon Realms toonified -> voidmage DungeonRealms format (Blender 5.0 headless)
+source: 1128 FBX | toonified 1109 | copied (FX) 12 | skipped (skybox) 7 | failures 0
+normal mode: auto (30 deg smoothing groups) 928 | smooth 181
+material families: RealmsCrystal 18, RealmsGold 24, RealmsShader 1061, RealmsWeb 6
+outline: separate <node>_Outline object, FantasyKingdomOutline material, coincident with the base (no baked offset), smooth normals, normals not flipped -- heden_outline.shader inflates it. Synty shipped NO outline in this pack; these were generated.
+units: source is already cm (NOT scaled, like Adventure) -> vmdl import_scale 0.3937
+
+=== node names differing from filename (0, Synty naming, kept) ===
+
+=== smooth-mode models (181) ===
+SM_Env_Bone_Rib_01
+SM_Env_Bone_Rib_02
+SM_Env_Bone_Rib_03
+SM_Env_Bone_Rib_04
+SM_Env_Bone_Rib_05
+SM_Env_Bone_Rib_06
+SM_Env_Bramble_01
+SM_Env_Bramble_02
+SM_Env_Bramble_03
+SM_Env_Crystals_Cluster_Large_01
+SM_Env_Crystals_Cluster_Large_02
+SM_Env_Crystals_Cluster_Large_03
+SM_Env_Crystals_Cluster_Large_04
+SM_Env_Dust_01
+SM_Env_Dust_02
+SM_Env_Dust_03
+SM_Env_Dust_04
+SM_Env_Dust_05
+SM_Env_Dwarf_Lava_Duct_01
+SM_Env_Dwarf_Lava_Duct_01_End_01
+SM_Env_Dwarf_Lava_Duct_01_End_02
+SM_Env_Dwarf_Lava_Duct_01_End_03
+SM_Env_Dwarf_Lava_Duct_Pillar_01
+SM_Env_Dwarf_Lava_Duct_Pillar_02
+SM_Env_Dwarf_Lava_Wheel_01
+SM_Env_Dwarf_Lava_Wheel_Bracket_01
+SM_Env_Entrance_Stairs_Sand_01
+SM_Env_Grass_Thin_01
+SM_Env_Grass_Thin_02
+SM_Env_Grass_Thin_03
+SM_Env_Grass_Thin_04
+SM_Env_Grass_Tuft_01
+SM_Env_Grass_Tuft_02
+SM_Env_Grass_Tuft_03
+SM_Env_Grass_Tuft_04
+SM_Env_Hell_Bone_Hand_L_01
+SM_Env_Hell_Bone_Hand_R_01
+SM_Env_Hell_Bone_Skull_01
+SM_Env_Hell_Bone_Skull_Jaw_01
+SM_Env_Hell_Floating_Rock_Chain_01
+SM_Env_Hell_Floating_Rock_Chain_02
+SM_Env_Hell_Floating_Rock_Chain_03
+SM_Env_Hell_Floating_Rock_Chain_04
+SM_Env_Hell_Rock_01
+SM_Env_Hell_Rock_02
+SM_Env_Hell_Rock_03
+SM_Env_Hell_Rock_04
+SM_Env_Hell_Rock_05
+SM_Env_Hell_Rock_06
+SM_Env_Hell_Rock_07
+SM_Env_Hell_Rock_08
+SM_Env_Lava_Cube_01
+SM_Env_Lava_Flow_01
+SM_Env_Lava_Line_01
+SM_Env_Lava_Plane_01
+SM_Env_Ore_Pile_01
+SM_Env_Ore_Pile_02
+SM_Env_Plant_01
+SM_Env_Plant_02
+SM_Env_Plant_Spikey_01
+SM_Env_Rock_Angle_01
+SM_Env_Rock_Cliff_01
+SM_Env_Rock_Cliff_02
+SM_Env_Rock_Cliff_03
+SM_Env_Rock_Cliff_Arch_01
+SM_Env_Rock_Cliff_Arch_02
+SM_Env_Rock_Cliff_Arch_PIllar_01
+SM_Env_Rock_Cliff_Cut_01
+SM_Env_Rock_Flat_01
+SM_Env_Rock_Flat_02
+SM_Env_Rock_Medium_01
+SM_Env_Rock_Medium_02
+SM_Env_Rock_Medium_03
+SM_Env_Rock_Medium_04
+SM_Env_Rock_Medium_05
+SM_Env_Rock_Medium_06
+SM_Env_Rock_Medium_07
+SM_Env_Rock_Obelisk_01
+SM_Env_Rock_Peak_01
+SM_Env_Rock_Peak_02
+SM_Env_Rock_Round_01
+SM_Env_Rock_Round_02
+SM_Env_Rock_Round_03
+SM_Env_Rock_Round_04
+SM_Env_Rock_Round_05
+SM_Env_Rock_Round_06
+SM_Env_Rock_Round_07
+SM_Env_Rock_Small_01
+SM_Env_Rock_Small_02
+SM_Env_Rock_Small_03
+SM_Env_Rock_Small_04
+SM_Env_Rock_Small_05
+SM_Env_Rock_Stairs_01
+SM_Env_Rock_Stairs_02
+SM_Env_Rock_Stairs_03
+SM_Env_Rock_Stairs_04
+SM_Env_Rubble_Rocks_01
+SM_Env_Rubble_Rocks_02
+SM_Env_Rubble_Rocks_03
+SM_Env_Sand_01
+SM_Env_Sand_02
+SM_Env_Sand_03
+SM_Env_Sand_04
+SM_Env_Sand_05
+SM_Env_Sand_Rocks_01
+SM_Env_Sand_Rocks_02
+SM_Env_Sand_Waterfall_01
+SM_Env_Sand_Waterfall_02
+SM_Env_Sand_Waterfall_03
+SM_Env_Sand_Waterfall_Ground_01
+SM_Env_Skull_Huge_01
+SM_Env_Skull_Huge_Horns_01
+SM_Env_Skull_Huge_Jaw_01
+SM_Env_Skull_Huge_Spikes_01
+SM_Env_SpiderWeb_01
+SM_Env_SpiderWeb_02
+SM_Env_SpiderWeb_03
+SM_Env_SpiderWeb_04
+SM_Env_SpiderWeb_05
+SM_Env_SpiderWeb_06
+SM_Env_Tree_Big_01
+SM_Env_Tree_Big_02
+SM_Env_Tree_Dead_01
+SM_Env_Tree_Dead_02
+SM_Env_Tree_Dead_Windswept_01
+SM_Env_Tree_Dead_Windswept_02
+SM_Generic_Grass_Patch_01
+SM_Generic_Grass_Patch_02
+SM_Generic_Grass_Patch_03
+SM_Generic_Small_Rocks_01
+SM_Generic_Small_Rocks_02
+SM_Generic_TreeDead_01
+SM_Generic_TreeStump_01
+SM_Generic_Tree_01
+SM_Generic_Tree_02
+SM_Generic_Tree_03
+SM_Generic_Tree_04
+SM_Generic_Water_Plane_01
+SM_Generic_Water_Plane_02
+SM_Prop_Crystal_01
+SM_Prop_Crystal_02
+SM_Prop_Crystal_03
+SM_Prop_Crystal_04
+SM_Prop_Crystal_05
+SM_Prop_Crystal_Rock_A_01
+SM_Prop_Crystal_Rock_A_02
+SM_Prop_Crystal_Rock_A_03
+SM_Prop_Crystal_Rock_B_01
+SM_Prop_Crystal_Rock_B_02
+SM_Prop_Crystal_Rock_B_03
+SM_Prop_Crystal_Rock_C_01
+SM_Prop_Crystal_Rock_C_02
+SM_Prop_Crystal_Rock_C_03
+SM_Prop_Crystal_Rock_D_01
+SM_Prop_Crystal_Rock_D_02
+SM_Prop_Crystal_Rock_D_03
+SM_Prop_Crystal_Rock_E_01
+SM_Prop_Crystal_Rock_E_02
+SM_Prop_Crystal_Rock_E_03
+SM_Prop_Crystal_Rock_F_01
+SM_Prop_Crystal_Rock_F_02
+SM_Prop_Crystal_Rock_F_03
+SM_Prop_Crystal_Rock_G_01
+SM_Prop_Crystal_Rock_G_02
+SM_Prop_Crystal_Rock_G_03
+SM_Prop_Dwarf_Cart_03_Ore
+SM_Prop_Hell_Skull_01
+SM_Prop_Hell_Skull_02
+SM_Prop_Hell_Spike_Skull_01
+SM_Prop_Hell_Spike_Skull_02
+SM_Prop_Hell_Spike_Skull_03
+SM_Prop_Ore_Insert_Large_01
+SM_Prop_Ore_Insert_Small_01
+SM_Prop_Rock_Small_01
+SM_Prop_Rock_Small_02
+SM_Prop_Rock_Small_03
+SM_Prop_Rock_Small_04
+SM_Veh_SandBoat_01
+SM_Veh_SandBoat_Bags_01
+SM_Veh_SandBoat_Sail_01
+SM_Veh_SandBoat_Sail_02
+
+=== degenerate faces dropped on import (19, harmless) ===
+SM_Bld_Ruin_Pillar_Arches_Round_01.fbx: 3 of 1278 faces dropped
+SM_Bld_Ruin_Tiles_03.fbx: 1 of 1607 faces dropped
+SM_Bld_Ruin_Tiles_04.fbx: 2 of 729 faces dropped
+SM_Env_Hell_Ground_01.fbx: 1 of 1621 faces dropped
+SM_Env_Hell_Ground_03.fbx: 6 of 1714 faces dropped
+SM_Env_Hell_Spikes_01.fbx: 1 of 1621 faces dropped
+SM_Env_Hell_Spikes_06.fbx: 1 of 1621 faces dropped
+SM_Env_Obelisk_03.fbx: 1 of 1760 faces dropped
+SM_Env_Obelisk_Glow_03.fbx: 1 of 1760 faces dropped
+SM_Env_Statue_Broken_05.fbx: 1 of 2183 faces dropped
+SM_Prop_Crystal_Rock_B_01.fbx: 4 of 322 faces dropped
+SM_Prop_Crystal_Rock_B_02.fbx: 2 of 228 faces dropped
+SM_Prop_Crystal_Rock_B_03.fbx: 2 of 188 faces dropped
+SM_Prop_Crystal_Rock_D_01.fbx: 1 of 165 faces dropped
+SM_Prop_Crystal_Rock_D_02.fbx: 1 of 149 faces dropped
+SM_Prop_Crystal_Rock_G_01.fbx: 1 of 295 faces dropped
+SM_Prop_DeadBody_Nomad_01.fbx: 7 of 1770 faces dropped
+SM_Rune_Symbol_31.fbx: 1 of 161 faces dropped
+SM_Wep_Shield_07.fbx: 7 of 768 faces dropped
+
+=== problems (0) ===

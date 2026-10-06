@@ -1,0 +1,13 @@
+// Unlit white blade trail. Every texture input is filled explicitly — a slot left empty on
+// a custom shader binds the purple error texture. Color/metal/rough values are moot in the
+// unlit path but keep the bindings real.
+Layer0
+{
+	shader "shaders/heden_trail_unlit.shader"
+
+	TextureColor "[1.000000 1.000000 1.000000 1.000000]"
+	TextureNormal "[0.500000 0.500000 1.000000 1.000000]"
+	TextureMetalness "[0.000000 0.000000 0.000000 0.000000]"
+	TextureRoughness "[1.000000 1.000000 1.000000 1.000000]"
+	TextureAmbientOcclusion "[1.000000 1.000000 1.000000 1.000000]"
+}

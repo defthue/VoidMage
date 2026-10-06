@@ -1,0 +1,232 @@
+@using System
+@using System.Collections.Generic
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Inventory
+@using VoidMage.Run
+@using VoidMage.Spells
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( _showing is { } show && Visible )
+	{
+		<div class="stage" style="@StageStyle()">
+			<div class="halo" style="@HaloStyle()"></div>
+			@for ( int k = 0; k < Sparks; k++ )
+			{
+				<div class="spark" style="@SparkStyle( k )"></div>
+			}
+			@if ( !Unrolled )
+			{
+				<Image class="closed" style="@ClosedStyle()" Texture=@ScrollText.Icon( show.Scroll.AsSealed )></Image>
+			}
+			else
+			{
+				<div class="paper" style="@PaperStyle()">
+					<Image class="open" style="@OpenImageStyle()" Texture=@ScrollText.Icon( show.Scroll )></Image>
+				</div>
+				<div class="runes">
+					@for ( int k = 0; k < show.Runes.Length; k++ )
+					{
+						<div class="rune" style="color: @ScrollText.Colour( show.Scroll ); @RuneStyle( k )">@show.Runes[k].ToString()</div>
+					}
+				</div>
+			}
+			<div class="caption" style="@CaptionStyle()">
+				<div class="kind @( show.Black ? "black" : "" )">@show.Kind</div>
+				<div class="name" style="color: @ScrollText.Colour( show.Scroll )">@show.Name</div>
+				<div class="line">@show.Line</div>
+				@if ( TabHint )
+				{
+					<div class="tab-hint" style="@TabHintStyle()">
+						<div class="word">Press</div>
+						<div class="key"><div class="dfk dfk-key"></div><div class="cap">Tab</div></div>
+						<div class="word">to look at your staff</div>
+					</div>
+				}
+			</div>
+		</div>
+	}
+</root>
+
+@code {
+	// The scroll opening on screen the moment it is taken (user, 2026-09-20: "player finds scroll and immediately gets
+	// the open animation on screen"; it used to play inside the inventory, on a click). Nothing to act on and nothing
+	// blocked: the fight goes on under it. A scroll taken for the FIRST time gets the whole show, since the player has
+	// no idea what they just put on their staff: the sealed bundle trembles, bursts, unrolls, its runes burn in, then
+	// its name and its one line. A known scroll was read on the floor already, so it only unrolls and names itself.
+	// Several taken at once queue up. One C# clock like the other HUDs; the timeline is the inventory's old one, faster.
+	private const int Sparks = 14;
+	private const float Size = 220f;
+	private const float FlyIn = 0.18f;
+	private const float UnrollSeconds = 0.26f;
+	private const float RuneGap = 0.14f;
+	private const float Leave = 0.35f;
+
+	private sealed class Show
+	{
+		public Scroll Scroll;
+		public string Runes, Kind, Name, Line;
+		public bool Black, First;
+	}
+
+	private readonly Queue<Show> _queue = new();
+	private Show _showing;
+	private float _at;
+
+	/// <summary>When the seal bursts (a known scroll has none: it starts unrolling at once).</summary>
+	private float BurstAt => _showing is { First: true } ? 0.62f : 0.05f;
+	private float CaptionAt => BurstAt + UnrollSeconds + 0.25f;
+	private float HoldUntil => CaptionAt + (_showing is { First: true } ? 1.9f : 1.2f) + (TabHint ? TabHintHold : 0f);
+	/// <summary>
+	/// Until the player has opened the inventory with a scroll on the staff (RunSaveData.StaffLookedAt), every reveal
+	/// ends on "Press Tab": the first open is where the inventory's tour plays. It stays up a little longer to be read.
+	/// </summary>
+	private static bool TabHint => !RunSave.Data.StaffLookedAt;
+	private const float TabHintHold = 1.6f;
+	private float Age => Time.Now - _at;
+	private bool Unrolled => Age >= BurstAt;
+	private bool Visible => !SpellLoadout.IsOpen && !RunUi.Blocking && !VoidMage.Boons.BoonScreen.IsOpen;
+
+	protected override void OnEnabled()
+	{
+		PlayerInventory.ScrollTaken += OnTaken;
+		PlayerInventory.SpellLearned += OnLearned;
+		PlayerInventory.SpellEquipped += OnEquipped;
+	}
+
+	protected override void OnDisabled()
+	{
+		PlayerInventory.ScrollTaken -= OnTaken;
+		PlayerInventory.SpellLearned -= OnLearned;
+		PlayerInventory.SpellEquipped -= OnEquipped;
+	}
+
+	private void OnTaken( Scroll scroll, bool first )
+	{
+		if ( scroll.ModifierDef is not { } def ) return;
+		var copies = PlayerInventory.Local?.Copies( def.Id ) ?? 1;
+		_queue.Enqueue( new Show
+		{
+			Scroll = scroll, Runes = ScrollText.Runes( scroll ), First = first, Black = def.Black,
+			Kind = def.Black ? "Black seal" : "Enchantment",
+			Name = copies > 1 ? $"{def.Name} {ScrollText.Tier( copies )}" : def.Name,
+			Line = copies > 1 ? ScrollText.StackLine( def.Id, copies ) : def.Banner,
+		} );
+	}
+
+	private void OnLearned( SpellDefinition spell ) => Enqueue( spell, true );
+	private void OnEquipped( SpellDefinition spell ) => Enqueue( spell, false );
+
+	private void Enqueue( SpellDefinition spell, bool first )
+	{
+		if ( spell is null ) return;
+		var scroll = Scroll.ForSpell( spell.Id );
+		_queue.Enqueue( new Show
+		{
+			Scroll = scroll, Runes = ScrollText.Runes( scroll ), First = first,
+			Kind = first ? "Spell learned" : "Your spell",
+			Name = spell.Name,
+			Line = ScrollText.Description( scroll ),
+		} );
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( _showing is not null && Age >= HoldUntil + Leave ) _showing = null;
+		if ( _showing is null && _queue.Count > 0 )
+		{
+			_showing = _queue.Dequeue();
+			_at = Time.Now;
+		}
+	}
+
+	protected override int BuildHash() => HashCode.Combine( _showing?.Name ?? "", _showing is null ? 0 : (int)(Age * 60f), Visible );
+
+	private static string N( float v ) => MathF.Round( v, 3 ).ToString( System.Globalization.CultureInfo.InvariantCulture );
+	private static float Frac( float v ) => v - MathF.Floor( v );
+	private float LeaveP => Ease.Window( Age, HoldUntil, Leave );
+
+	/// <summary>Rises into place under the crosshair's line of sight, and lifts away as it fades.</summary>
+	private string StageStyle()
+	{
+		float fly = Ease.OutCubic( Ease.Window( Age, 0f, FlyIn ) );
+		float scale = Ease.Lerp( 0.4f, 1f, fly );
+		float y = (1f - fly) * 40f - Ease.InQuad( LeaveP ) * 30f;
+		return $"width: {N( Size )}px; height: {N( Size )}px; opacity: {N( Math.Min( fly, 1f - LeaveP ) )}; transform: translateY( {N( y )}px ) scale( {N( scale )} );";
+	}
+
+	/// <summary>The sealed scroll before the burst: a tremble that grows into a shake, the wax straining.</summary>
+	private string ClosedStyle()
+	{
+		float build = Ease.InQuad( Ease.Window( Age, FlyIn, BurstAt - FlyIn ) );
+		float rz = MathF.Sin( Age * 38f ) * 9f * build + MathF.Sin( Age * 11f ) * 3f * build;
+		float tx = MathF.Sin( Age * 51f ) * 5f * build;
+		float squeeze = 1f - 0.12f * Ease.InCubic( Ease.Window( Age, BurstAt - 0.1f, 0.1f ) );
+		return $"transform: translateX( {N( tx )}px ) rotate( {N( rz )}deg ) scale( {N( squeeze )} );";
+	}
+
+	/// <summary>The open scroll unrolls sideways out of the middle (its box grows, the picture stays put inside it).</summary>
+	private string PaperStyle()
+	{
+		float w = Math.Clamp( Ease.OutBack( Ease.Window( Age, BurstAt, UnrollSeconds ), 1.1f ), 0.05f, 1.06f ) * Size;
+		return $"width: {N( w )}px; left: {N( (Size - w) * 0.5f )}px;";
+	}
+
+	private string OpenImageStyle()
+	{
+		float w = Math.Clamp( Ease.OutBack( Ease.Window( Age, BurstAt, UnrollSeconds ), 1.1f ), 0.05f, 1.06f ) * Size;
+		return $"left: {N( -(Size - w) * 0.5f )}px; width: {N( Size )}px; height: {N( Size )}px;";
+	}
+
+	/// <summary>Burned in one by one: a hot glow that cools to ink.</summary>
+	private string RuneStyle( int k )
+	{
+		float at = BurstAt + UnrollSeconds + k * RuneGap;
+		float p = Ease.Window( Age, at, 0.25f );
+		float grow = Ease.OutCubic( p );
+		float heat = 1f - Ease.OutQuad( Ease.Window( Age, at, 0.8f ) );
+		return $"opacity: {N( Ease.Clamp01( p * 2.5f ) )}; transform: translateY( {N( (1f - grow) * 8f )}px ) scale( {N( 0.55f + 0.45f * grow )} ); text-shadow: 0px 0px {N( 4f + 22f * heat )}px rgba(255, 196, 90, {N( 0.25f + 0.75f * heat )});";
+	}
+
+	private string CaptionStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( Age, CaptionAt, 0.3f ) ) * (1f - LeaveP);
+		return $"opacity: {N( p )}; transform: translateY( {N( (1f - p) * 12f )}px );";
+	}
+
+	/// <summary>Comes in after the caption has been read, then breathes so the eye finds the key.</summary>
+	private string TabHintStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( Age, CaptionAt + 0.7f, 0.35f ) );
+		float beat = 0.85f + 0.15f * MathF.Sin( Age * 4f );
+		return $"opacity: {N( p * beat )}; transform: translateY( {N( (1f - p) * 10f )}px );";
+	}
+
+	/// <summary>A glow that builds with the shake and flares at the burst, then settles behind the open scroll.</summary>
+	private string HaloStyle()
+	{
+		float build = _showing.First ? Ease.InQuad( Ease.Window( Age, FlyIn, BurstAt - FlyIn ) ) : 0f;
+		float flare = Age >= BurstAt ? 1f - Ease.Window( Age, BurstAt, 0.5f ) : 0f;
+		float settle = Age >= BurstAt ? 0.3f + 0.08f * MathF.Sin( Age * 3f ) : 0f;
+		float a = MathF.Max( build * 0.6f, MathF.Max( flare, settle ) ) * (1f - LeaveP);
+		var rgb = _showing.Scroll.IsSpell ? "255, 196, 90" : _showing.Black ? "150, 110, 255" : "232, 217, 168";
+		return $"opacity: {N( a )}; box-shadow: 0px 0px {N( 50f + 70f * flare )}px rgba({rgb}, 0.9); background-color: rgba({rgb}, {N( 0.08f + 0.25f * flare )});";
+	}
+
+	/// <summary>The burst: sparks thrown out in a ring, slowing and falling as they fade. Only a seal bursts.</summary>
+	private string SparkStyle( int k )
+	{
+		float age = Age - BurstAt;
+		if ( !_showing.First || age < 0f || age > 0.9f ) return "opacity: 0;";
+		float p = age / 0.9f;
+		float angle = k * (MathF.PI * 2f / Sparks) + MathF.Sin( k * 12.9898f ) * 0.3f;
+		float reach = (90f + 40f * Frac( MathF.Sin( k * 78.233f ) * 43758.5f )) * Ease.OutCubic( p );
+		float x = Size * 0.5f + MathF.Cos( angle ) * reach;
+		float y = Size * 0.5f + MathF.Sin( angle ) * reach + 50f * p * p;
+		float size = 6f * (1f - p) + 2f;
+		return $"left: {N( x - size * 0.5f )}px; top: {N( y - size * 0.5f )}px; width: {N( size )}px; height: {N( size )}px; opacity: {N( 1f - p )};";
+	}
+}

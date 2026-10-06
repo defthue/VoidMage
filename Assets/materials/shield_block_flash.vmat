@@ -1,0 +1,8 @@
+// Blue unlit flash for the skeleton's shield when it BLOCKS a player hit (heden's boss block cue): same shader as
+// the white damage flash, tinted into the game's block colour and slightly overbright so it pops. Damage stays
+// white, danger stays red.
+Layer0
+{
+	shader "shaders/white_unlit.shader"
+	g_vFlashColor "[0.450000 0.780000 1.400000 0.000000]"
+}

@@ -1,0 +1,31 @@
+// The sheet inside the Dark Fortress portal frame (darkfortress/sm_prop_portal_01_surface.vmdl): a procedural
+// void vortex, void_portal.shader. PortalVfx drives phase / notice / stall / colour per portal at runtime.
+
+Layer0
+{
+	shader "shaders/void_portal.shader"
+
+	//---- Shape ----
+	g_flAspect "1.680"
+	g_flStretch "1.300"
+	g_flPixels "72.000"
+	g_flBands "7.000"
+	g_flDepth "16.000"
+
+	//---- Vortex ----
+	g_flSpeed "1.000"
+	g_flTwist "2.200"
+	g_flArmSharpness "2.200"
+	g_flNoiseScale "2.600"
+	g_flNoiseWarp "2.400"
+	g_flCoreRadius "0.160"
+	g_flBrightness "1.600"
+
+	//---- Streaks ----
+	g_flStreaks "1.000"
+	g_flStreakCount "36.000"
+
+	//---- Rim ----
+	g_flRimGlow "0.500"
+	g_flRimWidth "0.140"
+}

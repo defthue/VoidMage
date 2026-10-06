@@ -1,0 +1,154 @@
+POLYGON Adventure toonified -> voidmage AdventurePack format (Blender 5.0 headless)
+source: 268 FBX | toonified 268 | failures 0
+normal mode: auto (30 deg smoothing groups) 133 | smooth 135
+outline: separate <node>_Outline object, FantasyKingdomOutline material, coincident with the base (no baked offset), smooth normals, normals not flipped -- heden_outline.shader inflates it
+units: source is already cm (NOT scaled, unlike DungeonPack) -> vmdl import_scale 0.3937
+material: single slot AdventureShader -> shaders/adventureshader.vmat (whole pack is one atlas)
+
+=== node names differing from filename (0, Synty naming, kept) ===
+
+=== smooth-mode models (135) ===
+SM_Env_Bush_01
+SM_Env_Bush_02
+SM_Env_Bush_03
+SM_Env_Bush_04
+SM_Env_Cloud_01
+SM_Env_Cloud_02
+SM_Env_Cloud_03
+SM_Env_Cloud_04
+SM_Env_Cloud_05
+SM_Env_Cloud_06
+SM_Env_Cloud_07
+SM_Env_DirtMound_01
+SM_Env_DirtMound_01_Snow
+SM_Env_Flower_01
+SM_Env_Flower_02
+SM_Env_Flower_03
+SM_Env_Flower_04
+SM_Env_Flower_05
+SM_Env_Flower_06
+SM_Env_Flower_07
+SM_Env_Flower_08
+SM_Env_Grass_01
+SM_Env_Grass_02
+SM_Env_GroundMounds_01
+SM_Env_GroundMounds_02
+SM_Env_GroundMounds_03
+SM_Env_GroundMounds_04
+SM_Env_GroundMounds_05
+SM_Env_GroundMounds_06
+SM_Env_GroundMounds_07
+SM_Env_GroundMounds_08
+SM_Env_GroundMounds_09
+SM_Env_GroundMounds_10
+SM_Env_Hedge_01
+SM_Env_Hedge_01_Snow
+SM_Env_HillSnow_01
+SM_Env_HillSnow_02
+SM_Env_HillSnow_03
+SM_Env_HillSnow_04
+SM_Env_Hill_01
+SM_Env_Hill_02
+SM_Env_Hill_03
+SM_Env_Hill_04
+SM_Env_Ice_01
+SM_Env_Ice_02
+SM_Env_Ice_03
+SM_Env_Lillypads_01
+SM_Env_Lillypads_02
+SM_Env_Lillypads_03
+SM_Env_Mushroom_01
+SM_Env_Plant_01
+SM_Env_Plant_02
+SM_Env_Plant_03
+SM_Env_Plant_04
+SM_Env_Plant_05
+SM_Env_Reeds_01
+SM_Env_Reeds_02
+SM_Env_Reeds_03
+SM_Env_Rock_01
+SM_Env_Rock_010
+SM_Env_Rock_011
+SM_Env_Rock_012
+SM_Env_Rock_013
+SM_Env_Rock_014
+SM_Env_Rock_015
+SM_Env_Rock_016
+SM_Env_Rock_02
+SM_Env_Rock_03
+SM_Env_Rock_03_Snow
+SM_Env_Rock_04
+SM_Env_Rock_04_Snow
+SM_Env_Rock_05
+SM_Env_Rock_05_Snow
+SM_Env_Rock_07
+SM_Env_Rock_08
+SM_Env_Rock_09
+SM_Env_SnowPile_01
+SM_Env_SnowPile_02
+SM_Env_SnowPile_03
+SM_Env_Stream_Corner_01
+SM_Env_Stream_Corner_01_Snow
+SM_Env_Stream_Straight_01
+SM_Env_Stream_Straight_01_Snow
+SM_Env_Stream_Straight_02
+SM_Env_Stream_Straight_02_Snow
+SM_Env_Stream_Straight_02_Snow_Test
+SM_Env_Stream_Straight_02_Snow_Test1
+SM_Env_TreeBirch_01
+SM_Env_TreeBirch_01_Snow
+SM_Env_TreeBirch_02
+SM_Env_TreeBirch_03
+SM_Env_TreeDead_01
+SM_Env_TreeDead_02
+SM_Env_TreeDead_02_Snow
+SM_Env_TreeLog_01
+SM_Env_TreePine_01
+SM_Env_TreePine_01_Snow
+SM_Env_TreePine_02
+SM_Env_TreePine_02_Snow
+SM_Env_TreePine_03
+SM_Env_TreePine_03_Snow
+SM_Env_TreePine_04
+SM_Env_TreeStump_01
+SM_Env_Tree_01
+SM_Env_Tree_010
+SM_Env_Tree_010_Snow
+SM_Env_Tree_011
+SM_Env_Tree_011_Snow
+SM_Env_Tree_012
+SM_Env_Tree_012_Snow
+SM_Env_Tree_013
+SM_Env_Tree_013_Snow
+SM_Env_Tree_014
+SM_Env_Tree_014_Snow
+SM_Env_Tree_015
+SM_Env_Tree_015_Snow
+SM_Env_Tree_016
+SM_Env_Tree_016_Snow
+SM_Env_Tree_017_Snow
+SM_Env_Tree_01_Snow
+SM_Env_Tree_02
+SM_Env_Tree_02_Snow
+SM_Env_Tree_03
+SM_Env_Tree_03_Snow
+SM_Env_Tree_04
+SM_Env_Tree_04_Snow
+SM_Env_Tree_05
+SM_Env_Tree_06
+SM_Env_Tree_06_Snow
+SM_Env_Tree_07
+SM_Env_Tree_07_Snow
+SM_Env_Tree_08
+SM_Env_Tree_08_Snow
+SM_Env_Tree_09
+SM_Env_Tree_09_Snow
+
+=== problems (7) ===
+SM_Bld_Stall_03.fbx: poly count changed 6293 -> 6292
+SM_Env_Rock_02.fbx: poly count changed 182 -> 179
+SM_Env_Rock_03.fbx: poly count changed 286 -> 283
+SM_Env_Rock_03_Snow.fbx: poly count changed 286 -> 283
+SM_Env_Rock_04.fbx: poly count changed 264 -> 260
+SM_Env_Rock_04_Snow.fbx: poly count changed 264 -> 260
+SM_Prop_Barrel_02.fbx: poly count changed 2730 -> 2728

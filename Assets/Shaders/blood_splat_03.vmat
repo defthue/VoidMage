@@ -1,0 +1,10 @@
+// A blood splatter stamped on a surface (BloodVfx.Mark): the engine's own splatter silhouette through the ground
+// splat shader, printing its own dark red (soot colour white = the texture as-is), permanent until the cap.
+Layer0
+{
+	shader "shaders/heden_ground_splat.shader"
+	TextureColor "vfx/blood_splatter_03.png"
+	g_vSootColor "[1.000000 1.000000 1.000000 0.000000]"
+	g_flOpacity "0.950"
+	g_flDepthFeather "3.000"
+}

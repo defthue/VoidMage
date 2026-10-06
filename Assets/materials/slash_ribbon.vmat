@@ -1,0 +1,23 @@
+// The sword slash ribbon (Code/Character/SwordSlash.cs). Every texture input is filled explicitly:
+// a slot left empty on a custom shader binds the purple error texture. The look lives in the
+// shader's Slash group; the strip's age fade and tint arrive as vertex colour from code.
+Layer0
+{
+	shader "shaders/slash_ribbon.shader"
+
+	F_ADDITIVE 0
+
+	TextureColor "[1.000000 1.000000 1.000000 1.000000]"
+	TextureNormal "[0.500000 0.500000 1.000000 1.000000]"
+	TextureMetalness "[0.000000 0.000000 0.000000 0.000000]"
+	TextureRoughness "[1.000000 1.000000 1.000000 1.000000]"
+	TextureAmbientOcclusion "[1.000000 1.000000 1.000000 1.000000]"
+
+	g_vColorHot "[1.000000 1.000000 1.000000]"
+	g_vColorBody "[0.900000 0.940000 1.000000]"
+	g_flCoreBrightness "1.500000"
+	g_flBodyBrightness "1.000000"
+	g_flCoreWidth "0.350000"
+	g_flEdgeSoft "0.750000"
+	g_flStepSoftness "0.150000"
+}

@@ -1,0 +1,133 @@
+@using System
+@using System.Collections.Generic
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Inventory
+@using VoidMage.Run
+@using VoidMage.Spells
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( _showing is { } card && Visible )
+	{
+		<div class="notice" style="@NoticeStyle()">
+			<div class="dfk dfk-panel-low"></div>
+			<div class="accent" style="background-color: @card.Accent;"></div>
+			<div class="rune" style="@RuneStyle() color: @card.Accent;">@card.Rune</div>
+			<div class="text">
+				<div class="kicker">@card.Kicker</div>
+				<div class="name">@card.Name</div>
+				<div class="hint" style="@HintStyle()">@card.Hint</div>
+			</div>
+			<div class="clip"><div class="sheen" style="@SheenStyle()"></div></div>
+		</div>
+	}
+</root>
+
+@code {
+	// The banner for something won for good: a weapon off the monster that carried it, a weapon out of a crate, a scroll
+	// off the shop's table. (A scroll TAKEN in the dungeon, and a spell learned from one, open on screen instead: ScrollReveal.) Nothing to act on, so it says its piece and goes; several at once queue up behind each
+	// other (two skeletons with different swords die in one swing). Animated in C# on one clock like the other HUDs.
+	private const float InSeconds = 0.34f;
+	private const float HoldSeconds = 2.3f;
+	private const float OutSeconds = 0.45f;
+	private const float Total = InSeconds + HoldSeconds + OutSeconds;
+
+	/// <summary>Gold: a weapon or a spell, the things kept for good.</summary>
+	private const string Gold = "#e8c368";
+	/// <summary>The enchantment scroll's red wax, so a find reads as which kind of seal it wears before it is opened.</summary>
+	private const string Wax = "#c65337";
+
+	private readonly record struct Card( string Kicker, string Name, string Rune, string Hint, string Accent );
+
+	private readonly Queue<Card> _queue = new();
+	private Card? _showing;
+	private float _shownAt;
+
+	protected override void OnEnabled()
+	{
+		PlayerInventory.SkinFound += OnSkin;
+		PlayerInventory.ScrollBought += OnBought;
+	}
+
+	protected override void OnDisabled()
+	{
+		PlayerInventory.SkinFound -= OnSkin;
+		PlayerInventory.ScrollBought -= OnBought;
+	}
+
+	private void OnSkin( WeaponSkin skin )
+	{
+		if ( skin is null ) return;
+		_queue.Enqueue( new Card( skin.IsSword ? "Sword unlocked" : "Staff unlocked", skin.Name,
+			skin.IsSword ? "ᛏ" : "ᛉ", "Armory · Tab", Gold ) );
+	}
+
+	/// <summary>Bought open off the shop's table: named, since the player already read what it was.</summary>
+	private void OnBought( Scroll scroll )
+	{
+		if ( scroll.IsEmpty ) return;
+		_queue.Enqueue( new Card( "Scroll bought", scroll.Name, "ᛜ", "On your staff for the next run", Wax ) );
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( _showing is not null && Time.Now - _shownAt >= Total ) _showing = null;
+		if ( _showing is null && _queue.Count > 0 )
+		{
+			_showing = _queue.Dequeue();
+			_shownAt = Time.Now;
+		}
+	}
+
+	private float Age => Time.Now - _shownAt;
+
+	/// <summary>Out of the way of anything full screen: the card it tells you about is right there in the HUD anyway.</summary>
+	private bool Visible => !SpellLoadout.IsOpen && !RunUi.Blocking && !VoidMage.Boons.BoonScreen.IsOpen;
+
+	/// <summary>Drops in from above the middle of the screen, settles, then lifts away as it fades.</summary>
+	private string NoticeStyle()
+	{
+		float inP = Ease.OutBack( Ease.Window( Age, 0f, InSeconds ), 1.1f );
+		float outP = Ease.InQuad( Ease.Window( Age, InSeconds + HoldSeconds, OutSeconds ) );
+		float y = Ease.Lerp( -34f, 0f, inP ) - outP * 26f;
+		float alpha = Math.Min( Ease.Window( Age, 0f, InSeconds * 0.6f ), 1f - outP );
+		float scale = Ease.Lerp( 0.94f, 1f, inP );
+		return $"opacity: {N( alpha )}; transform: translateY( {N( y )}px ) scale( {N( scale )} );";
+	}
+
+	/// <summary>The rune lands a beat after the card and swells once, like a seal being pressed on.</summary>
+	private string RuneStyle()
+	{
+		float p = Ease.OutBack( Ease.Window( Age, 0.08f, 0.34f ), 2.2f );
+		float pulse = 1f + 0.12f * (1f - Ease.OutQuad( Ease.Window( Age, 0.34f, 0.5f ) )) * Ease.Window( Age, 0.2f, 0.14f );
+		return $"opacity: {N( Ease.Window( Age, 0.08f, 0.2f ) )}; transform: scale( {N( Math.Min( p, 1.3f ) * pulse )} );";
+	}
+
+	/// <summary>The line telling you where to go for it comes last, so the name is read first.</summary>
+	private string HintStyle()
+	{
+		float p = Ease.OutQuad( Ease.Window( Age, 0.42f, 0.3f ) );
+		return $"opacity: {N( p * 0.75f )}; transform: translateX( {N( Ease.Lerp( -6f, 0f, p ) )}px );";
+	}
+
+	/// <summary>A light sweeps across it once, right after it lands.</summary>
+	private string SheenStyle()
+	{
+		float w = Ease.Window( Age, 0.22f, 0.6f );
+		if ( w <= 0f || w >= 1f ) return "opacity: 0;";
+		float p = Ease.InOutCubic( w );
+		float fade = MathF.Sin( w * MathF.PI );
+		return $"opacity: {N( fade * 0.5f )}; transform: translateX( {N( Ease.Lerp( -120f, 460f, p ) )}px ) rotate( 18deg );";
+	}
+
+	private static string N( float v ) => MathF.Round( v, 3 ).ToString( System.Globalization.CultureInfo.InvariantCulture );
+
+	protected override int BuildHash()
+	{
+		// one hash per frame while a card is up: the styles are all time based
+		return HashCode.Combine( _showing?.Name ?? "", _showing is null ? 0 : (int)(Age * 60f) );
+	}
+}

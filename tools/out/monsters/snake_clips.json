@@ -1,0 +1,84 @@
+{
+  "kind": "snake",
+  "fps": 24.0,
+  "root_bone": "Root",
+  "strike_bone": "Head",
+  "feet": [],
+  "forward": [
+    -0.1129,
+    -0.9936,
+    0.0
+  ],
+  "clips": {
+    "attack": {
+      "frames": [
+        0,
+        16
+      ],
+      "seconds": 0.667,
+      "hit_frame": 10,
+      "hit_time": 0.417,
+      "reach": 1.724,
+      "peak_speed_time": 0.333,
+      "peak_speed": 33.034,
+      "reach_at_peak_speed": 0.9263,
+      "body_rise": 0.4202
+    },
+    "death": {
+      "frames": [
+        0,
+        20
+      ],
+      "seconds": 0.833,
+      "hit_frame": 17,
+      "hit_time": 0.708,
+      "reach": 1.2092,
+      "peak_speed_time": 0.583,
+      "peak_speed": 3.737,
+      "reach_at_peak_speed": 0.891,
+      "body_rise": 0.4814
+    },
+    "idle": {
+      "frames": [
+        0,
+        50
+      ],
+      "seconds": 2.083,
+      "hit_frame": 23,
+      "hit_time": 0.958,
+      "reach": 0.1951,
+      "peak_speed_time": 0.167,
+      "peak_speed": 0.094,
+      "reach_at_peak_speed": 0.1458,
+      "body_rise": 0.0353
+    },
+    "jump": {
+      "frames": [
+        0,
+        23
+      ],
+      "seconds": 0.958,
+      "hit_frame": 11,
+      "hit_time": 0.458,
+      "reach": 0.5535,
+      "peak_speed_time": 0.458,
+      "peak_speed": 7.741,
+      "reach_at_peak_speed": 0.5535,
+      "body_rise": 1.4946
+    },
+    "walk": {
+      "frames": [
+        0,
+        20
+      ],
+      "seconds": 0.833,
+      "hit_frame": 10,
+      "hit_time": 0.417,
+      "reach": 0.2819,
+      "peak_speed_time": 0.792,
+      "peak_speed": 2.832,
+      "reach_at_peak_speed": 0.2314,
+      "body_rise": 0.0849
+    }
+  }
+}

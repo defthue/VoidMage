@@ -1,0 +1,121 @@
+{
+  "kind": "frog",
+  "title": "Frog",
+  "blend": "C:\\Users\\skipp\\Desktop\\Speelboord Studios\\Easy Animated Enemy Pack - Jan 2019\\Easy Animated Enemy Pack - Jan 2019\\Blends\\Frog.blend",
+  "fps": 24.0,
+  "armature": "Armature",
+  "root_bone": "root",
+  "bones": [
+    "root",
+    "Body",
+    "FrontLeg.L",
+    "FrontUpLeg.L",
+    "FrontLowLeg.L",
+    "Back",
+    "Shoulders",
+    "Neck",
+    "Head",
+    "Hips",
+    "Torso",
+    "BackHip.L",
+    "BackLeg.L",
+    "BackUpLeg.L",
+    "BackLowLeg.L",
+    "FrontLeg.L.001",
+    "FrontUpLeg.R",
+    "FrontLowLeg.R",
+    "BackHip.R",
+    "BackLeg.R",
+    "BackUpLeg.R",
+    "BackLowLeg.R",
+    "PoleTarget.L",
+    "PoleTarget.R",
+    "FrontFoot.L",
+    "BackFoot.L",
+    "FrontFoot.R",
+    "BackFoot.R"
+  ],
+  "body_mesh": "Frog",
+  "outline_mesh": "Frog_Outline",
+  "materials": {
+    "MonsterFrogGreen": {
+      "pack_slot": "Green",
+      "linear": [
+        0.270498,
+        0.496933,
+        0.147027
+      ]
+    },
+    "MonsterFrogYellow": {
+      "pack_slot": "Yellow",
+      "linear": [
+        0.698187,
+        0.500273,
+        0.191132
+      ]
+    },
+    "MonsterFrogRed": {
+      "pack_slot": "Red",
+      "linear": [
+        0.559596,
+        0.036076,
+        0.017437
+      ]
+    },
+    "MonsterFrogBlack": {
+      "pack_slot": "Black",
+      "linear": [
+        0.01574,
+        0.017387,
+        0.016143
+      ]
+    }
+  },
+  "mat_prefix": "MonsterFrog",
+  "rest_min": [
+    -1.7649,
+    -1.6501,
+    -0.0332
+  ],
+  "rest_max": [
+    1.7421,
+    1.5352,
+    1.3997
+  ],
+  "rest_size": [
+    3.507,
+    3.1853,
+    1.4329
+  ],
+  "rest_max_dim": 3.507,
+  "clips": [
+    {
+      "name": "attack",
+      "action": "Frog_Attack",
+      "start": 0,
+      "end": 18,
+      "seconds": 0.75
+    },
+    {
+      "name": "death",
+      "action": "Frog_Death",
+      "start": 0,
+      "end": 20,
+      "seconds": 0.833
+    },
+    {
+      "name": "idle",
+      "action": "Frog_Idle",
+      "start": 0,
+      "end": 60,
+      "seconds": 2.5
+    },
+    {
+      "name": "jump",
+      "action": "Frog_Jump",
+      "start": 0,
+      "end": 21,
+      "seconds": 0.875
+    }
+  ]
+}

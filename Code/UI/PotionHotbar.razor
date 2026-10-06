@@ -1,0 +1,100 @@
+@using System.Collections.Generic
+@using System
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Run
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( Potions is not null && Visible )
+	{
+		<div class="bar">
+			<div class="slot heal @Classes( PlayerPotions.Kind.Heal )">
+				<div class="dfk dfk-slot"></div>
+				<div class="key">1</div>
+				<div class="glow"></div>
+				<Image class="icon" Texture=@Icon( "potion_heal" )></Image>
+				<div class="count">@Potions.Heal</div>
+			</div>
+			<div class="slot mana @Classes( PlayerPotions.Kind.Mana )">
+				<div class="dfk dfk-slot"></div>
+				<div class="key">2</div>
+				<div class="glow"></div>
+				<Image class="icon" Texture=@Icon( "potion_mana" )></Image>
+				<div class="count">@Potions.Mana</div>
+			</div>
+			@if ( Frogs is not null && Frogs.Carried > 0 )
+			{
+				<div class="slot frog @( FrogPulse ? "pulse" : "" )">
+					<div class="dfk dfk-slot"></div>
+					<div class="glow"></div>
+					<div class="frog-view" @ref=FrogView></div>
+					<div class="count">@Frogs.Carried</div>
+				</div>
+			}
+		</div>
+	}
+</root>
+
+@code {
+	// The two quick slots: 1 = healing (potion 07, red), 2 = mana (potion 06, blue). The bottle's liquid level is
+	// the count over the carry cap; a pickup or a drink pulses the slot, an empty press flashes it red.
+	private PlayerPotions Potions => PlayerPotions.Local;
+	private PotionDrinker Drinker => PotionDrinker.Local;
+	// the frog slot has no key and no cap: it only shows while frogs are in the bag, and counts them
+	private PlayerFrogs Frogs => PlayerFrogs.Local;
+	private bool FrogPulse => Frogs is not null && Time.Now - Frogs.LastCatchAt < 0.25f;
+
+	private bool Visible => !RunUi.Blocking;
+
+	// The slots show the things themselves (user, 2026-09-19): the two flasks the player drinks, baked from their
+	// models (tools/render_weapon_icons.py -- items), and a live frog filmed on a hidden stage (FrogPortrait), the
+	// way the shopkeeper's portrait is.
+	private static readonly Dictionary<string, Texture> _icons = new();
+
+	private static Texture Icon( string id )
+	{
+		if ( !_icons.TryGetValue( id, out var tex ) )
+		{
+			tex = Texture.Load( $"ui/items/{id}.png" );
+			_icons[id] = tex;
+		}
+		return tex;
+	}
+
+	private Panel FrogView { get; set; }
+	private FrogPortrait _frogStage;
+
+	protected override void OnUpdate()
+	{
+		if ( !Visible || Frogs is null || Frogs.Carried <= 0 ) return;
+		if ( !_frogStage.IsValid() ) _frogStage = FrogPortrait.Ensure( Scene );
+		_frogStage.Active = true;
+		if ( FrogView.IsValid() && _frogStage.Texture is { } tex && FrogView.Style.BackgroundImage != tex ) FrogView.Style.BackgroundImage = tex;
+	}
+
+	private bool Pulse( PlayerPotions.Kind kind )
+	{
+		var p = Potions;
+		if ( p is null ) return false;
+		return (Time.Now - p.LastPickupAt < 0.25f && p.LastPickupKind == kind) || (Time.Now - p.LastDrinkAt < 0.3f && p.LastDrinkKind == kind);
+	}
+
+	private bool Denied( PlayerPotions.Kind kind ) => Drinker is not null && Time.Now - Drinker.LastDeniedAt < 0.3f && Drinker.LastDeniedKind == kind;
+	private bool Drinking( PlayerPotions.Kind kind ) => PotionDrinker.IsDrinking && Drinker is not null && Drinker.Kind == kind;
+
+	private string Classes( PlayerPotions.Kind kind )
+	{
+		var empty = Potions.Count( kind ) <= 0;
+		return $"{( empty ? "empty" : "" )} {( Pulse( kind ) ? "pulse" : "" )} {( Denied( kind ) ? "denied" : "" )} {( Drinking( kind ) ? "drinking" : "" )}";
+	}
+
+	protected override int BuildHash()
+	{
+		var p = Potions;
+		return HashCode.Combine( Visible, p?.Heal, p?.Mana, Pulse( PlayerPotions.Kind.Heal ), Pulse( PlayerPotions.Kind.Mana ), Denied( PlayerPotions.Kind.Heal ), Denied( PlayerPotions.Kind.Mana ), HashCode.Combine( Drinking( PlayerPotions.Kind.Heal ), Drinking( PlayerPotions.Kind.Mana ), p?.Capacity, Frogs?.Carried, FrogPulse ) );
+	}
+}

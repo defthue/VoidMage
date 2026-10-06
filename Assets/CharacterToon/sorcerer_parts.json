@@ -1,0 +1,8797 @@
+{
+ "generated": "2026-09-03 18:41",
+ "palette_cells": 16,
+ "palette_material": "shaders/sorcererpalette.vmat",
+ "parts": [
+  {
+   "id": "sorc_01_arm_lower_l",
+   "model": "charactertoon/sorc_01_arm_lower_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "arm_lower_l",
+   "sidekick_code": "13ALWL",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_13ALWL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "upperarm_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 444,
+   "base_verts": 222,
+   "base_polys": 254,
+   "bbox_cm": {
+    "min": [
+     44.1,
+     -2.4,
+     129.7
+    ],
+    "max": [
+     72.7,
+     11.6,
+     142.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 110,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 90,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 30,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 24,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_arm_lower_r",
+   "model": "charactertoon/sorc_01_arm_lower_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "arm_lower_r",
+   "sidekick_code": "14ALWR",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_14ALWR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "upperarm_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 452,
+   "base_verts": 226,
+   "base_polys": 258,
+   "bbox_cm": {
+    "min": [
+     -72.7,
+     -2.7,
+     129.7
+    ],
+    "max": [
+     -44.1,
+     11.6,
+     142.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 114,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 89,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 30,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 25,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_arm_upper_l",
+   "model": "charactertoon/sorc_01_arm_upper_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "arm_upper_l",
+   "sidekick_code": "11AUPL",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_11AUPL_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "spine_03",
+    "upperarm_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 300,
+   "base_verts": 150,
+   "base_polys": 187,
+   "bbox_cm": {
+    "min": [
+     18.9,
+     -3.7,
+     128.2
+    ],
+    "max": [
+     46.3,
+     13.0,
+     145.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 173,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 14,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_arm_upper_r",
+   "model": "charactertoon/sorc_01_arm_upper_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "arm_upper_r",
+   "sidekick_code": "12AUPR",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_12AUPR_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "spine_03",
+    "upperarm_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 298,
+   "base_verts": 149,
+   "base_polys": 185,
+   "bbox_cm": {
+    "min": [
+     -46.3,
+     -3.7,
+     128.2
+    ],
+    "max": [
+     -18.9,
+     13.0,
+     145.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 171,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 14,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_attach_back",
+   "model": "charactertoon/sorc_01_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_l",
+    "abac_dyn_01_01_r",
+    "abac_dyn_01_02_l",
+    "abac_dyn_01_02_r",
+    "abac_dyn_01_03_l",
+    "abac_dyn_01_03_r",
+    "abac_dyn_01_04_l",
+    "abac_dyn_01_04_r",
+    "abac_dyn_01_05_l",
+    "abac_dyn_01_05_r",
+    "abac_dyn_02_01_l",
+    "abac_dyn_02_01_r",
+    "abac_dyn_02_02_l",
+    "abac_dyn_02_02_r",
+    "abac_dyn_02_03_l",
+    "abac_dyn_02_03_r",
+    "abac_dyn_02_04_l",
+    "abac_dyn_02_04_r",
+    "abac_dyn_02_05_l",
+    "abac_dyn_02_05_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 2284,
+   "base_verts": 1142,
+   "base_polys": 1398,
+   "bbox_cm": {
+    "min": [
+     -63.9,
+     -5.5,
+     95.2
+    ],
+    "max": [
+     63.3,
+     40.5,
+     178.2
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 2,
+     "faces": 1398,
+     "name": "Glow 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_attach_face",
+   "model": "charactertoon/sorc_01_attach_face.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "attach_face",
+   "sidekick_code": "23AFAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_23AFAC_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "clavicle_r",
+    "faceAttach",
+    "jaw",
+    "neck_01",
+    "upperarm_l",
+    "upperarm_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 12,
+   "verts": 612,
+   "base_verts": 306,
+   "base_polys": 400,
+   "bbox_cm": {
+    "min": [
+     -22.2,
+     -20.3,
+     134.8
+    ],
+    "max": [
+     23.1,
+     17.1,
+     163.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 10,
+     "faces": 400,
+     "name": "Face Attachment 01",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_attach_head",
+   "model": "charactertoon/sorc_01_attach_head.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "attach_head",
+   "sidekick_code": "22AHED",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_22AHED_HU01.fbx",
+   "weighted_bones": [
+    "headAttach"
+   ],
+   "dyn_bones_folded": [
+    "ahed_dyn_01_01_c",
+    "ahed_dyn_01_02_c",
+    "ahed_dyn_01_03_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1092,
+   "base_verts": 546,
+   "base_polys": 621,
+   "bbox_cm": {
+    "min": [
+     -25.9,
+     -27.8,
+     152.6
+    ],
+    "max": [
+     24.9,
+     31.8,
+     194.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 10,
+     "faces": 378,
+     "name": "Head Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 9,
+     "faces": 92,
+     "name": "Head Attachment 02",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 60,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 52,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 4,
+     "faces": 24,
+     "name": "Stitch 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 5,
+     "faces": 15,
+     "name": "Jewellery Metal 02",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_attach_hips_back",
+   "model": "charactertoon/sorc_01_attach_hips_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "attach_hips_back",
+   "sidekick_code": "26AHPB",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_26AHPB_HU01.fbx",
+   "weighted_bones": [
+    "hipAttachBack"
+   ],
+   "dyn_bones_folded": [
+    "ahpb_dyn_01_01_c",
+    "ahpb_dyn_01_02_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1862,
+   "base_verts": 931,
+   "base_polys": 997,
+   "bbox_cm": {
+    "min": [
+     -17.4,
+     8.9,
+     78.1
+    ],
+    "max": [
+     14.1,
+     28.0,
+     109.1
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 14,
+     "v": 13,
+     "faces": 265,
+     "name": "Hip Back Outfit 03",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 209,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 10,
+     "faces": 173,
+     "name": "Paper 01",
+     "group": 4
+    },
+    {
+     "u": 14,
+     "v": 15,
+     "faces": 140,
+     "name": "Hip Back Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 135,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 44,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 14,
+     "v": 14,
+     "faces": 31,
+     "name": "Hip Back Outfit 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_attach_hips_l",
+   "model": "charactertoon/sorc_01_attach_hips_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "attach_hips_l",
+   "sidekick_code": "27AHPL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_27AHPL_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_l"
+   ],
+   "dyn_bones_folded": [
+    "ahpl_dyn_01_01_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 574,
+   "base_verts": 287,
+   "base_polys": 357,
+   "bbox_cm": {
+    "min": [
+     11.9,
+     -18.0,
+     72.0
+    ],
+    "max": [
+     35.3,
+     21.5,
+     110.2
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 198,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 12,
+     "v": 15,
+     "faces": 98,
+     "name": "Hip Left Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 11,
+     "v": 10,
+     "faces": 51,
+     "name": "Paper 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 10,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_attach_hips_r",
+   "model": "charactertoon/sorc_01_attach_hips_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "attach_hips_r",
+   "sidekick_code": "28AHPR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_28AHPR_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_r"
+   ],
+   "dyn_bones_folded": [
+    "ahpr_dyn_01_01_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 876,
+   "base_verts": 438,
+   "base_polys": 482,
+   "bbox_cm": {
+    "min": [
+     -44.9,
+     -15.1,
+     79.4
+    ],
+    "max": [
+     -16.8,
+     18.0,
+     117.1
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 262,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 60,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 60,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 9,
+     "faces": 49,
+     "name": "Paper 02",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 10,
+     "faces": 41,
+     "name": "Paper 01",
+     "group": 4
+    },
+    {
+     "u": 15,
+     "v": 15,
+     "faces": 10,
+     "name": null,
+     "group": null
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_attach_shoulder_l",
+   "model": "charactertoon/sorc_01_attach_shoulder_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "attach_shoulder_l",
+   "sidekick_code": "29ASHL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_29ASHL_HU01.fbx",
+   "weighted_bones": [
+    "shoulderAttach_l"
+   ],
+   "dyn_bones_folded": [
+    "ashl_dyn_01_01_l",
+    "ashl_dyn_01_02_l",
+    "ashl_dyn_01_03_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1468,
+   "base_verts": 734,
+   "base_polys": 832,
+   "bbox_cm": {
+    "min": [
+     6.8,
+     -9.3,
+     139.0
+    ],
+    "max": [
+     27.7,
+     15.4,
+     163.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 12,
+     "faces": 586,
+     "name": "Shoulder Left Outfit 04",
+     "group": 3
+    },
+    {
+     "u": 15,
+     "v": 6,
+     "faces": 54,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 5,
+     "v": 14,
+     "faces": 54,
+     "name": "Shoulder Left Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 11,
+     "faces": 54,
+     "name": "Shoulder Left Outfit 05",
+     "group": 3
+    },
+    {
+     "u": 15,
+     "v": 15,
+     "faces": 48,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 15,
+     "v": 10,
+     "faces": 30,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 5,
+     "v": 15,
+     "faces": 6,
+     "name": "Shoulder Left Outfit 01",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_attach_shoulder_r",
+   "model": "charactertoon/sorc_01_attach_shoulder_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "attach_shoulder_r",
+   "sidekick_code": "30ASHR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_30ASHR_HU01.fbx",
+   "weighted_bones": [
+    "shoulderAttach_r"
+   ],
+   "dyn_bones_folded": [
+    "ashr_dyn_01_01_r",
+    "ashr_dyn_01_02_r",
+    "ashr_dyn_01_03_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1508,
+   "base_verts": 754,
+   "base_polys": 860,
+   "bbox_cm": {
+    "min": [
+     -27.7,
+     -9.9,
+     136.5
+    ],
+    "max": [
+     -6.8,
+     14.8,
+     171.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 15,
+     "faces": 587,
+     "name": "Shoulder Right Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 6,
+     "v": 13,
+     "faces": 70,
+     "name": "Shoulder Right Outfit 03",
+     "group": 3
+    },
+    {
+     "u": 15,
+     "v": 6,
+     "faces": 54,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 6,
+     "v": 14,
+     "faces": 49,
+     "name": "Shoulder Right Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 15,
+     "v": 15,
+     "faces": 40,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 30,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 15,
+     "v": 10,
+     "faces": 30,
+     "name": null,
+     "group": null
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_facial_hair",
+   "model": "charactertoon/sorc_01_facial_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "facial_hair",
+   "sidekick_code": "09FCHR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_09FCHR_HU01.fbx",
+   "weighted_bones": [
+    "jaw"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 43,
+   "verts": 808,
+   "base_verts": 404,
+   "base_polys": 506,
+   "bbox_cm": {
+    "min": [
+     -9.6,
+     -15.5,
+     143.5
+    ],
+    "max": [
+     9.9,
+     -1.4,
+     157.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 7,
+     "v": 4,
+     "faces": 506,
+     "name": "Facial Hair 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_foot_l",
+   "model": "charactertoon/sorc_01_foot_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "foot_l",
+   "sidekick_code": "20FOTL",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_20FOTL_HU01.fbx",
+   "weighted_bones": [
+    "ball_l",
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 236,
+   "base_verts": 118,
+   "base_polys": 146,
+   "bbox_cm": {
+    "min": [
+     6.2,
+     -16.7,
+     0.0
+    ],
+    "max": [
+     18.2,
+     10.4,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 3,
+     "v": 9,
+     "faces": 62,
+     "name": "Foot Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 3,
+     "v": 7,
+     "faces": 46,
+     "name": "Foot Left Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 3,
+     "v": 8,
+     "faces": 38,
+     "name": "Foot Left Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_foot_r",
+   "model": "charactertoon/sorc_01_foot_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "foot_r",
+   "sidekick_code": "21FOTR",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_21FOTR_HU01.fbx",
+   "weighted_bones": [
+    "ball_r",
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 236,
+   "base_verts": 118,
+   "base_polys": 146,
+   "bbox_cm": {
+    "min": [
+     -18.2,
+     -17.5,
+     0.0
+    ],
+    "max": [
+     -6.2,
+     10.4,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 4,
+     "v": 9,
+     "faces": 62,
+     "name": "Foot Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 4,
+     "v": 7,
+     "faces": 46,
+     "name": "Foot Right Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 4,
+     "v": 8,
+     "faces": 38,
+     "name": "Foot Right Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_hair",
+   "model": "charactertoon/sorc_01_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "hair",
+   "sidekick_code": "02HAIR",
+   "hides_body_region": "Hair",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_02HAIR_HU01.fbx",
+   "weighted_bones": [
+    "head"
+   ],
+   "dyn_bones_folded": [
+    "hair_dyn_01_01_c",
+    "hair_dyn_01_02_c",
+    "hair_dyn_01_03_c",
+    "hair_dyn_02_01_c",
+    "hair_dyn_02_02_c",
+    "hair_dyn_03_01_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1526,
+   "base_verts": 763,
+   "base_polys": 944,
+   "bbox_cm": {
+    "min": [
+     -20.8,
+     -11.9,
+     152.4
+    ],
+    "max": [
+     21.9,
+     24.4,
+     193.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 4,
+     "faces": 813,
+     "name": "Hair 01",
+     "group": 1
+    },
+    {
+     "u": 6,
+     "v": 3,
+     "faces": 131,
+     "name": "Hair 02",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_hand_l",
+   "model": "charactertoon/sorc_01_hand_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "hand_l",
+   "sidekick_code": "15HNDL",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_15HNDL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "index_01_l",
+    "index_02_l",
+    "index_03_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "middle_01_l",
+    "middle_02_l",
+    "middle_03_l",
+    "pinky_01_l",
+    "pinky_02_l",
+    "pinky_03_l",
+    "ring_01_l",
+    "ring_02_l",
+    "ring_03_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "thumb_03_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 340,
+   "base_verts": 170,
+   "base_polys": 211,
+   "bbox_cm": {
+    "min": [
+     71.5,
+     -6.2,
+     129.5
+    ],
+    "max": [
+     94.7,
+     12.0,
+     138.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 3,
+     "v": 14,
+     "faces": 114,
+     "name": "Hand Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 3,
+     "v": 15,
+     "faces": 47,
+     "name": "Hand Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 46,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 2,
+     "v": 3,
+     "faces": 4,
+     "name": "Fingernails Right",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_hand_r",
+   "model": "charactertoon/sorc_01_hand_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "hand_r",
+   "sidekick_code": "16HNDR",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_16HNDR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "index_01_r",
+    "index_02_r",
+    "index_03_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "middle_01_r",
+    "middle_02_r",
+    "middle_03_r",
+    "pinky_01_r",
+    "pinky_02_r",
+    "pinky_03_r",
+    "ring_01_r",
+    "ring_02_r",
+    "ring_03_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "thumb_03_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 340,
+   "base_verts": 170,
+   "base_polys": 211,
+   "bbox_cm": {
+    "min": [
+     -94.7,
+     -6.2,
+     129.5
+    ],
+    "max": [
+     -71.5,
+     12.0,
+     138.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 4,
+     "v": 14,
+     "faces": 114,
+     "name": "Hand Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 4,
+     "v": 15,
+     "faces": 47,
+     "name": "Hand Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 46,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 2,
+     "v": 3,
+     "faces": 4,
+     "name": "Fingernails Right",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_hips",
+   "model": "charactertoon/sorc_01_hips.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "hips",
+   "sidekick_code": "17HIPS",
+   "hides_body_region": "Hips",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_17HIPS_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_r",
+    "calf_twist_01_l",
+    "calf_twist_01_r",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "thigh_twist_01_l",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 2882,
+   "base_verts": 1441,
+   "base_polys": 1759,
+   "bbox_cm": {
+    "min": [
+     -39.2,
+     -24.9,
+     2.0
+    ],
+    "max": [
+     39.2,
+     35.7,
+     99.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 8,
+     "faces": 585,
+     "name": "Hips Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 9,
+     "faces": 507,
+     "name": "Hips Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 6,
+     "faces": 304,
+     "name": "Hips Outfit 05",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 7,
+     "faces": 189,
+     "name": "Hips Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 10,
+     "faces": 112,
+     "name": "Hips Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 62,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_leg_l",
+   "model": "charactertoon/sorc_01_leg_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "leg_l",
+   "sidekick_code": "18LEGL",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_18LEGL_HU01.fbx",
+   "weighted_bones": [
+    "ball_l",
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l",
+    "thigh_l",
+    "thigh_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 392,
+   "base_verts": 196,
+   "base_polys": 246,
+   "bbox_cm": {
+    "min": [
+     3.4,
+     -4.7,
+     4.3
+    ],
+    "max": [
+     20.2,
+     13.7,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 10,
+     "v": 2,
+     "faces": 162,
+     "name": "Bandage 01",
+     "group": 4
+    },
+    {
+     "u": 1,
+     "v": 8,
+     "faces": 42,
+     "name": "Leg Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 9,
+     "faces": 42,
+     "name": "Leg Left Outfit 02",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_leg_r",
+   "model": "charactertoon/sorc_01_leg_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "leg_r",
+   "sidekick_code": "19LEGR",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_19LEGR_HU01.fbx",
+   "weighted_bones": [
+    "ball_r",
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r",
+    "thigh_r",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 384,
+   "base_verts": 192,
+   "base_polys": 239,
+   "bbox_cm": {
+    "min": [
+     -20.2,
+     -4.7,
+     4.3
+    ],
+    "max": [
+     -3.4,
+     13.7,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 10,
+     "v": 2,
+     "faces": 155,
+     "name": "Bandage 01",
+     "group": 4
+    },
+    {
+     "u": 2,
+     "v": 8,
+     "faces": 42,
+     "name": "Leg Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 9,
+     "faces": 42,
+     "name": "Leg Right Outfit 02",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_01_torso",
+   "model": "charactertoon/sorc_01_torso.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "01",
+   "slot": "torso",
+   "sidekick_code": "10TORS",
+   "hides_body_region": "Torso",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_01_10TORS_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "clavicle_r",
+    "head",
+    "neck_01",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "upperarm_l",
+    "upperarm_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 2632,
+   "base_verts": 1316,
+   "base_polys": 1671,
+   "bbox_cm": {
+    "min": [
+     -30.0,
+     -17.2,
+     89.4
+    ],
+    "max": [
+     30.0,
+     17.6,
+     154.8
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 13,
+     "faces": 554,
+     "name": "Torso Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 15,
+     "faces": 512,
+     "name": "Torso Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 353,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 138,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 14,
+     "faces": 57,
+     "name": "Torso Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 11,
+     "faces": 29,
+     "name": "Torso Outfit 05",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 26,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 2,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 7,
+     "faces": 2,
+     "name": "Back Attachment 04",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_arm_lower_l",
+   "model": "charactertoon/sorc_02_arm_lower_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "arm_lower_l",
+   "sidekick_code": "13ALWL",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_13ALWL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 444,
+   "base_verts": 222,
+   "base_polys": 276,
+   "bbox_cm": {
+    "min": [
+     44.1,
+     -2.8,
+     130.0
+    ],
+    "max": [
+     73.0,
+     12.1,
+     146.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 105,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 89,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 12,
+     "faces": 82,
+     "name": "Arm Left Outfit 04",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_arm_lower_r",
+   "model": "charactertoon/sorc_02_arm_lower_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "arm_lower_r",
+   "sidekick_code": "14ALWR",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_14ALWR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "thumb_01_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 444,
+   "base_verts": 222,
+   "base_polys": 276,
+   "bbox_cm": {
+    "min": [
+     -73.0,
+     -2.8,
+     130.0
+    ],
+    "max": [
+     -44.1,
+     12.1,
+     146.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 105,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 89,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 12,
+     "faces": 82,
+     "name": "Arm Right Outfit 04",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_arm_upper_l",
+   "model": "charactertoon/sorc_02_arm_upper_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "arm_upper_l",
+   "sidekick_code": "11AUPL",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_11AUPL_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "spine_03",
+    "upperarm_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 540,
+   "base_verts": 270,
+   "base_polys": 346,
+   "bbox_cm": {
+    "min": [
+     18.9,
+     -3.6,
+     126.2
+    ],
+    "max": [
+     46.8,
+     12.7,
+     145.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 165,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 12,
+     "faces": 129,
+     "name": "Arm Left Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 52,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_arm_upper_r",
+   "model": "charactertoon/sorc_02_arm_upper_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "arm_upper_r",
+   "sidekick_code": "12AUPR",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_12AUPR_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "spine_03",
+    "upperarm_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 558,
+   "base_verts": 279,
+   "base_polys": 358,
+   "bbox_cm": {
+    "min": [
+     -46.8,
+     -3.6,
+     126.2
+    ],
+    "max": [
+     -18.9,
+     12.7,
+     145.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 175,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 12,
+     "faces": 130,
+     "name": "Arm Right Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 53,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_attach_back",
+   "model": "charactertoon/sorc_02_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_c",
+    "abac_dyn_01_02_c",
+    "abac_dyn_01_03_c",
+    "abac_dyn_02_01_c",
+    "abac_dyn_02_02_c",
+    "abac_dyn_02_03_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 2582,
+   "base_verts": 1291,
+   "base_polys": 1478,
+   "bbox_cm": {
+    "min": [
+     -30.6,
+     8.3,
+     67.7
+    ],
+    "max": [
+     49.5,
+     41.9,
+     156.1
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 616,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 9,
+     "faces": 390,
+     "name": "Metal 02",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 9,
+     "faces": 153,
+     "name": "Back Attachment 02",
+     "group": 3
+    },
+    {
+     "u": 7,
+     "v": 10,
+     "faces": 124,
+     "name": "Back Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 8,
+     "faces": 98,
+     "name": "Metal 03",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 10,
+     "faces": 49,
+     "name": "Paper 01",
+     "group": 4
+    },
+    {
+     "u": 15,
+     "v": 15,
+     "faces": 33,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 8,
+     "v": 2,
+     "faces": 12,
+     "name": "Glow 01",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 8,
+     "faces": 1,
+     "name": "Back Attachment 03",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 1,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 7,
+     "faces": 1,
+     "name": "Back Attachment 04",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_attach_face",
+   "model": "charactertoon/sorc_02_attach_face.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "attach_face",
+   "sidekick_code": "23AFAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_23AFAC_HU01.fbx",
+   "weighted_bones": [
+    "faceAttach",
+    "jaw"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 12,
+   "verts": 458,
+   "base_verts": 229,
+   "base_polys": 274,
+   "bbox_cm": {
+    "min": [
+     -9.0,
+     -16.4,
+     146.6
+    ],
+    "max": [
+     9.0,
+     -8.1,
+     159.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 10,
+     "faces": 132,
+     "name": "Face Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 6,
+     "v": 9,
+     "faces": 128,
+     "name": "Face Attachment 02",
+     "group": 3
+    },
+    {
+     "u": 6,
+     "v": 8,
+     "faces": 14,
+     "name": "Face Attachment 03",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_attach_head",
+   "model": "charactertoon/sorc_02_attach_head.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "attach_head",
+   "sidekick_code": "22AHED",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_22AHED_HU01.fbx",
+   "weighted_bones": [
+    "headAttach"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 0,
+   "verts": 564,
+   "base_verts": 282,
+   "base_polys": 312,
+   "bbox_cm": {
+    "min": [
+     -40.6,
+     -15.8,
+     162.5
+    ],
+    "max": [
+     40.5,
+     1.5,
+     178.8
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 11,
+     "v": 6,
+     "faces": 170,
+     "name": "Horns 01",
+     "group": 1
+    },
+    {
+     "u": 5,
+     "v": 10,
+     "faces": 74,
+     "name": "Head Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 9,
+     "faces": 32,
+     "name": "Head Attachment 02",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 8,
+     "faces": 20,
+     "name": "Head Attachment 03",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 2,
+     "faces": 8,
+     "name": "Glow 01",
+     "group": 4
+    },
+    {
+     "u": 15,
+     "v": 15,
+     "faces": 8,
+     "name": null,
+     "group": null
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_attach_hips_l",
+   "model": "charactertoon/sorc_02_attach_hips_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "attach_hips_l",
+   "sidekick_code": "27AHPL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_27AHPL_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_l"
+   ],
+   "dyn_bones_folded": [
+    "ahpl_dyn_01_01_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 138,
+   "base_verts": 69,
+   "base_polys": 82,
+   "bbox_cm": {
+    "min": [
+     16.4,
+     -19.8,
+     85.5
+    ],
+    "max": [
+     21.2,
+     20.6,
+     103.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 11,
+     "v": 8,
+     "faces": 42,
+     "name": "Wood 01",
+     "group": 4
+    },
+    {
+     "u": 12,
+     "v": 15,
+     "faces": 40,
+     "name": "Hip Left Outfit 01",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_attach_hips_r",
+   "model": "charactertoon/sorc_02_attach_hips_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "attach_hips_r",
+   "sidekick_code": "28AHPR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_28AHPR_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_r"
+   ],
+   "dyn_bones_folded": [
+    "ahpr_dyn_01_01_r",
+    "ahpr_dyn_01_02_r",
+    "ahpr_dyn_01_03_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1116,
+   "base_verts": 558,
+   "base_polys": 567,
+   "bbox_cm": {
+    "min": [
+     -35.8,
+     -5.7,
+     56.8
+    ],
+    "max": [
+     -15.2,
+     14.0,
+     97.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 446,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 4,
+     "faces": 121,
+     "name": "Glass 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_attach_shoulder_l",
+   "model": "charactertoon/sorc_02_attach_shoulder_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "attach_shoulder_l",
+   "sidekick_code": "29ASHL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_29ASHL_HU01.fbx",
+   "weighted_bones": [
+    "shoulderAttach_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 0,
+   "verts": 248,
+   "base_verts": 124,
+   "base_polys": 145,
+   "bbox_cm": {
+    "min": [
+     8.7,
+     -9.5,
+     134.0
+    ],
+    "max": [
+     26.1,
+     18.6,
+     153.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 15,
+     "faces": 95,
+     "name": "Shoulder Left Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 14,
+     "faces": 50,
+     "name": "Shoulder Left Outfit 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_attach_shoulder_r",
+   "model": "charactertoon/sorc_02_attach_shoulder_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "attach_shoulder_r",
+   "sidekick_code": "30ASHR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_30ASHR_HU01.fbx",
+   "weighted_bones": [
+    "shoulderAttach_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 0,
+   "verts": 248,
+   "base_verts": 124,
+   "base_polys": 145,
+   "bbox_cm": {
+    "min": [
+     -26.1,
+     -9.5,
+     134.0
+    ],
+    "max": [
+     -8.7,
+     18.6,
+     153.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 15,
+     "faces": 95,
+     "name": "Shoulder Right Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 6,
+     "v": 14,
+     "faces": 50,
+     "name": "Shoulder Right Outfit 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_facial_hair",
+   "model": "charactertoon/sorc_02_facial_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "facial_hair",
+   "sidekick_code": "09FCHR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_09FCHR_HU01.fbx",
+   "weighted_bones": [
+    "head",
+    "jaw"
+   ],
+   "dyn_bones_folded": [
+    "fchr_dyn_01_01_c"
+   ],
+   "shape_keys_stripped": 43,
+   "verts": 954,
+   "base_verts": 477,
+   "base_polys": 592,
+   "bbox_cm": {
+    "min": [
+     -12.5,
+     -16.4,
+     140.0
+    ],
+    "max": [
+     12.4,
+     -0.8,
+     161.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 7,
+     "v": 4,
+     "faces": 592,
+     "name": "Facial Hair 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_foot_l",
+   "model": "charactertoon/sorc_02_foot_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "foot_l",
+   "sidekick_code": "20FOTL",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_20FOTL_HU01.fbx",
+   "weighted_bones": [
+    "ball_l",
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 286,
+   "base_verts": 143,
+   "base_polys": 169,
+   "bbox_cm": {
+    "min": [
+     6.2,
+     -16.6,
+     0.0
+    ],
+    "max": [
+     18.3,
+     10.4,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 3,
+     "v": 9,
+     "faces": 87,
+     "name": "Foot Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 3,
+     "v": 8,
+     "faces": 82,
+     "name": "Foot Left Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_foot_r",
+   "model": "charactertoon/sorc_02_foot_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "foot_r",
+   "sidekick_code": "21FOTR",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_21FOTR_HU01.fbx",
+   "weighted_bones": [
+    "ball_r",
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 286,
+   "base_verts": 143,
+   "base_polys": 169,
+   "bbox_cm": {
+    "min": [
+     -18.3,
+     -16.6,
+     0.0
+    ],
+    "max": [
+     -6.2,
+     10.4,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 4,
+     "v": 9,
+     "faces": 87,
+     "name": "Foot Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 4,
+     "v": 8,
+     "faces": 82,
+     "name": "Foot Right Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_hair",
+   "model": "charactertoon/sorc_02_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "hair",
+   "sidekick_code": "02HAIR",
+   "hides_body_region": "Hair",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_02HAIR_HU01.fbx",
+   "weighted_bones": [
+    "head"
+   ],
+   "dyn_bones_folded": [
+    "hair_dyn_01_01_c",
+    "hair_dyn_01_02_c",
+    "hair_dyn_01_03_c",
+    "hair_dyn_01_04_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1896,
+   "base_verts": 948,
+   "base_polys": 1166,
+   "bbox_cm": {
+    "min": [
+     -15.7,
+     -14.2,
+     147.3
+    ],
+    "max": [
+     14.6,
+     19.0,
+     199.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 4,
+     "faces": 1011,
+     "name": "Hair 01",
+     "group": 1
+    },
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 105,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 50,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_hand_l",
+   "model": "charactertoon/sorc_02_hand_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "hand_l",
+   "sidekick_code": "15HNDL",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_15HNDL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "index_01_l",
+    "index_02_l",
+    "index_03_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "middle_01_l",
+    "middle_02_l",
+    "middle_03_l",
+    "pinky_01_l",
+    "pinky_02_l",
+    "pinky_03_l",
+    "ring_01_l",
+    "ring_02_l",
+    "ring_03_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "thumb_03_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 380,
+   "base_verts": 190,
+   "base_polys": 216,
+   "bbox_cm": {
+    "min": [
+     71.5,
+     -6.2,
+     129.5
+    ],
+    "max": [
+     94.7,
+     12.0,
+     139.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 3,
+     "v": 14,
+     "faces": 94,
+     "name": "Hand Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 92,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 22,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 2,
+     "v": 3,
+     "faces": 8,
+     "name": "Fingernails Right",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_hand_r",
+   "model": "charactertoon/sorc_02_hand_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "hand_r",
+   "sidekick_code": "16HNDR",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_16HNDR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "index_01_r",
+    "index_02_r",
+    "index_03_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "middle_01_r",
+    "middle_02_r",
+    "middle_03_r",
+    "pinky_01_r",
+    "pinky_02_r",
+    "pinky_03_r",
+    "ring_01_r",
+    "ring_02_r",
+    "ring_03_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "thumb_03_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 380,
+   "base_verts": 190,
+   "base_polys": 216,
+   "bbox_cm": {
+    "min": [
+     -94.7,
+     -6.2,
+     129.5
+    ],
+    "max": [
+     -71.5,
+     12.0,
+     139.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 4,
+     "v": 14,
+     "faces": 94,
+     "name": "Hand Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 92,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 22,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 2,
+     "v": 3,
+     "faces": 8,
+     "name": "Fingernails Right",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_hips",
+   "model": "charactertoon/sorc_02_hips.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "hips",
+   "sidekick_code": "17HIPS",
+   "hides_body_region": "Hips",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_17HIPS_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_r",
+    "calf_twist_01_l",
+    "calf_twist_01_r",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "thigh_twist_01_l",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 1852,
+   "base_verts": 926,
+   "base_polys": 1095,
+   "bbox_cm": {
+    "min": [
+     -32.5,
+     -20.5,
+     11.4
+    ],
+    "max": [
+     31.9,
+     25.9,
+     99.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 9,
+     "faces": 629,
+     "name": "Hips Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 8,
+     "faces": 216,
+     "name": "Hips Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 115,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 10,
+     "faces": 114,
+     "name": "Hips Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 21,
+     "name": "Metal 04",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_leg_l",
+   "model": "charactertoon/sorc_02_leg_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "leg_l",
+   "sidekick_code": "18LEGL",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_18LEGL_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l",
+    "thigh_l",
+    "thigh_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 490,
+   "base_verts": 245,
+   "base_polys": 288,
+   "bbox_cm": {
+    "min": [
+     2.8,
+     -5.0,
+     5.7
+    ],
+    "max": [
+     20.6,
+     14.6,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 8,
+     "faces": 150,
+     "name": "Leg Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 9,
+     "faces": 93,
+     "name": "Leg Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 10,
+     "faces": 45,
+     "name": "Leg Left Outfit 01",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_leg_r",
+   "model": "charactertoon/sorc_02_leg_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "leg_r",
+   "sidekick_code": "19LEGR",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_19LEGR_HU01.fbx",
+   "weighted_bones": [
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r",
+    "thigh_r",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 490,
+   "base_verts": 245,
+   "base_polys": 288,
+   "bbox_cm": {
+    "min": [
+     -20.6,
+     -5.0,
+     5.7
+    ],
+    "max": [
+     -2.8,
+     14.6,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 8,
+     "faces": 150,
+     "name": "Leg Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 9,
+     "faces": 93,
+     "name": "Leg Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 10,
+     "faces": 45,
+     "name": "Leg Right Outfit 01",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_02_torso",
+   "model": "charactertoon/sorc_02_torso.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "02",
+   "slot": "torso",
+   "sidekick_code": "10TORS",
+   "hides_body_region": "Torso",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_02_10TORS_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "clavicle_r",
+    "head",
+    "neck_01",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "upperarm_l",
+    "upperarm_r",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 2694,
+   "base_verts": 1347,
+   "base_polys": 1663,
+   "bbox_cm": {
+    "min": [
+     -23.7,
+     -17.4,
+     91.9
+    ],
+    "max": [
+     23.9,
+     18.1,
+     153.2
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 13,
+     "faces": 842,
+     "name": "Torso Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 9,
+     "faces": 299,
+     "name": "Metal 02",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 8,
+     "faces": 236,
+     "name": "Metal 03",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 14,
+     "faces": 205,
+     "name": "Torso Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 15,
+     "faces": 81,
+     "name": "Torso Outfit 01",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_arm_lower_l",
+   "model": "charactertoon/sorc_03_arm_lower_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "arm_lower_l",
+   "sidekick_code": "13ALWL",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_13ALWL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "pinky_01_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 472,
+   "base_verts": 236,
+   "base_polys": 305,
+   "bbox_cm": {
+    "min": [
+     44.1,
+     -2.7,
+     129.0
+    ],
+    "max": [
+     73.0,
+     11.6,
+     144.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 8,
+     "faces": 142,
+     "name": "Metal 03",
+     "group": 4
+    },
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 77,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 9,
+     "faces": 47,
+     "name": "Metal 02",
+     "group": 4
+    },
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 29,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 10,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_arm_lower_r",
+   "model": "charactertoon/sorc_03_arm_lower_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "arm_lower_r",
+   "sidekick_code": "14ALWR",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_14ALWR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "pinky_01_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 472,
+   "base_verts": 236,
+   "base_polys": 305,
+   "bbox_cm": {
+    "min": [
+     -73.0,
+     -2.7,
+     129.0
+    ],
+    "max": [
+     -44.1,
+     11.6,
+     144.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 8,
+     "faces": 142,
+     "name": "Metal 03",
+     "group": 4
+    },
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 77,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 9,
+     "faces": 47,
+     "name": "Metal 02",
+     "group": 4
+    },
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 29,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 10,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_arm_upper_l",
+   "model": "charactertoon/sorc_03_arm_upper_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "arm_upper_l",
+   "sidekick_code": "11AUPL",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_11AUPL_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "spine_03",
+    "upperarm_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 394,
+   "base_verts": 197,
+   "base_polys": 251,
+   "bbox_cm": {
+    "min": [
+     18.9,
+     -4.4,
+     127.9
+    ],
+    "max": [
+     46.3,
+     12.8,
+     145.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 172,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 79,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_arm_upper_r",
+   "model": "charactertoon/sorc_03_arm_upper_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "arm_upper_r",
+   "sidekick_code": "12AUPR",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_12AUPR_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "spine_03",
+    "upperarm_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 394,
+   "base_verts": 197,
+   "base_polys": 251,
+   "bbox_cm": {
+    "min": [
+     -46.3,
+     -4.4,
+     127.9
+    ],
+    "max": [
+     -18.9,
+     12.8,
+     145.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 172,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 79,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_attach_back",
+   "model": "charactertoon/sorc_03_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_c",
+    "abac_dyn_01_02_c",
+    "abac_dyn_01_03_c",
+    "abac_dyn_01_04_c",
+    "abac_dyn_01_05_c",
+    "abac_dyn_01_06_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 2066,
+   "base_verts": 1033,
+   "base_polys": 1171,
+   "bbox_cm": {
+    "min": [
+     -27.0,
+     9.7,
+     94.8
+    ],
+    "max": [
+     28.4,
+     56.2,
+     156.8
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 404,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 10,
+     "faces": 183,
+     "name": "Paper 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 9,
+     "faces": 149,
+     "name": "Metal 02",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 135,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 4,
+     "faces": 131,
+     "name": "Glass 01",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 10,
+     "faces": 72,
+     "name": "Back Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 7,
+     "v": 8,
+     "faces": 63,
+     "name": "Back Attachment 03",
+     "group": 3
+    },
+    {
+     "u": 11,
+     "v": 8,
+     "faces": 24,
+     "name": "Wood 01",
+     "group": 4
+    },
+    {
+     "u": 15,
+     "v": 15,
+     "faces": 10,
+     "name": null,
+     "group": null
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_attach_face",
+   "model": "charactertoon/sorc_03_attach_face.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "attach_face",
+   "sidekick_code": "23AFAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_23AFAC_HU01.fbx",
+   "weighted_bones": [
+    "faceAttach",
+    "neck_01"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 12,
+   "verts": 390,
+   "base_verts": 195,
+   "base_polys": 227,
+   "bbox_cm": {
+    "min": [
+     -12.6,
+     -16.2,
+     139.5
+    ],
+    "max": [
+     13.0,
+     15.3,
+     165.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 10,
+     "faces": 227,
+     "name": "Face Attachment 01",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_attach_head",
+   "model": "charactertoon/sorc_03_attach_head.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "attach_head",
+   "sidekick_code": "22AHED",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_22AHED_HU01.fbx",
+   "weighted_bones": [
+    "headAttach"
+   ],
+   "dyn_bones_folded": [
+    "ahed_dyn_01_01_c",
+    "ahed_dyn_01_02_c",
+    "ahed_dyn_01_03_c",
+    "ahed_dyn_01_04_c",
+    "ahed_dyn_02_01_c",
+    "ahed_dyn_03_01_c",
+    "ahed_dyn_04_01_c",
+    "ahed_dyn_04_02_c",
+    "ahed_dyn_05_01_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1082,
+   "base_verts": 541,
+   "base_polys": 636,
+   "bbox_cm": {
+    "min": [
+     -33.2,
+     -35.8,
+     144.2
+    ],
+    "max": [
+     34.8,
+     53.9,
+     205.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 10,
+     "faces": 374,
+     "name": "Head Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 113,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 92,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 30,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 16,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    },
+    {
+     "u": 5,
+     "v": 9,
+     "faces": 11,
+     "name": "Head Attachment 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_attach_hips_l",
+   "model": "charactertoon/sorc_03_attach_hips_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "attach_hips_l",
+   "sidekick_code": "27AHPL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_27AHPL_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_l"
+   ],
+   "dyn_bones_folded": [
+    "ahpl_dyn_01_01_l",
+    "ahpl_dyn_01_02_l",
+    "ahpl_dyn_01_03_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 328,
+   "base_verts": 164,
+   "base_polys": 186,
+   "bbox_cm": {
+    "min": [
+     18.0,
+     -9.0,
+     70.7
+    ],
+    "max": [
+     28.9,
+     7.7,
+     93.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 12,
+     "v": 8,
+     "faces": 46,
+     "name": "Concrete 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 41,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 7,
+     "faces": 41,
+     "name": "Rope 02",
+     "group": 4
+    },
+    {
+     "u": 12,
+     "v": 7,
+     "faces": 30,
+     "name": "Concrete 02",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 1,
+     "faces": 28,
+     "name": "Glow 02",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_attach_hips_r",
+   "model": "charactertoon/sorc_03_attach_hips_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "attach_hips_r",
+   "sidekick_code": "28AHPR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_28AHPR_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_r"
+   ],
+   "dyn_bones_folded": [
+    "ahpr_dyn_01_01_r",
+    "ahpr_dyn_01_02_r",
+    "ahpr_dyn_02_01_r",
+    "ahpr_dyn_02_02_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 544,
+   "base_verts": 272,
+   "base_polys": 314,
+   "bbox_cm": {
+    "min": [
+     -28.0,
+     -5.4,
+     53.6
+    ],
+    "max": [
+     -16.6,
+     13.9,
+     94.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 133,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 12,
+     "v": 7,
+     "faces": 90,
+     "name": "Concrete 02",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 1,
+     "faces": 50,
+     "name": "Glow 02",
+     "group": 4
+    },
+    {
+     "u": 12,
+     "v": 8,
+     "faces": 41,
+     "name": "Concrete 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_attach_shoulder_l",
+   "model": "charactertoon/sorc_03_attach_shoulder_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "attach_shoulder_l",
+   "sidekick_code": "29ASHL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_29ASHL_HU01.fbx",
+   "weighted_bones": [
+    "shoulderAttach_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 0,
+   "verts": 672,
+   "base_verts": 336,
+   "base_polys": 413,
+   "bbox_cm": {
+    "min": [
+     11.7,
+     -6.4,
+     138.2
+    ],
+    "max": [
+     42.6,
+     14.3,
+     156.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 15,
+     "faces": 192,
+     "name": "Shoulder Left Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 13,
+     "faces": 160,
+     "name": "Shoulder Left Outfit 03",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 14,
+     "faces": 61,
+     "name": "Shoulder Left Outfit 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_attach_shoulder_r",
+   "model": "charactertoon/sorc_03_attach_shoulder_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "attach_shoulder_r",
+   "sidekick_code": "30ASHR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_30ASHR_HU01.fbx",
+   "weighted_bones": [
+    "shoulderAttach_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 0,
+   "verts": 672,
+   "base_verts": 336,
+   "base_polys": 413,
+   "bbox_cm": {
+    "min": [
+     -42.6,
+     -6.4,
+     138.2
+    ],
+    "max": [
+     -11.7,
+     14.3,
+     156.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 15,
+     "faces": 192,
+     "name": "Shoulder Right Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 6,
+     "v": 13,
+     "faces": 160,
+     "name": "Shoulder Right Outfit 03",
+     "group": 3
+    },
+    {
+     "u": 6,
+     "v": 14,
+     "faces": 61,
+     "name": "Shoulder Right Outfit 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_facial_hair",
+   "model": "charactertoon/sorc_03_facial_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "facial_hair",
+   "sidekick_code": "09FCHR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_09FCHR_HU01.fbx",
+   "weighted_bones": [
+    "head",
+    "jaw"
+   ],
+   "dyn_bones_folded": [
+    "fchr_dyn_01_01_c",
+    "fchr_dyn_01_02_c",
+    "fchr_dyn_01_03_c"
+   ],
+   "shape_keys_stripped": 43,
+   "verts": 2460,
+   "base_verts": 1230,
+   "base_polys": 1526,
+   "bbox_cm": {
+    "min": [
+     -14.9,
+     -21.6,
+     120.4
+    ],
+    "max": [
+     16.6,
+     0.3,
+     163.8
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 7,
+     "v": 4,
+     "faces": 1526,
+     "name": "Facial Hair 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_foot_l",
+   "model": "charactertoon/sorc_03_foot_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "foot_l",
+   "sidekick_code": "20FOTL",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_20FOTL_HU01.fbx",
+   "weighted_bones": [
+    "ball_l",
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 274,
+   "base_verts": 137,
+   "base_polys": 172,
+   "bbox_cm": {
+    "min": [
+     5.6,
+     -20.9,
+     0.0
+    ],
+    "max": [
+     18.8,
+     11.6,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 103,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 3,
+     "v": 9,
+     "faces": 69,
+     "name": "Foot Left Outfit 02",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_foot_r",
+   "model": "charactertoon/sorc_03_foot_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "foot_r",
+   "sidekick_code": "21FOTR",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_21FOTR_HU01.fbx",
+   "weighted_bones": [
+    "ball_r",
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 274,
+   "base_verts": 137,
+   "base_polys": 172,
+   "bbox_cm": {
+    "min": [
+     -18.8,
+     -20.9,
+     0.0
+    ],
+    "max": [
+     -5.6,
+     11.6,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 103,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 4,
+     "v": 9,
+     "faces": 69,
+     "name": "Foot Right Outfit 02",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_hair",
+   "model": "charactertoon/sorc_03_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "hair",
+   "sidekick_code": "02HAIR",
+   "hides_body_region": "Hair",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_02HAIR_HU01.fbx",
+   "weighted_bones": [
+    "head"
+   ],
+   "dyn_bones_folded": [
+    "hair_dyn_01_01_l",
+    "hair_dyn_01_01_r",
+    "hair_dyn_01_02_l",
+    "hair_dyn_01_02_r",
+    "hair_dyn_02_01_c",
+    "hair_dyn_02_02_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1816,
+   "base_verts": 908,
+   "base_polys": 1165,
+   "bbox_cm": {
+    "min": [
+     -25.9,
+     -5.7,
+     125.5
+    ],
+    "max": [
+     23.0,
+     28.4,
+     172.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 4,
+     "faces": 1165,
+     "name": "Hair 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_hand_l",
+   "model": "charactertoon/sorc_03_hand_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "hand_l",
+   "sidekick_code": "15HNDL",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_15HNDL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "index_01_l",
+    "index_02_l",
+    "index_03_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "middle_01_l",
+    "middle_02_l",
+    "middle_03_l",
+    "pinky_01_l",
+    "pinky_02_l",
+    "pinky_03_l",
+    "ring_01_l",
+    "ring_02_l",
+    "ring_03_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "thumb_03_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 458,
+   "base_verts": 229,
+   "base_polys": 258,
+   "bbox_cm": {
+    "min": [
+     71.5,
+     -7.7,
+     121.7
+    ],
+    "max": [
+     94.7,
+     15.3,
+     142.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 125,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 3,
+     "v": 15,
+     "faces": 58,
+     "name": "Hand Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 3,
+     "v": 13,
+     "faces": 53,
+     "name": "Hand Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 12,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 2,
+     "v": 3,
+     "faces": 10,
+     "name": "Fingernails Right",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_hand_r",
+   "model": "charactertoon/sorc_03_hand_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "hand_r",
+   "sidekick_code": "16HNDR",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_16HNDR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "index_01_r",
+    "index_02_r",
+    "index_03_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "middle_01_r",
+    "middle_02_r",
+    "middle_03_r",
+    "pinky_01_r",
+    "pinky_02_r",
+    "pinky_03_r",
+    "ring_01_r",
+    "ring_02_r",
+    "ring_03_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "thumb_03_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 434,
+   "base_verts": 217,
+   "base_polys": 246,
+   "bbox_cm": {
+    "min": [
+     -94.7,
+     -7.7,
+     121.7
+    ],
+    "max": [
+     -71.5,
+     15.3,
+     142.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 125,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 4,
+     "v": 15,
+     "faces": 58,
+     "name": "Hand Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 4,
+     "v": 13,
+     "faces": 53,
+     "name": "Hand Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 3,
+     "faces": 10,
+     "name": "Fingernails Right",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_hips",
+   "model": "charactertoon/sorc_03_hips.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "hips",
+   "sidekick_code": "17HIPS",
+   "hides_body_region": "Hips",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_17HIPS_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_r",
+    "calf_twist_01_l",
+    "calf_twist_01_r",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "thigh_twist_01_l",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 2402,
+   "base_verts": 1201,
+   "base_polys": 1388,
+   "bbox_cm": {
+    "min": [
+     -29.9,
+     -25.4,
+     15.2
+    ],
+    "max": [
+     29.9,
+     28.6,
+     99.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 9,
+     "faces": 524,
+     "name": "Hips Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 8,
+     "faces": 349,
+     "name": "Hips Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 7,
+     "faces": 257,
+     "name": "Hips Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 10,
+     "faces": 122,
+     "name": "Hips Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 6,
+     "faces": 59,
+     "name": "Hips Outfit 05",
+     "group": 2
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 57,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 5,
+     "faces": 20,
+     "name": "Strap 02",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_leg_l",
+   "model": "charactertoon/sorc_03_leg_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "leg_l",
+   "sidekick_code": "18LEGL",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_18LEGL_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l",
+    "thigh_l",
+    "thigh_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 444,
+   "base_verts": 222,
+   "base_polys": 265,
+   "bbox_cm": {
+    "min": [
+     3.3,
+     -6.4,
+     5.7
+    ],
+    "max": [
+     20.3,
+     14.6,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 9,
+     "faces": 126,
+     "name": "Leg Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 8,
+     "faces": 89,
+     "name": "Leg Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 10,
+     "faces": 46,
+     "name": "Leg Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 4,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_leg_r",
+   "model": "charactertoon/sorc_03_leg_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "leg_r",
+   "sidekick_code": "19LEGR",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_19LEGR_HU01.fbx",
+   "weighted_bones": [
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r",
+    "thigh_r",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 444,
+   "base_verts": 222,
+   "base_polys": 265,
+   "bbox_cm": {
+    "min": [
+     -20.3,
+     -6.4,
+     5.7
+    ],
+    "max": [
+     -3.3,
+     14.6,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 9,
+     "faces": 126,
+     "name": "Leg Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 8,
+     "faces": 89,
+     "name": "Leg Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 10,
+     "faces": 46,
+     "name": "Leg Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 4,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_03_torso",
+   "model": "charactertoon/sorc_03_torso.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "03",
+   "slot": "torso",
+   "sidekick_code": "10TORS",
+   "hides_body_region": "Torso",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_03_10TORS_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "clavicle_r",
+    "head",
+    "neck_01",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "upperarm_l",
+    "upperarm_r",
+    "upperarm_twist_01_l",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 2530,
+   "base_verts": 1265,
+   "base_polys": 1600,
+   "bbox_cm": {
+    "min": [
+     -33.4,
+     -16.2,
+     91.9
+    ],
+    "max": [
+     33.4,
+     18.6,
+     150.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 13,
+     "faces": 607,
+     "name": "Torso Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 15,
+     "faces": 241,
+     "name": "Torso Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 14,
+     "faces": 213,
+     "name": "Torso Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 177,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 12,
+     "faces": 136,
+     "name": "Torso Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 11,
+     "faces": 101,
+     "name": "Torso Outfit 05",
+     "group": 2
+    },
+    {
+     "u": 10,
+     "v": 5,
+     "faces": 80,
+     "name": "Strap 02",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 41,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 4,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_arm_lower_l",
+   "model": "charactertoon/sorc_04_arm_lower_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "arm_lower_l",
+   "sidekick_code": "13ALWL",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_13ALWL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 484,
+   "base_verts": 242,
+   "base_polys": 293,
+   "bbox_cm": {
+    "min": [
+     44.1,
+     -1.6,
+     129.8
+    ],
+    "max": [
+     73.0,
+     10.6,
+     141.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 104,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 10,
+     "v": 2,
+     "faces": 102,
+     "name": "Bandage 01",
+     "group": 4
+    },
+    {
+     "u": 1,
+     "v": 14,
+     "faces": 45,
+     "name": "Arm Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 42,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_arm_lower_r",
+   "model": "charactertoon/sorc_04_arm_lower_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "arm_lower_r",
+   "sidekick_code": "14ALWR",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_14ALWR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 484,
+   "base_verts": 242,
+   "base_polys": 293,
+   "bbox_cm": {
+    "min": [
+     -73.0,
+     -1.6,
+     129.8
+    ],
+    "max": [
+     -44.1,
+     10.6,
+     141.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 104,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 10,
+     "v": 2,
+     "faces": 102,
+     "name": "Bandage 01",
+     "group": 4
+    },
+    {
+     "u": 2,
+     "v": 14,
+     "faces": 45,
+     "name": "Arm Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 42,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_arm_upper_l",
+   "model": "charactertoon/sorc_04_arm_upper_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "arm_upper_l",
+   "sidekick_code": "11AUPL",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_11AUPL_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "spine_03",
+    "upperarm_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 846,
+   "base_verts": 423,
+   "base_polys": 475,
+   "bbox_cm": {
+    "min": [
+     18.9,
+     -5.4,
+     123.6
+    ],
+    "max": [
+     46.3,
+     15.3,
+     145.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 220,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 196,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 38,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 21,
+     "name": "Strap 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_arm_upper_r",
+   "model": "charactertoon/sorc_04_arm_upper_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "arm_upper_r",
+   "sidekick_code": "12AUPR",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_12AUPR_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "spine_03",
+    "upperarm_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 846,
+   "base_verts": 423,
+   "base_polys": 474,
+   "bbox_cm": {
+    "min": [
+     -46.3,
+     -5.4,
+     123.6
+    ],
+    "max": [
+     -18.9,
+     15.3,
+     145.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 219,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 196,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 38,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 21,
+     "name": "Strap 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_attach_back",
+   "model": "charactertoon/sorc_04_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_r",
+    "abac_dyn_01_02_r",
+    "abac_dyn_01_03_r",
+    "abac_dyn_01_04_r",
+    "abac_dyn_02_01_l",
+    "abac_dyn_02_02_l",
+    "abac_dyn_02_03_l",
+    "abac_dyn_02_04_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1232,
+   "base_verts": 616,
+   "base_polys": 726,
+   "bbox_cm": {
+    "min": [
+     -40.6,
+     6.7,
+     7.8
+    ],
+    "max": [
+     38.1,
+     42.3,
+     152.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 7,
+     "v": 10,
+     "faces": 380,
+     "name": "Back Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 7,
+     "v": 9,
+     "faces": 346,
+     "name": "Back Attachment 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_attach_head",
+   "model": "charactertoon/sorc_04_attach_head.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "attach_head",
+   "sidekick_code": "22AHED",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_22AHED_HU01.fbx",
+   "weighted_bones": [
+    "headAttach"
+   ],
+   "dyn_bones_folded": [
+    "ahed_dyn_01_01_c",
+    "ahed_dyn_02_01_c",
+    "ahed_dyn_02_02_c",
+    "ahed_dyn_02_03_c",
+    "ahed_dyn_02_04_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1048,
+   "base_verts": 524,
+   "base_polys": 611,
+   "bbox_cm": {
+    "min": [
+     -31.5,
+     -28.4,
+     148.7
+    ],
+    "max": [
+     32.0,
+     44.4,
+     198.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 9,
+     "faces": 254,
+     "name": "Head Attachment 02",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 10,
+     "faces": 229,
+     "name": "Head Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 8,
+     "faces": 108,
+     "name": "Head Attachment 03",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 20,
+     "name": "Metal 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_attach_hips_l",
+   "model": "charactertoon/sorc_04_attach_hips_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "attach_hips_l",
+   "sidekick_code": "27AHPL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_27AHPL_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_l"
+   ],
+   "dyn_bones_folded": [
+    "ahpl_dyn_01_01_l",
+    "ahpl_dyn_02_01_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 460,
+   "base_verts": 230,
+   "base_polys": 242,
+   "bbox_cm": {
+    "min": [
+     13.7,
+     -11.6,
+     73.1
+    ],
+    "max": [
+     29.1,
+     9.2,
+     105.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 4,
+     "faces": 97,
+     "name": "Glass 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 3,
+     "faces": 61,
+     "name": "Glass 02",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 56,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 8,
+     "faces": 28,
+     "name": "Wood 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_attach_hips_r",
+   "model": "charactertoon/sorc_04_attach_hips_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "attach_hips_r",
+   "sidekick_code": "28AHPR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_28AHPR_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_r"
+   ],
+   "dyn_bones_folded": [
+    "ahpr_dyn_01_01_r",
+    "ahpr_dyn_02_01_r",
+    "ahpr_dyn_03_01_r",
+    "ahpr_dyn_04_01_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 916,
+   "base_verts": 458,
+   "base_polys": 480,
+   "bbox_cm": {
+    "min": [
+     -31.0,
+     -13.4,
+     72.1
+    ],
+    "max": [
+     -8.3,
+     15.6,
+     103.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 13,
+     "v": 14,
+     "faces": 76,
+     "name": "Hip Right Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 3,
+     "faces": 69,
+     "name": "Glass 02",
+     "group": 4
+    },
+    {
+     "u": 13,
+     "v": 15,
+     "faces": 66,
+     "name": "Hip Right Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 4,
+     "faces": 62,
+     "name": "Glass 01",
+     "group": 4
+    },
+    {
+     "u": 13,
+     "v": 12,
+     "faces": 56,
+     "name": "Hip Right Outfit 04",
+     "group": 3
+    },
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 54,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 13,
+     "v": 13,
+     "faces": 42,
+     "name": "Hip Right Outfit 03",
+     "group": 3
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 35,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 8,
+     "faces": 16,
+     "name": "Wood 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 8,
+     "faces": 3,
+     "name": "Metal 03",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 8,
+     "faces": 2,
+     "name": "Back Attachment 03",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_attach_shoulder_l",
+   "model": "charactertoon/sorc_04_attach_shoulder_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "attach_shoulder_l",
+   "sidekick_code": "29ASHL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_29ASHL_HU01.fbx",
+   "weighted_bones": [
+    "shoulderAttach_l"
+   ],
+   "dyn_bones_folded": [
+    "ashl_dyn_01_01_l",
+    "ashl_dyn_01_02_l",
+    "ashl_dyn_01_03_l",
+    "ashl_dyn_02_01_l",
+    "ashl_dyn_03_01_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1370,
+   "base_verts": 685,
+   "base_polys": 897,
+   "bbox_cm": {
+    "min": [
+     8.6,
+     -8.8,
+     143.5
+    ],
+    "max": [
+     28.3,
+     14.6,
+     176.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 14,
+     "faces": 383,
+     "name": "Shoulder Left Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 15,
+     "faces": 330,
+     "name": "Shoulder Left Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 13,
+     "faces": 154,
+     "name": "Shoulder Left Outfit 03",
+     "group": 3
+    },
+    {
+     "u": 15,
+     "v": 10,
+     "faces": 10,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 15,
+     "v": 7,
+     "faces": 10,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 15,
+     "v": 15,
+     "faces": 10,
+     "name": null,
+     "group": null
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_attach_shoulder_r",
+   "model": "charactertoon/sorc_04_attach_shoulder_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "attach_shoulder_r",
+   "sidekick_code": "30ASHR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_30ASHR_HU01.fbx",
+   "weighted_bones": [
+    "shoulderAttach_r"
+   ],
+   "dyn_bones_folded": [
+    "ashr_dyn_01_01_r",
+    "ashr_dyn_01_02_r",
+    "ashr_dyn_01_03_r",
+    "ashr_dyn_02_01_r",
+    "ashr_dyn_02_02_r",
+    "ashr_dyn_03_01_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1474,
+   "base_verts": 737,
+   "base_polys": 945,
+   "bbox_cm": {
+    "min": [
+     -36.5,
+     -8.9,
+     142.7
+    ],
+    "max": [
+     -2.6,
+     14.2,
+     174.8
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 14,
+     "faces": 414,
+     "name": "Shoulder Right Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 6,
+     "v": 15,
+     "faces": 347,
+     "name": "Shoulder Right Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 6,
+     "v": 13,
+     "faces": 154,
+     "name": "Shoulder Right Outfit 03",
+     "group": 3
+    },
+    {
+     "u": 15,
+     "v": 10,
+     "faces": 10,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 15,
+     "v": 7,
+     "faces": 10,
+     "name": null,
+     "group": null
+    },
+    {
+     "u": 15,
+     "v": 15,
+     "faces": 10,
+     "name": null,
+     "group": null
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_facial_hair",
+   "model": "charactertoon/sorc_04_facial_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "facial_hair",
+   "sidekick_code": "09FCHR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_09FCHR_HU01.fbx",
+   "weighted_bones": [
+    "head",
+    "jaw"
+   ],
+   "dyn_bones_folded": [
+    "fchr_dyn_01_01_c",
+    "fchr_dyn_01_02_c",
+    "fchr_dyn_01_03_c"
+   ],
+   "shape_keys_stripped": 43,
+   "verts": 1342,
+   "base_verts": 671,
+   "base_polys": 825,
+   "bbox_cm": {
+    "min": [
+     -11.6,
+     -22.5,
+     124.6
+    ],
+    "max": [
+     11.8,
+     -2.3,
+     159.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 7,
+     "v": 4,
+     "faces": 746,
+     "name": "Facial Hair 01",
+     "group": 1
+    },
+    {
+     "u": 7,
+     "v": 3,
+     "faces": 79,
+     "name": "Facial Hair 02",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_foot_l",
+   "model": "charactertoon/sorc_04_foot_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "foot_l",
+   "sidekick_code": "20FOTL",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_20FOTL_HU01.fbx",
+   "weighted_bones": [
+    "ball_l",
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 302,
+   "base_verts": 151,
+   "base_polys": 179,
+   "bbox_cm": {
+    "min": [
+     6.1,
+     -19.3,
+     0.0
+    ],
+    "max": [
+     18.3,
+     10.3,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 3,
+     "v": 8,
+     "faces": 106,
+     "name": "Foot Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 3,
+     "v": 9,
+     "faces": 73,
+     "name": "Foot Left Outfit 02",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_foot_r",
+   "model": "charactertoon/sorc_04_foot_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "foot_r",
+   "sidekick_code": "21FOTR",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_21FOTR_HU01.fbx",
+   "weighted_bones": [
+    "ball_r",
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 302,
+   "base_verts": 151,
+   "base_polys": 179,
+   "bbox_cm": {
+    "min": [
+     -18.3,
+     -19.3,
+     0.0
+    ],
+    "max": [
+     -6.1,
+     10.3,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 4,
+     "v": 8,
+     "faces": 106,
+     "name": "Foot Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 4,
+     "v": 9,
+     "faces": 73,
+     "name": "Foot Right Outfit 02",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_hair",
+   "model": "charactertoon/sorc_04_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "hair",
+   "sidekick_code": "02HAIR",
+   "hides_body_region": "Hair",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_02HAIR_HU01.fbx",
+   "weighted_bones": [
+    "head"
+   ],
+   "dyn_bones_folded": [
+    "hair_dyn_01_01_c",
+    "hair_dyn_02_01_c",
+    "hair_dyn_03_01_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 2146,
+   "base_verts": 1073,
+   "base_polys": 1304,
+   "bbox_cm": {
+    "min": [
+     -21.7,
+     -17.7,
+     147.9
+    ],
+    "max": [
+     21.3,
+     22.3,
+     181.8
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 4,
+     "faces": 1294,
+     "name": "Hair 01",
+     "group": 1
+    },
+    {
+     "u": 6,
+     "v": 3,
+     "faces": 10,
+     "name": "Hair 02",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_hand_l",
+   "model": "charactertoon/sorc_04_hand_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "hand_l",
+   "sidekick_code": "15HNDL",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_15HNDL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "index_01_l",
+    "index_02_l",
+    "index_03_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "middle_01_l",
+    "middle_02_l",
+    "middle_03_l",
+    "pinky_01_l",
+    "pinky_02_l",
+    "pinky_03_l",
+    "ring_01_l",
+    "ring_02_l",
+    "ring_03_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "thumb_03_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 356,
+   "base_verts": 178,
+   "base_polys": 236,
+   "bbox_cm": {
+    "min": [
+     71.5,
+     -6.2,
+     129.5
+    ],
+    "max": [
+     94.4,
+     12.0,
+     138.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 14,
+     "v": 2,
+     "faces": 207,
+     "name": "Ice 01",
+     "group": 5
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 29,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_hand_r",
+   "model": "charactertoon/sorc_04_hand_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "hand_r",
+   "sidekick_code": "16HNDR",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_16HNDR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "index_01_r",
+    "index_02_r",
+    "index_03_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "middle_01_r",
+    "middle_02_r",
+    "middle_03_r",
+    "pinky_01_r",
+    "pinky_02_r",
+    "pinky_03_r",
+    "ring_01_r",
+    "ring_02_r",
+    "ring_03_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "thumb_03_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 336,
+   "base_verts": 168,
+   "base_polys": 224,
+   "bbox_cm": {
+    "min": [
+     -94.4,
+     -6.2,
+     129.5
+    ],
+    "max": [
+     -71.5,
+     12.0,
+     138.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 14,
+     "v": 2,
+     "faces": 200,
+     "name": "Ice 01",
+     "group": 5
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 24,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_hips",
+   "model": "charactertoon/sorc_04_hips.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "hips",
+   "sidekick_code": "17HIPS",
+   "hides_body_region": "Hips",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_17HIPS_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_r",
+    "calf_twist_01_l",
+    "calf_twist_01_r",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "thigh_twist_01_l",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 2402,
+   "base_verts": 1201,
+   "base_polys": 1469,
+   "bbox_cm": {
+    "min": [
+     -26.9,
+     -21.2,
+     16.8
+    ],
+    "max": [
+     28.4,
+     26.8,
+     99.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 7,
+     "faces": 383,
+     "name": "Hips Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 6,
+     "faces": 316,
+     "name": "Hips Outfit 05",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 9,
+     "faces": 217,
+     "name": "Hips Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 8,
+     "faces": 212,
+     "name": "Hips Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 10,
+     "faces": 145,
+     "name": "Hips Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 95,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 91,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 4,
+     "faces": 10,
+     "name": "Stitch 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_leg_l",
+   "model": "charactertoon/sorc_04_leg_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "leg_l",
+   "sidekick_code": "18LEGL",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_18LEGL_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l",
+    "thigh_l",
+    "thigh_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 428,
+   "base_verts": 214,
+   "base_polys": 256,
+   "bbox_cm": {
+    "min": [
+     3.1,
+     -6.2,
+     5.7
+    ],
+    "max": [
+     20.5,
+     14.2,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 9,
+     "faces": 139,
+     "name": "Leg Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 8,
+     "faces": 84,
+     "name": "Leg Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 10,
+     "faces": 23,
+     "name": "Leg Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 10,
+     "name": "Metal 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_leg_r",
+   "model": "charactertoon/sorc_04_leg_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "leg_r",
+   "sidekick_code": "19LEGR",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_19LEGR_HU01.fbx",
+   "weighted_bones": [
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r",
+    "thigh_r",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 424,
+   "base_verts": 212,
+   "base_polys": 252,
+   "bbox_cm": {
+    "min": [
+     -20.5,
+     -6.2,
+     5.7
+    ],
+    "max": [
+     -3.1,
+     14.2,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 9,
+     "faces": 139,
+     "name": "Leg Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 8,
+     "faces": 80,
+     "name": "Leg Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 10,
+     "faces": 23,
+     "name": "Leg Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 10,
+     "name": "Metal 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_04_torso",
+   "model": "charactertoon/sorc_04_torso.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "04",
+   "slot": "torso",
+   "sidekick_code": "10TORS",
+   "hides_body_region": "Torso",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_04_10TORS_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "clavicle_r",
+    "head",
+    "neck_01",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "upperarm_l",
+    "upperarm_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 2270,
+   "base_verts": 1135,
+   "base_polys": 1474,
+   "bbox_cm": {
+    "min": [
+     -21.1,
+     -16.9,
+     91.9
+    ],
+    "max": [
+     21.1,
+     17.7,
+     149.8
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 15,
+     "faces": 386,
+     "name": "Torso Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 279,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 13,
+     "faces": 149,
+     "name": "Torso Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 131,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 12,
+     "faces": 131,
+     "name": "Torso Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 11,
+     "faces": 94,
+     "name": "Torso Outfit 05",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 9,
+     "faces": 90,
+     "name": "Metal 02",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 14,
+     "faces": 88,
+     "name": "Torso Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 10,
+     "v": 4,
+     "faces": 68,
+     "name": "Stitch 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 7,
+     "faces": 28,
+     "name": "Rope 02",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 2,
+     "faces": 18,
+     "name": "Glow 01",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 12,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_arm_lower_l",
+   "model": "charactertoon/sorc_05_arm_lower_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "arm_lower_l",
+   "sidekick_code": "13ALWL",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_13ALWL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 246,
+   "base_verts": 123,
+   "base_polys": 152,
+   "bbox_cm": {
+    "min": [
+     44.1,
+     -3.0,
+     125.8
+    ],
+    "max": [
+     72.6,
+     12.3,
+     143.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 92,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 42,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 18,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_arm_lower_r",
+   "model": "charactertoon/sorc_05_arm_lower_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "arm_lower_r",
+   "sidekick_code": "14ALWR",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_14ALWR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 246,
+   "base_verts": 123,
+   "base_polys": 152,
+   "bbox_cm": {
+    "min": [
+     -72.6,
+     -3.0,
+     125.8
+    ],
+    "max": [
+     -44.1,
+     12.3,
+     143.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 92,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 42,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 18,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_arm_upper_l",
+   "model": "charactertoon/sorc_05_arm_upper_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "arm_upper_l",
+   "sidekick_code": "11AUPL",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_11AUPL_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "spine_03",
+    "upperarm_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 542,
+   "base_verts": 271,
+   "base_polys": 327,
+   "bbox_cm": {
+    "min": [
+     18.9,
+     -2.8,
+     129.5
+    ],
+    "max": [
+     46.3,
+     12.7,
+     145.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 10,
+     "v": 2,
+     "faces": 115,
+     "name": "Bandage 01",
+     "group": 4
+    },
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 103,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 93,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 15,
+     "faces": 16,
+     "name": "Torso Outfit 01",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_arm_upper_r",
+   "model": "charactertoon/sorc_05_arm_upper_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "arm_upper_r",
+   "sidekick_code": "12AUPR",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_12AUPR_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "spine_03",
+    "upperarm_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 542,
+   "base_verts": 271,
+   "base_polys": 327,
+   "bbox_cm": {
+    "min": [
+     -46.3,
+     -2.8,
+     129.5
+    ],
+    "max": [
+     -18.9,
+     12.7,
+     145.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 10,
+     "v": 2,
+     "faces": 115,
+     "name": "Bandage 01",
+     "group": 4
+    },
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 109,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 103,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_attach_back",
+   "model": "charactertoon/sorc_05_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_c",
+    "abac_dyn_01_02_c",
+    "abac_dyn_01_03_c",
+    "abac_dyn_01_04_c",
+    "abac_dyn_01_05_c",
+    "abac_dyn_01_06_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 912,
+   "base_verts": 456,
+   "base_polys": 557,
+   "bbox_cm": {
+    "min": [
+     -69.9,
+     5.1,
+     39.7
+    ],
+    "max": [
+     43.0,
+     31.8,
+     201.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 225,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 159,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 5,
+     "faces": 88,
+     "name": "Jewellery Metal 02",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 10,
+     "faces": 55,
+     "name": "Back Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 30,
+     "name": "Metal 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_attach_head",
+   "model": "charactertoon/sorc_05_attach_head.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "attach_head",
+   "sidekick_code": "22AHED",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_22AHED_HU01.fbx",
+   "weighted_bones": [
+    "headAttach"
+   ],
+   "dyn_bones_folded": [
+    "ahed_dyn_01_01_c",
+    "ahed_dyn_01_02_c",
+    "ahed_dyn_01_03_c",
+    "ahed_dyn_02_01_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1230,
+   "base_verts": 615,
+   "base_polys": 709,
+   "bbox_cm": {
+    "min": [
+     -31.2,
+     -20.4,
+     150.8
+    ],
+    "max": [
+     33.5,
+     30.4,
+     204.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 459,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 5,
+     "v": 10,
+     "faces": 238,
+     "name": "Head Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 12,
+     "name": "Metal 04",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_attach_hips_l",
+   "model": "charactertoon/sorc_05_attach_hips_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "attach_hips_l",
+   "sidekick_code": "27AHPL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_27AHPL_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_l"
+   ],
+   "dyn_bones_folded": [
+    "ahpl_dyn_01_01_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 386,
+   "base_verts": 193,
+   "base_polys": 212,
+   "bbox_cm": {
+    "min": [
+     16.7,
+     -10.0,
+     81.4
+    ],
+    "max": [
+     32.4,
+     8.7,
+     103.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 12,
+     "v": 14,
+     "faces": 113,
+     "name": "Hip Left Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 12,
+     "v": 15,
+     "faces": 90,
+     "name": "Hip Left Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 15,
+     "v": 14,
+     "faces": 9,
+     "name": null,
+     "group": null
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_attach_hips_r",
+   "model": "charactertoon/sorc_05_attach_hips_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "attach_hips_r",
+   "sidekick_code": "28AHPR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_28AHPR_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_r"
+   ],
+   "dyn_bones_folded": [
+    "ahpr_dyn_01_01_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 806,
+   "base_verts": 403,
+   "base_polys": 465,
+   "bbox_cm": {
+    "min": [
+     -39.3,
+     -6.9,
+     74.2
+    ],
+    "max": [
+     -11.0,
+     26.1,
+     105.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 127,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 5,
+     "faces": 93,
+     "name": "Strap 02",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 9,
+     "faces": 84,
+     "name": "Back Attachment 02",
+     "group": 3
+    },
+    {
+     "u": 11,
+     "v": 10,
+     "faces": 81,
+     "name": "Paper 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 63,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 13,
+     "v": 15,
+     "faces": 17,
+     "name": "Hip Right Outfit 01",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_facial_hair",
+   "model": "charactertoon/sorc_05_facial_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "facial_hair",
+   "sidekick_code": "09FCHR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_09FCHR_HU01.fbx",
+   "weighted_bones": [
+    "head",
+    "jaw"
+   ],
+   "dyn_bones_folded": [
+    "fchr_dyn_01_01_l",
+    "fchr_dyn_02_01_r"
+   ],
+   "shape_keys_stripped": 43,
+   "verts": 1414,
+   "base_verts": 707,
+   "base_polys": 872,
+   "bbox_cm": {
+    "min": [
+     -14.8,
+     -16.3,
+     143.2
+    ],
+    "max": [
+     17.5,
+     -6.4,
+     157.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 7,
+     "v": 4,
+     "faces": 744,
+     "name": "Facial Hair 01",
+     "group": 1
+    },
+    {
+     "u": 7,
+     "v": 3,
+     "faces": 75,
+     "name": "Facial Hair 02",
+     "group": 1
+    },
+    {
+     "u": 7,
+     "v": 1,
+     "faces": 53,
+     "name": "Facial Hair Accessory",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_foot_l",
+   "model": "charactertoon/sorc_05_foot_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "foot_l",
+   "sidekick_code": "20FOTL",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_20FOTL_HU01.fbx",
+   "weighted_bones": [
+    "ball_l",
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 248,
+   "base_verts": 124,
+   "base_polys": 144,
+   "bbox_cm": {
+    "min": [
+     5.8,
+     -20.5,
+     0.0
+    ],
+    "max": [
+     18.7,
+     10.4,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 3,
+     "v": 9,
+     "faces": 78,
+     "name": "Foot Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 3,
+     "v": 8,
+     "faces": 52,
+     "name": "Foot Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 8,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 6,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_foot_r",
+   "model": "charactertoon/sorc_05_foot_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "foot_r",
+   "sidekick_code": "21FOTR",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_21FOTR_HU01.fbx",
+   "weighted_bones": [
+    "ball_r",
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 248,
+   "base_verts": 124,
+   "base_polys": 144,
+   "bbox_cm": {
+    "min": [
+     -18.7,
+     -20.5,
+     0.0
+    ],
+    "max": [
+     -5.8,
+     10.4,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 4,
+     "v": 9,
+     "faces": 78,
+     "name": "Foot Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 4,
+     "v": 8,
+     "faces": 52,
+     "name": "Foot Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 8,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 6,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_hair",
+   "model": "charactertoon/sorc_05_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "hair",
+   "sidekick_code": "02HAIR",
+   "hides_body_region": "Hair",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_02HAIR_HU01.fbx",
+   "weighted_bones": [
+    "head"
+   ],
+   "dyn_bones_folded": [
+    "hair_dyn_01_01_c",
+    "hair_dyn_01_02_c",
+    "hair_dyn_02_01_r",
+    "hair_dyn_03_01_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1784,
+   "base_verts": 892,
+   "base_polys": 1163,
+   "bbox_cm": {
+    "min": [
+     -21.1,
+     -14.3,
+     149.2
+    ],
+    "max": [
+     20.8,
+     21.8,
+     195.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 4,
+     "faces": 1008,
+     "name": "Hair 01",
+     "group": 1
+    },
+    {
+     "u": 6,
+     "v": 3,
+     "faces": 155,
+     "name": "Hair 02",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_hand_l",
+   "model": "charactertoon/sorc_05_hand_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "hand_l",
+   "sidekick_code": "15HNDL",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_15HNDL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "index_01_l",
+    "index_02_l",
+    "index_03_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "middle_01_l",
+    "middle_02_l",
+    "middle_03_l",
+    "pinky_01_l",
+    "pinky_02_l",
+    "pinky_03_l",
+    "ring_01_l",
+    "ring_02_l",
+    "ring_03_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "thumb_03_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 470,
+   "base_verts": 235,
+   "base_polys": 266,
+   "bbox_cm": {
+    "min": [
+     71.5,
+     -7.5,
+     129.5
+    ],
+    "max": [
+     97.9,
+     12.0,
+     138.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 140,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 1,
+     "v": 3,
+     "faces": 78,
+     "name": "Fingernails Left",
+     "group": 1
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 24,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 5,
+     "faces": 24,
+     "name": "Jewellery Metal 02",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_hand_r",
+   "model": "charactertoon/sorc_05_hand_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "hand_r",
+   "sidekick_code": "16HNDR",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_16HNDR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "index_01_r",
+    "index_02_r",
+    "index_03_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "middle_01_r",
+    "middle_02_r",
+    "middle_03_r",
+    "pinky_01_r",
+    "pinky_02_r",
+    "pinky_03_r",
+    "ring_01_r",
+    "ring_02_r",
+    "ring_03_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "thumb_03_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 470,
+   "base_verts": 235,
+   "base_polys": 266,
+   "bbox_cm": {
+    "min": [
+     -97.9,
+     -7.5,
+     129.5
+    ],
+    "max": [
+     -71.5,
+     12.0,
+     138.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 140,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 1,
+     "v": 3,
+     "faces": 78,
+     "name": "Fingernails Left",
+     "group": 1
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 24,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 5,
+     "faces": 24,
+     "name": "Jewellery Metal 02",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_hips",
+   "model": "charactertoon/sorc_05_hips.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "hips",
+   "sidekick_code": "17HIPS",
+   "hides_body_region": "Hips",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_17HIPS_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_r",
+    "calf_twist_01_l",
+    "calf_twist_01_r",
+    "hipAttachBack",
+    "hipAttachFront",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "thigh_twist_01_l",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [
+    "hips_dyn_01_01_c",
+    "hips_dyn_01_02_c",
+    "hips_dyn_01_03_c"
+   ],
+   "shape_keys_stripped": 5,
+   "verts": 3048,
+   "base_verts": 1524,
+   "base_polys": 1816,
+   "bbox_cm": {
+    "min": [
+     -29.5,
+     -17.5,
+     17.2
+    ],
+    "max": [
+     29.4,
+     27.6,
+     99.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 9,
+     "faces": 964,
+     "name": "Hips Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 10,
+     "faces": 320,
+     "name": "Hips Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 6,
+     "faces": 196,
+     "name": "Hips Outfit 05",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 8,
+     "faces": 174,
+     "name": "Hips Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 7,
+     "faces": 154,
+     "name": "Hips Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 8,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_leg_l",
+   "model": "charactertoon/sorc_05_leg_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "leg_l",
+   "sidekick_code": "18LEGL",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_18LEGL_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l",
+    "thigh_l",
+    "thigh_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 316,
+   "base_verts": 158,
+   "base_polys": 186,
+   "bbox_cm": {
+    "min": [
+     4.1,
+     -3.7,
+     5.7
+    ],
+    "max": [
+     19.0,
+     13.7,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 9,
+     "faces": 88,
+     "name": "Leg Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 10,
+     "faces": 57,
+     "name": "Leg Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 8,
+     "faces": 33,
+     "name": "Leg Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 7,
+     "faces": 8,
+     "name": "Leg Left Outfit 04",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_leg_r",
+   "model": "charactertoon/sorc_05_leg_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "leg_r",
+   "sidekick_code": "19LEGR",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_19LEGR_HU01.fbx",
+   "weighted_bones": [
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r",
+    "thigh_r",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 316,
+   "base_verts": 158,
+   "base_polys": 186,
+   "bbox_cm": {
+    "min": [
+     -19.0,
+     -3.7,
+     5.7
+    ],
+    "max": [
+     -4.1,
+     13.7,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 9,
+     "faces": 88,
+     "name": "Leg Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 10,
+     "faces": 57,
+     "name": "Leg Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 8,
+     "faces": 33,
+     "name": "Leg Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 7,
+     "faces": 8,
+     "name": "Leg Right Outfit 04",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_05_torso",
+   "model": "charactertoon/sorc_05_torso.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "05",
+   "slot": "torso",
+   "sidekick_code": "10TORS",
+   "hides_body_region": "Torso",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_05_10TORS_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "clavicle_r",
+    "head",
+    "neck_01",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "upperarm_l",
+    "upperarm_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 2202,
+   "base_verts": 1101,
+   "base_polys": 1377,
+   "bbox_cm": {
+    "min": [
+     -21.1,
+     -14.5,
+     91.9
+    ],
+    "max": [
+     21.1,
+     17.8,
+     151.0
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 13,
+     "faces": 641,
+     "name": "Torso Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 15,
+     "faces": 444,
+     "name": "Torso Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 14,
+     "faces": 116,
+     "name": "Torso Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 12,
+     "faces": 92,
+     "name": "Torso Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 72,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 12,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_arm_lower_l",
+   "model": "charactertoon/sorc_06_arm_lower_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "arm_lower_l",
+   "sidekick_code": "13ALWL",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_13ALWL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 382,
+   "base_verts": 191,
+   "base_polys": 226,
+   "bbox_cm": {
+    "min": [
+     44.1,
+     -4.6,
+     126.9
+    ],
+    "max": [
+     73.0,
+     14.1,
+     143.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 104,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 96,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 26,
+     "name": "Metal 04",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_arm_lower_r",
+   "model": "charactertoon/sorc_06_arm_lower_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "arm_lower_r",
+   "sidekick_code": "14ALWR",
+   "hides_body_region": "Forearms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_14ALWR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 382,
+   "base_verts": 191,
+   "base_polys": 226,
+   "bbox_cm": {
+    "min": [
+     -73.0,
+     -4.6,
+     126.9
+    ],
+    "max": [
+     -44.1,
+     14.1,
+     143.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 104,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 96,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 26,
+     "name": "Metal 04",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_arm_upper_l",
+   "model": "charactertoon/sorc_06_arm_upper_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "arm_upper_l",
+   "sidekick_code": "11AUPL",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_11AUPL_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "spine_03",
+    "upperarm_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 366,
+   "base_verts": 183,
+   "base_polys": 216,
+   "bbox_cm": {
+    "min": [
+     18.9,
+     -3.4,
+     127.4
+    ],
+    "max": [
+     46.3,
+     12.0,
+     143.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 86,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 12,
+     "faces": 58,
+     "name": "Arm Left Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 55,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 17,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_arm_upper_r",
+   "model": "charactertoon/sorc_06_arm_upper_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "arm_upper_r",
+   "sidekick_code": "12AUPR",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_12AUPR_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "spine_03",
+    "upperarm_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 366,
+   "base_verts": 183,
+   "base_polys": 216,
+   "bbox_cm": {
+    "min": [
+     -46.3,
+     -3.4,
+     127.4
+    ],
+    "max": [
+     -18.9,
+     12.0,
+     143.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 86,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 12,
+     "faces": 58,
+     "name": "Arm Right Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 55,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 17,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_attach_back",
+   "model": "charactertoon/sorc_06_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_c",
+    "abac_dyn_01_02_c",
+    "abac_dyn_01_03_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1518,
+   "base_verts": 759,
+   "base_polys": 835,
+   "bbox_cm": {
+    "min": [
+     -31.9,
+     11.7,
+     112.4
+    ],
+    "max": [
+     32.0,
+     31.4,
+     153.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 11,
+     "v": 8,
+     "faces": 252,
+     "name": "Wood 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 176,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 161,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 10,
+     "faces": 98,
+     "name": "Back Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 7,
+     "v": 8,
+     "faces": 96,
+     "name": "Back Attachment 03",
+     "group": 3
+    },
+    {
+     "u": 7,
+     "v": 9,
+     "faces": 52,
+     "name": "Back Attachment 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_attach_head",
+   "model": "charactertoon/sorc_06_attach_head.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "attach_head",
+   "sidekick_code": "22AHED",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_22AHED_HU01.fbx",
+   "weighted_bones": [
+    "headAttach",
+    "neck_01"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 11,
+   "verts": 550,
+   "base_verts": 275,
+   "base_polys": 333,
+   "bbox_cm": {
+    "min": [
+     -14.2,
+     -16.0,
+     141.5
+    ],
+    "max": [
+     12.8,
+     15.3,
+     181.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 10,
+     "faces": 259,
+     "name": "Head Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 9,
+     "faces": 74,
+     "name": "Head Attachment 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_attach_hips_l",
+   "model": "charactertoon/sorc_06_attach_hips_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "attach_hips_l",
+   "sidekick_code": "27AHPL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_27AHPL_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_l"
+   ],
+   "dyn_bones_folded": [
+    "ahpl_dyn_01_01_l",
+    "ahpl_dyn_01_02_l",
+    "ahpl_dyn_01_03_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1074,
+   "base_verts": 537,
+   "base_polys": 575,
+   "bbox_cm": {
+    "min": [
+     12.9,
+     -21.1,
+     77.2
+    ],
+    "max": [
+     28.7,
+     17.7,
+     101.2
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 310,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 108,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 99,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 12,
+     "v": 15,
+     "faces": 22,
+     "name": "Hip Left Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 12,
+     "v": 14,
+     "faces": 19,
+     "name": "Hip Left Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 12,
+     "v": 13,
+     "faces": 17,
+     "name": "Hip Left Outfit 03",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_attach_hips_r",
+   "model": "charactertoon/sorc_06_attach_hips_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "attach_hips_r",
+   "sidekick_code": "28AHPR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_28AHPR_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_r"
+   ],
+   "dyn_bones_folded": [
+    "ahpr_dyn_01_01_r",
+    "ahpr_dyn_01_02_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 562,
+   "base_verts": 281,
+   "base_polys": 321,
+   "bbox_cm": {
+    "min": [
+     -28.6,
+     -21.1,
+     75.9
+    ],
+    "max": [
+     -7.6,
+     0.6,
+     100.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 13,
+     "v": 15,
+     "faces": 138,
+     "name": "Hip Right Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 13,
+     "v": 14,
+     "faces": 53,
+     "name": "Hip Right Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 4,
+     "faces": 48,
+     "name": "Glass 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 35,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 14,
+     "v": 4,
+     "faces": 20,
+     "name": "Water 01",
+     "group": 5
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 15,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 12,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_foot_l",
+   "model": "charactertoon/sorc_06_foot_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "foot_l",
+   "sidekick_code": "20FOTL",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_20FOTL_HU01.fbx",
+   "weighted_bones": [
+    "ball_l",
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 286,
+   "base_verts": 143,
+   "base_polys": 184,
+   "bbox_cm": {
+    "min": [
+     6.7,
+     -19.6,
+     -0.2
+    ],
+    "max": [
+     17.8,
+     11.3,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 3,
+     "v": 9,
+     "faces": 95,
+     "name": "Foot Left Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 60,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 3,
+     "v": 8,
+     "faces": 29,
+     "name": "Foot Left Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_foot_r",
+   "model": "charactertoon/sorc_06_foot_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "foot_r",
+   "sidekick_code": "21FOTR",
+   "hides_body_region": "Feet",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_21FOTR_HU01.fbx",
+   "weighted_bones": [
+    "ball_r",
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 286,
+   "base_verts": 143,
+   "base_polys": 184,
+   "bbox_cm": {
+    "min": [
+     -17.8,
+     -19.6,
+     -0.2
+    ],
+    "max": [
+     -6.7,
+     11.3,
+     10.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 4,
+     "v": 9,
+     "faces": 95,
+     "name": "Foot Right Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 60,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 4,
+     "v": 8,
+     "faces": 29,
+     "name": "Foot Right Outfit 03",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_hair",
+   "model": "charactertoon/sorc_06_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "hair",
+   "sidekick_code": "02HAIR",
+   "hides_body_region": "Hair",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_02HAIR_HU01.fbx",
+   "weighted_bones": [
+    "head",
+    "neck_01"
+   ],
+   "dyn_bones_folded": [
+    "hair_dyn_01_01_c",
+    "hair_dyn_01_02_c",
+    "hair_dyn_01_02_r",
+    "hair_dyn_01_03_c",
+    "hair_dyn_01_03_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1838,
+   "base_verts": 919,
+   "base_polys": 1123,
+   "bbox_cm": {
+    "min": [
+     -21.8,
+     -14.7,
+     121.4
+    ],
+    "max": [
+     21.7,
+     24.0,
+     177.1
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 4,
+     "faces": 1123,
+     "name": "Hair 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_hand_l",
+   "model": "charactertoon/sorc_06_hand_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "hand_l",
+   "sidekick_code": "15HNDL",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_15HNDL_HU01.fbx",
+   "weighted_bones": [
+    "hand_l",
+    "index_01_l",
+    "index_02_l",
+    "index_03_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "middle_01_l",
+    "middle_02_l",
+    "middle_03_l",
+    "pinky_01_l",
+    "pinky_02_l",
+    "pinky_03_l",
+    "ring_01_l",
+    "ring_02_l",
+    "ring_03_l",
+    "thumb_01_l",
+    "thumb_02_l",
+    "thumb_03_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 496,
+   "base_verts": 248,
+   "base_polys": 275,
+   "bbox_cm": {
+    "min": [
+     71.5,
+     -6.8,
+     129.5
+    ],
+    "max": [
+     95.4,
+     12.0,
+     139.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 132,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 1,
+     "v": 3,
+     "faces": 68,
+     "name": "Fingernails Left",
+     "group": 1
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 54,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 12,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 9,
+     "name": "Metal 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_hand_r",
+   "model": "charactertoon/sorc_06_hand_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "hand_r",
+   "sidekick_code": "16HNDR",
+   "hides_body_region": "Hands",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_16HNDR_HU01.fbx",
+   "weighted_bones": [
+    "hand_r",
+    "index_01_r",
+    "index_02_r",
+    "index_03_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "middle_01_r",
+    "middle_02_r",
+    "middle_03_r",
+    "pinky_01_r",
+    "pinky_02_r",
+    "pinky_03_r",
+    "ring_01_r",
+    "ring_02_r",
+    "ring_03_r",
+    "thumb_01_r",
+    "thumb_02_r",
+    "thumb_03_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 496,
+   "base_verts": 248,
+   "base_polys": 275,
+   "bbox_cm": {
+    "min": [
+     -95.4,
+     -6.8,
+     129.5
+    ],
+    "max": [
+     -71.5,
+     12.0,
+     139.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 132,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 2,
+     "v": 3,
+     "faces": 68,
+     "name": "Fingernails Right",
+     "group": 1
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 54,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 12,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 9,
+     "name": "Metal 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_hips",
+   "model": "charactertoon/sorc_06_hips.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "hips",
+   "sidekick_code": "17HIPS",
+   "hides_body_region": "Hips",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_17HIPS_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_r",
+    "calf_twist_01_l",
+    "calf_twist_01_r",
+    "kneeAttach_l",
+    "kneeAttach_r",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "thigh_twist_01_l",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 3076,
+   "base_verts": 1538,
+   "base_polys": 1945,
+   "bbox_cm": {
+    "min": [
+     -23.8,
+     -14.6,
+     22.6
+    ],
+    "max": [
+     25.7,
+     18.1,
+     102.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 9,
+     "faces": 707,
+     "name": "Hips Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 8,
+     "faces": 664,
+     "name": "Hips Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 236,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 208,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 10,
+     "faces": 130,
+     "name": "Hips Outfit 01",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_leg_l",
+   "model": "charactertoon/sorc_06_leg_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "leg_l",
+   "sidekick_code": "18LEGL",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_18LEGL_HU01.fbx",
+   "weighted_bones": [
+    "calf_l",
+    "calf_twist_01_l",
+    "foot_l",
+    "thigh_l",
+    "thigh_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 454,
+   "base_verts": 227,
+   "base_polys": 276,
+   "bbox_cm": {
+    "min": [
+     5.5,
+     -3.6,
+     5.7
+    ],
+    "max": [
+     18.3,
+     12.2,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 10,
+     "faces": 143,
+     "name": "Leg Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 8,
+     "faces": 74,
+     "name": "Leg Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 9,
+     "faces": 59,
+     "name": "Leg Left Outfit 02",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_leg_r",
+   "model": "charactertoon/sorc_06_leg_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "leg_r",
+   "sidekick_code": "19LEGR",
+   "hides_body_region": "Shins",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_19LEGR_HU01.fbx",
+   "weighted_bones": [
+    "calf_r",
+    "calf_twist_01_r",
+    "foot_r",
+    "thigh_r",
+    "thigh_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 454,
+   "base_verts": 227,
+   "base_polys": 276,
+   "bbox_cm": {
+    "min": [
+     -18.3,
+     -3.6,
+     5.7
+    ],
+    "max": [
+     -5.5,
+     12.2,
+     42.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 10,
+     "faces": 143,
+     "name": "Leg Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 8,
+     "faces": 74,
+     "name": "Leg Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 9,
+     "faces": 59,
+     "name": "Leg Right Outfit 02",
+     "group": 2
+    }
+   ]
+  },
+  {
+   "id": "sorc_06_torso",
+   "model": "charactertoon/sorc_06_torso.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "06",
+   "slot": "torso",
+   "sidekick_code": "10TORS",
+   "hides_body_region": "Torso",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_06_10TORS_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "clavicle_r",
+    "head",
+    "neck_01",
+    "pelvis",
+    "spine_01",
+    "spine_02",
+    "spine_03",
+    "thigh_l",
+    "thigh_r",
+    "upperarm_l",
+    "upperarm_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 2326,
+   "base_verts": 1163,
+   "base_polys": 1474,
+   "bbox_cm": {
+    "min": [
+     -23.6,
+     -15.8,
+     91.9
+    ],
+    "max": [
+     21.6,
+     17.7,
+     153.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 0,
+     "v": 11,
+     "faces": 257,
+     "name": "Torso Outfit 05",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 12,
+     "faces": 235,
+     "name": "Torso Outfit 04",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 13,
+     "faces": 197,
+     "name": "Torso Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 15,
+     "faces": 177,
+     "name": "Torso Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 14,
+     "faces": 158,
+     "name": "Torso Outfit 02",
+     "group": 2
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 120,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 104,
+     "name": "Skin 01",
+     "group": 1
+    },
+    {
+     "u": 8,
+     "v": 6,
+     "faces": 74,
+     "name": "Jewellery Metal 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 4,
+     "faces": 73,
+     "name": "Stitch 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 34,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 28,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 1,
+     "faces": 9,
+     "name": "Jewellery Gem 02",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 8,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_07_arm_upper_l",
+   "model": "charactertoon/sorc_07_arm_upper_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "07",
+   "slot": "arm_upper_l",
+   "sidekick_code": "11AUPL",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_07_11AUPL_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_l",
+    "lowerarm_l",
+    "lowerarm_twist_01_l",
+    "spine_03",
+    "upperarm_l",
+    "upperarm_twist_01_l"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 332,
+   "base_verts": 166,
+   "base_polys": 188,
+   "bbox_cm": {
+    "min": [
+     18.9,
+     -3.5,
+     127.4
+    ],
+    "max": [
+     46.3,
+     12.4,
+     143.8
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 1,
+     "v": 15,
+     "faces": 86,
+     "name": "Arm Left Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 1,
+     "v": 13,
+     "faces": 69,
+     "name": "Arm Left Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 33,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_07_arm_upper_r",
+   "model": "charactertoon/sorc_07_arm_upper_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "07",
+   "slot": "arm_upper_r",
+   "sidekick_code": "12AUPR",
+   "hides_body_region": "UpperArms",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_07_12AUPR_HU01.fbx",
+   "weighted_bones": [
+    "clavicle_r",
+    "lowerarm_r",
+    "lowerarm_twist_01_r",
+    "spine_03",
+    "upperarm_r",
+    "upperarm_twist_01_r"
+   ],
+   "dyn_bones_folded": [],
+   "shape_keys_stripped": 5,
+   "verts": 332,
+   "base_verts": 166,
+   "base_polys": 188,
+   "bbox_cm": {
+    "min": [
+     -46.3,
+     -3.5,
+     127.4
+    ],
+    "max": [
+     -18.9,
+     12.4,
+     143.8
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 2,
+     "v": 15,
+     "faces": 86,
+     "name": "Arm Right Outfit 01",
+     "group": 2
+    },
+    {
+     "u": 2,
+     "v": 13,
+     "faces": 69,
+     "name": "Arm Right Outfit 03",
+     "group": 2
+    },
+    {
+     "u": 0,
+     "v": 5,
+     "faces": 33,
+     "name": "Skin 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_07_attach_back",
+   "model": "charactertoon/sorc_07_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "07",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_07_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_c",
+    "abac_dyn_01_02_c",
+    "abac_dyn_01_03_c",
+    "abac_dyn_01_04_c",
+    "abac_dyn_01_05_c",
+    "abac_dyn_01_06_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 2414,
+   "base_verts": 1207,
+   "base_polys": 1240,
+   "bbox_cm": {
+    "min": [
+     -44.0,
+     11.5,
+     65.1
+    ],
+    "max": [
+     47.3,
+     48.8,
+     164.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 7,
+     "v": 10,
+     "faces": 261,
+     "name": "Back Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 10,
+     "v": 4,
+     "faces": 182,
+     "name": "Stitch 01",
+     "group": 4
+    },
+    {
+     "u": 9,
+     "v": 10,
+     "faces": 142,
+     "name": "Transparency FX 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 10,
+     "faces": 137,
+     "name": "Paper 01",
+     "group": 4
+    },
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 135,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 8,
+     "faces": 117,
+     "name": "Wood 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 82,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 14,
+     "v": 4,
+     "faces": 80,
+     "name": "Water 01",
+     "group": 5
+    },
+    {
+     "u": 11,
+     "v": 9,
+     "faces": 66,
+     "name": "Paper 02",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 7,
+     "faces": 38,
+     "name": "Wood 02",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_07_attach_head",
+   "model": "charactertoon/sorc_07_attach_head.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "07",
+   "slot": "attach_head",
+   "sidekick_code": "22AHED",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_07_22AHED_HU01.fbx",
+   "weighted_bones": [
+    "headAttach",
+    "neck_01"
+   ],
+   "dyn_bones_folded": [
+    "ahed_dyn_01_01_c",
+    "ahed_dyn_01_02_c"
+   ],
+   "shape_keys_stripped": 11,
+   "verts": 774,
+   "base_verts": 387,
+   "base_polys": 472,
+   "bbox_cm": {
+    "min": [
+     -16.6,
+     -17.3,
+     141.6
+    ],
+    "max": [
+     17.0,
+     15.3,
+     195.1
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 10,
+     "faces": 281,
+     "name": "Head Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 9,
+     "faces": 191,
+     "name": "Head Attachment 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_07_attach_hips_l",
+   "model": "charactertoon/sorc_07_attach_hips_l.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "07",
+   "slot": "attach_hips_l",
+   "sidekick_code": "27AHPL",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_07_27AHPL_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_l"
+   ],
+   "dyn_bones_folded": [
+    "ahpl_dyn_01_01_l",
+    "ahpl_dyn_01_02_l",
+    "ahpl_dyn_01_03_l",
+    "ahpl_dyn_01_04_l"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1420,
+   "base_verts": 710,
+   "base_polys": 715,
+   "bbox_cm": {
+    "min": [
+     9.0,
+     -18.2,
+     61.4
+    ],
+    "max": [
+     34.6,
+     7.9,
+     96.7
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 12,
+     "v": 15,
+     "faces": 117,
+     "name": "Hip Left Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 10,
+     "v": 6,
+     "faces": 106,
+     "name": "Strap 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 94,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 4,
+     "faces": 92,
+     "name": "Glass 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 77,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 12,
+     "v": 14,
+     "faces": 67,
+     "name": "Hip Left Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 3,
+     "faces": 54,
+     "name": "Glass 02",
+     "group": 4
+    },
+    {
+     "u": 14,
+     "v": 4,
+     "faces": 46,
+     "name": "Water 01",
+     "group": 5
+    },
+    {
+     "u": 11,
+     "v": 8,
+     "faces": 30,
+     "name": "Wood 01",
+     "group": 4
+    },
+    {
+     "u": 14,
+     "v": 3,
+     "faces": 16,
+     "name": "Water 02",
+     "group": 5
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 12,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 2,
+     "faces": 4,
+     "name": "Glow 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_07_attach_hips_r",
+   "model": "charactertoon/sorc_07_attach_hips_r.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "07",
+   "slot": "attach_hips_r",
+   "sidekick_code": "28AHPR",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_07_28AHPR_HU01.fbx",
+   "weighted_bones": [
+    "hipAttach_r"
+   ],
+   "dyn_bones_folded": [
+    "ahpr_dyn_01_01_r",
+    "ahpr_dyn_01_02_r",
+    "ahpr_dyn_02_01_r",
+    "ahpr_dyn_03_01_r",
+    "ahpr_dyn_04_01_r"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1368,
+   "base_verts": 684,
+   "base_polys": 723,
+   "bbox_cm": {
+    "min": [
+     -28.7,
+     -23.4,
+     61.1
+    ],
+    "max": [
+     -4.9,
+     0.6,
+     101.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 13,
+     "v": 15,
+     "faces": 271,
+     "name": "Hip Right Outfit 01",
+     "group": 3
+    },
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 140,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 10,
+     "faces": 118,
+     "name": "Paper 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 9,
+     "faces": 60,
+     "name": "Paper 02",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 56,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 13,
+     "v": 14,
+     "faces": 41,
+     "name": "Hip Right Outfit 02",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 37,
+     "name": "Metal 04",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_07_hair",
+   "model": "charactertoon/sorc_07_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "07",
+   "slot": "hair",
+   "sidekick_code": "02HAIR",
+   "hides_body_region": "Hair",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_07_02HAIR_HU01.fbx",
+   "weighted_bones": [
+    "head"
+   ],
+   "dyn_bones_folded": [
+    "hair_dyn_01_01_c",
+    "hair_dyn_01_02_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 1586,
+   "base_verts": 793,
+   "base_polys": 969,
+   "bbox_cm": {
+    "min": [
+     -13.9,
+     -12.6,
+     133.9
+    ],
+    "max": [
+     13.4,
+     19.4,
+     177.6
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 4,
+     "faces": 969,
+     "name": "Hair 01",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_08_attach_back",
+   "model": "charactertoon/sorc_08_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "08",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_08_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_c",
+    "abac_dyn_01_02_c",
+    "abac_dyn_01_03_c",
+    "abac_dyn_01_04_c",
+    "abac_dyn_02_01_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 988,
+   "base_verts": 494,
+   "base_polys": 587,
+   "bbox_cm": {
+    "min": [
+     -40.5,
+     14.2,
+     46.9
+    ],
+    "max": [
+     36.1,
+     37.0,
+     200.4
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 7,
+     "v": 10,
+     "faces": 382,
+     "name": "Back Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 10,
+     "v": 8,
+     "faces": 95,
+     "name": "Rope 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 8,
+     "faces": 88,
+     "name": "Wood 01",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 9,
+     "faces": 22,
+     "name": "Back Attachment 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_08_attach_head",
+   "model": "charactertoon/sorc_08_attach_head.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "08",
+   "slot": "attach_head",
+   "sidekick_code": "22AHED",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_08_22AHED_HU01.fbx",
+   "weighted_bones": [
+    "headAttach",
+    "neck_01"
+   ],
+   "dyn_bones_folded": [
+    "ahed_dyn_01_01_c"
+   ],
+   "shape_keys_stripped": 12,
+   "verts": 1326,
+   "base_verts": 663,
+   "base_polys": 809,
+   "bbox_cm": {
+    "min": [
+     -24.2,
+     -21.8,
+     133.9
+    ],
+    "max": [
+     22.9,
+     19.8,
+     176.5
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 5,
+     "v": 10,
+     "faces": 629,
+     "name": "Head Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 5,
+     "v": 9,
+     "faces": 180,
+     "name": "Head Attachment 02",
+     "group": 3
+    }
+   ]
+  },
+  {
+   "id": "sorc_08_hair",
+   "model": "charactertoon/sorc_08_hair.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "08",
+   "slot": "hair",
+   "sidekick_code": "02HAIR",
+   "hides_body_region": "Hair",
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_08_02HAIR_HU01.fbx",
+   "weighted_bones": [
+    "head",
+    "headAttach"
+   ],
+   "dyn_bones_folded": [
+    "hair_dyn_01_01_c",
+    "hair_dyn_01_02_c",
+    "hair_dyn_02_01_c",
+    "hair_dyn_03_01_c",
+    "hair_dyn_03_02_c"
+   ],
+   "shape_keys_stripped": 0,
+   "verts": 2008,
+   "base_verts": 1004,
+   "base_polys": 1250,
+   "bbox_cm": {
+    "min": [
+     -14.2,
+     -12.5,
+     133.9
+    ],
+    "max": [
+     13.5,
+     24.9,
+     190.9
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 6,
+     "v": 4,
+     "faces": 1047,
+     "name": "Hair 01",
+     "group": 1
+    },
+    {
+     "u": 6,
+     "v": 3,
+     "faces": 203,
+     "name": "Hair 02",
+     "group": 1
+    }
+   ]
+  },
+  {
+   "id": "sorc_09_attach_back",
+   "model": "charactertoon/sorc_09_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "09",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_09_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_c",
+    "abac_dyn_01_02_c",
+    "abac_dyn_01_03_c"
+   ],
+   "shape_keys_stripped": 5,
+   "verts": 1554,
+   "base_verts": 777,
+   "base_polys": 1016,
+   "bbox_cm": {
+    "min": [
+     -39.8,
+     6.0,
+     40.1
+    ],
+    "max": [
+     30.2,
+     30.1,
+     188.2
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 11,
+     "v": 8,
+     "faces": 628,
+     "name": "Wood 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 209,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 167,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 2,
+     "faces": 12,
+     "name": "Glow 01",
+     "group": 4
+    }
+   ]
+  },
+  {
+   "id": "sorc_10_attach_back",
+   "model": "charactertoon/sorc_10_attach_back.vmdl",
+   "pack": "FantasySorcerers",
+   "set": "10",
+   "slot": "attach_back",
+   "sidekick_code": "24ABAC",
+   "hides_body_region": null,
+   "source": "Resources/Meshes/Outfits/FantasySorcerers/SK_FANT_SORC_10_24ABAC_HU01.fbx",
+   "weighted_bones": [
+    "backAttach"
+   ],
+   "dyn_bones_folded": [
+    "abac_dyn_01_01_c",
+    "abac_dyn_02_01_c",
+    "abac_dyn_03_01_c"
+   ],
+   "shape_keys_stripped": 5,
+   "verts": 4108,
+   "base_verts": 2054,
+   "base_polys": 2320,
+   "bbox_cm": {
+    "min": [
+     -21.0,
+     11.2,
+     82.1
+    ],
+    "max": [
+     20.8,
+     24.9,
+     147.3
+    ]
+   },
+   "palette_zones": [
+    {
+     "u": 8,
+     "v": 10,
+     "faces": 1261,
+     "name": "Metal 01",
+     "group": 4
+    },
+    {
+     "u": 8,
+     "v": 7,
+     "faces": 705,
+     "name": "Metal 04",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 10,
+     "faces": 145,
+     "name": "Back Attachment 01",
+     "group": 3
+    },
+    {
+     "u": 11,
+     "v": 10,
+     "faces": 115,
+     "name": "Paper 01",
+     "group": 4
+    },
+    {
+     "u": 7,
+     "v": 9,
+     "faces": 35,
+     "name": "Back Attachment 02",
+     "group": 3
+    },
+    {
+     "u": 7,
+     "v": 8,
+     "faces": 35,
+     "name": "Back Attachment 03",
+     "group": 3
+    },
+    {
+     "u": 7,
+     "v": 7,
+     "faces": 12,
+     "name": "Back Attachment 04",
+     "group": 3
+    },
+    {
+     "u": 8,
+     "v": 2,
+     "faces": 7,
+     "name": "Glow 01",
+     "group": 4
+    },
+    {
+     "u": 11,
+     "v": 2,
+     "faces": 5,
+     "name": "Jewellery Gem 01",
+     "group": 4
+    }
+   ]
+  }
+ ]
+}

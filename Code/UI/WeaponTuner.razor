@@ -1,0 +1,352 @@
+@using System
+@using System.Linq
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Inventory
+@inherits PanelComponent
+@implements ICameraModifier
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( IsOpen && Arms is not null && Skin is { } skin )
+	{
+		var tune = WeaponTuning.Get( skin.Id );
+		@if ( _orbit )
+		{
+			<OrbitPad @ref=Pad class="orbit-pad"></OrbitPad>
+		}
+		<div class="window">
+			<div class="row title">
+				<div class="heading">Weapon seat</div>
+				<div class="spacer"></div>
+				<div class="button @( _hand == HandSide.Left ? "on" : "" )" onclick=@( () => SetHand( HandSide.Left ) )>Sword</div>
+				<div class="button @( _hand == HandSide.Right ? "on" : "" )" onclick=@( () => SetHand( HandSide.Right ) )>Staff</div>
+			</div>
+
+			<div class="row view">
+				<div class="button @( _orbit ? "on" : "" )" onclick=@ToggleOrbit>@( _orbit ? "Free look: on" : "Free look" )</div>
+				@if ( _orbit )
+				{
+					<div class="button" onclick=@( () => FocusOrbit( keepAngle: true ) )>Recenter</div>
+					<div class="button" onclick=@( () => { _yaw += 180f; } )>Other side</div>
+				}
+			</div>
+
+			<div class="row pick">
+				<div class="button" onclick=@( () => Cycle( -1 ) )>◀</div>
+				<div class="skin-name">@skin.Name</div>
+				<div class="button" onclick=@( () => Cycle( 1 ) )>▶</div>
+			</div>
+			<div class="row sub">@skin.Id @( skin.Starter ? "· starting weapon" : "" ) @( tune is null ? "· untuned" : "" )</div>
+
+			<div class="row steps">
+				<div class="step-name">Move</div>
+				@foreach ( var s in MoveSteps )
+				{
+					var step = s;
+					<div class="button small @( _move == step ? "on" : "" )" onclick=@( () => _move = step )>@step</div>
+				}
+				<div class="spacer"></div>
+				<div class="step-name">Turn</div>
+				@foreach ( var s in TurnSteps )
+				{
+					var step = s;
+					<div class="button small @( _turn == step ? "on" : "" )" onclick=@( () => _turn = step )>@step°</div>
+				}
+			</div>
+
+			@Axis( "Along the fingers", Offset.x, () => Nudge( new Vector3( -_move, 0, 0 ) ), () => Nudge( new Vector3( _move, 0, 0 ) ) )
+			@Axis( "Into the palm", Offset.y, () => Nudge( new Vector3( 0, -_move, 0 ) ), () => Nudge( new Vector3( 0, _move, 0 ) ) )
+			@Axis( "Along the blade", Offset.z, () => Nudge( new Vector3( 0, 0, -_move ) ), () => Nudge( new Vector3( 0, 0, _move ) ) )
+			@Axis( "Pitch", Turn.pitch, () => Rotate( new Angles( -_turn, 0, 0 ) ), () => Rotate( new Angles( _turn, 0, 0 ) ) )
+			@Axis( "Yaw", Turn.yaw, () => Rotate( new Angles( 0, -_turn, 0 ) ), () => Rotate( new Angles( 0, _turn, 0 ) ) )
+			@Axis( "Roll", Turn.roll, () => Rotate( new Angles( 0, 0, -_turn ) ), () => Rotate( new Angles( 0, 0, _turn ) ) )
+			@Axis( "Spin about the blade", Spin, () => Edit( t => t.Spin = Spin - _turn ), () => Edit( t => t.Spin = Spin + _turn ) )
+			@Axis( "Slide along the shaft", Shift, () => Edit( t => t.Shift = Shift - _move ), () => Edit( t => t.Shift = Shift + _move ) )
+			@if ( _hand == HandSide.Right )
+			{
+				@Axis( "Spell tip length", Arms.TipLength, () => Edit( t => t.TipLength = Arms.TipLength - _move ), () => Edit( t => t.TipLength = Arms.TipLength + _move ) )
+			}
+			<div class="row axis">
+				<div class="name">Import scale</div>
+				<div class="button" onclick=@( () => Scale( -ScaleStep ) )>−</div>
+				<div class="value">@ImportScale.ToString( "0.000" )</div>
+				<div class="button" onclick=@( () => Scale( ScaleStep ) )>+</div>
+				<div class="note">@( tune is not null && MathF.Abs( tune.ImportScale - tune.CompiledScale ) > 0.0005f ? $"baked {tune.CompiledScale:0.###}" : "" )</div>
+			</div>
+			<div class="row axis">
+				<div class="name">Upside down</div>
+				<div class="button @( Flip ? "on" : "" )" onclick=@( () => Edit( t => t.Flip = !Flip ) )>@( Flip ? "Flipped" : "Upright" )</div>
+				<div class="spacer"></div>
+				<div class="button @( Frozen ? "on" : "" )" onclick=@ToggleFreeze>Freeze pose</div>
+			</div>
+
+			<div class="row actions">
+				<div class="button" onclick=@( () => { WeaponTuning.Reset( skin.Id ); _savedAt = -1f; } )>Reset</div>
+				<div class="spacer"></div>
+				<div class="button" onclick=@Print>Print</div>
+				<div class="button @( Time.Now - _savedAt < 1.5f ? "on" : "" )" onclick=@Save>Save</div>
+				<div class="button" onclick=@( () => SetOpen( false ) )>Done</div>
+			</div>
+			<div class="row hint">Free look: drag anywhere to orbit the weapon, Shift+drag to pan, wheel to zoom (the arms hold still) · Q cursor / look around · Save keeps every weapon's seat in your data folder; run tools/gen_player_weapons.py to bake import scales into the player copies. The cyan cross is the spell tip.</div>
+		</div>
+	}
+</root>
+
+@code {
+	// Live seat tuning for the weapon skins (`weapon_tune`), the potion tuner's twin: the weapon in the hand moves as the
+	// buttons are pressed. Offsets and turns sit on top of the prefab grip; spin/slide/flip/tip replace the skin table's
+	// values; the import scale shows at once as a scaled prop and is baked into Assets/PlayerWeapons by the tool.
+
+	public static bool IsOpen { get; private set; }
+
+	// ---- free look: the camera orbits the weapon while the HUD stays up (ejecting hides every screen panel)
+	private OrbitPad Pad { get; set; }
+	private bool _orbit;
+	private Vector3 _target;
+	private Vector3 _pan;
+	private float _yaw, _pitch, _dist = 24f;
+	private bool _frozeForOrbit;
+	private bool _layerBeforeOrbit;
+
+	int ICameraModifier.CameraOrder => 5000;
+
+	void ICameraModifier.ModifyCamera( CameraComponent camera, ref CameraView view )
+	{
+		if ( !IsOpen || !_orbit || camera != Scene.Camera ) return;
+		var rotation = global::Rotation.From( _pitch, _yaw, 0f );
+		view.Rotation = rotation;
+		view.Position = _target + _pan - rotation.Forward * _dist;
+		view.ZNear = 0.5f;
+	}
+
+	/// <summary>Where free look aims: a hand's length up the weapon in hand (the blade, or the staff above the grip).</summary>
+	private Vector3? WeaponPoint()
+	{
+		var arms = Arms;
+		if ( arms is null ) return null;
+		var t = _hand == HandSide.Left ? arms.SwordWorld : arms.StaffWorld;
+		return t is { } w ? w.Position + w.Rotation.Up * 8f : null;
+	}
+
+	private void ToggleOrbit()
+	{
+		if ( _orbit ) { StopOrbit(); return; }
+		var arms = Arms;
+		if ( arms is null || WeaponPoint() is null ) { Log.Info( "[Weapons] free look needs the first-person arms showing (not third person)" ); return; }
+		_orbit = true;
+		FirstPersonArms.HoldEye = true;
+		// hold the pose so the weapon stays put, and draw the arms as world objects (the view model layer is made for the eye)
+		if ( Pose is { } src && !src.Frozen ) { src.Frozen = true; _frozeForOrbit = true; }
+		_layerBeforeOrbit = arms.ViewModelLayer;
+		arms.ViewModelLayer = false;
+		arms.RefreshRenderFlags();
+		FocusOrbit( keepAngle: false );
+		MouseLock.Release = true;
+	}
+
+	/// <summary>Aim at the weapon again: from where the eye looks at it (the first time), or keeping the current angle.</summary>
+	private void FocusOrbit( bool keepAngle )
+	{
+		if ( WeaponPoint() is not { } point ) return;
+		_target = point;
+		_pan = Vector3.Zero;
+		if ( keepAngle ) return;
+		var eye = Scene.Camera.IsValid() ? Scene.Camera.WorldPosition : point - Vector3.Forward * 24f;
+		var toTarget = point - eye;
+		_dist = Math.Clamp( toTarget.Length, 6f, 60f );
+		var angles = global::Rotation.LookAt( toTarget.Normal ).Angles();
+		_yaw = angles.yaw;
+		_pitch = angles.pitch;
+	}
+
+	private void StopOrbit()
+	{
+		if ( !_orbit ) return;
+		_orbit = false;
+		FirstPersonArms.HoldEye = false;
+		if ( _frozeForOrbit && Pose is { } src ) src.Frozen = false;
+		_frozeForOrbit = false;
+		if ( Arms is { } arms )
+		{
+			arms.ViewModelLayer = _layerBeforeOrbit;
+			arms.RefreshRenderFlags();
+		}
+	}
+
+	private void TickOrbit()
+	{
+		if ( !_orbit || !Pad.IsValid() ) return;
+		Pad.Wheel ??= delta => _dist = Math.Clamp( _dist * (1f + delta * 0.1f), 3f, 300f );
+		if ( !Pad.HasActive ) return;
+		var d = Mouse.Delta;
+		var rotation = global::Rotation.From( _pitch, _yaw, 0f );
+		if ( Input.Down( "Run" ) )
+		{
+			float k = _dist * 0.0025f;
+			_pan += rotation.Right * -d.x * k + rotation.Up * d.y * k;
+		}
+		else
+		{
+			_yaw -= d.x * 0.3f;
+			_pitch = Math.Clamp( _pitch + d.y * 0.3f, -89f, 89f );
+		}
+	}
+
+	private static readonly float[] MoveSteps = { 0.1f, 0.5f, 2f };
+	private static readonly float[] TurnSteps = { 1f, 5f, 90f };
+	private const float ScaleStep = 0.005f;
+	private float _move = 0.5f;
+	private float _turn = 5f;
+	private HandSide _hand = HandSide.Left;
+	private float _savedAt = -1f;
+	private string _swordBefore, _staffBefore;
+	private static WeaponTuner _instance;
+
+	private static PlayerInventory Inv => PlayerInventory.Local;
+	private FirstPersonArms Arms => PotionDrinker.Local?.Components.Get<FirstPersonArms>( FindMode.EverythingInSelfAndDescendants );
+	private WeaponSkin Skin => Arms?.SkinInHand( _hand );
+
+	private WeaponTune Tune => Skin is { } s ? WeaponTuning.Get( s.Id ) : null;
+	private Vector3 Offset => Tune?.Offset ?? default;
+	private Angles Turn => Tune?.Rotation ?? default;
+	private float Spin => Tune?.Spin ?? Skin?.Spin ?? 0f;
+	private bool Flip => Tune?.Flip ?? Skin?.Flip ?? false;
+	private float Shift => Tune?.Shift ?? (Skin?.Shift ?? 0f) * (Tune?.SizeRatio ?? 1f);
+	private float ImportScale => Tune?.ImportScale ?? WeaponTuning.AuthoredScale;
+
+	private ClipPoseSource Pose => Arms is { } arms ? ClipPoseSource.Find( arms ) : null;
+	private bool Frozen => Pose is { } src && src.Frozen;
+
+	/// <summary>`weapon_tune` opens the tuner on the sword, `weapon_tune staff` on the staff; again closes it.</summary>
+	[ConCmd( "weapon_tune" )]
+	public static void TuneCommand( string hand = "sword" )
+	{
+		if ( !_instance.IsValid() ) { Log.Info( "[Weapons] no weapon tuner on the HUD (spawn the player first)" ); return; }
+		if ( IsOpen ) { _instance.SetOpen( false ); return; }
+		_instance._hand = hand.StartsWith( "st", StringComparison.OrdinalIgnoreCase ) ? HandSide.Right : HandSide.Left;
+		_instance.SetOpen( true );
+	}
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+		_instance = this;
+	}
+
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
+		if ( IsOpen ) SetOpen( false );
+		if ( _instance == this ) _instance = null;
+	}
+
+	private void SetOpen( bool open )
+	{
+		if ( open == IsOpen ) return;
+		IsOpen = open;
+		var inv = Inv;
+		if ( open )
+		{
+			SpellLoadout.SetOpen( false );
+			_swordBefore = inv?.SwordSkin;
+			_staffBefore = inv?.StaffSkin;
+			MouseLock.Release = true;
+			Log.Info( "[Weapons] tuning: ◀ ▶ picks any skin (owned or not); Q switches the mouse between the panel and looking around" );
+			return;
+		}
+		StopOrbit();
+		if ( Pose is { } src ) src.Frozen = false;
+		// put back what was really equipped (the tuner can hold skins the player has not found)
+		if ( inv.IsValid() )
+		{
+			if ( !string.IsNullOrEmpty( _swordBefore ) ) inv.PreviewSkin( _swordBefore );
+			if ( !string.IsNullOrEmpty( _staffBefore ) ) inv.PreviewSkin( _staffBefore );
+		}
+		MouseLock.Release = SpellLoadout.IsOpen;
+	}
+
+	private void SetHand( HandSide hand ) => _hand = hand;
+
+	private void Cycle( int dir )
+	{
+		var inv = Inv;
+		var list = WeaponSkins.For( _hand ).ToList();
+		if ( !inv.IsValid() || list.Count == 0 ) return;
+		int i = list.FindIndex( s => s.Id == inv.SkinFor( _hand ) );
+		i = ((i < 0 ? 0 : i + dir) % list.Count + list.Count) % list.Count;
+		inv.PreviewSkin( list[i].Id );
+	}
+
+	private void Edit( Action<WeaponTune> change )
+	{
+		if ( Skin is not { } skin ) return;
+		change( WeaponTuning.Edit( skin.Id ) );
+	}
+
+	private void Nudge( Vector3 by ) => Edit( t => t.Offset += by );
+	private void Rotate( Angles by ) => Edit( t => t.Rotation = new Angles( t.Rotation.pitch + by.pitch, t.Rotation.yaw + by.yaw, t.Rotation.roll + by.roll ) );
+
+	/// <summary>A new import scale; the slide and tip keep their place on the model (they were in world units at the old size).</summary>
+	private void Scale( float by )
+	{
+		if ( Skin is not { } skin ) return;
+		WeaponTuning.SetImportScale( skin.Id, ImportScale + by );
+	}
+
+	private void ToggleFreeze()
+	{
+		if ( Pose is { } src ) src.Frozen = !src.Frozen;
+	}
+
+	private void Save()
+	{
+		WeaponTuning.Save();
+		_savedAt = Time.Now;
+	}
+
+	private void Print()
+	{
+		if ( Skin is not { } skin ) return;
+		var t = WeaponTuning.Get( skin.Id );
+		Log.Info( t is null
+			? $"[Weapons] {skin.Id}: untuned"
+			: $"[Weapons] {skin.Id}: offset {t.Offset.x:0.##},{t.Offset.y:0.##},{t.Offset.z:0.##} rotation {t.Rotation.pitch:0.#},{t.Rotation.yaw:0.#},{t.Rotation.roll:0.#} spin {Spin:0.#} flip {Flip} shift {Shift:0.##} tip {Arms?.TipLength:0.##} import scale {t.ImportScale:0.###} (baked {t.CompiledScale:0.###})" );
+	}
+
+	private RenderFragment Axis( string name, float value, Action minus, Action plus ) => @<div class="row axis">
+		<div class="name">@name</div>
+		<div class="button" onclick=@minus>−</div>
+		<div class="value">@value.ToString( "0.00" )</div>
+		<div class="button" onclick=@plus>+</div>
+	</div>;
+
+	protected override void OnUpdate()
+	{
+		if ( !IsOpen ) return;
+		var health = PlayerHealth.Local;
+		if ( VoidMage.Run.RunUi.Blocking || (health.IsValid() && health.IsDead) ) { SetOpen( false ); return; }
+		if ( Input.EscapePressed ) { Input.EscapePressed = false; SetOpen( false ); return; }
+		// Q hands the mouse back to looking around, and back to the panel (free look keeps the cursor)
+		if ( Input.Pressed( "Menu" ) && !_orbit ) MouseLock.Release = !MouseLock.Release;
+		TickOrbit();
+
+		// the spell tip, where the staff's spells leave from
+		if ( Arms is { } arms && arms.StaffTipWorld is { } tip )
+		{
+			const float r = 1.5f;
+			DebugOverlay.Line( tip - Vector3.Forward * r, tip + Vector3.Forward * r, Color.Cyan );
+			DebugOverlay.Line( tip - Vector3.Left * r, tip + Vector3.Left * r, Color.Cyan );
+			DebugOverlay.Line( tip - Vector3.Up * r, tip + Vector3.Up * r, Color.Cyan );
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		if ( !IsOpen ) return 0;
+		var t = Tune;
+		return HashCode.Combine( _orbit && IsOpen, Skin?.Id, _hand, _move, _turn, t?.Offset, t?.Rotation, HashCode.Combine( t?.Spin, t?.Flip, t?.Shift, t?.TipLength, t?.ImportScale, Frozen, Time.Now - _savedAt < 1.5f ) );
+	}
+}

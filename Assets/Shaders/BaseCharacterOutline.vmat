@@ -1,0 +1,14 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/heden_outline.shader"
+
+	//---- Outline ----
+	g_flOutlineMaxWorld "1.000"
+	g_flOutlineMinWorld "0.020"
+	g_flOutlineScreenWidth "0.800"
+	g_flZoneDarknessResponse "1.000"
+	g_vOutlineColor "[0.007843 0.007843 0.007843 0.000000]"
+	ToonRampNight "materials/heden_ramp_night.png"
+}

@@ -1,0 +1,131 @@
+{
+  "kind": "bat",
+  "title": "Bat",
+  "blend": "C:\\Users\\skipp\\Desktop\\Speelboord Studios\\Monster Pack Animated by Quaternius\\Blend\\Bat.blend",
+  "fps": 24.0,
+  "armature": "BatArmature",
+  "root_bone": "Root",
+  "bones": [
+    "Root",
+    "BodyRoot",
+    "Body",
+    "Neck",
+    "Head",
+    "Face",
+    "Nose",
+    "Shoulder.L",
+    "Wing1.L",
+    "Wing2.L",
+    "Wing3.L",
+    "Wing4.L",
+    "Shoulder.R",
+    "Wing1.R",
+    "Wing2.R",
+    "Wing3.R",
+    "Wing4.R",
+    "UpperLeg.L",
+    "LowerLeg.L",
+    "Feet.L",
+    "UpperLeg.R",
+    "LowerLeg.R",
+    "Feet.R"
+  ],
+  "body_mesh": "Bat",
+  "outline_mesh": "Bat_Outline",
+  "materials": {
+    "MonsterBatMain": {
+      "pack_slot": "Main",
+      "linear": [
+        0.021219,
+        0.01096,
+        0.049707
+      ]
+    },
+    "MonsterBatBlack": {
+      "pack_slot": "Black",
+      "linear": [
+        0.003642,
+        0.003642,
+        0.003642
+      ]
+    },
+    "MonsterBatBelly": {
+      "pack_slot": "Belly",
+      "linear": [
+        0.8,
+        0.530387,
+        0.091078
+      ]
+    },
+    "MonsterBatNose": {
+      "pack_slot": "Nose",
+      "linear": [
+        0.152926,
+        0.045186,
+        0.102242
+      ]
+    },
+    "MonsterBatEyes": {
+      "pack_slot": "Eyes",
+      "linear": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "mat_prefix": "MonsterBat",
+  "rest_min": [
+    -1.6099,
+    -1.4123,
+    -0.0796
+  ],
+  "rest_max": [
+    1.3515,
+    0.8407,
+    4.5975
+  ],
+  "rest_size": [
+    2.9615,
+    2.2529,
+    4.6771
+  ],
+  "rest_max_dim": 4.6771,
+  "clips": [
+    {
+      "name": "attack",
+      "action": "Bat_Attack",
+      "start": 0,
+      "end": 21,
+      "seconds": 0.875
+    },
+    {
+      "name": "attack2",
+      "action": "Bat_Attack2",
+      "start": 0,
+      "end": 30,
+      "seconds": 1.25
+    },
+    {
+      "name": "death",
+      "action": "Bat_Death",
+      "start": 0,
+      "end": 29,
+      "seconds": 1.208
+    },
+    {
+      "name": "flying",
+      "action": "Bat_Flying",
+      "start": 0,
+      "end": 30,
+      "seconds": 1.25
+    },
+    {
+      "name": "hit",
+      "action": "Bat_Hit",
+      "start": 0,
+      "end": 30,
+      "seconds": 1.25
+    }
+  ]
+}

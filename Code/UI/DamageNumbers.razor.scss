@@ -1,0 +1,78 @@
+// Damage numbers: dark, dungeon-matching colours with a darker stroke. Every duration here is
+// DamageNumbers.LifetimeSeconds (0.8 s); keep them in step when retuning.
+DamageNumbers {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	font-family: Almendra;
+	font-weight: 700;
+	font-smooth: auto;
+
+	.popup {
+		position: absolute;
+		pointer-events: none;
+		white-space: nowrap;
+		text-align: center;
+		// Quality rule: the text is rasterised at its font-size and a transform only scales that bitmap, so every
+		// scale() below stays at or under 1.0 (scaling down keeps the glyphs crisp, scaling up blurs them). The
+		// resting size is the font-size; the grow-in starts smaller and settles at 1.0.
+		font-size: 60px;
+		transition: margin-left 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+		animation: climb 0.8s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+
+		.inner {
+			animation: settle-fade 0.8s linear forwards;
+		}
+
+		// the sword: dark red on a near-black red
+		&.physical {
+			color: #a52a2a;
+			text-stroke: 4px #2a0707;
+		}
+
+		// spells: dark purple
+		&.magic {
+			color: #7c3fae;
+			text-stroke: 4px #210a36;
+		}
+
+		// A crit of either kind: yellow-orange, bigger, "25!", with a pop. After .physical/.magic so it wins.
+		// Rests at 80px. The pop overshoots to 1.3x, so the text is rasterised at the PEAK (104px) and the
+		// keyframes scale down to the 80px rest (0.77) instead of scaling a smaller raster up.
+		&.crit {
+			color: #d4892b;
+			text-stroke: 6px #3d2306;
+			font-size: 104px;
+
+			.inner {
+				animation: crit-pop-fade 0.8s linear forwards;
+			}
+		}
+	}
+}
+
+@keyframes climb {
+	0%   { transform: translate(-50%, 0px); }
+	100% { transform: translate(-50%, -90px); }
+}
+
+// Pop in, hold only a beat, then dissolve: the fade starts as soon as the grow-in settles and the
+// number shrinks a little on the way out, so it never parks on screen at full strength.
+@keyframes settle-fade {
+	0%   { transform: scale(0.85); opacity: 1; }
+	12%  { transform: scale(1.0); opacity: 1; }
+	30%  { transform: scale(1.0); opacity: 1; }
+	100% { transform: scale(0.85); opacity: 0; }
+}
+
+// 0.46 -> 1.0 -> 0.77 of the 104px raster: a 48px -> 104px -> 80px pop, never above the rasterised size
+@keyframes crit-pop-fade {
+	0%   { transform: scale(0.46); opacity: 1; }
+	10%  { transform: scale(1.0); opacity: 1; }
+	22%  { transform: scale(0.77); opacity: 1; }
+	38%  { transform: scale(0.77); opacity: 1; }
+	100% { transform: scale(0.66); opacity: 0; }
+}

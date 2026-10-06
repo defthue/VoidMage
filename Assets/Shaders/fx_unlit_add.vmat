@@ -1,0 +1,10 @@
+// Additive unlit FX mesh material (glows: spheres, spikes, rings, sparks). Colour comes from the renderer's Tint.
+Layer0
+{
+	shader "shaders/fx_unlit.shader"
+	F_ADDITIVE 1
+	g_vColor "[1.000000 1.000000 1.000000]"
+	g_flBrightness "1.600000"
+	g_flOpacity "1.000000"
+	g_flRimFade "0.000000"
+}

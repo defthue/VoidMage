@@ -1,0 +1,111 @@
+@using System
+@using System.Collections.Generic
+@using System.Linq
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Inventory
+@using VoidMage.Run
+@using VoidMage.Spells
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( Visible && Staff is { } staff )
+	{
+		var spell = Scroll.ForSpell( staff.SpellId );
+		var rows = Rows();
+		<div class="staff">
+			<div class="scrolls">
+				@foreach ( var row in rows )
+				{
+					<div class="row">
+						@foreach ( var id in row )
+						{
+							var mod = Scroll.ForModifier( id );
+							var copies = staff.Stack( id );
+							<div class="scroll @( mod.ModifierDef is { Black: true } ? "black" : "" ) @( IsNew( id ) ? "new" : "" )">
+								<Image class="icon" Texture=@ScrollText.Icon( mod )></Image>
+								<div class="runes" style="color: @ScrollText.Colour( mod )">@ScrollText.Runes( mod )</div>
+								@if ( copies > 1 )
+								{
+									<div class="tier">@ScrollText.Tier( copies )</div>
+								}
+							</div>
+						}
+					</div>
+				}
+			</div>
+			<div class="spell @( Primed ? "primed" : "" ) @( Overcharged ? "overcharged" : "" ) @( Edged ? "edged" : "" )">
+				<div class="dfk dfk-slot"></div>
+				<Image class="icon" Texture=@ScrollText.Icon( spell )></Image>
+				<div class="runes" style="color: @ScrollText.Colour( spell )">@ScrollText.Runes( spell )</div>
+				<div class="name" style="color: @ScrollText.Colour( spell )">@spell.Name</div>
+			</div>
+		</div>
+	}
+</root>
+
+@code {
+	// The staff at a glance, bottom right (user, 2026-09-20: "a new panel on the bottom right side screen that displays
+	// the equipped spell and enchantments"; the spell's name used to sit under the crosshair). The spell's scroll in an
+	// iron slot with its name under it, and to its left every scroll taken this run in the order it was taken, eight
+	// to a row, the rows stacking upward, a tier in the corner of a scroll held more than once. A scroll just taken
+	// swells for a moment so the eye finds where it went. The slot's frame is also the staff's tell: gold while
+	// Kindling has the next cast primed, violet when the next cast is the overcharged one, the spell's own colour
+	// while The Edge rides the blade.
+	private const int PerRow = 8;
+	private const float NewSeconds = 2.2f;
+
+	private static StaffLoadout Staff => StaffLoadout.Local;
+	private static PlayerInventory Inv => PlayerInventory.Local;
+	private static SpellCaster Caster => SpellCaster.Local;
+
+	private bool Visible => !RunUi.Blocking && !SpellLoadout.IsOpen && !VoidMage.Boons.BoonScreen.IsOpen;
+	private bool Primed => Caster?.KindlingActive ?? false;
+	private bool Overcharged => Caster is { OverchargeBuild01: >= 0.999f };
+	private bool Edged => Caster?.EdgeActive ?? false;
+
+	private readonly Dictionary<ModifierId, int> _seen = new();
+	private readonly Dictionary<ModifierId, float> _changedAt = new();
+	private bool _seeded;
+
+	private bool IsNew( ModifierId id ) => _changedAt.TryGetValue( id, out var at ) && Time.Now - at < NewSeconds;
+
+	/// <summary>The taken scrolls in rows of eight, the LAST row first: the markup stacks them upward from the spell.</summary>
+	private List<List<ModifierId>> Rows()
+	{
+		var rows = new List<List<ModifierId>>();
+		var taken = Inv?.RunScrolls;
+		if ( taken is null ) return rows;
+		for ( int i = 0; i < taken.Count; i += PerRow ) rows.Add( taken.Skip( i ).Take( PerRow ).ToList() );
+		rows.Reverse();
+		return rows;
+	}
+
+	protected override void OnUpdate()
+	{
+		var staff = Staff;
+		var taken = Inv?.RunScrolls;
+		if ( !staff.IsValid() || taken is null ) return;
+		// what changed since last frame swells; the first look at a staff is history, not news
+		foreach ( var id in taken )
+		{
+			var copies = staff.Stack( id );
+			if ( _seen.TryGetValue( id, out var had ) && had == copies ) continue;
+			if ( _seeded ) _changedAt[id] = Time.Now;
+			_seen[id] = copies;
+		}
+		if ( _seen.Count > taken.Count )
+			foreach ( var gone in _seen.Keys.Where( k => !taken.Contains( k ) ).ToList() ) { _seen.Remove( gone ); _changedAt.Remove( gone ); }
+		_seeded = true;
+	}
+
+	protected override int BuildHash()
+	{
+		var staff = Staff;
+		int news = 0;
+		foreach ( var (id, at) in _changedAt ) if ( Time.Now - at < NewSeconds ) news = HashCode.Combine( news, id );
+		return HashCode.Combine( Visible, staff?.SpellId, staff?.ModsLo, staff?.ModsHi, Primed, Overcharged, Edged, news );
+	}
+}

@@ -1,0 +1,22 @@
+{
+  "kind": "bat",
+  "scale": 0.06954203296606296,
+  "fbx_size": [
+    273.3186721801758,
+    407.8138815851355,
+    431.39377323985093
+  ],
+  "width": 19.0,
+  "height": 28.4,
+  "depth": 30.0,
+  "units_per_bu": 6.954203296606296,
+  "root_bone": "Root",
+  "bones": 23,
+  "clips": [
+    "attack",
+    "attack2",
+    "death",
+    "flying",
+    "hit"
+  ]
+}

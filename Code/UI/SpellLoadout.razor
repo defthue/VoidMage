@@ -1,0 +1,1283 @@
+@using System
+@using System.Collections.Generic
+@using System.Globalization
+@using System.Linq
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Inventory
+@using VoidMage.Run
+@using VoidMage.Spells
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root class="@ThemeClass">
+	@if ( _visible )
+	{
+		<div class="backdrop" style="opacity: @F( BackdropAlpha() )"></div>
+
+		<div class="window" @ref=WindowPanel style="@WindowStyle()">
+			<div class="df df-window"></div>
+			<div class="df df-divider"></div>
+			<div class="df df-crest"></div>
+			<div class="tabs">
+				@for ( int i = 0; i < TabNames.Length; i++ )
+				{
+					var idx = i;
+					<div class="tab @( _tab == idx ? "on" : "" )" style="left: @F( TabX( idx ) )px; width: @F( TabW )px;" onclick=@( () => SelectTab( idx ) )>
+						@( TabNames[idx] )
+						@if ( TabBadge( idx ) )
+						{
+							<div class="badge" style="@BadgeStyle()"></div>
+						}
+					</div>
+				}
+				<div class="underline" style="left: @F( _underlineX + 18f )px; width: @F( TabW - 36f )px;"></div>
+			</div>
+
+			<div class="purse" @ref=PursePanel>
+				<div class="style-switch" onclick=@StartTour>?</div>
+				@if ( RunManager.Instance is { CanAbandon: true } )
+				{
+					<div class="abandon @( AbandonArmed ? "armed" : "" )" onclick=@ClickAbandon>@( AbandonArmed ? "Lose this run? Click again" : "Abandon run" )</div>
+				}
+				<div class="where @( PlayerInventory.AtHome ? "home" : "" )">@( PlayerInventory.AtHome ? "Home" : "In the dungeon" )</div>
+				<div class="shards" style="@PurseStyle()"><div class="lt">◆ @_shownShards.ToString( "0", CultureInfo.InvariantCulture )</div><div class="dim">@( PlayerInventory.AtHome ? "banked" : "carried" )</div></div>
+			</div>
+
+			<div class="content" @ref=ContentPanel>
+				<div class="page" style="@PageStyle()">
+					@if ( _tab == TabStaff && Inv is { } inv && Staff is { } staff )
+					{
+						var taken = inv.RunScrolls;
+						var held = Scroll.ForSpell( staff.SpellId );
+						var sockets = GridSockets( taken.Count );
+						var detailsTop = GridBottom( taken.Count ) + 40f;
+						<div class="section-label" style="@LabelStyle( 0f, 0f, 0f )">Your spell</div>
+						<div class="section-label" style="@LabelStyle( 0f, 196f, 0.06f )"><div class="lt">Spellbook</div><div class="dim">@( PlayerInventory.CanChooseSpell ? "pick the spell you start with" : $"{inv.UnlockedCount} / {SpellDatabase.All.Length} learned" )</div></div>
+						<div class="section-label" style="@LabelStyle( 400f, 0f, 0.08f )"><div class="lt">Scrolls on your staff</div><div class="dim">@( taken.Count == 0 ? "none yet · they fall from the monsters as you fight through the floor" : $"{staff.Stacks.Total} taken · they stay for the whole run" )</div></div>
+
+						<div class="slot socket spell @( _staffHover == "sp" ? "hover" : "" )" style="@StaffSlotStyle( "sp", SpellRect, 0.02f )">
+							<div class="tile" style="@StaffTileStyle( "sp" )">
+								<Image class="icon" Texture=@ScrollText.Icon( held )></Image>
+								<div class="runes" style="color: @ScrollText.Colour( held )">@ScrollText.Runes( held )</div>
+							</div>
+						</div>
+						<div class="spell-blurb" style="@CardStyle( 186f, 28f, 182f, 150f, 0.05f )">
+							<div class="spell-name" style="color: @ScrollText.Colour( held )">@held.Name</div>
+							<div class="spell-desc">@ScrollText.Description( held )</div>
+						</div>
+
+						@for ( int i = 0; i < SpellDatabase.All.Length; i++ )
+						{
+							var idx = i;
+							var spell = SpellDatabase.All[idx];
+							var page = Scroll.ForSpell( spell.Id );
+							var known = inv.IsUnlocked( spell.Id );
+							<div class="slot book @( known ? "filled" : "empty" ) @( _staffHover == $"bk{idx}" ? "hover" : "" ) @( inv.StartingSpell == spell.Id ? "starting" : "" )"
+								style="@StaffSlotStyle( $"bk{idx}", BookRect( idx ), 0.1f + idx * 0.02f )" onclick=@( () => ClickBook( idx ) )>
+								@if ( known )
+								{
+									<div class="tile" style="@StaffTileStyle( $"bk{idx}" )">
+										<Image class="icon" Texture=@ScrollText.Icon( page )></Image>
+										<div class="runes" style="color: @ScrollText.Colour( page )">@ScrollText.Runes( page )</div>
+									</div>
+								}
+								else
+								{
+									<div class="empty-hint">?</div>
+								}
+								@if ( inv.StartingSpell == spell.Id )
+								{
+									<div class="start-mark">ᛋ</div>
+								}
+							</div>
+						}
+
+						@for ( int i = 0; i < sockets; i++ )
+						{
+							var idx = i;
+							@if ( idx < taken.Count )
+							{
+								var mod = Scroll.ForModifier( taken[idx] );
+								var copies = staff.Stack( taken[idx] );
+								<div class="slot socket mod filled @( mod.ModifierDef is { Black: true } ? "black" : "" ) @( _staffHover == $"md{idx}" ? "hover" : "" )" style="@StaffSlotStyle( $"md{idx}", TileRect( idx ), 0.1f + idx * 0.012f )">
+									<div class="tile" style="@StaffTileStyle( $"md{idx}" )">
+										<Image class="icon" Texture=@ScrollText.Icon( mod )></Image>
+										<div class="runes" style="color: @ScrollText.Colour( mod )">@ScrollText.Runes( mod )</div>
+										@if ( copies > 1 )
+										{
+											<div class="count">@ScrollText.Tier( copies )</div>
+										}
+									</div>
+								</div>
+							}
+							else
+							{
+								<div class="slot socket mod empty" style="@StaffSlotStyle( $"md{idx}", TileRect( idx ), 0.1f + idx * 0.012f )"></div>
+							}
+						}
+
+						<div class="section-label" style="@LabelStyle( 0f, 290f, 0.1f )">Your cast</div>
+						<div class="card stats" style="@CardStyle( 0f, 316f, 368f, 180f, 0.14f )">
+							<div class="dfk dfk-panel"></div>
+							@foreach ( var line in StatLines() )
+							{
+								<div class="stat">
+									<div class="stat-label">@line.Label</div>
+									<div class="stat-value @line.Css">@line.Value</div>
+								</div>
+							}
+						</div>
+
+						<div class="section-label" style="@LabelStyle( 0f, 514f, 0.16f )">Boons this run</div>
+						<div class="boons" style="@CardStyle( 0f, 540f, 368f, 100f, 0.18f )">
+							<div class="dfk dfk-panel"></div>
+							@if ( Boons is { } boons && boons.Owned.Count > 0 )
+							{
+								@foreach ( var boon in boons.Owned )
+								{
+									<div class="boon @( boon.IsPact ? "pact" : boon.Family.ToString().ToLowerInvariant() )">
+										<div class="boon-rune">@VoidMage.Boons.BoonDatabase.Glyph( boon.Family )</div>
+										<div class="tip">
+											<div class="tip-name">@boon.Name</div>
+											@foreach ( var line in boon.Lines )
+											{
+												<div class="tip-line @( line.IsCost ? "cost" : "" )">@line.Text</div>
+											}
+										</div>
+									</div>
+								}
+							}
+							else
+							{
+								<div class="none">None yet. Boons are picked between floors.</div>
+							}
+						</div>
+
+						<div class="section-label" style="@LabelStyle( 400f, detailsTop - 26f, 0.16f )">Details</div>
+						<div class="card details" style="@CardStyle( 400f, detailsTop, 832f, 640f - detailsTop, 0.2f )">
+							<div class="dfk dfk-panel"></div>
+							@if ( !_detail.IsEmpty )
+							{
+								var d = _detail;
+								var owned = d.IsModifier ? staff.Stack( d.Modifier ) : 0;
+								<div class="detail-head" style="@DetailHeadStyle()">
+									<div class="detail-icon">
+										<Image class="icon" Texture=@ScrollText.Icon( d )></Image>
+										<div class="runes" style="color: @ScrollText.Colour( d )">@ScrollText.Runes( d )</div>
+									</div>
+									<div class="detail-title">
+										<div class="detail-name">@d.Name@( owned > 1 ? " " + ScrollText.Tier( owned ) : "" )</div>
+										<div class="detail-kind">@d.KindLabel@( d.ModifierDef is { Black: true } ? " · black seal" : "" )@( d.ModifierDef is { } md ? " · " + md.Banner : "" )</div>
+									</div>
+								</div>
+								<div class="detail-desc">@ScrollText.Description( d )</div>
+								@if ( d.IsModifier )
+								{
+									@for ( int n = 1; n <= 3; n++ )
+									{
+										var tier = n;
+										<div class="detail-line @( tier == owned ? "on" : "" )">@ScrollText.Tier( tier )  @ScrollText.StackLine( d.Modifier, tier )</div>
+									}
+								}
+								else
+								{
+									@foreach ( var line in ScrollText.Details( d ) )
+									{
+										<div class="detail-line">@line</div>
+									}
+								}
+							}
+							else
+							{
+								<div class="none">Hover a scroll to read it.</div>
+							}
+						</div>
+					}
+					else if ( _tab == TabIndex && Inv is { } ix )
+					{
+						<div class="index-scroll" @ref=IndexScroll style="@CardStyle( 0f, 0f, IndexViewW, IndexViewH, 0f )">
+							<div class="index-inner" style="height: @F( IndexContentHeight )px;">
+								<div class="section-label" style="@LabelStyle( 0f, 0f, 0f )"><div class="lt">Spells</div><div class="dim">@ix.DiscoveredCount( true ) / @SpellDatabase.All.Length</div></div>
+								<div class="section-label" style="@LabelStyle( 0f, 172f, 0.04f )"><div class="lt">Enchantments</div><div class="dim">@ix.DiscoveredCount( false ) / @ModifierDatabase.All.Length</div></div>
+								@for ( int i = 0; i < Scroll.All.Length; i++ )
+								{
+									var idx = i;
+									var s = Scroll.All[idx];
+									var known = ix.IsDiscovered( s );
+									<div class="index-card @( s.IsSpell ? "spell-card" : "" ) @( known ? "" : "unknown" ) @( _indexSel == s ? "selected" : "" ) @( known && ix.IsUnseen( s.Key ) ? "new" : "" )"
+										style="@IndexCardStyle( idx )" onclick=@( () => SelectIndex( idx ) )>
+										<div class="card-icon">
+											<Image class="icon" Texture=@ScrollText.Icon( known ? s : s.AsSealed )></Image>
+											@if ( known )
+											{
+												<div class="runes" style="color: @ScrollText.Colour( s )">@ScrollText.Runes( s )</div>
+											}
+										</div>
+										<div class="name">@( known ? s.Name : "???" )</div>
+										@if ( known && s.IsModifier && ix.Copies( s.Modifier ) > 0 )
+										{
+											<div class="owned">@ScrollText.Tier( ix.Copies( s.Modifier ) )</div>
+										}
+									</div>
+								}
+							</div>
+						</div>
+						<div class="progress" style="@CardStyle( 0f, 600f, 752f, 8f, 0.3f )">
+							<div class="progress-fill" style="width: @F( IndexProgress() * 100f )%;"></div>
+						</div>
+						<div class="progress-text" style="@CardStyle( 0f, 612f, 752f, 24f, 0.32f )">@( ix.DiscoveredCount( true ) + ix.DiscoveredCount( false ) ) of @Scroll.All.Length scrolls discovered · scroll for more</div>
+
+						<div class="card details index-detail" style="@CardStyle( 792f, 0f, 440f, 640f, 0.12f )">
+							<div class="df df-card-side"></div>
+							@if ( IndexShown() is { IsEmpty: false } shown )
+							{
+								@if ( ix.IsDiscovered( shown ) )
+								{
+									<div class="big-scroll" style="@BigRuneStyle()">
+										<Image class="icon" Texture=@ScrollText.Icon( shown )></Image>
+										<div class="runes" style="color: @ScrollText.Colour( shown )">@ScrollText.Runes( shown )</div>
+									</div>
+									<div class="detail-name center">@shown.Name</div>
+									<div class="detail-kind center">@shown.KindLabel@( shown.ModifierDef is { Black: true } ? " · black seal" : "" )</div>
+									@if ( shown.ModifierDef is { } md2 )
+									{
+										<div class="detail-banner center">@md2.Banner</div>
+									}
+									<div class="detail-desc center">@ScrollText.Description( shown )</div>
+									@foreach ( var line in ScrollText.Details( shown ) )
+									{
+										<div class="detail-line center">@line</div>
+									}
+									<div class="detail-foot center">@( shown.IsSpell ? "Learned: you can start a run with it" : ix.Copies( shown.Modifier ) > 0 ? $"On your staff: {ScrollText.Tier( ix.Copies( shown.Modifier ) )}" : "Known: it will lie open when you find it" )</div>
+								}
+								else
+								{
+									<div class="big-scroll unknown" style="@BigRuneStyle()">
+										<Image class="icon" Texture=@ScrollText.Icon( shown.AsSealed )></Image>
+									</div>
+									<div class="detail-name center">???</div>
+									<div class="detail-desc center">@( shown.IsSpell ? "Not learned yet. One gold-sealed scroll falls on every floor: a spell." : "Never taken. Scrolls fall from the monsters as you fight; break the seal to find out what it is." )</div>
+								}
+							}
+							else
+							{
+								<div class="none center">Pick a scroll to read about it.</div>
+							}
+						</div>
+					}
+					else if ( _tab == TabArmory && Inv is { } ar )
+					{
+						<div class="section-label" style="@LabelStyle( 0f, 0f, 0f )"><div class="lt">Swords</div><div class="dim">@ar.SkinCount( HandSide.Left ) / @WeaponSkins.For( HandSide.Left ).Count()</div></div>
+						<div class="section-label" style="@LabelStyle( 0f, 352f, 0.04f )"><div class="lt">Staffs</div><div class="dim">@ar.SkinCount( HandSide.Right ) / @WeaponSkins.For( HandSide.Right ).Count()</div></div>
+						@for ( int i = 0; i < WeaponSkins.All.Length; i++ )
+						{
+							var idx = i;
+							var skin = WeaponSkins.All[idx];
+							var owned = ar.HasSkin( skin.Id );
+							var equipped = ar.SkinFor( skin.Hand ) == skin.Id;
+							<div class="skin-card @( owned ? "" : "unknown" ) @( equipped ? "equipped" : "" ) @( _skinSel == skin.Id ? "selected" : "" ) @( owned && ar.IsUnseen( "skin:" + skin.Id ) ? "new" : "" )"
+								style="@SkinCardStyle( idx )" onclick=@( () => ClickSkin( idx ) )>
+								<Image class="skin-icon" Texture=@WeaponSkins.Icon( skin, owned )></Image>
+								<div class="skin-name">@( owned ? skin.Name : "???" )</div>
+								@if ( equipped )
+								{
+									<div class="skin-badge" style="@EquipBadgeStyle( skin.Hand )">Equipped</div>
+								}
+							</div>
+						}
+
+						<div class="card details index-detail" style="@CardStyle( 792f, 0f, 440f, 640f, 0.12f )">
+							<div class="df df-card-side"></div>
+							@if ( WeaponSkins.Get( SkinShownId() ) is { } shownSkin )
+							{
+								var ownedSkin = ar.HasSkin( shownSkin.Id );
+								@if ( ownedSkin )
+								{
+									<div class="weapon-view" @ref=WeaponView style="@WeaponViewStyle()"></div>
+								}
+								else
+								{
+									<Image class="weapon-shade" style="@BigRuneStyle()" Texture=@WeaponSkins.Icon( shownSkin, false )></Image>
+								}
+								<div class="detail-name center">@( ownedSkin ? shownSkin.Name : "???" )</div>
+								<div class="detail-kind center">@( (shownSkin.IsSword ? "Sword" : "Staff") + " · cosmetic" )</div>
+							@if ( !string.IsNullOrEmpty( shownSkin.CarriedBy ) )
+							{
+								<div class="detail-line center">Carried by @shownSkin.CarriedBy.ToLowerInvariant()</div>
+							}
+								@if ( !ownedSkin )
+								{
+									<div class="detail-desc center">@( shownSkin.FromCrates
+										? "Not found yet. One turns up in a crate or a barrel now and then, and the village shop sometimes has it on the table."
+										: $"Not found yet. Kill {PlayerInventory.SkinKillsNeeded} of the monsters carrying it and the weapon is yours for good." )</div>
+									@if ( !shownSkin.FromCrates )
+									{
+										<div class="detail-line center">@Math.Min( ar.SkinKills( shownSkin.Id ), PlayerInventory.SkinKillsNeeded ) / @PlayerInventory.SkinKillsNeeded killed</div>
+									}
+								}
+								else if ( ar.SkinFor( shownSkin.Hand ) == shownSkin.Id )
+								{
+									<div class="detail-desc center">In your hand.</div>
+								}
+								else
+								{
+									<div class="button big" onclick=@( () => EquipSkin( shownSkin.Id ) )>Equip</div>
+								}
+							}
+							else
+							{
+								<div class="none center">Pick a weapon to look at it.</div>
+							}
+						</div>
+					}
+					else if ( _tab == TabWardrobe )
+					{
+						<WardrobePage></WardrobePage>
+					}
+				</div>
+			</div>
+
+			<div class="footer">
+				<div class="hint">@FooterHint()</div>
+				<div class="spacer"></div>
+				<div class="toast" style="@ToastStyle()">@_toast</div>
+			</div>
+
+			@if ( _tour >= 0 )
+			{
+				var step = TourSteps[_tour];
+				var last = _tour == TourSteps.Length - 1;
+				<div class="tour">
+					@for ( int i = 0; i < 4; i++ )
+					{
+						<div class="tour-shade" style="@TourShadeStyle( i )"></div>
+					}
+					<div class="tour-hole" style="@TourHoleStyle()"></div>
+					<div class="tour-card" style="@TourCardStyle()">
+						<div class="dfk dfk-panel"></div>
+						<div class="tour-title">@step.Title</div>
+						@foreach ( var line in step.Lines )
+						{
+							<div class="tour-line">@line</div>
+						}
+						<div class="tour-buttons">
+							<div class="button" onclick=@EndTour>Skip</div>
+							<div class="tour-pips">
+								@for ( int i = 0; i < TourSteps.Length; i++ )
+								{
+									<div class="pip @( i == _tour ? "on" : "" )"></div>
+								}
+							</div>
+							@if ( _tour > 0 )
+							{
+								<div class="button" onclick=@( () => TourGo( _tour - 1 ) )>Back</div>
+							}
+							<div class="button on" onclick=@TourNext>@( last ? "Got it" : "Next" )</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	}
+</root>
+
+@code {
+	// The one screen for the staff, the index and the weapon skins (designed with the user 2026-09-17; the Staff tab
+	// rebuilt 2026-09-20 when the satchel, the library and the sockets went: scrolls are taken in the world with E
+	// and stay on the staff, so this tab only SHOWS the run, and the one thing it changes is the starting spell, in
+	// the village). Like the boon screen, every motion runs on one C# clock (_t) with inline styles, so timelines
+	// restart freely and `inv_anim_speed 0.25` slows all of it for review. Everything is laid out in C# and hovered
+	// by rectangle (see TickCardHover for why mouse events are not used). Text never scales above 1 (the raster rule).
+
+	/// <summary>The look being tried on (2026-09-18, the Synty Dark Fantasy interface packs baked by tools/gen_ui_kit.py):
+	/// 0 the placeholder, 1 wrought iron, 2 ossuary, 3 blood chapel. The button by the purse cycles it.</summary>
+	[ConVar( "hud_style", ConVarFlags.Saved )] public static int HudStyle { get; set; } = 1;
+
+	private static readonly string[] StyleIds = { "", "df-iron", "df-ossuary", "df-chapel" };
+	private static readonly string[] StyleNames = { "Placeholder", "Wrought Iron", "Ossuary", "Blood Chapel" };
+	private static int StyleIndex => Math.Clamp( HudStyle, 0, StyleIds.Length - 1 );
+	private string ThemeClass => StyleIds[StyleIndex];
+	private string StyleName => StyleNames[StyleIndex];
+
+	private void CycleStyle()
+	{
+		HudStyle = (StyleIndex + 1) % StyleIds.Length;
+		Sfx( "inventory_tab" );
+	}
+
+	/// <summary>Scales every timing in the panel: 0.25 is slow motion for review.</summary>
+	[ConVar( "inv_anim_speed" )] public static float AnimSpeed { get; set; } = 1f;
+
+	/// <summary>Open on the local screen: the caster and the sword stop reading clicks while it is.</summary>
+	public static bool IsOpen { get; private set; }
+
+	// "Abandon run": the only way out of a run that is not the boss or a death, so it asks twice
+	private const float AbandonArmSeconds = 3f;
+	private float _abandonArmedAt = float.NegativeInfinity;
+	private bool AbandonArmed => Time.Now - _abandonArmedAt < AbandonArmSeconds;
+
+	private void ClickAbandon()
+	{
+		if ( !AbandonArmed ) { _abandonArmedAt = Time.Now; return; }
+		_abandonArmedAt = float.NegativeInfinity;
+		SetOpen( false );
+		RunManager.Instance?.AbandonRun();
+	}
+
+	public static SpellLoadout Instance { get; private set; }
+
+	public static void Toggle() => SetOpen( !IsOpen );
+
+	public static void SetOpen( bool open )
+	{
+		if ( open == IsOpen ) return;
+		if ( open )
+		{
+			IsOpen = true;
+			MouseLock.Release = true;
+			if ( Instance.IsValid() ) Instance.BeginOpen();
+		}
+		else
+		{
+			IsOpen = false;
+			MouseLock.Release = false;
+			if ( Instance.IsValid() ) Instance.BeginClose();
+		}
+	}
+
+	// ---- tabs
+	// the Dev tab moved to the Director panel (key 0), 2026-09-23
+	private const int TabStaff = 0, TabIndex = 1, TabArmory = 2, TabWardrobe = 3;
+	private static readonly string[] TabNames = { "Staff", "Index", "Armory", "Wardrobe" };
+
+	/// <summary>The B key, and anything else that wants the character customizer: the inventory, on its Wardrobe tab.</summary>
+	public static void OpenWardrobe()
+	{
+		if ( RunUi.Blocking ) return;
+		// the tour turns the pages itself; opened with B instead, the player asked for the wardrobe: the tour waits for a Tab open
+		if ( IsOpen && Instance.IsValid() && Instance._tour >= 0 ) return;
+		if ( !IsOpen ) SetOpen( true );
+		if ( !Instance.IsValid() ) return;
+		Instance._tour = -1;
+		if ( Instance._tab != TabWardrobe ) Instance.SelectTab( TabWardrobe );
+	}
+	private const float TabW = 132f;
+	private static float TabX( int i ) => i * TabW;
+
+	// ---- timings (seconds of panel time)
+	private const float OpenDuration = 0.32f;
+	private const float CloseDuration = 0.16f;
+	private const float AppearDuration = 0.3f;
+	private const float TabSlide = 0.26f;
+	private const float LandDuration = 0.34f;
+	private const float ShakeDuration = 0.36f;
+	private const float ToastSeconds = 2.4f;
+
+	// ---- layout (px, the staff tab's content space: 1232 x 640)
+	private const int TilesPerRow = 10;
+	private static readonly Rect2 SpellRect = new( 0f, 28f, 170f, 150f );
+	/// <summary>The spellbook row: one slot per spell in SpellDatabase order, a "?" until learned.</summary>
+	private static Rect2 BookRect( int i ) => new( i * 52f, 222f, 46f, 46f );
+	/// <summary>The scrolls taken this run, in the order they were taken.</summary>
+	private static Rect2 TileRect( int i ) => new( 400f + (i % TilesPerRow) * 83f, 28f + (i / TilesPerRow) * 83f, 76f, 76f );
+	/// <summary>The board always shows three rows of sockets (a run takes about two dozen scrolls) and grows a row at a time past that.</summary>
+	private static int GridRows( int taken ) => Math.Max( 3, (taken + TilesPerRow - 1) / TilesPerRow );
+	private static int GridSockets( int taken ) => GridRows( taken ) * TilesPerRow;
+	private static float GridBottom( int taken ) => 28f + GridRows( taken ) * 83f - 7f;
+
+	// ---- the index: a window onto a taller page (the pool outgrew the tab on 2026-09-20)
+	private const float IndexViewW = 772f, IndexViewH = 588f;
+	private Panel IndexScroll { get; set; }
+	/// <summary>How far the index is scrolled, in the page's own pixels.</summary>
+	private float IndexScrollY => IndexScroll.IsValid() ? IndexScroll.ScrollOffset.y * IndexScroll.ScaleFromScreen : 0f;
+	private static float IndexContentHeight => IndexRect( Scroll.All.Length - 1 ).Y + 122f + 16f;
+
+	private readonly record struct Rect2( float X, float Y, float W, float H )
+	{
+		public bool Contains( Vector2 p ) => p.x >= X && p.x < X + W && p.y >= Y && p.y < Y + H;
+		public Vector2 Center => new( X + W * 0.5f, Y + H * 0.5f );
+	}
+
+	private Panel ContentPanel { get; set; }
+	/// <summary>The Armory's 3D picture: wears the ArmoryStage's render target.</summary>
+	private Panel WeaponView { get; set; }
+	private ArmoryStage _armoryStage;
+	private bool _visible;
+	private bool _closing;
+	private float _t;
+	private float _openAt;
+	private float _closeAt;
+	private int _tab;
+	private float _tabAt = float.NegativeInfinity;
+	private int _tabDir = 1;
+	private float _underlineX;
+	private Vector2 _mouse;
+	/// <summary>What the mouse is over on the staff tab: "sp" the spell, "bk3" a spellbook slot, "md5" a taken scroll, "" nothing.</summary>
+	private string _staffHover = "";
+	private readonly Dictionary<string, float> _lands = new();
+	private readonly Dictionary<string, float> _shakes = new();
+	private readonly Dictionary<string, float> _hoverT = new();
+	private Scroll _detail;
+	private float _detailAt;
+	private string _toast = "";
+	private float _toastAt = float.NegativeInfinity;
+	private bool _toastBad;
+	private float _shownShards;
+	private float _purseAt = float.NegativeInfinity;
+	private int _lastPurse;
+	private Scroll _indexSel;
+	private int _indexHover = -1;
+	private string _skinSel;
+	private int _skinHover = -1;
+	private float _equipAtLeft = float.NegativeInfinity, _equipAtRight = float.NegativeInfinity;
+
+	private static string F( float v ) => v.ToString( "0.###", CultureInfo.InvariantCulture );
+
+	private static PlayerInventory Inv => PlayerInventory.Local;
+	private static StaffLoadout Staff => StaffLoadout.Local;
+	private static VoidMage.Boons.PlayerBoons Boons => VoidMage.Boons.PlayerBoons.Local;
+	private static PlayerMana Mana => PlayerMana.Local;
+	private static int Purse => PlayerInventory.AtHome ? RunSave.Data.BankedShards : PlayerShards.Local?.Carried ?? 0;
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+		Instance = this;
+	}
+
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
+		if ( IsOpen ) SetOpen( false );
+		_visible = false;
+		if ( Instance == this ) Instance = null;
+	}
+
+	// ------------------------------------------------------------------ open / close
+
+	private void BeginOpen()
+	{
+		// _t only ever moves forward, so a landing or a shake stamped before the last close never replays
+		_visible = true;
+		_closing = false;
+		_openAt = _t;
+		_tabAt = float.NegativeInfinity;
+		_underlineX = TabX( _tab );
+		_shownShards = Purse;
+		_lastPurse = Purse;
+		_hoverT.Clear();
+		_detail = Scroll.Empty;
+		// the test scenes have no RunManager to add the inventory
+		if ( !Inv.IsValid() && Staff.IsValid() ) PlayerInventory.EnsureOn( Staff.GameObject );
+		Sfx( "inventory_open" );
+
+		// the first open ever is the tour; a taken scroll's reveal says "Press Tab" until the staff has been looked at
+		// with a scroll on it (Load is a no-op after RunManager's: it keeps a test scene from saving over the real file)
+		RunSave.Load();
+		_tour = -1;
+		if ( !RunSave.Data.InventoryTourDone )
+		{
+			_tab = TabStaff;
+			_underlineX = TabX( _tab );
+			StartTour();
+		}
+		if ( !RunSave.Data.StaffLookedAt && Inv is { } inv && inv.RunScrolls.Count > 0 )
+		{
+			RunSave.Data.StaffLookedAt = true;
+			RunSave.Save();
+		}
+	}
+
+	private void BeginClose()
+	{
+		if ( !_visible ) return;
+		_closing = true;
+		_closeAt = _t;
+		Sfx( "inventory_close" );
+	}
+
+	/// <summary>Tab or Escape.</summary>
+	private void RequestClose() => SetOpen( false );
+
+	// ------------------------------------------------------------------ clock
+
+	protected override void OnUpdate()
+	{
+		var health = PlayerHealth.Local;
+		bool dead = health.IsValid() && health.IsDead;
+
+		// B is the wardrobe: the inventory on its Wardrobe tab (it was its own window until 2026-09-19)
+		if ( Input.Pressed( "Wardrobe" ) )
+		{
+			if ( IsOpen && _tab == TabWardrobe ) RequestClose();
+			else if ( !dead ) OpenWardrobe();
+		}
+		if ( Input.Pressed( "Score" ) )
+		{
+			if ( IsOpen ) RequestClose();
+			else if ( !RunUi.Blocking && !dead ) SetOpen( true );
+		}
+		if ( !_visible ) return;
+
+		var dt = Time.Delta * Math.Clamp( AnimSpeed, 0.05f, 4f );
+		_t += dt;
+		TickArmoryStage();
+
+		if ( IsOpen )
+		{
+			if ( Input.EscapePressed )
+			{
+				// swallow Escape so the pause menu does not open on the same press
+				Input.EscapePressed = false;
+				RequestClose();
+			}
+			// a run card or a death takes the screen: close without asking
+			if ( IsOpen && (RunUi.Blocking || dead) ) SetOpen( false );
+			if ( IsOpen ) MouseLock.Release = true;
+		}
+
+		if ( ContentPanel.IsValid() ) _mouse = ContentPanel.MousePosition * ContentPanel.ScaleFromScreen;
+		TickStaffHover();
+		TickCardHover();
+		TickHover( dt );
+		TickTour( dt );
+		_underlineX = MathX.Lerp( _underlineX, TabX( _tab ), 1f - MathF.Exp( -dt * 16f ) );
+		_shownShards = MathX.Approach( _shownShards, Purse, MathF.Max( 1f, MathF.Abs( _shownShards - Purse ) ) * dt * 6f );
+		if ( Purse != _lastPurse ) { _lastPurse = Purse; _purseAt = _t; }
+
+		if ( _closing && _t - _closeAt >= CloseDuration )
+		{
+			_visible = false;
+			_closing = false;
+		}
+		StateHasChanged();
+	}
+
+	protected override int BuildHash() => HashCode.Combine( _visible, _t, Inv?.Version, HudStyle, AbandonArmed, RunManager.Instance?.CanAbandon );
+
+	// ------------------------------------------------------------------ staff tab
+
+	/// <summary>What the mouse is over, from the resting rectangles every frame (the cards lift when hovered, so mouse events flicker: see TickCardHover).</summary>
+	private void TickStaffHover()
+	{
+		var inv = Inv;
+		var hover = "";
+		if ( _tab == TabStaff && inv.IsValid() && IsOpen && !_closing )
+		{
+			if ( SpellRect.Contains( _mouse ) ) hover = "sp";
+			for ( int i = 0; i < SpellDatabase.All.Length && hover == ""; i++ )
+				if ( BookRect( i ).Contains( _mouse ) ) hover = $"bk{i}";
+			var taken = inv.RunScrolls;
+			for ( int i = 0; i < taken.Count && hover == ""; i++ )
+				if ( TileRect( i ).Contains( _mouse ) ) hover = $"md{i}";
+		}
+		_staffHover = hover;
+
+		// the details card follows the hover, and keeps the last scroll rather than blinking empty
+		var next = Scroll.Empty;
+		if ( hover == "sp" && Staff.IsValid() ) next = Scroll.ForSpell( Staff.SpellId );
+		else if ( hover.StartsWith( "bk", StringComparison.Ordinal ) && int.TryParse( hover.AsSpan( 2 ), out var b ) && inv.IsUnlocked( SpellDatabase.All[b].Id ) ) next = Scroll.ForSpell( SpellDatabase.All[b].Id );
+		else if ( hover.StartsWith( "md", StringComparison.Ordinal ) && int.TryParse( hover.AsSpan( 2 ), out var m ) && m < inv.RunScrolls.Count ) next = Scroll.ForModifier( inv.RunScrolls[m] );
+		if ( next.IsEmpty && _detail.IsEmpty && _tab == TabStaff && Staff.IsValid() ) next = Scroll.ForSpell( Staff.SpellId );
+		if ( next.IsEmpty || next == _detail ) return;
+		_detail = next;
+		_detailAt = _t;
+		inv.MarkSeen( next.Key );
+	}
+
+	private void TickHover( float dt )
+	{
+		var hovered = _staffHover.Length > 0 ? _staffHover : null;
+		if ( hovered is not null && !_hoverT.ContainsKey( hovered ) ) _hoverT[hovered] = 0f;
+		foreach ( var key in _hoverT.Keys.ToList() )
+		{
+			var v = MathX.Approach( _hoverT[key], key == hovered ? 1f : 0f, dt * 9f );
+			if ( v <= 0f && key != hovered ) _hoverT.Remove( key );
+			else _hoverT[key] = v;
+		}
+	}
+
+	/// <summary>The spellbook: in the village a learned spell becomes the one the next run starts with.</summary>
+	private void ClickBook( int i )
+	{
+		var inv = Inv;
+		if ( !inv.IsValid() || i < 0 || i >= SpellDatabase.All.Length ) return;
+		var spell = SpellDatabase.All[i];
+		var key = $"bk{i}";
+		if ( !inv.IsUnlocked( spell.Id ) )
+		{
+			_shakes[key] = _t;
+			Toast( "You have not learned that spell", true );
+			Sfx( "inventory_denied" );
+			return;
+		}
+		if ( !PlayerInventory.CanChooseSpell )
+		{
+			_shakes[key] = _t;
+			Toast( "The starting spell is chosen in the village. In the dungeon a spell scroll swaps it", true );
+			Sfx( "inventory_denied" );
+			return;
+		}
+		if ( inv.StartingSpell == spell.Id ) { _lands[key] = _t; return; }
+		if ( !inv.ChooseStartingSpell( spell.Id ) ) return;
+		_lands[key] = _t;
+		_lands["sp"] = _t;
+		Toast( $"Your runs start with {spell.Name}", false );
+		Sfx( "inventory_equip" );
+	}
+
+	private string StaffSlotStyle( string key, Rect2 r, float delay )
+	{
+		float appear = Appear( delay );
+		var css = $"left: {F( r.X )}px; top: {F( r.Y )}px; width: {F( r.W )}px; height: {F( r.H )}px; opacity: {F( appear )}; transform: translateX({F( Shake( key ) )}px) translateY({F( (1f - appear) * 14f )}px);";
+		float glow = Land( key ) * 0.7f;
+		string colour = "232, 217, 168";
+		if ( _shakes.TryGetValue( key, out var shakeAt ) && _t - shakeAt < ShakeDuration )
+		{
+			colour = "208, 70, 60";
+			glow = MathF.Max( glow, 0.8f * (1f - (_t - shakeAt) / ShakeDuration) );
+		}
+		if ( glow > 0.01f ) css += $" box-shadow: 0px 0px {F( 8f + 18f * glow )}px rgba({colour}, {F( glow )});";
+		return css;
+	}
+
+	private string StaffTileStyle( string key )
+	{
+		// a small drop and settle when something lands here, a lift under the mouse (translate only: the tile never grows)
+		float land = Land( key );
+		float ty = -7f * MathF.Sin( land * MathF.PI ) * land - 3f * Ease.OutCubic( HoverT( key ) );
+		return $"transform: translateY({F( ty )}px);";
+	}
+
+	private float HoverT( string key ) => _hoverT.TryGetValue( key, out var v ) ? v : 0f;
+
+	// ------------------------------------------------------------------ tabs
+
+	private void SelectTab( int tab )
+	{
+		if ( tab == _tab ) return;
+		_tabDir = tab > _tab ? 1 : -1;
+		_tab = tab;
+		_tabAt = _t;
+		Sfx( "inventory_tab" );
+	}
+
+	private bool TabBadge( int tab ) => Inv is { } inv && tab switch
+	{
+		TabIndex => inv.AnyUnseen( false ),
+		TabArmory => inv.AnyUnseen( true ),
+		_ => false,
+	};
+
+	/// <summary>Seconds since this tab's content started appearing (the open or the tab switch, whichever came later).</summary>
+	private float Since => _t - MathF.Max( _openAt, _tabAt );
+
+	private void Toast( string text, bool bad )
+	{
+		_toast = text;
+		_toastAt = _t;
+		_toastBad = bad;
+	}
+
+	/// <summary>Sound hooks: no clips exist yet (the user supplies them); an event that does not resolve plays nothing.</summary>
+	private static void Sfx( string name ) { }
+
+	private float Appear( float delay ) => Ease.OutCubic( Ease.Window( Since, delay, AppearDuration ) );
+
+	private float Shake( string key )
+	{
+		if ( !_shakes.TryGetValue( key, out var at ) ) return 0f;
+		float p = (_t - at) / ShakeDuration;
+		if ( p < 0f || p >= 1f ) return 0f;
+		return MathF.Sin( p * MathF.PI * 7f ) * 7f * (1f - p);
+	}
+
+	private float Land( string key )
+	{
+		if ( !_lands.TryGetValue( key, out var at ) ) return 0f;
+		float p = (_t - at) / LandDuration;
+		return p < 0f || p >= 1f ? 0f : 1f - p;
+	}
+
+	private string LabelStyle( float x, float y, float delay )
+	{
+		float appear = Appear( delay );
+		return $"left: {F( x )}px; top: {F( y )}px; opacity: {F( appear )}; transform: translateX({F( (1f - appear) * -10f )}px);";
+	}
+
+	private string CardStyle( float x, float y, float w, float h, float delay )
+	{
+		float appear = Appear( delay );
+		return $"left: {F( x )}px; top: {F( y )}px; width: {F( w )}px; height: {F( h )}px; opacity: {F( appear )}; transform: translateY({F( (1f - appear) * 16f )}px);";
+	}
+
+	private string DetailHeadStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _detailAt, 0.2f ) );
+		return $"opacity: {F( 0.4f + 0.6f * p )}; transform: translateX({F( (1f - p) * 10f )}px);";
+	}
+
+	// ------------------------------------------------------------------ staff tab: the active spell's numbers
+
+	private readonly record struct StatLine( string Label, string Value, string Css );
+
+	private IEnumerable<StatLine> StatLines()
+	{
+		var staff = Staff;
+		var spell = staff?.ActiveSpell;
+		if ( spell is null ) yield break;
+		var health = PlayerHealth.Local;
+		float missing = health.IsValid() ? 1f - health.Health01 : 0f;
+		int shards = PlayerShards.Local?.Carried ?? 0;   // what Avarice feeds on
+		var cast = ResolvedCast.Preview( spell, staff.Stacks, shards, SpellCaster.Local?.KindlingActive ?? false, missing );
+
+		yield return new StatLine( "Damage", DamageText( cast ), cast.DamageMultiplier > 1.001f ? "up" : cast.DamageMultiplier < 0.999f ? "down" : "" );
+		if ( cast.HealthCost > 0f ) yield return new StatLine( "Health cost", $"{cast.HealthCost:0.#}", "down" );
+		else yield return new StatLine( "Mana", $"{cast.ManaCost:0.#}", cast.Primed ? "up" : "" );
+		yield return new StatLine( "A cast every", $"{cast.CastSeconds:0.00}s", "" );
+		var extras = Extras( cast );
+		if ( extras.Length > 0 ) yield return new StatLine( "Effects", extras, "" );
+	}
+
+	private static string DamageText( ResolvedCast c ) => c.Count > 1 ? $"{c.Damage:0.#} × {c.Count}" : $"{c.Damage:0.#}";
+
+	private static string Extras( ResolvedCast c )
+	{
+		var parts = new List<string>();
+		if ( c.Bounces > 0 ) parts.Add( $"{c.Bounces} bounces" );
+		if ( c.Rings > 0 ) parts.Add( $"orbit ×{c.Rings}" );
+		if ( c.Echoes > 0 ) parts.Add( $"echo ×{c.Echoes}" );
+		if ( c.Mine ) parts.Add( "mines" );
+		if ( c.Wake ) parts.Add( "wake" );
+		if ( c.Hound ) parts.Add( "homing" );
+		if ( c.KillHeal > 0f ) parts.Add( $"kill heals {c.KillHeal:0}" );
+		return string.Join( " · ", parts );
+	}
+
+	// ------------------------------------------------------------------ index tab
+
+	private void SelectIndex( int i )
+	{
+		var s = Scroll.All[i];
+		_indexSel = s;
+		_lands[$"ix{i}"] = _t;
+		Inv?.MarkSeen( s.Key );
+		_detailAt = _t;
+		Sfx( "inventory_select" );
+	}
+
+	/// <summary>
+	/// Which index or armory card the mouse is over, from the cards' resting rectangles every frame, like the staff
+	/// tab's slots. Mouse events were tried first and failed twice over: a hovered card lifts 4 px, so a cursor near
+	/// its bottom edge fell off it and back on every frame, and crossing a card's own children (icon, name) fired
+	/// out/over again, restarting the detail fade or leaving the hover cleared with the mouse still on the card.
+	/// </summary>
+	private void TickCardHover()
+	{
+		int index = -1, skin = -1;
+		if ( _tab == TabIndex )
+		{
+			// the cards live on the scrolled page; the mouse is on the window over it
+			var onPage = new Vector2( _mouse.x, _mouse.y + IndexScrollY );
+			bool inView = _mouse.x >= 0f && _mouse.x < IndexViewW && _mouse.y >= 0f && _mouse.y < IndexViewH;
+			for ( int i = 0; inView && i < Scroll.All.Length && index < 0; i++ )
+				if ( IndexRect( i ).Contains( onPage ) ) index = i;
+		}
+		else if ( _tab == TabArmory )
+		{
+			for ( int i = 0; i < WeaponSkins.All.Length && skin < 0; i++ )
+				if ( SkinRect( i ).Contains( _mouse ) ) skin = i;
+			// something is always on show: the sword in hand until a card is picked
+			if ( _skinSel is null && Inv is { } inv ) _skinSel = inv.SkinFor( HandSide.Left );
+		}
+
+		// crossing the gap between two cards is not leaving them: a hover is only let go after a moment off every card
+		if ( index >= 0 || skin >= 0 ) _cardHoverAt = _t;
+		bool letGo = _t - _cardHoverAt > CardHoverGrace;
+
+		if ( index != _indexHover )
+		{
+			if ( index >= 0 ) HoverIndex( index, true ); else if ( letGo || _tab != TabIndex ) _indexHover = -1;
+		}
+		if ( skin != _skinHover )
+		{
+			if ( skin >= 0 ) HoverSkin( skin, true ); else if ( letGo || _tab != TabArmory ) _skinHover = -1;
+		}
+	}
+
+	private const float CardHoverGrace = 0.12f;
+	private float _cardHoverAt;
+
+	private void HoverIndex( int i, bool on )
+	{
+		if ( on )
+		{
+			if ( _indexHover != i ) _detailAt = _t;
+			_indexHover = i;
+			Inv?.MarkSeen( Scroll.All[i].Key );
+		}
+		else if ( _indexHover == i ) _indexHover = -1;
+	}
+
+	private Scroll IndexShown() => _indexHover >= 0 ? Scroll.All[_indexHover] : _indexSel;
+
+	private float IndexProgress()
+	{
+		var inv = Inv;
+		if ( !inv.IsValid() ) return 0f;
+		float target = (inv.DiscoveredCount( true ) + inv.DiscoveredCount( false )) / (float)Scroll.All.Length;
+		return target * Ease.OutCubic( Ease.Window( Since, 0.3f, 0.7f ) );
+	}
+
+	private static Rect2 IndexRect( int i )
+	{
+		int spells = SpellDatabase.All.Length;
+		if ( i < spells ) return new Rect2( i * 108f, 28f, 100f, 124f );
+		int m = i - spells;
+		return new Rect2( (m % 8) * 95f, 200f + (m / 8) * 132f, 87f, 122f );
+	}
+
+	private string IndexCardStyle( int i )
+	{
+		var r = IndexRect( i );
+		var key = $"ix{i}";
+		float appear = Appear( 0.04f + i * 0.018f );
+		float hover = _indexHover == i ? 1f : 0f;
+		float land = Land( key );
+		float ty = (1f - appear) * 18f - 4f * hover - 5f * MathF.Sin( land * MathF.PI ) * land;
+		var css = $"left: {F( r.X )}px; top: {F( r.Y )}px; width: {F( r.W )}px; height: {F( r.H )}px; opacity: {F( appear )}; transform: translateY({F( ty )}px);";
+		if ( Inv is { } inv && inv.IsDiscovered( Scroll.All[i] ) && inv.IsUnseen( Scroll.All[i].Key ) )
+			css += $" box-shadow: 0px 0px {F( 10f + 8f * MathF.Sin( _t * 4f ) )}px rgba(232, 217, 168, 0.45);";
+		return css;
+	}
+
+	private string WeaponViewStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _detailAt, 0.3f ) );
+		return $"opacity: {F( p )};";
+	}
+
+	/// <summary>Keeps the stage showing the picked weapon while the Armory is up; the stage stops rendering the frame this stops asking.</summary>
+	private void TickArmoryStage()
+	{
+		if ( !IsOpen || _tab != TabArmory || Inv is not { } inv ) return;
+		var skin = WeaponSkins.Get( SkinShownId() );
+		if ( skin is null || !inv.HasSkin( skin.Id ) ) return;
+		if ( !_armoryStage.IsValid() ) _armoryStage = ArmoryStage.Ensure( Scene );
+		_armoryStage.Show( skin );
+		_armoryStage.Active = true;
+		if ( !WeaponView.IsValid() ) return;
+		if ( WeaponView.Box.Rect.Width > 0f ) _armoryStage.SetPanelSize( WeaponView.Box.Rect.Size );
+		if ( _armoryStage.PreviewTexture is { } tex && WeaponView.Style.BackgroundImage != tex ) WeaponView.Style.BackgroundImage = tex;
+	}
+
+	private string BigRuneStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _detailAt, 0.25f ) );
+		return $"opacity: {F( p )}; transform: translateY({F( (1f - p) * 12f + MathF.Sin( _t * 1.8f ) * 3f )}px);";
+	}
+
+	// ------------------------------------------------------------------ armory tab
+
+	private static Rect2 SkinRect( int i )
+	{
+		var skin = WeaponSkins.All[i];
+		int n = WeaponSkins.All.Take( i ).Count( s => s.Hand == skin.Hand );
+		// seven to a row, tall enough for the weapon's picture over its name: 16 swords take three rows, 14 staffs two
+		float top = skin.IsSword ? 28f : 380f;
+		return new Rect2( (n % 7) * 108f, top + (n / 7) * 106f, 104f, 100f );
+	}
+
+	private void ClickSkin( int i )
+	{
+		var skin = WeaponSkins.All[i];
+		_skinSel = skin.Id;
+		_detailAt = _t;
+		var inv = Inv;
+		if ( !inv.IsValid() ) return;
+		inv.MarkSeen( "skin:" + skin.Id );
+		if ( !inv.HasSkin( skin.Id ) )
+		{
+			_shakes[$"sk{i}"] = _t;
+			Toast( "Not found yet", true );
+			Sfx( "inventory_denied" );
+			return;
+		}
+		if ( inv.SkinFor( skin.Hand ) != skin.Id ) EquipSkin( skin.Id );
+		else _lands[$"sk{i}"] = _t;
+	}
+
+	private void EquipSkin( string id )
+	{
+		var inv = Inv;
+		if ( !inv.IsValid() || !inv.EquipSkin( id ) ) return;
+		var skin = WeaponSkins.Get( id );
+		int i = Array.IndexOf( WeaponSkins.All, skin );
+		_lands[$"sk{i}"] = _t;
+		if ( skin.IsSword ) _equipAtLeft = _t; else _equipAtRight = _t;
+		Toast( $"{skin.Name} equipped", false );
+		Sfx( "inventory_equip" );
+	}
+
+	private void HoverSkin( int i, bool on )
+	{
+		if ( on )
+		{
+			if ( _skinHover != i ) _detailAt = _t;
+			_skinHover = i;
+			Inv?.MarkSeen( "skin:" + WeaponSkins.All[i].Id );
+		}
+		else if ( _skinHover == i ) _skinHover = -1;
+	}
+
+	private string SkinShownId() => _skinHover >= 0 ? WeaponSkins.All[_skinHover].Id : _skinSel;
+
+	private string SkinCardStyle( int i )
+	{
+		var r = SkinRect( i );
+		var key = $"sk{i}";
+		float appear = Appear( 0.04f + i * 0.025f );
+		float hover = _skinHover == i ? 1f : 0f;
+		float land = Land( key );
+		float ty = (1f - appear) * 18f - 4f * hover - 6f * MathF.Sin( land * MathF.PI ) * land;
+		var css = $"left: {F( r.X )}px; top: {F( r.Y )}px; width: {F( r.W )}px; height: {F( r.H )}px; opacity: {F( appear )}; transform: translateX({F( Shake( key ) )}px) translateY({F( ty )}px);";
+		if ( land > 0f ) css += $" box-shadow: 0px 0px {F( 24f * land )}px rgba(232, 217, 168, {F( 0.6f * land )});";
+		return css;
+	}
+
+	private string EquipBadgeStyle( HandSide hand )
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, hand == HandSide.Left ? _equipAtLeft : _equipAtRight, 0.3f ) );
+		return $"opacity: {F( p )}; transform: translateY({F( (1f - p) * 8f )}px);";
+	}
+
+	// ------------------------------------------------------------------ the tour
+	// The first time the window is ever opened (user, 2026-09-21: a taken scroll's reveal says "Press Tab", and the
+	// first Tab explains the window): the window goes dark but for one lit area at a time, a card beside it says what
+	// is shown there, and Next walks on, turning the pages itself. The shade takes every click, so nothing under it
+	// can be pressed. Read to the end or skipped, it never comes back on its own (RunSaveData.InventoryTourDone);
+	// closing the window mid-tour leaves it for the next open, and "Guide" by the purse plays it again.
+
+	/// <summary>Hole and card are in the window's own pixels (1280 x 780).</summary>
+	private readonly record struct TourStep( int Tab, Rect2 Hole, float CardX, float CardY, string Title, string[] Lines );
+
+	/// <summary>A rectangle of the page as a hole in the window (.content sits at 24, 84), with a little air around it.</summary>
+	private static Rect2 OnPage( float x, float y, float w, float h ) => new( 24f + x - 8f, 84f + y - 8f, w + 16f, h + 16f );
+
+	private const float TourCardW = 400f;
+
+	/// <summary>The purse row is as wide as what is in it (Abandon run comes and goes), so its hole is measured: this is only the stand-in until it has a layout.</summary>
+	private static readonly Rect2 PurseHole = new( 640f, 12f, 624f, 56f );
+	private Panel WindowPanel { get; set; }
+	private Panel PursePanel { get; set; }
+
+	private Rect2 TourHole( int step )
+	{
+		var hole = TourSteps[step].Hole;
+		if ( hole != PurseHole || !WindowPanel.IsValid() || !PursePanel.IsValid() || PursePanel.Box.Rect.Width <= 0f ) return hole;
+		var w = WindowPanel.Box.Rect;
+		var p = PursePanel.Box.Rect;
+		float s = WindowPanel.ScaleFromScreen;
+		return new Rect2( (p.Left - w.Left) * s - 10f, (p.Top - w.Top) * s - 10f, p.Width * s + 20f, p.Height * s + 20f );
+	}
+
+	private static readonly TourStep[] TourSteps =
+	{
+		new( TabStaff, new Rect2( 16f, 8f, 544f, 64f ), 40f, 100f, "Your inventory", new[]
+		{
+			"Tab opens and closes this window, in the village and in the dungeon.",
+			"It has four pages. Staff is the run you are on. Index is every scroll you have found. Armory and Wardrobe are how you look.",
+		} ),
+		new( TabStaff, OnPage( 0f, 0f, 368f, 276f ), 424f, 110f, "Your spell", new[]
+		{
+			"Your staff casts one spell. Under it lies your spellbook: every spell you have learned.",
+			"In the village, click a learned spell to start your next run with it. In the dungeon, a gold-sealed scroll swaps the spell on your staff.",
+		} ),
+		new( TabStaff, OnPage( 400f, 0f, 832f, 640f ), 8f, 240f, "Scrolls on your staff", new[]
+		{
+			"Every scroll you take with E lands here and stays until the run ends. Each one changes how your spell behaves, and up to three copies of the same scroll stack.",
+			"Hover a scroll and Details, underneath, tells what it does at one, two and three copies. A violet edge marks a black seal: power at a price.",
+		} ),
+		new( TabStaff, OnPage( 0f, 290f, 368f, 350f ), 424f, 380f, "Your cast and your boons", new[]
+		{
+			"Your cast is the spell with everything counted in: its damage, its cost and how fast it fires. Green is better than the bare spell, red is worse.",
+			"Boons are picked between floors; hover one to read it. Scrolls and boons last for one run.",
+		} ),
+		new( TabStaff, PurseHole, 840f, 100f, "Void shards", new[]
+		{
+			"What you carry in the dungeon, or what is banked while you are home. Shards buy scrolls, potions and weapons at the village shop, and they come home with you even when you die.",
+			"While a run is on, Abandon run gives it up from here.",
+		} ),
+		new( TabIndex, OnPage( 0f, 0f, 772f, 640f ), 836f, 170f, "The Index", new[]
+		{
+			"Every scroll there is. One you have never taken lies sealed on the dungeon floor: you find out what it is by taking it.",
+			"Once a scroll has been on your staff it is known for good. From then on it lies open and names itself, so taking it is a choice. Click a known scroll here to read it again.",
+		} ),
+		new( TabArmory, OnPage( 0f, 0f, 772f, 640f ), 836f, 170f, "The Armory", new[]
+		{
+			"The swords and staffs you have found. They are cosmetic: a skin changes how your weapon looks, never what it does.",
+			"Some are won by killing the monsters that carry them, others turn up in crates and barrels or on the shop's table. Once found they are yours for good. Click one you own to equip it.",
+		} ),
+		new( TabWardrobe, OnPage( 0f, 0f, 640f, 640f ), 770f, 170f, "The Wardrobe", new[]
+		{
+			"Your mage's clothes, colours and hair. Cosmetic too: wear what you like.",
+			"Pick a piece on the figure, then choose what to wear from the list on this side. B opens the inventory straight on this page.",
+		} ),
+	};
+
+	/// <summary>The step showing, -1 while there is no tour.</summary>
+	private int _tour = -1;
+	private float _tourBeganAt;
+	private float _tourStepAt;
+	private Rect2 _hole;
+
+	private void StartTour()
+	{
+		_tourBeganAt = _t;
+		_hole = TourSteps[0].Hole;
+		TourGo( 0 );
+		// the first card waits for the window to finish opening
+		if ( _t - _openAt < OpenDuration ) _tourStepAt = _openAt + OpenDuration;
+	}
+
+	private void TourGo( int step )
+	{
+		_tour = Math.Clamp( step, 0, TourSteps.Length - 1 );
+		_tourStepAt = _t;
+		if ( TourSteps[_tour].Tab != _tab ) SelectTab( TourSteps[_tour].Tab );
+	}
+
+	private void TourNext()
+	{
+		if ( _tour >= TourSteps.Length - 1 ) EndTour();
+		else TourGo( _tour + 1 );
+	}
+
+	/// <summary>Got it, or Skip: either way it has been offered, and it does not come back by itself.</summary>
+	private void EndTour()
+	{
+		_tour = -1;
+		if ( _tab != TabStaff ) SelectTab( TabStaff );
+		if ( RunSave.Data.InventoryTourDone ) return;
+		RunSave.Data.InventoryTourDone = true;
+		RunSave.Save();
+	}
+
+	/// <summary>The lit area glides from one step's rectangle to the next.</summary>
+	private void TickTour( float dt )
+	{
+		if ( _tour < 0 ) return;
+		var to = TourHole( _tour );
+		float k = 1f - MathF.Exp( -dt * 11f );
+		_hole = new Rect2( MathX.Lerp( _hole.X, to.X, k ), MathX.Lerp( _hole.Y, to.Y, k ), MathX.Lerp( _hole.W, to.W, k ), MathX.Lerp( _hole.H, to.H, k ) );
+	}
+
+	/// <summary>
+	/// The dark around the lit area: a bar over it, a bar under it, and one each side between them, out to where the
+	/// iron frame hangs past the window. Whole pixels, so the four meet without a seam.
+	/// </summary>
+	private string TourShadeStyle( int side )
+	{
+		const float l = -16f, t = -22f, r = 1296f, b = 802f;
+		float x0 = MathF.Round( _hole.X ), y0 = MathF.Round( _hole.Y ), x1 = MathF.Round( _hole.X + _hole.W ), y1 = MathF.Round( _hole.Y + _hole.H );
+		var (x, y, w, h) = side switch
+		{
+			0 => (l, t, r - l, y0 - t),
+			1 => (l, y1, r - l, b - y1),
+			2 => (l, y0, x0 - l, y1 - y0),
+			_ => (x1, y0, r - x1, y1 - y0),
+		};
+		float a = 0.78f * Ease.OutCubic( Ease.Window( _t, _tourBeganAt, 0.35f ) );
+		return $"left: {F( x )}px; top: {F( y )}px; width: {F( MathF.Max( 0f, w ) )}px; height: {F( MathF.Max( 0f, h ) )}px; background-color: rgba(3, 3, 8, {F( a )});";
+	}
+
+	private string TourHoleStyle()
+	{
+		float a = Ease.OutCubic( Ease.Window( _t, _tourBeganAt, 0.35f ) );
+		float beat = 0.5f + 0.5f * MathF.Sin( _t * 3f );
+		return $"left: {F( MathF.Round( _hole.X ) )}px; top: {F( MathF.Round( _hole.Y ) )}px; width: {F( MathF.Round( _hole.W ) )}px; height: {F( MathF.Round( _hole.H ) )}px; opacity: {F( a )}; box-shadow: 0px 0px {F( 10f + 10f * beat )}px rgba(230, 217, 173, {F( 0.35f + 0.25f * beat )});";
+	}
+
+	private string TourCardStyle()
+	{
+		var step = TourSteps[_tour];
+		float p = Ease.OutCubic( Ease.Window( _t, _tourStepAt, 0.28f ) );
+		return $"left: {F( step.CardX )}px; top: {F( step.CardY )}px; width: {F( TourCardW )}px; opacity: {F( p )}; transform: translateY({F( (1f - p) * 14f )}px);";
+	}
+
+	/// <summary>Dev: a new player's inventory again (the tour on the next Tab, "Press Tab" under the next scroll).</summary>
+	[ConCmd( "inv_tour_reset" )]
+	public static void TourResetCommand()
+	{
+		RunSave.Load();
+		RunSave.Data.InventoryTourDone = false;
+		RunSave.Data.StaffLookedAt = false;
+		RunSave.Save();
+		Log.Info( "[Inventory] tour reset: it plays on the next Tab" );
+	}
+
+	// ------------------------------------------------------------------ chrome
+
+	private float BackdropAlpha()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _openAt, 0.25f ) );
+		if ( _closing ) p *= 1f - Ease.Window( _t, _closeAt, CloseDuration );
+		return p;
+	}
+
+	private string WindowStyle()
+	{
+		float p = Ease.OutCubic( Ease.Window( _t, _openAt, OpenDuration ) );
+		float opacity = p, ty = (1f - p) * 26f, scale = 0.96f + 0.04f * p;
+		if ( _closing )
+		{
+			float c = Ease.InQuad( Ease.Window( _t, _closeAt, CloseDuration ) );
+			opacity *= 1f - c;
+			ty += c * 12f;
+			scale *= 1f - 0.03f * c;
+		}
+		return $"opacity: {F( opacity )}; transform: translateY({F( ty )}px) scale({F( scale )});";
+	}
+
+	private string PageStyle()
+	{
+		if ( _tabAt < _openAt ) return "";
+		float p = Ease.OutCubic( Ease.Window( _t, _tabAt, TabSlide ) );
+		return $"transform: translateX({F( (1f - p) * 26f * _tabDir )}px);";
+	}
+
+	private string BadgeStyle()
+	{
+		float beat = 0.5f + 0.5f * MathF.Sin( _t * 4f );
+		return $"opacity: {F( 0.6f + 0.4f * beat )};";
+	}
+
+	private string PurseStyle()
+	{
+		float p = Ease.Window( _t, _purseAt, 0.5f );
+		if ( p >= 1f ) return "";
+		return $"color: rgb({F( Ease.Lerp( 255f, 216f, p ) )}, {F( Ease.Lerp( 200f, 212f, p ) )}, {F( Ease.Lerp( 90f, 200f, p ) )}); transform: translateY({F( -3f * MathF.Sin( p * MathF.PI ) )}px);";
+	}
+
+	private string ToastStyle()
+	{
+		float age = _t - _toastAt;
+		if ( age >= ToastSeconds ) return "opacity: 0;";
+		float inP = Ease.OutCubic( Ease.Window( age, 0f, 0.18f ) );
+		float outP = Ease.Window( age, ToastSeconds - 0.4f, 0.4f );
+		return $"opacity: {F( inP * (1f - outP) )}; transform: translateY({F( (1f - inP) * 8f )}px); color: {(_toastBad ? "#e0806e" : "#e8d9a8")};";
+	}
+
+	private string FooterHint() => _tab switch
+	{
+		TabStaff => PlayerInventory.CanChooseSpell ? "Click a spell you know to start your next run with it · Tab closes" : "Scrolls you take stay on the staff until the run ends · Tab closes",
+		TabIndex => "Every scroll you have ever held: a known scroll lies open when you find it again · Tab closes",
+		TabArmory => "Click a weapon you own to equip it · Tab closes",
+		TabWardrobe => "Pick a piece on the figure, then what to wear · drag the figure to turn it · B or Tab closes",
+		_ => "Tab closes",
+	};
+
+}

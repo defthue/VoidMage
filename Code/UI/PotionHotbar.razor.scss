@@ -1,0 +1,107 @@
+@import "Themes/_iron_kit.scss";
+
+PotionHotbar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+
+	// bottom centre, two slots
+	.bar {
+		position: absolute;
+		bottom: 34px;
+		left: 50%;
+		transform: translateX( -50% );
+		flex-direction: row;
+		align-items: flex-end;
+	}
+
+	.slot {
+		position: relative;
+		// Wrought Iron: the frame is the kit's stretchy slot on a childless overlay; states tint it
+		width: 58px;
+		height: 68px;
+		margin: 0 6px;
+		align-items: center;
+		justify-content: center;
+		transition: transform 0.12s ease;
+
+		.dfk {
+			border-image-tint: #c4c4cc;
+		}
+
+		.key {
+			position: absolute;
+			top: 3px;
+			left: 8px;
+			font-family: $df-head;
+			font-weight: 400;
+			font-size: 18px;
+			color: $df-dim;
+			text-shadow: 0px 1px 2px #000;
+		}
+
+		.count {
+			position: absolute;
+			bottom: 2px;
+			right: 8px;
+			font-family: $df-head;
+			font-weight: 400;
+			font-size: 22px;
+			color: $df-gold;
+			text-shadow: 0px 1px 3px #000;
+		}
+
+		// a stylised bottle: neck over a rounded body, the liquid rising inside with the count
+		// the thing itself: a baked picture of the flask, or the live frog, over a breath of its own colour
+		.icon, .frog-view {
+			width: 52px;
+			height: 52px;
+			margin-top: 4px;
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+		}
+
+		.frog-view {
+			width: 56px;
+			height: 56px;
+			margin-top: 0px;
+		}
+
+		.glow {
+			position: absolute;
+			left: 8px;
+			top: 12px;
+			width: 42px;
+			height: 44px;
+			border-radius: 50%;
+			opacity: 0.5;
+		}
+
+		&.heal .glow { background: radial-gradient( circle, rgba( 230, 50, 60, 0.75 ) 0%, rgba( 230, 50, 60, 0 ) 70% ); }
+		&.mana .glow { background: radial-gradient( circle, rgba( 80, 130, 255, 0.75 ) 0%, rgba( 80, 130, 255, 0 ) 70% ); }
+		&.frog .glow { background: radial-gradient( circle, rgba( 120, 200, 90, 0.6 ) 0%, rgba( 120, 200, 90, 0 ) 70% ); }
+
+		&.empty {
+			opacity: 0.45;
+		}
+
+		&.pulse {
+			transform: scale( 1.15 );
+
+			.dfk { border-image-tint: #ffffff; }
+		}
+
+		&.drinking .dfk {
+			border-image-tint: #ffe6a6;
+		}
+
+		&.denied {
+			transform: scale( 0.92 );
+
+			.dfk { border-image-tint: #ff7a70; }
+		}
+	}
+}

@@ -1,0 +1,115 @@
+@import "Themes/_iron_kit.scss";
+
+// The bars of the Colossus, Wrought Iron (2026-09-19): plain fills inside the kit stretchy iron bar, whose ornate ends
+// hang outside the element. The name is blackletter, so it is written in mixed case (all caps in blackletter is unreadable).
+BossBar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+
+	.boss {
+		position: absolute;
+		top: 18px;
+		left: 50%;
+		width: 640px;
+		margin-left: -320px;
+		flex-direction: column;
+		align-items: center;
+		// the panel is created when the fight starts: it comes down into place once
+		animation: df-drop 0.6s cubic-bezier( 0.22, 1, 0.36, 1 ) 1;
+
+		&.dying {
+			opacity: 0.35;
+		}
+	}
+
+	.name {
+		font-family: $df-head;
+		font-weight: 400;
+		font-size: 36px;
+		letter-spacing: 2px;
+		margin-bottom: 8px;
+		color: #f1dcc0;
+		text-shadow: 0px 0px 10px rgba( 255, 90, 20, 0.7 ), 0px 2px 3px #000;
+	}
+
+	// the skull row: the layer pips at the left of the bar (the bar itself stays centred under the name)
+	.row {
+		position: relative;
+		width: 600px;
+		margin-bottom: 18px;
+	}
+
+	.pips {
+		position: absolute;
+		left: -34px;
+		top: 3px;
+		flex-direction: row;
+
+		.pip {
+			width: 12px;
+			height: 12px;
+			margin-right: 4px;
+			background-color: rgb( 232, 220, 195 );
+			border: 1px solid rgba( 0, 0, 0, 0.6 );
+			transform: rotate( 45deg );
+			transition: opacity 0.3s ease-out, background-color 0.3s ease-out;
+
+			&.gone {
+				background-color: rgba( 60, 40, 40, 0.5 );
+			}
+		}
+	}
+
+	.skull {
+		position: relative;
+		width: 600px;
+		height: 20px;
+
+		// the second layer (the health under the first): red, seen whole under the draining bone layer
+		.fill {
+			height: 100%;
+			background-color: rgb( 190, 30, 30 );
+			border-top: 3px solid rgba( 255, 255, 255, 0.16 );
+		}
+
+		// the first layer over it: bone, drains from the right like any bar, gone in a beat when both hands fall
+		.guard {
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100%;
+			background-color: rgb( 226, 214, 188 );
+			border-top: 3px solid rgba( 255, 255, 255, 0.35 );
+			transition: width 0.25s ease-out;
+		}
+	}
+
+	.hands {
+		width: 600px;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.hand {
+		position: relative;
+		width: 270px;
+		height: 11px;
+
+		.fill {
+			height: 100%;
+			background-color: rgb( 200, 120, 40 );
+		}
+
+		&.right {
+			flex-direction: row-reverse;
+		}
+
+		&.dead {
+			opacity: 0.25;
+		}
+	}
+}

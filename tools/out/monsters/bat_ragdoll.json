@@ -1,0 +1,49 @@
+{
+  "kind": "bat",
+  "bodies": [
+    "Body",
+    "BodyRoot",
+    "Face",
+    "Head",
+    "Neck",
+    "Shoulder_L",
+    "Shoulder_R",
+    "UpperLeg_L",
+    "UpperLeg_R",
+    "Wing1_L",
+    "Wing1_R",
+    "Wing2_L",
+    "Wing2_R",
+    "Wing3_L",
+    "Wing3_R",
+    "Wing4_L"
+  ],
+  "connectors": [
+    "Neck"
+  ],
+  "welds": {},
+  "verts": {
+    "Wing1_L": 6,
+    "Shoulder_L": 11,
+    "Body": 8,
+    "Head": 16,
+    "Wing2_L": 38,
+    "Wing4_L": 27,
+    "Wing3_L": 8,
+    "UpperLeg_L": 11,
+    "Feet_L": 21,
+    "Nose": 18,
+    "Face": 228,
+    "LowerLeg_L": 4,
+    "Wing1_R": 7,
+    "Shoulder_R": 10,
+    "Wing2_R": 31,
+    "Wing3_R": 15,
+    "Wing4_R": 26,
+    "UpperLeg_R": 11,
+    "Feet_R": 21,
+    "LowerLeg_R": 4,
+    "BodyRoot": 6
+  },
+  "total_verts": 527
+}

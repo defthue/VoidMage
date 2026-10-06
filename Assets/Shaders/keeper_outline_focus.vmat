@@ -1,0 +1,20 @@
+// The outline John the shopkeeper wears while he is the thing E would talk to (Shopkeeper.Highlight). The pickups'
+// potion_outline_focus.vmat is a bold line for a bottle on a table; on a whole body an arm's length away it is far too
+// much (user, 2026-09-18), so his is the same plain white at under half the width.
+
+Layer0
+{
+	shader "shaders/heden_outline.shader"
+
+	//---- Outline ----
+	g_flInteractBreatheAmount "0.000"
+	g_flInteractBreatheHz "1.000"
+	g_flInteractThicken "0.000"
+	g_flOutlineMaxWorld "2.000"
+	g_flOutlineMinWorld "0.100"
+	g_flOutlineScreenWidth "2.000"
+	g_flZoneDarknessResponse "0.000"
+	g_vInteractTint "[1.000000 1.000000 1.000000 0.000000]"
+	g_vOutlineColor "[1.000000 1.000000 1.000000 0.000000]"
+	ToonRampNight "materials/heden_ramp_night.png"
+}

@@ -1,0 +1,122 @@
+{
+  "kind": "rat",
+  "title": "Rat",
+  "blend": "C:\\Users\\skipp\\Desktop\\Speelboord Studios\\Easy Animated Enemy Pack - Jan 2019\\Easy Animated Enemy Pack - Jan 2019\\Blends\\Rat.blend",
+  "fps": 24.0,
+  "armature": "Armature",
+  "root_bone": "root",
+  "bones": [
+    "root",
+    "FrontFoot.R",
+    "Body",
+    "FrontLeg.R",
+    "FrontUpLeg.R",
+    "FrontLowLeg.R",
+    "BackLeg.R",
+    "BackUpLeg.R",
+    "BackLowLeg.R",
+    "FrontLeg.L",
+    "FrontUpLeg.L",
+    "FrontLowLeg.L",
+    "BackLeg.L",
+    "BackUpLeg.L",
+    "BackLowLeg.L",
+    "Back",
+    "Tail1",
+    "Tail2",
+    "Tail3",
+    "Tail4",
+    "Tail5",
+    "Tail6",
+    "Tail7",
+    "Shoulders",
+    "Neck",
+    "Head",
+    "Hips",
+    "Torso",
+    "BackFoot.R",
+    "FrontFoot.L",
+    "BackFoot.L"
+  ],
+  "body_mesh": "Rat",
+  "outline_mesh": "Rat_Outline",
+  "materials": {
+    "MonsterRatPink": {
+      "pack_slot": "Pink",
+      "linear": [
+        0.8,
+        0.460398,
+        0.411693
+      ]
+    },
+    "MonsterRatGrey": {
+      "pack_slot": "Grey",
+      "linear": [
+        0.142395,
+        0.120061,
+        0.131309
+      ]
+    }
+  },
+  "mat_prefix": "MonsterRat",
+  "rest_min": [
+    -0.7548,
+    -2.0872,
+    -0.0012
+  ],
+  "rest_max": [
+    0.7553,
+    4.7205,
+    2.2431
+  ],
+  "rest_size": [
+    1.51,
+    6.8077,
+    2.2443
+  ],
+  "rest_max_dim": 6.8077,
+  "clips": [
+    {
+      "name": "attack",
+      "action": "Rat_Attack",
+      "start": 0,
+      "end": 16,
+      "seconds": 0.667
+    },
+    {
+      "name": "death",
+      "action": "Rat_Death",
+      "start": 0,
+      "end": 26,
+      "seconds": 1.083
+    },
+    {
+      "name": "idle",
+      "action": "Rat_Idle",
+      "start": 0,
+      "end": 57,
+      "seconds": 2.375
+    },
+    {
+      "name": "jump",
+      "action": "Rat_Jump",
+      "start": 0,
+      "end": 20,
+      "seconds": 0.833
+    },
+    {
+      "name": "run",
+      "action": "Rat_Run",
+      "start": 0,
+      "end": 12,
+      "seconds": 0.5
+    },
+    {
+      "name": "walk",
+      "action": "Rat_Walk",
+      "start": 0,
+      "end": 32,
+      "seconds": 1.333
+    }
+  ]
+}

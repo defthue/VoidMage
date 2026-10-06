@@ -1,0 +1,135 @@
+{
+  "kind": "dragon",
+  "title": "Dragon",
+  "blend": "C:\\Users\\skipp\\Desktop\\Speelboord Studios\\Monster Pack Animated by Quaternius\\Blend\\Dragon.blend",
+  "fps": 24.0,
+  "armature": "DragonArmature",
+  "root_bone": "Root",
+  "bones": [
+    "Root",
+    "BodyRoot",
+    "Body",
+    "Neck",
+    "Head",
+    "Face",
+    "Nose",
+    "Shoulder.L",
+    "Wing1.L",
+    "Wing2.L",
+    "Wing3.L",
+    "Wing4.L",
+    "Shoulder.R",
+    "Wing1.R",
+    "Wing2.R",
+    "Wing3.R",
+    "Wing4.R",
+    "UpperLeg.L",
+    "LowerLeg.L",
+    "Feet.L",
+    "UpperLeg.R",
+    "LowerLeg.R",
+    "Feet.R",
+    "Tail1",
+    "Tail2",
+    "Tail3",
+    "Tail4"
+  ],
+  "body_mesh": "Dragon",
+  "outline_mesh": "Dragon_Outline",
+  "materials": {
+    "MonsterDragonMain": {
+      "pack_slot": "Main",
+      "linear": [
+        0.049707,
+        0.011612,
+        0.014444
+      ]
+    },
+    "MonsterDragonWings": {
+      "pack_slot": "Wings",
+      "linear": [
+        0.01341,
+        0.01341,
+        0.01341
+      ]
+    },
+    "MonsterDragonBelly": {
+      "pack_slot": "Belly",
+      "linear": [
+        0.326376,
+        0.226141,
+        0.023457
+      ]
+    },
+    "MonsterDragonClaws": {
+      "pack_slot": "Claws",
+      "linear": [
+        0.009018,
+        0.009018,
+        0.009018
+      ]
+    },
+    "MonsterDragonEyes": {
+      "pack_slot": "Eyes",
+      "linear": [
+        0.01341,
+        0.01341,
+        0.01341
+      ]
+    }
+  },
+  "mat_prefix": "MonsterDragon",
+  "rest_min": [
+    -2.9152,
+    -1.8061,
+    0.1073
+  ],
+  "rest_max": [
+    2.8458,
+    2.3279,
+    3.6027
+  ],
+  "rest_size": [
+    5.761,
+    4.134,
+    3.4955
+  ],
+  "rest_max_dim": 5.761,
+  "clips": [
+    {
+      "name": "attack",
+      "action": "Dragon_Attack",
+      "start": 0,
+      "end": 21,
+      "seconds": 0.875
+    },
+    {
+      "name": "attack2",
+      "action": "Dragon_Attack2",
+      "start": 0,
+      "end": 40,
+      "seconds": 1.667
+    },
+    {
+      "name": "death",
+      "action": "Dragon_Death",
+      "start": 0,
+      "end": 29,
+      "seconds": 1.208
+    },
+    {
+      "name": "flying",
+      "action": "Dragon_Flying",
+      "start": 0,
+      "end": 40,
+      "seconds": 1.667
+    },
+    {
+      "name": "hit",
+      "action": "Dragon_Hit",
+      "start": 0,
+      "end": 40,
+      "seconds": 1.667
+    }
+  ]
+}

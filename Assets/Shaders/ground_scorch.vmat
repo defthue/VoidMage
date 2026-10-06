@@ -1,0 +1,7 @@
+// The fireball's scorch mark: GroundBreak cracks stamped through the splat shader, whose
+// ember/fade state GroundScorch drives per frame.
+Layer0
+{
+	shader "shaders/heden_ground_splat.shader"
+	TextureColor "vfx/polygonparticles_groundbreak.png"
+}

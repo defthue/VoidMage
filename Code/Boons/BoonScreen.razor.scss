@@ -1,0 +1,309 @@
+@import "../UI/Themes/_iron_kit.scss";
+
+// The boon pick between floors. Every moving value (transform, opacity, glow) is written inline from C# each
+// frame (BoonScreen.razor); this sheet is only the look. Palette follows RunUi: gold headings, void purple, bone text.
+BoonScreen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	// Wrought Iron (2026-09-19): type and frames from the iron kit. A card's frame is the kit's stretchy panel on a
+	// childless overlay inside each side, tinted by family on the face; the sheen sweeps in its own clipped layer
+	// because the frame hangs outside the face.
+	font-family: $df-body;
+	font-weight: 600;
+	color: $df-text;
+
+	.backdrop {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		pointer-events: all;
+	}
+
+	.motes {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+
+		.mote {
+			position: absolute;
+			border-radius: 50%;
+			background-color: #9a6ad0;
+			box-shadow: 0px 0px 8px #7c3fae;
+		}
+	}
+
+	.header {
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 40px;
+		pointer-events: none;
+
+		.title {
+			font-family: $df-head;
+			font-weight: 400;
+			font-size: 64px;
+			color: $df-gold;
+			text-shadow: 0px 2px 12px #000;
+		}
+
+		.subtitle {
+			font-size: 26px;
+			color: $df-label;
+			text-shadow: 0px 1px 6px #000;
+		}
+	}
+
+	.row {
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		height: 440px;
+	}
+
+	.slot {
+		width: 340px;
+		height: 440px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.card {
+		position: relative;
+		width: 290px;
+		height: 410px;
+		border-radius: 10px;
+		cursor: pointer;
+
+		.back, .face {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: 10px;
+			pointer-events: none;
+		}
+
+		.back {
+			padding: 12px;
+
+			.dfk {
+				border-image-tint: #b9a2d8;
+			}
+
+			.back-frame {
+				width: 100%;
+				height: 100%;
+				justify-content: center;
+				align-items: center;
+				background: linear-gradient(to bottom, rgba(40, 24, 60, 0.55), rgba(12, 8, 18, 0));
+			}
+
+			.back-rune {
+				font-family: "Noto Sans Runic", Almendra;
+				font-size: 120px;
+				color: #5a3c80;
+				text-shadow: 0px 0px 18px #7c3fae;
+			}
+		}
+
+		.face {
+			flex-direction: column;
+			align-items: center;
+			padding: 22px 20px;
+
+			.dfk {
+				border-image-tint: #c4c4cc;
+			}
+
+			.clip {
+				position: absolute;
+				left: 5px;
+				top: 5px;
+				right: 5px;
+				bottom: 5px;
+				overflow: hidden;
+				pointer-events: none;
+			}
+
+			.glyph {
+				font-family: "Noto Sans Runic", Almendra;
+				font-size: 72px;
+				height: 96px;
+				color: #8a8f98;
+			}
+
+			.name {
+				font-family: $df-head;
+				font-weight: 400;
+				font-size: 36px;
+				color: $df-gold;
+				text-align: center;
+				text-shadow: 0px 0px 6px #000;
+			}
+
+			.family {
+				font-size: 18px;
+				color: $df-dim;
+				letter-spacing: 3px;
+				text-transform: uppercase;
+				margin-top: 2px;
+			}
+
+			.divider {
+				width: 78%;
+				height: 14px;
+				margin: 12px 0px 14px 0px;
+				background-image: url("ui/darkfantasy/kit/divider.png");
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+				opacity: 0.85;
+			}
+
+			.lines {
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+			}
+
+			.line {
+				font-size: 25px;
+				color: $df-text;
+				text-align: center;
+				margin-bottom: 10px;
+				text-shadow: 0px 0px 4px #000;
+
+				&.cost {
+					color: #d0463c;
+					margin-top: 8px;
+				}
+			}
+
+			// the light sweep across the face as the card turns over
+			.sweep {
+				position: absolute;
+				top: -10%;
+				width: 60px;
+				height: 120%;
+				margin-left: -30px;
+				background: linear-gradient(to right, rgba(255, 245, 220, 0), rgba(255, 245, 220, 0.9), rgba(255, 245, 220, 0));
+				transform: skewX(-18deg);
+			}
+		}
+
+		// family colours: the glyph and the frame
+		&.edge .face .glyph { color: #c9b27a; }
+		&.font .face .glyph { color: #7c9ae8; }
+		&.vein .face .glyph { color: #c65050; }
+		&.hoard .face .glyph { color: #d8b24a; }
+		&.step .face .glyph { color: #66b890; }
+
+		&.edge .face .dfk { border-image-tint: #e6d3a0; }
+		&.font .face .dfk { border-image-tint: #a9bdf5; }
+		&.vein .face .dfk { border-image-tint: #f0a0a0; }
+		&.hoard .face .dfk { border-image-tint: #f2d684; }
+		&.step .face .dfk { border-image-tint: #a4e6c4; }
+
+		&.pact {
+			.face {
+				.dfk { border-image-tint: #ff8a80; }
+
+				.glyph { color: #d0463c; }
+				.name { color: #f0c8b8; }
+				.family { color: #a0544c; }
+				.divider { background-tint: #ff8a80; }
+			}
+
+			.back {
+				.dfk { border-image-tint: #d86a6a; }
+				.back-rune { color: #7a2226; text-shadow: 0px 0px 18px #9a1b1b; }
+			}
+		}
+
+		&.hover .face .dfk { border-image-tint: #ffffff; }
+		&.pact.hover .face .dfk { border-image-tint: #ffb0a6; }
+	}
+
+	.footer {
+		flex-direction: column;
+		align-items: center;
+		margin-top: 36px;
+
+		.reroll {
+			position: relative;
+			flex-direction: row;
+			height: 52px;
+			min-width: 240px;
+			padding: 0px 46px;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+			pointer-events: all;
+
+			.t {
+				font-family: $df-head;
+				font-weight: 400;
+				font-size: 27px;
+				text-shadow: 0px 1px 3px #000;
+			}
+
+			.dfk { border-image-tint: #cdb4f2; }
+
+			&:hover .dfk { border-image-tint: #ead9ff; }
+
+			&.poor {
+				.t { color: $df-dim; }
+				.dfk { border-image-tint: #8a8a94; }
+			}
+		}
+
+		.carried {
+			flex-direction: row;
+			margin-top: 14px;
+			font-size: 21px;
+			color: $df-label;
+
+			&.flash .shard {
+				color: #d0463c;
+			}
+		}
+	}
+
+	.shard {
+		color: $df-void;
+		margin-left: 8px;
+	}
+
+	.waiting {
+		position: absolute;
+		bottom: 12%;
+		flex-direction: row;
+		align-items: center;
+
+		.spinner {
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 34px;
+			color: #7c3fae;
+			margin-right: 14px;
+		}
+
+		.waiting-text {
+			font-family: $df-head;
+			font-weight: 400;
+			font-size: 28px;
+			color: $df-label;
+		}
+	}
+}

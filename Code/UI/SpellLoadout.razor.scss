@@ -1,0 +1,1411 @@
+@import "Themes/_iron_kit.scss";
+// Placeholder look (the full UI design sweep replaces it). Positions and motion are set inline from C#; this file
+// only draws boxes, so every rectangle below is absolute and sized by the razor.
+
+SpellLoadout {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	justify-content: center;
+	align-items: center;
+	font-family: Almendra;
+	color: #d8d4c8;
+
+	.backdrop {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient(circle, rgba(8, 6, 14, 0.55) 0%, rgba(4, 3, 8, 0.9) 100%);
+	}
+
+	.window {
+		position: relative;
+		pointer-events: all;
+		width: 1280px;
+		height: 780px;
+		background-color: #121318f2;
+		border: 1px solid #3e4350;
+		border-radius: 8px;
+		box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.7);
+	}
+
+	.spacer {
+		flex-grow: 1;
+	}
+
+	.dim {
+		color: #7a766c;
+		font-size: 13px;
+		margin-left: 6px;
+	}
+
+	.rune {
+		font-family: "Noto Sans Runic", Almendra;
+	}
+
+	// ---------------------------------------------------------------- header
+
+	.tabs {
+		position: absolute;
+		left: 24px;
+		top: 16px;
+		width: 700px;
+		height: 52px;
+	}
+
+	.tab {
+		position: absolute;
+		top: 0;
+		height: 52px;
+		justify-content: center;
+		align-items: center;
+		font-size: 22px;
+		font-weight: 700;
+		color: #8a867c;
+		cursor: pointer;
+
+		&:hover {
+			color: #c8c4b8;
+		}
+
+		&.on {
+			color: #e8d9a8;
+		}
+
+		.badge {
+			position: absolute;
+			top: 10px;
+			right: 22px;
+			width: 8px;
+			height: 8px;
+			border-radius: 4px;
+			background-color: #e8d9a8;
+		}
+	}
+
+	.underline {
+		position: absolute;
+		top: 48px;
+		height: 3px;
+		border-radius: 2px;
+		background-color: #e8d9a8;
+	}
+
+	.purse {
+		position: absolute;
+		right: 24px;
+		top: 26px;
+		flex-direction: row;
+		align-items: center;
+
+		.where {
+			font-size: 13px;
+			padding: 3px 10px;
+			margin-right: 14px;
+			border: 1px solid #4a3a5a;
+			border-radius: 10px;
+			color: #b89ad8;
+
+			&.home {
+				border-color: #5a4e34;
+				color: #d8b24a;
+			}
+		}
+
+		.shards {
+			font-size: 22px;
+			font-weight: 700;
+			color: #d8d4c8;
+		}
+	}
+
+	.found-banner {
+		position: absolute;
+		top: -78px;
+		left: 290px;
+		width: 700px;
+		height: 64px;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: #1a1510f2;
+		border: 1px solid #8a6a2a;
+		border-radius: 8px;
+
+		.found-title {
+			font-size: 24px;
+			font-weight: 700;
+			color: #e8d9a8;
+
+			span {
+				margin-left: 8px;
+			}
+		}
+
+		.found-sub {
+			font-size: 14px;
+			color: #a8a294;
+		}
+	}
+
+	// ---------------------------------------------------------------- page
+
+	.content {
+		position: absolute;
+		left: 24px;
+		top: 84px;
+		width: 1232px;
+		height: 640px;
+	}
+
+	.page {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.section-label {
+		position: absolute;
+		font-size: 16px;
+		font-weight: 700;
+		color: #b8b2a2;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		white-space: nowrap;
+	}
+
+	.none {
+		font-size: 15px;
+		color: #6a665c;
+
+		&.center {
+			align-self: center;
+			margin-top: 260px;
+		}
+	}
+
+	.card {
+		position: absolute;
+		flex-direction: column;
+		padding: 14px 16px;
+		background-color: #181a20;
+		border: 1px solid #2c3038;
+		border-radius: 6px;
+	}
+
+	.footer {
+		position: absolute;
+		left: 24px;
+		bottom: 14px;
+		width: 1232px;
+		height: 26px;
+		flex-direction: row;
+		align-items: center;
+
+		.hint {
+			font-size: 14px;
+			color: #6a665c;
+		}
+
+		.toast {
+			font-size: 16px;
+			font-weight: 700;
+		}
+	}
+
+	// ---------------------------------------------------------------- slots
+
+	.slot {
+		position: absolute;
+		border-radius: 6px;
+		background-color: #0d0e12;
+		border: 1px solid #2a2d35;
+		justify-content: center;
+		align-items: center;
+
+		&.hover {
+			border-color: #6a6e78;
+		}
+
+		&.socket {
+			background-color: #15131c;
+			border: 2px solid #3a3448;
+		}
+
+		&.socket.accept {
+			border-color: #b8a268;
+		}
+
+		&.socket.reject {
+			opacity: 0.4;
+		}
+
+		.empty-hint {
+			font-size: 13px;
+			color: #4a4658;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+		}
+	}
+
+	.socket.spell {
+		flex-direction: column;
+		justify-content: flex-start;
+
+		.socket-head {
+			width: 100%;
+			height: 26px;
+			flex-direction: row;
+			align-items: center;
+			padding: 0px 8px;
+			border-bottom: 1px solid #2a2636;
+
+			.key {
+				font-size: 15px;
+				font-weight: 700;
+				color: #8a849a;
+				margin-right: 8px;
+			}
+
+			.state {
+				font-size: 12px;
+				color: #5a5668;
+			}
+
+			&.active {
+				background-color: #2a2418;
+
+				.key, .state {
+					color: #e8d9a8;
+				}
+			}
+		}
+
+		.tile {
+			width: 124px;
+			height: 104px;
+			margin-top: 8px;
+
+			.rune {
+				font-size: 50px;
+			}
+
+			.name {
+				font-size: 15px;
+			}
+		}
+
+		.empty-hint {
+			margin-top: 42px;
+		}
+	}
+
+	.tile {
+		position: relative;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 90%;
+		height: 90%;
+		background-color: #1c1e26;
+		border: 2px solid #555;
+		border-radius: 5px;
+
+		.rune {
+			font-size: 34px;
+			line-height: 38px;
+		}
+
+		.name {
+			font-size: 11px;
+			color: #c8c4b8;
+			white-space: nowrap;
+			overflow: hidden;
+			max-width: 94%;
+		}
+
+		.count {
+			position: absolute;
+			right: 3px;
+			bottom: 1px;
+			font-size: 13px;
+			font-weight: 700;
+			color: #e8d9a8;
+		}
+
+		.burn-bar {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			height: 4px;
+			background-color: #e8782a;
+		}
+	}
+
+	.shelf .tile .rune {
+		font-size: 28px;
+		line-height: 32px;
+	}
+
+	.flyer, .ghost {
+		position: absolute;
+		pointer-events: none;
+		background-color: #22242e;
+		z-index: 20;
+	}
+
+	.ghost {
+		z-index: 30;
+	}
+
+	// ---------------------------------------------------------------- staff tab furniture
+
+	.seal {
+		position: absolute;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(10, 8, 16, 0.78);
+		border: 1px solid #3a2e4a;
+		border-radius: 8px;
+		pointer-events: none;
+
+		.seal-rune {
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 64px;
+			color: #6a4e8a;
+		}
+
+		.seal-text {
+			font-size: 17px;
+			color: #9a88b0;
+		}
+	}
+
+	.brazier {
+		position: absolute;
+		flex-direction: row;
+		align-items: center;
+		padding: 0px 16px;
+		background-color: #18120e;
+		border: 1px dashed #4a3424;
+		border-radius: 6px;
+
+		&.lit {
+			border: 1px solid #b86a2a;
+		}
+
+		.brazier-flame {
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 40px;
+			color: #e8782a;
+			margin-right: 14px;
+		}
+
+		.brazier-text {
+			flex-direction: column;
+		}
+
+		.brazier-title {
+			font-size: 17px;
+			font-weight: 700;
+			color: #d8a068;
+		}
+
+		.brazier-sub {
+			font-size: 12px;
+			color: #7a6a5a;
+		}
+
+		.ember {
+			position: absolute;
+			border-radius: 3px;
+			background-color: #ffb24a;
+			pointer-events: none;
+		}
+
+		.ember-gain {
+			position: absolute;
+			right: 18px;
+			top: 26px;
+			font-size: 22px;
+			font-weight: 700;
+			color: #ffd06a;
+			pointer-events: none;
+		}
+	}
+
+	.boons {
+		position: absolute;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-content: flex-start;
+
+		.boon {
+			position: relative;
+			width: 44px;
+			height: 44px;
+			margin: 0px 8px 8px 0px;
+			justify-content: center;
+			align-items: center;
+			background-color: #1c2026;
+			border: 2px solid #4a4f58;
+			border-radius: 6px;
+
+			.boon-rune {
+				font-family: "Noto Sans Runic", Almendra;
+				font-size: 26px;
+				color: #d8d4c8;
+			}
+
+			.tip {
+				display: none;
+				position: absolute;
+				top: 50px;
+				left: 0px;
+				flex-direction: column;
+				min-width: 220px;
+				padding: 8px 10px;
+				background-color: #0e1013f8;
+				border: 1px solid #4a4f58;
+				border-radius: 4px;
+				z-index: 40;
+
+				.tip-name {
+					font-size: 17px;
+					font-weight: 700;
+					color: #e8d9a8;
+					margin-bottom: 4px;
+				}
+
+				.tip-line {
+					font-size: 14px;
+					white-space: nowrap;
+
+					&.cost {
+						color: #d0463c;
+					}
+				}
+			}
+
+			&:hover .tip {
+				display: flex;
+			}
+
+			&.edge { border-color: #6e6450; .boon-rune { color: #c9b27a; } }
+			&.font { border-color: #46557e; .boon-rune { color: #7c9ae8; } }
+			&.vein { border-color: #6e3434; .boon-rune { color: #c65050; } }
+			&.hoard { border-color: #74623a; .boon-rune { color: #d8b24a; } }
+			&.step { border-color: #3e6a56; .boon-rune { color: #66b890; } }
+			&.pact { border-color: #8a2226; background-color: #2a1014; .boon-rune { color: #d0463c; } }
+		}
+	}
+
+	.hint-block {
+		position: absolute;
+		flex-direction: column;
+		justify-content: flex-end;
+		font-size: 14px;
+		color: #6a665c;
+	}
+
+	.stats {
+		.stats-name {
+			font-size: 22px;
+			font-weight: 700;
+			margin-bottom: 8px;
+		}
+
+		.stat {
+			flex-direction: row;
+			align-items: center;
+			margin-bottom: 5px;
+		}
+
+		.stat-label {
+			width: 96px;
+			font-size: 14px;
+			color: #8a867c;
+		}
+
+		.stat-value {
+			flex-grow: 1;
+			font-size: 15px;
+			font-weight: 700;
+
+			&.up { color: #7cc88a; }
+			&.down { color: #e0806e; }
+		}
+
+		.stats-note {
+			margin-top: 6px;
+			font-size: 12px;
+			color: #b8a268;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+		}
+	}
+
+	.details {
+		.detail-head {
+			flex-direction: row;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		.detail-rune {
+			font-family: "Noto Sans Runic", Almendra;
+			width: 64px;
+			height: 64px;
+			font-size: 40px;
+			justify-content: center;
+			align-items: center;
+			border: 2px solid #555;
+			border-radius: 6px;
+			margin-right: 14px;
+		}
+
+		.detail-title {
+			flex-direction: column;
+		}
+
+		.detail-name {
+			font-size: 26px;
+			font-weight: 700;
+			color: #e8d9a8;
+		}
+
+		.detail-kind {
+			font-size: 13px;
+			color: #8a867c;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.detail-desc {
+			font-size: 16px;
+			color: #c8c4b8;
+			margin-bottom: 10px;
+		}
+
+		.detail-line {
+			font-size: 14px;
+			color: #a8a294;
+			margin-bottom: 2px;
+		}
+
+		.detail-foot {
+			flex-direction: row;
+			margin-top: 12px;
+			font-size: 14px;
+			color: #8a867c;
+		}
+
+		.center {
+			align-self: center;
+			text-align: center;
+		}
+	}
+
+	// ---------------------------------------------------------------- index + armory
+
+	.index-card, .skin-card {
+		position: absolute;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background-color: #181a20;
+		border: 1px solid #2c3038;
+		border-radius: 6px;
+		cursor: pointer;
+
+		&:hover {
+			border-color: #6a6e78;
+		}
+
+		&.selected {
+			border: 2px solid #e8d9a8;
+		}
+
+		&.unknown {
+			background-color: #0f1014;
+
+			.name, .skin-name {
+				color: #4a4f58;
+			}
+		}
+
+		&.new {
+			border-color: #e8d9a8;
+		}
+	}
+
+	.index-card {
+		.rune {
+			font-size: 44px;
+		}
+
+		.name {
+			font-size: 13px;
+			text-align: center;
+			padding: 0px 4px;
+		}
+
+		.owned {
+			position: absolute;
+			top: 4px;
+			right: 6px;
+			font-size: 12px;
+			color: #b8a268;
+		}
+	}
+
+	.skin-card {
+		.skin-rune {
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 26px;
+			color: #b8b2a2;
+		}
+
+		.skin-name {
+			font-size: 12px;
+			text-align: center;
+			padding: 0px 4px;
+		}
+
+		.skin-badge {
+			position: absolute;
+			top: 5px;
+			right: 6px;
+			font-size: 11px;
+			padding: 1px 6px;
+			border-radius: 8px;
+			background-color: #3a3220;
+			color: #e8d9a8;
+		}
+
+		&.equipped {
+			border: 2px solid #b8a268;
+		}
+	}
+
+	.index-detail {
+		align-items: center;
+
+		.big-rune {
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 120px;
+			margin-top: 40px;
+			color: #b8b2a2;
+
+			&.unknown {
+				color: #3a3e48;
+			}
+		}
+	}
+
+	.progress {
+		position: absolute;
+		background-color: #0d0e12;
+		border-radius: 5px;
+		overflow: hidden;
+
+		.progress-fill {
+			height: 100%;
+			background-color: #b8a268;
+		}
+	}
+
+	.progress-text {
+		position: absolute;
+		font-size: 14px;
+		color: #8a867c;
+	}
+
+	.button {
+		font-size: 15px;
+		padding: 5px 12px;
+		margin: 0px 8px 8px 0px;
+		background-color: #22262c;
+		border: 1px solid #4a4f58;
+		border-radius: 4px;
+		cursor: pointer;
+
+		&:hover {
+			border-color: #8a8f98;
+		}
+
+		&.on {
+			border-color: #ffd76a;
+			background-color: #3a3626;
+			color: #ffd76a;
+		}
+
+		&.big {
+			margin-top: 30px;
+			font-size: 20px;
+			padding: 8px 40px;
+			align-self: center;
+		}
+	}
+
+	// ---------------------------------------------------------------- dev tab
+
+	.dev {
+		position: absolute;
+		flex-direction: column;
+
+		.dev-row {
+			flex-direction: row;
+			flex-wrap: wrap;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		.label-inline {
+			font-size: 15px;
+			font-weight: 700;
+			margin: 0px 8px 8px 12px;
+		}
+
+		.readout {
+			font-family: Consolas, monospace;
+			font-size: 13px;
+			color: #b8c4d0;
+			background-color: #0e1013;
+			padding: 8px 10px;
+			border-radius: 4px;
+			margin-bottom: 10px;
+		}
+
+		.dev-note {
+			font-size: 13px;
+			color: #6a665c;
+		}
+	}
+
+
+	// ---------------------------------------------------------------- scroll icons (2026-09-17)
+	// Every scroll is its rendered icon (tools/render_scroll_icons.py) with its two-rune code written on the open paper.
+	// Rune boxes sit on the paper itself, measured on the 512 px render (x 90..424, y 107..411), about 36% of the icon tall.
+	// Later in the file than the old tile rules, so these win.
+
+	.tile {
+		background-color: transparent;
+		border-width: 0px;
+		width: 100%;
+		height: 100%;
+
+		.icon {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.runes {
+			position: absolute;
+			left: 17.6%;
+			top: 20.9%;
+			width: 65.2%;
+			height: 59.4%;
+			justify-content: center;
+			align-items: center;
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 29px;
+		}
+
+		.count {
+			text-shadow: 0px 0px 3px #000;
+		}
+	}
+
+	.socket.spell .tile {
+		width: 118px;
+		height: 118px;
+		margin-top: 0px;
+
+		.runes {
+			font-size: 42px;
+		}
+	}
+
+	.socket.mod .tile .runes { font-size: 29px; }
+	.bag .tile .runes { font-size: 32px; }
+	.shelf .tile .runes { font-size: 20px; }
+	.book .tile .runes { font-size: 16px; }
+	.ghost .runes, .flyer .runes { font-size: 27px; }
+
+	.flyer, .ghost {
+		background-color: transparent;
+	}
+
+	.slot.book {
+		background-color: #15131c;
+		border: 1px solid #3a3448;
+
+		.empty-hint {
+			font-size: 18px;
+			color: #3a3646;
+		}
+	}
+
+	.details .detail-icon {
+		position: relative;
+		width: 72px;
+		height: 72px;
+		margin-right: 14px;
+
+		.icon {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.runes {
+			position: absolute;
+			left: 17.6%;
+			top: 20.9%;
+			width: 65.2%;
+			height: 59.4%;
+			justify-content: center;
+			align-items: center;
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 26px;
+		}
+	}
+
+	.index-card .card-icon {
+		position: relative;
+		width: 64px;
+		height: 64px;
+
+		.icon {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.runes {
+			position: absolute;
+			left: 17.6%;
+			top: 20.9%;
+			width: 65.2%;
+			height: 59.4%;
+			justify-content: center;
+			align-items: center;
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 23px;
+		}
+	}
+
+	.index-card.unknown .card-icon {
+		opacity: 0.25;
+	}
+
+	.index-detail .big-scroll {
+		position: relative;
+		width: 240px;
+		height: 240px;
+		margin-top: 30px;
+
+		.icon {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.runes {
+			position: absolute;
+			left: 17.6%;
+			top: 20.9%;
+			width: 65.2%;
+			height: 59.4%;
+			justify-content: center;
+			align-items: center;
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 86px;
+		}
+
+		&.unknown {
+			opacity: 0.3;
+		}
+	}
+
+	.found-banner .found-open {
+		position: absolute;
+		right: 14px;
+		top: 16px;
+		margin: 0px;
+		pointer-events: all;
+	}
+
+	// ---------------------------------------------------------------- unwrapping a sealed scroll
+
+	.opening-veil {
+		position: absolute;
+		left: -24px;
+		top: -84px;
+		width: 1280px;
+		height: 780px;
+		background-color: #07060c;
+		z-index: 40;
+	}
+
+	.opening {
+		position: absolute;
+		z-index: 41;
+		cursor: pointer;
+
+		.opening-halo {
+			position: absolute;
+			left: 40px;
+			top: 40px;
+			width: 200px;
+			height: 200px;
+			border-radius: 100px;
+		}
+
+		.opening-spark {
+			position: absolute;
+			border-radius: 4px;
+			background-color: #ffd68a;
+		}
+
+		.opening-closed {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.opening-paper {
+			position: absolute;
+			top: 0;
+			height: 100%;
+			overflow: hidden;
+
+			.opening-open {
+				position: absolute;
+				top: 0;
+			}
+		}
+
+		.opening-runes {
+			position: absolute;
+			left: 17.6%;
+			top: 20.9%;
+			width: 65.2%;
+			height: 59.4%;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.opening-rune {
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 100px;
+			margin: 0px 2px;
+		}
+
+		.opening-caption {
+			position: absolute;
+			left: -110px;
+			top: 280px;
+			width: 500px;
+			flex-direction: column;
+			align-items: center;
+
+			.opening-kind {
+				font-size: 16px;
+				color: #b8b2a2;
+				text-transform: uppercase;
+				letter-spacing: 3px;
+			}
+
+			.opening-name {
+				font-size: 38px;
+				font-weight: 700;
+				text-shadow: 0px 2px 8px #000;
+			}
+		}
+	}
+
+	// ---------------------------------------------------------------- looks on trial (2026-09-18)
+	// `hud_style` puts a df-<look> class on the root; each look is a generated sheet (tools/gen_ui_kit.py) imported
+	// below. The .df divs are the frames that hang outside their parent: hidden unless a look turns them on.
+
+	.df {
+		display: none;
+		position: absolute;
+		pointer-events: none;
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+	}
+
+	// A label and its grey side-note are two children in a row (mixed text + span came out in the wrong order
+	// in the engine), sat on one baseline.
+	.section-label, .purse .shards {
+		flex-direction: row;
+		align-items: flex-end;
+	}
+
+	.brazier .brazier-text {
+		width: 200px;
+	}
+
+	.brazier .brazier-sub {
+		white-space: normal;
+	}
+
+	// ---------------------------------------------------------------- armory pictures (2026-09-18)
+	// Catalogue icons are baked (tools/render_weapon_icons.py); the picked weapon is live 3D from Code/UI/ArmoryStage.cs.
+
+	.skin-card .skin-icon {
+		width: 50px;
+		height: 50px;
+	}
+
+	.index-detail .weapon-view {
+		width: 384px;
+		height: 384px;
+		margin-top: 4px;
+		margin-bottom: 8px;
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+	}
+
+	.index-detail .weapon-shade {
+		width: 300px;
+		height: 300px;
+		margin-top: 46px;
+		margin-bottom: 50px;
+	}
+
+	// ---------------------------------------------------------------- "are you sure" before a scroll burns (2026-09-19)
+	// Covers the whole window and takes every click, so nothing behind it can be dropped, picked up or switched.
+
+	.confirm-veil {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(4, 3, 8, 0.74);
+		pointer-events: all;
+		z-index: 60;
+	}
+
+	.confirm {
+		position: relative;
+		width: 460px;
+		height: 244px;
+		flex-direction: column;
+		align-items: center;
+		padding: 20px 28px;
+		background-color: #181a20;
+		border: 1px solid #3e4350;
+		border-radius: 6px;
+
+		.confirm-title {
+			font-size: 26px;
+			font-weight: 700;
+			color: #e8d9a8;
+			margin-bottom: 8px;
+		}
+
+		.confirm-scroll {
+			flex-direction: row;
+			align-items: center;
+			margin-bottom: 6px;
+		}
+
+		.confirm-icon {
+			position: relative;
+			width: 64px;
+			height: 64px;
+			margin-right: 12px;
+
+			.icon {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			.runes {
+				position: absolute;
+				left: 17.6%;
+				top: 20.9%;
+				width: 65.2%;
+				height: 59.4%;
+				justify-content: center;
+				align-items: center;
+				font-family: "Noto Sans Runic", Almendra;
+				font-size: 23px;
+			}
+		}
+
+		.confirm-name {
+			font-size: 24px;
+			font-weight: 700;
+		}
+
+		.confirm-sub {
+			font-size: 16px;
+			color: #a8a294;
+			margin-bottom: 14px;
+		}
+
+		.confirm-buttons {
+			flex-direction: row;
+
+			.button {
+				margin: 0px 10px;
+				font-size: 18px;
+				padding: 7px 28px;
+			}
+
+			.button.danger {
+				border-color: #b8482a;
+				color: #ffb08a;
+			}
+		}
+	}
+
+	.purse .style-switch {
+		font-size: 13px;
+		padding: 3px 10px;
+		margin-right: 14px;
+		border: 1px solid #3e4350;
+		border-radius: 2px;
+		color: #8a867c;
+		cursor: pointer;
+
+		&:hover {
+			color: #e8d9a8;
+			border-color: #8a8f98;
+		}
+	}
+}
+
+@import "Themes/inv_iron.scss";
+@import "Themes/inv_ossuary.scss";
+@import "Themes/inv_chapel.scss";
+
+// "Abandon run", beside the where-am-I pill while a run is on; it asks twice (red while armed)
+SpellLoadout .purse .abandon {
+	font-size: 17px;
+	padding: 3px 12px;
+	margin-right: 14px;
+	border: 1px solid #4a3a3a;
+	border-radius: 2px;
+	color: #9a8a84;
+	cursor: pointer;
+
+	&:hover {
+		color: #e8c8b8;
+		border-color: #a05a4a;
+	}
+
+	&.armed {
+		color: #ff9a80;
+		border-color: #d8403a;
+	}
+}
+
+// ---------------------------------------------------------------- the staff tab of 2026-09-20
+// One spell, the spellbook that picks the starting spell, and the scrolls taken this run. After the looks, so these
+// hold in every one of them (the looks are generated sheets: tools/gen_ui_kit.py). 17 px is the text floor.
+SpellLoadout {
+	.spell-blurb {
+		position: absolute;
+		flex-direction: column;
+		justify-content: center;
+
+		.spell-name {
+			font-size: 28px;
+			font-weight: 700;
+			margin-bottom: 6px;
+			text-shadow: 0px 2px 6px #000;
+		}
+
+		.spell-desc {
+			font-size: 18px;
+			color: #adaabf;
+		}
+	}
+
+	// the spell the next run starts with: a small sun rune on its page, and the page lit
+	.slot.book {
+		cursor: pointer;
+
+		.start-mark {
+			position: absolute;
+			right: -5px;
+			top: -9px;
+			font-family: "Noto Sans Runic", Almendra;
+			font-size: 19px;
+			color: #ffe6a6;
+			text-shadow: 0px 0px 6px #000;
+		}
+
+		&.starting {
+			background-tint: #ffe6a6;
+		}
+	}
+
+	// a black-sealed scroll on the staff wears a cold edge, so what cost you something is findable at a glance
+	.slot.socket.mod.black {
+		background-tint: #b9a4ff;
+	}
+
+	.slot.socket.mod .tile .count {
+		right: 6px;
+		bottom: 2px;
+		font-size: 17px;
+	}
+
+// the stretchy kit frame (Themes/_iron_kit.scss) on the cards this tab sizes itself: the baked df-card-* frames are
+	// pictures of the OLD card sizes and hung far outside the new ones. Only the iron look has a kit.
+	.dfk {
+		display: none;
+	}
+
+	&.df-iron .dfk {
+		display: flex;
+	}
+
+	.slot.socket.mod.empty {
+		opacity: 0.45;
+	}
+
+	.card.stats {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	// the index is a window onto a taller page: the wheel scrolls it, the cards keep their C# rectangles on the page
+	.index-scroll {
+		position: absolute;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		flex-direction: column;
+
+		.index-inner {
+			position: relative;
+			width: 100%;
+			flex-shrink: 0;
+		}
+	}
+
+	.details .detail-line.on {
+		color: #ffe6a6;
+	}
+
+	.details .detail-banner {
+		font-size: 19px;
+		color: #e6d9ad;
+		margin-bottom: 8px;
+	}
+}
+
+// ---------------------------------------------------------------- the first-open tour (2026-09-21)
+// Everything dark but one lit area, and a card beside it. The layer takes every click: only the card's buttons work.
+// Rectangles and fades are inline from C# (SpellLoadout.razor, "the tour"). Above the are-you-sure veil.
+SpellLoadout {
+	.tour {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: all;
+		z-index: 70;
+	}
+
+	.tour-shade {
+		position: absolute;
+	}
+
+	.tour-hole {
+		position: absolute;
+		border: 2px solid #e6d9ad;
+		border-radius: 3px;
+	}
+
+	.tour-card {
+		position: absolute;
+		flex-direction: column;
+		padding: 18px 24px 14px 24px;
+		background-color: #14141cf7;
+		border: 1px solid #4b4c5e;
+
+		.tour-title {
+			font-family: $df-head;
+			font-weight: 400;
+			font-size: 30px;
+			color: $df-gold;
+			margin-bottom: 8px;
+		}
+
+		.tour-line {
+			font-size: 21px;
+			color: #dddbe6;
+			margin-bottom: 10px;
+		}
+
+		.tour-buttons {
+			flex-direction: row;
+			align-items: center;
+			margin-top: 6px;
+
+			.button {
+				margin: 0px 0px 0px 8px;
+				font-size: 19px;
+				padding: 5px 16px;
+			}
+		}
+
+		.tour-pips {
+			flex-grow: 1;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+
+			.pip {
+				width: 7px;
+				height: 7px;
+				margin: 0px 3px;
+				border-radius: 4px;
+				background-color: #4b4c5e;
+
+				&.on {
+					background-color: #e6d9ad;
+				}
+			}
+		}
+	}
+
+	&.df-iron .tour-card {
+		border-width: 0px;
+	}
+}

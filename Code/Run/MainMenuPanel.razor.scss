@@ -1,0 +1,260 @@
+@import "../UI/Themes/_iron_kit.scss";
+
+MainMenuPanel {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	font-family: $df-body;
+	font-weight: 600;
+	color: $df-text;
+
+	// What the buttons stand in: the left of the picture lost in shadow. Not a box and not a straight ramp (the user
+	// threw both out): a radial falloff centred on the screen's left edge, on an element well over two screens tall so the whole
+	// edge sits inside its black core and only the inner side curves, eased so it reads as darkness closing in on the
+	// view rather than a panel laid over it. It is spent before the campfire in the middle. The engine evaluates
+	// `ellipse farthest-side at x y` in the shader (Styles.TryParseRadialPrelude), so the stops are exact.
+	.backdrop {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.dark {
+		position: absolute;
+		left: 0;
+		top: -80%;
+		width: 60%;
+		height: 260%;
+		// the tail is eased out over several stops: a ramp that simply ends leaves a visible line where it stops
+		background: radial-gradient( ellipse farthest-side at 0% 50%, rgba( 2, 1, 4, 1 ) 0%, rgba( 2, 1, 4, 1 ) 34%, rgba( 2, 1, 4, 0.94 ) 44%, rgba( 3, 2, 6, 0.74 ) 56%, rgba( 4, 2, 8, 0.44 ) 68%, rgba( 4, 2, 8, 0.2 ) 79%, rgba( 4, 2, 8, 0.07 ) 89%, rgba( 4, 2, 8, 0.02 ) 95%, rgba( 4, 2, 8, 0 ) 100% );
+	}
+
+	// the void breathing behind the title: a low violet bloom in the black, the portal's colour before there is a portal
+	.glow {
+		position: absolute;
+		left: -4%;
+		top: 12%;
+		width: 46%;
+		height: 60%;
+		background: radial-gradient( ellipse closest-side at 50% 50%, rgba( 132, 84, 210, 0.2 ) 0%, rgba( 120, 72, 196, 0.09 ) 50%, rgba( 100, 60, 170, 0 ) 100% );
+	}
+
+	// The buttons stand to the left, clear of the campfire in the middle of the view.
+	.menu {
+		position: absolute;
+		left: 9%;
+		top: 0;
+		height: 100%;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		animation: df-rise 0.5s cubic-bezier( 0.22, 1, 0.36, 1 ) 1;
+	}
+
+	.title {
+		font-family: $df-head;
+		font-weight: 400;
+		font-size: 104px;
+		color: $df-gold;
+		text-shadow: 0px 0px 26px rgba( 150, 96, 230, 0.55 );
+		margin-bottom: 4px;
+	}
+
+	.rule {
+		width: 340px;
+		margin-bottom: 30px;
+	}
+
+	.button {
+		position: relative;
+		height: 52px;
+		width: 300px;
+		margin: 9px 0;
+		justify-content: center;
+		align-items: center;
+		transition: transform 0.1s ease;
+
+		.t {
+			font-family: $df-head;
+			font-weight: 400;
+			font-size: 29px;
+			color: $df-text;
+			text-shadow: 0px 1px 3px #000;
+		}
+
+		.dfk {
+			border-image-tint: #c4c4cc;
+		}
+
+		&.hover {
+			transform: translateY( -2px );
+
+			.dfk { border-image-tint: #ffffff; }
+			.t { color: $df-gold; }
+		}
+
+		&.go .dfk { border-image-tint: #cdb4f2; }
+		&.go.hover .dfk { border-image-tint: #ead9ff; }
+	}
+
+	// The mouse is taken by this one sheet, never by a button: the CRT tube shows every button away from where the
+	// engine has it, so the panel does its own hit test where the player is looking (MainMenuPanel.SeenButton).
+	.catch {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: all;
+
+		&.point { cursor: pointer; }
+	}
+
+	// the little music player: what is playing, by whom, and the way to more of it. It stands across the screen from
+	// the menu, at the same height: the right side's answer to the buttons on the left.
+	.side {
+		position: absolute;
+		right: 9%;
+		top: 0;
+		height: 100%;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-end;
+	}
+
+	.player {
+		position: relative;
+		flex-direction: column;
+		padding: 14px 20px 14px 20px;
+		min-width: 330px;
+
+		// the song on the left, the speaker (mute) in the top right corner
+		.head {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-start;
+			margin-bottom: 10px;
+		}
+
+		.now {
+			flex-direction: column;
+		}
+
+		.mute {
+			margin-right: 0;
+			margin-left: 18px;
+
+			.ic { color: $df-gold; }
+			&.off .ic { color: $df-dim; }
+		}
+
+		.song {
+			font-family: $df-head;
+			font-weight: 400;
+			font-size: 30px;
+			color: $df-gold;
+			text-shadow: 0px 1px 4px #000;
+		}
+
+		.artist {
+			font-size: 21px;
+			color: $df-label;
+			text-shadow: 0px 1px 3px #000;
+		}
+
+		.controls {
+			flex-direction: row;
+			align-items: center;
+		}
+	}
+
+	.ctl {
+		position: relative;
+		height: 38px;
+		min-width: 40px;
+		margin-right: 8px;
+		padding: 0px 8px;
+		justify-content: center;
+		align-items: center;
+		transition: transform 0.1s ease;
+
+		.t {
+			font-family: $df-body;
+			font-weight: 700;
+			font-size: 21px;
+			color: $df-text;
+			text-shadow: 0px 1px 3px #000;
+		}
+
+		// the transport glyphs are the engine's Material Icons (an <i> is an IconPanel): the body font has no play/pause
+		.ic {
+			font-family: "Material Icons";
+			font-size: 25px;
+			color: $df-text;
+			text-shadow: 0px 1px 3px #000;
+		}
+
+		.dfk { border-image-tint: #c4c4cc; }
+
+		&.hover {
+			transform: translateY( -1px );
+
+			.dfk { border-image-tint: #ffffff; }
+			.t, .ic { color: $df-gold; }
+		}
+
+		// the Spotify button's text is a rich label holding the link; the button takes the click and hands it on
+		.link {
+			pointer-events: none;
+
+			LinkLabel {
+				pointer-events: none;
+				font-family: $df-head;
+				font-weight: 400;
+				font-size: 22px;
+				color: $df-text;
+				text-shadow: 0px 1px 3px #000;
+			}
+		}
+
+		&.hover LinkLabel { color: $df-gold; }
+
+		&.spotify, &.close {
+			min-width: 150px;
+			margin-left: 10px;
+			margin-right: 0;
+			padding: 0px 22px;
+
+			.t { font-family: $df-head; font-weight: 400; font-size: 22px; }
+		}
+
+		&.spotify .dfk { border-image-tint: #a9dcb4; }
+		&.spotify.hover .dfk { border-image-tint: #d6f7dd; }
+	}
+
+	// a click anywhere on the way in hurries the camera
+	.skip {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: all;
+	}
+
+	// the lightning: the whole screen, a cold white
+	.flash {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #f4f7ff;
+		opacity: 0;
+	}
+}

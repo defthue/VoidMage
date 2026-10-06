@@ -1,0 +1,857 @@
+{
+  "fps": 30,
+  "units_per_cm": 0.3937,
+  "blade_cm": 93.0,
+  "root_bone": "root",
+  "strike_bone": "weapon_r",
+  "forward": [
+    0.0,
+    -1.0,
+    0.0
+  ],
+  "clips": {
+    "attack_heavycombo01a_returntoidle_rootmotion": {
+      "frames": [
+        64,
+        92
+      ],
+      "seconds": 0.933,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.467,
+      "hit_speed_cm_s": 738.0,
+      "reach_forward_cm": 33.9,
+      "reach_planar_cm": 103.1,
+      "lunge_before_hit_cm": -0.0,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.467,
+          "speed_cm_s": 738.0,
+          "reach_forward_cm": 33.9,
+          "reach_planar_cm": 103.1,
+          "lunge_before_cm": -0.0
+        }
+      ],
+      "hand_reach_forward_cm": -19.7,
+      "max_reach_time": 0.7,
+      "max_reach_forward_cm": 64.2,
+      "lunge_at_max_reach_cm": -0.0
+    },
+    "attack_heavycombo01a_rootmotion": {
+      "frames": [
+        3,
+        64
+      ],
+      "seconds": 2.033,
+      "root_travel_cm": 50.1,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 1.167,
+      "hit_speed_cm_s": 2642.0,
+      "reach_forward_cm": 134.6,
+      "reach_planar_cm": 146.2,
+      "lunge_before_hit_cm": 50.0,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 1.167,
+          "speed_cm_s": 2642.0,
+          "reach_forward_cm": 134.6,
+          "reach_planar_cm": 146.2,
+          "lunge_before_cm": 50.0
+        }
+      ],
+      "hand_reach_forward_cm": 26.8,
+      "max_reach_time": 1.133,
+      "max_reach_forward_cm": 134.6,
+      "lunge_at_max_reach_cm": 50.0
+    },
+    "attack_heavycombo01b_returntoidle_rootmotion": {
+      "frames": [
+        114,
+        155
+      ],
+      "seconds": 1.367,
+      "root_travel_cm": 21.6,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.633,
+      "hit_speed_cm_s": 431.0,
+      "reach_forward_cm": 84.9,
+      "reach_planar_cm": 85.6,
+      "lunge_before_hit_cm": -6.1,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.633,
+          "speed_cm_s": 431.0,
+          "reach_forward_cm": 84.9,
+          "reach_planar_cm": 85.6,
+          "lunge_before_cm": -6.1
+        },
+        {
+          "time": 0.833,
+          "speed_cm_s": 249.0,
+          "reach_forward_cm": 91.5,
+          "reach_planar_cm": 91.7,
+          "lunge_before_cm": 3.1
+        }
+      ],
+      "hand_reach_forward_cm": 69.9,
+      "max_reach_time": 0.8,
+      "max_reach_forward_cm": 91.5,
+      "lunge_at_max_reach_cm": 1.5
+    },
+    "attack_heavycombo01b_rootmotion": {
+      "frames": [
+        64,
+        114
+      ],
+      "seconds": 1.667,
+      "root_travel_cm": 50.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.8,
+      "hit_speed_cm_s": 2859.0,
+      "reach_forward_cm": 126.9,
+      "reach_planar_cm": 141.4,
+      "lunge_before_hit_cm": 17.1,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.8,
+          "speed_cm_s": 2859.0,
+          "reach_forward_cm": 126.9,
+          "reach_planar_cm": 141.4,
+          "lunge_before_cm": 17.1
+        }
+      ],
+      "hand_reach_forward_cm": 26.9,
+      "max_reach_time": 0.867,
+      "max_reach_forward_cm": 126.9,
+      "lunge_at_max_reach_cm": 27.4
+    },
+    "attack_heavycombo01c_returntoidle_rootmotion": {
+      "frames": [
+        162,
+        202
+      ],
+      "seconds": 1.333,
+      "root_travel_cm": 40.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.667,
+      "hit_speed_cm_s": 689.0,
+      "reach_forward_cm": 100.3,
+      "reach_planar_cm": 100.5,
+      "lunge_before_hit_cm": -4.7,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.667,
+          "speed_cm_s": 689.0,
+          "reach_forward_cm": 100.3,
+          "reach_planar_cm": 100.5,
+          "lunge_before_cm": -4.7
+        }
+      ],
+      "hand_reach_forward_cm": 52.8,
+      "max_reach_time": 0.467,
+      "max_reach_forward_cm": 139.5,
+      "lunge_at_max_reach_cm": -13.0
+    },
+    "attack_heavycombo01c_rootmotion": {
+      "frames": [
+        114,
+        162
+      ],
+      "seconds": 1.6,
+      "root_travel_cm": 150.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 1.133,
+      "hit_speed_cm_s": 1928.0,
+      "reach_forward_cm": 148.0,
+      "reach_planar_cm": 150.2,
+      "lunge_before_hit_cm": 130.6,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.7,
+          "speed_cm_s": 1568.0,
+          "reach_forward_cm": 37.4,
+          "reach_planar_cm": 124.5,
+          "lunge_before_cm": 17.3
+        },
+        {
+          "time": 1.133,
+          "speed_cm_s": 1928.0,
+          "reach_forward_cm": 148.0,
+          "reach_planar_cm": 150.2,
+          "lunge_before_cm": 130.6
+        }
+      ],
+      "hand_reach_forward_cm": 52.6,
+      "max_reach_time": 1.1,
+      "max_reach_forward_cm": 148.0,
+      "lunge_at_max_reach_cm": 125.5
+    },
+    "attack_heavyflourish01_returntoidle_rootmotion": {
+      "frames": [
+        64,
+        110
+      ],
+      "seconds": 1.533,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.467,
+      "hit_speed_cm_s": 531.0,
+      "reach_forward_cm": 54.5,
+      "reach_planar_cm": 142.4,
+      "lunge_before_hit_cm": 0.0,
+      "hit2_time": 0.867,
+      "peaks": [
+        {
+          "time": 0.467,
+          "speed_cm_s": 531.0,
+          "reach_forward_cm": 54.5,
+          "reach_planar_cm": 142.4,
+          "lunge_before_cm": 0.0
+        },
+        {
+          "time": 0.867,
+          "speed_cm_s": 498.0,
+          "reach_forward_cm": 120.4,
+          "reach_planar_cm": 123.8,
+          "lunge_before_cm": 0.0
+        }
+      ],
+      "hand_reach_forward_cm": 19.8,
+      "max_reach_time": 0.833,
+      "max_reach_forward_cm": 120.4,
+      "lunge_at_max_reach_cm": 0.0
+    },
+    "attack_heavyflourish01_rootmotion": {
+      "frames": [
+        3,
+        64
+      ],
+      "seconds": 2.033,
+      "root_travel_cm": 125.1,
+      "root_lateral_cm": 14.8,
+      "root_rise_cm": 0.0,
+      "hit_time": 1.467,
+      "hit_speed_cm_s": 2325.0,
+      "reach_forward_cm": 134.2,
+      "reach_planar_cm": 143.6,
+      "lunge_before_hit_cm": 108.6,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.867,
+          "speed_cm_s": 2082.0,
+          "reach_forward_cm": 85.1,
+          "reach_planar_cm": 139.1,
+          "lunge_before_cm": 25.2
+        },
+        {
+          "time": 1.2,
+          "speed_cm_s": 1204.0,
+          "reach_forward_cm": 16.4,
+          "reach_planar_cm": 119.6,
+          "lunge_before_cm": 74.3
+        },
+        {
+          "time": 1.467,
+          "speed_cm_s": 2325.0,
+          "reach_forward_cm": 134.2,
+          "reach_planar_cm": 143.6,
+          "lunge_before_cm": 108.6
+        }
+      ],
+      "hand_reach_forward_cm": 61.6,
+      "max_reach_time": 1.467,
+      "max_reach_forward_cm": 134.2,
+      "lunge_at_max_reach_cm": 108.6
+    },
+    "attack_heavystab01_returntoidle_rootmotion": {
+      "frames": [
+        44,
+        92
+      ],
+      "seconds": 1.6,
+      "root_travel_cm": 25.4,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.267,
+      "hit_speed_cm_s": 592.0,
+      "reach_forward_cm": 99.1,
+      "reach_planar_cm": 101.8,
+      "lunge_before_hit_cm": -12.9,
+      "hit2_time": 0.6,
+      "peaks": [
+        {
+          "time": 0.267,
+          "speed_cm_s": 592.0,
+          "reach_forward_cm": 99.1,
+          "reach_planar_cm": 101.8,
+          "lunge_before_cm": -12.9
+        },
+        {
+          "time": 0.6,
+          "speed_cm_s": 276.0,
+          "reach_forward_cm": 55.4,
+          "reach_planar_cm": 83.3,
+          "lunge_before_cm": -25.3
+        }
+      ],
+      "hand_reach_forward_cm": 44.1,
+      "max_reach_time": 0.067,
+      "max_reach_forward_cm": 133.2,
+      "lunge_at_max_reach_cm": -0.4
+    },
+    "attack_heavystab01_rootmotion": {
+      "frames": [
+        3,
+        44
+      ],
+      "seconds": 1.367,
+      "root_travel_cm": 50.3,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.9,
+      "hit_speed_cm_s": 1142.0,
+      "reach_forward_cm": 106.0,
+      "reach_planar_cm": 106.5,
+      "lunge_before_hit_cm": 17.6,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.9,
+          "speed_cm_s": 1142.0,
+          "reach_forward_cm": 106.0,
+          "reach_planar_cm": 106.5,
+          "lunge_before_cm": 17.6
+        }
+      ],
+      "hand_reach_forward_cm": 49.8,
+      "max_reach_time": 1.3,
+      "max_reach_forward_cm": 131.5,
+      "lunge_at_max_reach_cm": 49.7
+    },
+    "attack_lightcombo01a_returntoidle_rootmotion": {
+      "frames": [
+        27,
+        50
+      ],
+      "seconds": 0.767,
+      "root_travel_cm": 48.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.267,
+      "hit_speed_cm_s": 872.0,
+      "reach_forward_cm": 72.6,
+      "reach_planar_cm": 87.3,
+      "lunge_before_hit_cm": 20.8,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.267,
+          "speed_cm_s": 872.0,
+          "reach_forward_cm": 72.6,
+          "reach_planar_cm": 87.3,
+          "lunge_before_cm": 20.8
+        }
+      ],
+      "hand_reach_forward_cm": 56.7,
+      "max_reach_time": 0.4,
+      "max_reach_forward_cm": 88.5,
+      "lunge_at_max_reach_cm": 36.5
+    },
+    "attack_lightcombo01a_rootmotion": {
+      "frames": [
+        3,
+        27
+      ],
+      "seconds": 0.8,
+      "root_travel_cm": 112.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.433,
+      "hit_speed_cm_s": 2807.0,
+      "reach_forward_cm": 154.8,
+      "reach_planar_cm": 157.3,
+      "lunge_before_hit_cm": 82.0,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.433,
+          "speed_cm_s": 2807.0,
+          "reach_forward_cm": 154.8,
+          "reach_planar_cm": 157.3,
+          "lunge_before_cm": 82.0
+        }
+      ],
+      "hand_reach_forward_cm": 62.8,
+      "max_reach_time": 0.433,
+      "max_reach_forward_cm": 154.8,
+      "lunge_at_max_reach_cm": 82.0
+    },
+    "attack_lightcombo01b_returntoidle_rootmotion": {
+      "frames": [
+        47,
+        70
+      ],
+      "seconds": 0.767,
+      "root_travel_cm": 12.1,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.033,
+      "hit_speed_cm_s": 256.0,
+      "reach_forward_cm": 50.1,
+      "reach_planar_cm": 80.4,
+      "lunge_before_hit_cm": 2.3,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.033,
+          "speed_cm_s": 256.0,
+          "reach_forward_cm": 50.1,
+          "reach_planar_cm": 80.4,
+          "lunge_before_cm": 2.3
+        }
+      ],
+      "hand_reach_forward_cm": -39.7,
+      "max_reach_time": 0.5,
+      "max_reach_forward_cm": 63.6,
+      "lunge_at_max_reach_cm": 12.1
+    },
+    "attack_lightcombo01b_rootmotion": {
+      "frames": [
+        27,
+        47
+      ],
+      "seconds": 0.667,
+      "root_travel_cm": 125.9,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.233,
+      "hit_speed_cm_s": 2706.0,
+      "reach_forward_cm": 139.8,
+      "reach_planar_cm": 148.3,
+      "lunge_before_hit_cm": 31.1,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.233,
+          "speed_cm_s": 2706.0,
+          "reach_forward_cm": 139.8,
+          "reach_planar_cm": 148.3,
+          "lunge_before_cm": 31.1
+        }
+      ],
+      "hand_reach_forward_cm": 81.8,
+      "max_reach_time": 0.267,
+      "max_reach_forward_cm": 139.8,
+      "lunge_at_max_reach_cm": 37.9
+    },
+    "attack_lightcombo01c_returntoidle_rootmotion": {
+      "frames": [
+        69,
+        92
+      ],
+      "seconds": 0.767,
+      "root_travel_cm": 7.1,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.333,
+      "hit_speed_cm_s": 1930.0,
+      "reach_forward_cm": 106.8,
+      "reach_planar_cm": 140.4,
+      "lunge_before_hit_cm": 7.1,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.333,
+          "speed_cm_s": 1930.0,
+          "reach_forward_cm": 106.8,
+          "reach_planar_cm": 140.4,
+          "lunge_before_cm": 7.1
+        }
+      ],
+      "hand_reach_forward_cm": -22.2,
+      "max_reach_time": 0.2,
+      "max_reach_forward_cm": 136.2,
+      "lunge_at_max_reach_cm": 6.2
+    },
+    "attack_lightcombo01c_rootmotion": {
+      "frames": [
+        47,
+        69
+      ],
+      "seconds": 0.733,
+      "root_travel_cm": 148.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.4,
+      "hit_speed_cm_s": 1239.0,
+      "reach_forward_cm": 122.5,
+      "reach_planar_cm": 149.1,
+      "lunge_before_hit_cm": 92.6,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.4,
+          "speed_cm_s": 1239.0,
+          "reach_forward_cm": 122.5,
+          "reach_planar_cm": 149.1,
+          "lunge_before_cm": 92.6
+        }
+      ],
+      "hand_reach_forward_cm": 31.9,
+      "max_reach_time": 0.633,
+      "max_reach_forward_cm": 129.1,
+      "lunge_at_max_reach_cm": 142.6
+    },
+    "attack_lightfencing01_returntoidle_rootmotion": {
+      "frames": [
+        39,
+        67
+      ],
+      "seconds": 0.933,
+      "root_travel_cm": 39.7,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.633,
+      "hit_speed_cm_s": 380.0,
+      "reach_forward_cm": 111.5,
+      "reach_planar_cm": 112.7,
+      "lunge_before_hit_cm": -39.7,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.267,
+          "speed_cm_s": 360.0,
+          "reach_forward_cm": 116.9,
+          "reach_planar_cm": 124.5,
+          "lunge_before_cm": -24.6
+        },
+        {
+          "time": 0.633,
+          "speed_cm_s": 380.0,
+          "reach_forward_cm": 111.5,
+          "reach_planar_cm": 112.7,
+          "lunge_before_cm": -39.7
+        }
+      ],
+      "hand_reach_forward_cm": 6.5,
+      "max_reach_time": 0.033,
+      "max_reach_forward_cm": 123.2,
+      "lunge_at_max_reach_cm": -1.6
+    },
+    "attack_lightfencing01_rootmotion": {
+      "frames": [
+        3,
+        39
+      ],
+      "seconds": 1.2,
+      "root_travel_cm": 157.4,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0,
+      "hit_time": 0.733,
+      "hit_speed_cm_s": 2522.0,
+      "reach_forward_cm": 133.1,
+      "reach_planar_cm": 133.4,
+      "lunge_before_hit_cm": 115.0,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.233,
+          "speed_cm_s": 1434.0,
+          "reach_forward_cm": 56.0,
+          "reach_planar_cm": 58.2,
+          "lunge_before_cm": 17.3
+        },
+        {
+          "time": 0.733,
+          "speed_cm_s": 2522.0,
+          "reach_forward_cm": 133.1,
+          "reach_planar_cm": 133.4,
+          "lunge_before_cm": 115.0
+        }
+      ],
+      "hand_reach_forward_cm": 76.8,
+      "max_reach_time": 0.933,
+      "max_reach_forward_cm": 133.7,
+      "lunge_at_max_reach_cm": 147.8
+    },
+    "attack_lightleaping01_returntoidle_rootmotion": {
+      "frames": [
+        50,
+        72
+      ],
+      "seconds": 0.733,
+      "root_travel_cm": 49.4,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.1,
+      "hit_time": 0.367,
+      "hit_speed_cm_s": 369.0,
+      "reach_forward_cm": 50.1,
+      "reach_planar_cm": 91.7,
+      "lunge_before_hit_cm": -27.5,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.367,
+          "speed_cm_s": 369.0,
+          "reach_forward_cm": 50.1,
+          "reach_planar_cm": 91.7,
+          "lunge_before_cm": -27.5
+        }
+      ],
+      "hand_reach_forward_cm": -40.5,
+      "max_reach_time": 0.533,
+      "max_reach_forward_cm": 64.3,
+      "lunge_at_max_reach_cm": -48.6
+    },
+    "attack_lightleaping01_rootmotion": {
+      "frames": [
+        3,
+        50
+      ],
+      "seconds": 1.567,
+      "root_travel_cm": 735.3,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 76.3,
+      "hit_time": 1.067,
+      "hit_speed_cm_s": 4815.0,
+      "reach_forward_cm": 150.6,
+      "reach_planar_cm": 158.6,
+      "lunge_before_hit_cm": 603.2,
+      "hit2_time": null,
+      "peaks": [
+        {
+          "time": 0.633,
+          "speed_cm_s": 2060.0,
+          "reach_forward_cm": 16.2,
+          "reach_planar_cm": 120.9,
+          "lunge_before_cm": 284.7
+        },
+        {
+          "time": 1.067,
+          "speed_cm_s": 4815.0,
+          "reach_forward_cm": 150.6,
+          "reach_planar_cm": 158.6,
+          "lunge_before_cm": 603.2
+        }
+      ],
+      "hand_reach_forward_cm": 92.5,
+      "max_reach_time": 1.067,
+      "max_reach_forward_cm": 150.6,
+      "lunge_at_max_reach_cm": 603.2
+    },
+    "hit_b_react": {
+      "frames": [
+        3,
+        28
+      ],
+      "seconds": 0.833,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_b_stagger": {
+      "frames": [
+        3,
+        35
+      ],
+      "seconds": 1.067,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_b_stagger_rootmotion": {
+      "frames": [
+        3,
+        35
+      ],
+      "seconds": 1.067,
+      "root_travel_cm": 75.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_f_react": {
+      "frames": [
+        3,
+        28
+      ],
+      "seconds": 0.833,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_f_stagger": {
+      "frames": [
+        3,
+        35
+      ],
+      "seconds": 1.067,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_f_stagger_rootmotion": {
+      "frames": [
+        3,
+        35
+      ],
+      "seconds": 1.067,
+      "root_travel_cm": 75.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_l_react": {
+      "frames": [
+        3,
+        28
+      ],
+      "seconds": 0.833,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_l_stagger": {
+      "frames": [
+        3,
+        35
+      ],
+      "seconds": 1.067,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_l_stagger_rootmotion": {
+      "frames": [
+        3,
+        35
+      ],
+      "seconds": 1.067,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 75.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_r_react": {
+      "frames": [
+        3,
+        28
+      ],
+      "seconds": 0.833,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_r_stagger": {
+      "frames": [
+        3,
+        35
+      ],
+      "seconds": 1.067,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "hit_r_stagger_rootmotion": {
+      "frames": [
+        3,
+        35
+      ],
+      "seconds": 1.067,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 75.0,
+      "root_rise_cm": 0.0
+    },
+    "idle_base": {
+      "frames": [
+        3,
+        56
+      ],
+      "seconds": 1.767,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "knockdown_begin": {
+      "frames": [
+        3,
+        24
+      ],
+      "seconds": 0.7,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "knockdown_begin_rootmotion": {
+      "frames": [
+        3,
+        24
+      ],
+      "seconds": 0.7,
+      "root_travel_cm": 100.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "knockdown_end": {
+      "frames": [
+        61,
+        122
+      ],
+      "seconds": 2.033,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "knockdown_loop": {
+      "frames": [
+        24,
+        61
+      ],
+      "seconds": 1.233,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "stun_begin": {
+      "frames": [
+        3,
+        30
+      ],
+      "seconds": 0.9,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "stun_end": {
+      "frames": [
+        70,
+        107
+      ],
+      "seconds": 1.233,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    },
+    "stun_loop": {
+      "frames": [
+        30,
+        70
+      ],
+      "seconds": 1.333,
+      "root_travel_cm": 0.0,
+      "root_lateral_cm": 0.0,
+      "root_rise_cm": 0.0
+    }
+  }
+}

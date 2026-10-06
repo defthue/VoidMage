@@ -1,0 +1,74 @@
+@using System.Linq
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Spells
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@if ( Visible )
+	{
+		<div class="crosshair">
+			@if ( Charging )
+			{
+				<div class="reticle">
+					<div class="tick top"></div>
+					<div class="tick bottom"></div>
+					<div class="tick left"></div>
+					<div class="tick right"></div>
+				</div>
+				<div class="charge">
+					<div class="fill @ReadyClass" style="width: @( Percent( Charge ) )%; background-color: @( Ready ? Hot : Core )"></div>
+				</div>
+			}
+			else
+			{
+				<div class="dot @( Denied ? "denied" : "" )"></div>
+			}
+		</div>
+	}
+</root>
+
+@code {
+	// The local player's caster; a panel left in a scene with no player draws nothing instead of throwing.
+	private SpellCaster Caster
+	{
+		get
+		{
+			if ( !_caster.IsValid() || _caster.IsProxy )
+				_caster = Scene?.GetAllComponents<SpellCaster>().FirstOrDefault( c => !c.IsProxy );
+			return _caster;
+		}
+	}
+
+	private SpellCaster _caster;
+
+	// hidden under any full-screen panel: the inventory, the wardrobe, a run card or the boon pick
+	private bool Visible => (Caster?.InFirstPerson ?? false) && !SpellLoadout.IsOpen
+		&& !VoidMage.Run.RunUi.Blocking && !VoidMage.Boons.BoonScreen.IsOpen;
+	// only a real hold is a charge to show (Gluttony): an instant cast's raise is over before it could be read
+	private bool Charging => Caster?.ShowsCharge ?? false;
+	private bool Firing => Caster?.IsFiring ?? false;
+	private float Charge => Caster?.Charge01 ?? 0f;
+	private bool Ready => Charge >= 0.999f;
+	private string ReadyClass => Ready ? "ready" : "";
+	private bool Denied => Caster is not null && Time.Now - Caster.LastDeniedAt < 0.3f;
+	private bool Kindled => Caster?.KindlingActive ?? false;
+
+	private SpellDefinition Spell => Charging || Firing ? Caster?.CastingSpell : Caster?.ActiveSpell;
+	private SpellPalette Palette => Spell?.Palette ?? SpellPalette.Fire;
+	private string Core => SpellPalette.Css( Palette.Core );
+	private string Hot => SpellPalette.Css( Palette.Hot );
+
+	// Re-rendered on the charge itself, quantised to whole percent: a continuous ramp with nothing to subscribe to.
+	protected override int BuildHash()
+	{
+		return System.HashCode.Combine( Visible, Charging, Firing, (int)( Charge * 100f ), Spell?.Id, Kindled, Denied );
+	}
+
+	private static int Percent( float fraction )
+	{
+		return (int)( fraction.Clamp( 0f, 1f ) * 100f );
+	}
+}

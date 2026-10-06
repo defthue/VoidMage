@@ -1,0 +1,22 @@
+{
+  "kind": "dragon",
+  "scale": 0.1245984530103669,
+  "fbx_size": [
+    340.96851348876953,
+    385.2375277565146,
+    371.14723044579273
+  ],
+  "width": 42.5,
+  "height": 48.0,
+  "depth": 46.2,
+  "units_per_bu": 12.45984530103669,
+  "root_bone": "Root",
+  "bones": 27,
+  "clips": [
+    "attack",
+    "attack2",
+    "death",
+    "flying",
+    "hit"
+  ]
+}

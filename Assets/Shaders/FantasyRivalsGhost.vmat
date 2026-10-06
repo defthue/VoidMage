@@ -1,0 +1,57 @@
+// Hand-maintained. The translucent parts of POLYGON Fantasy Rivals: the SpiritDemon's ghost slot
+// (Synty's `_Ghost2`, "FantasyRivals_SpiritDemon") and the Mystic's four spectral arms
+// (SK_Arms_Lower/Upper_01, "FantasyRivals_MysticArms"). Synty drew both with a soft-blend shader over
+// Mystic_Arms.tga, a 512 texture of four vertical colour columns (gold, cyan, red, pale blue) whose
+// ALPHA fades to nothing toward the bottom.
+//
+// heden_ghost.shader (2026-09-13): the toon-lit texture colour ALPHA-BLENDED at g_flOpacity with a rim
+// fade, two sided, no depth write. The texture's own alpha is deliberately NOT read: the SpiritDemon's
+// 246 ghost faces all sit on one texel (pale blue, alpha 0.075), so a cutout (the old heden_foliage
+// setup) discarded him entirely once the vmdl pointed here, and honouring the alpha would leave him
+// invisible. The Mystic's arms (gallery only) keep the colour gradient but not its alpha ramp.
+// gen_pack_assets.py / gen_synty_chars.py write the remap that points here but never write this file.
+
+Layer0
+{
+	shader "shaders/heden_ghost.shader"
+
+	//---- Two sided ----
+	F_RENDER_BACKFACES 1
+
+	//---- Toon Lighting ----
+	F_USE_RAMP 1
+
+	//---- Ghost ----
+	AlbedoTexture "textures/fantasyrivalstextures/mystic_arms.png"
+	g_vGhostTint "[1.000000 1.000000 1.000000 0.000000]"
+	g_flOpacity "0.350"
+	g_flRimFade "0.500"
+	g_flRimPower "2.000"
+
+	//---- Debug ----
+	g_flDebugMode "0.000"
+
+	//---- Dynamic Lights ----
+	g_flDynamicLightBands "4.000"
+	g_flDynamicLightBandSoftness "0.080"
+	g_flDynamicLightOuterBandScale "1.000"
+	g_flDynamicLightOuterSoftness "0.400"
+	g_flDynamicLightStrength "1.000"
+
+	//---- Toon Lighting ----
+	g_flAmbientFloor "0.500"
+	g_flAmbientLift "0.500"
+	g_flBandSoftness "0.005"
+	g_flBandThreshold "0.500"
+	g_flCrispSunShadows "1.000"
+	g_flShadowBandSoftness "0.030"
+	g_flShadowNormalOffset "2.000"
+	g_flShadowSmoothing "1.500"
+	g_flSunColorInfluence "0.400"
+
+	//---- Toon Ramp ----
+	g_flRampBrightness "1.000"
+	g_flRampShadowPoint "0.250"
+	ToonRamp "materials/heden_ramp_day.png"
+	ToonRampNight "materials/heden_ramp_night.png"
+}

@@ -1,0 +1,654 @@
+@using System
+@using System.Collections.Generic
+@using System.Linq
+@using Sandbox
+@using Sandbox.UI
+@using VoidMage.Character
+@using VoidMage.Run
+@using VoidMage.UI
+@inherits PanelComponent
+@namespace VoidMage.Dev
+@attribute [StyleSheet]
+
+<root>
+	@if ( _letterbox > 0f )
+	{
+		<div class="bar top" style="height: @( BarPercent )%"></div>
+		<div class="bar bottom" style="height: @( BarPercent )%"></div>
+	}
+	@if ( IsOpen )
+	{
+		<div class="window">
+			<div class="row head">
+				<div class="heading">Director</div>
+				<div class="spacer"></div>
+				<div class="state">@( State )</div>
+				<div class="button small @( DevDirector.Armed ? "on" : "" )" onclick=@( () => DevDirector.Armed = !DevDirector.Armed )>Keys live</div>
+				<div class="button small" onclick=@( () => SetOpen( false ) )>Close (0)</div>
+			</div>
+			<div class="hint">F free camera · R pause · G hide HUD · mouse 4/5 slower/faster · 3–9 fly a saved path · Q lock the cursor</div>
+			<div class="scroll">
+
+				@* ---------------------------------------------------------------- time *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "time" ) )>@( Arrow( "time" ) ) Time</div>
+					@if ( Open( "time" ) )
+					{
+						<div class="row">
+							<div class="button @( DevDirector.Paused ? "on" : "" )" onclick=@( () => DevDirector.TogglePause() )>@( DevDirector.Paused ? "Resume" : "Pause" )</div>
+							<div class="button" onclick=@( () => DevDirector.StepFrame() )>Step 1/60</div>
+							<div class="button" onclick=@( () => DevDirector.StepFrame( 0.25f ) )>Step 1/4 s</div>
+							<div class="button @( DevDirector.CleanFx ? "on" : "" )" onclick=@( () => DevDirector.CleanFx = !DevDirector.CleanFx )>Clean FX</div>
+						</div>
+						<div class="row">
+							<div class="label">Speed</div>
+							@foreach ( var s in DevDirector.SpeedSteps )
+							{
+								var speed = s;
+								<div class="button small @( !DevDirector.Paused && MathF.Abs( DevDirector.Speed - speed ) < 0.001f ? "on" : "" )" onclick=@( () => DevDirector.SetSpeed( speed ) )>@( "x" + speed )</div>
+							}
+						</div>
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- camera *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "cam" ) )>@( Arrow( "cam" ) ) Camera</div>
+					@if ( Open( "cam" ) )
+					{
+						<div class="row">
+							<div class="button @( DevDirector.FreeCam ? "on" : "" )" onclick=@( () => DevDirector.ToggleFreeCam() )>Free camera</div>
+							<div class="button" onclick=@( () => DevDirector.BringPlayerHere() )>Bring player here</div>
+							<div class="button" onclick=@( () => DevDirector.SnapCamToPlayer() )>Camera to player</div>
+							<div class="button @( DevActions.ThirdPerson ? "on" : "" )" onclick=@( () => DevActions.ThirdPerson = !DevActions.ThirdPerson )>Third person</div>
+						</div>
+						<div class="row">
+							<div class="label">Lens</div>
+							<div class="button small" onclick=@( () => DevDirector.CamFov = Math.Clamp( ( DevDirector.CamFov > 1f ? DevDirector.CamFov : Preferences.FieldOfView ) - 5f, 20f, 140f ) )>−5</div>
+							<div class="value">@( DevDirector.CamFov > 1f ? $"{DevDirector.CamFov:0}°" : "player's" )</div>
+							<div class="button small" onclick=@( () => DevDirector.CamFov = Math.Clamp( ( DevDirector.CamFov > 1f ? DevDirector.CamFov : Preferences.FieldOfView ) + 5f, 20f, 140f ) )>+5</div>
+							<div class="button small" onclick=@( () => DevDirector.CamFov = 0f )>reset</div>
+							<div class="label">Fly speed</div>
+							<div class="value">@( (int)DevDirector.CamSpeed )</div>
+							<div class="label">(wheel)</div>
+							<div class="button small @( DevDirector.CamRollAllowed ? "on" : "" )" onclick=@( () => DevDirector.CamRollAllowed = !DevDirector.CamRollAllowed )>roll (alt+wheel)</div>
+						</div>
+						<div class="row">
+							<div class="label">Walk speed</div>
+							<div class="button small" onclick=@( () => DevDirector.MoveScale = MathF.Max( 0.1f, DevDirector.MoveScale - 0.1f ) )>−</div>
+							<div class="value">@( "x" + DevDirector.MoveScale.ToString( "0.0" ) )</div>
+							<div class="button small" onclick=@( () => DevDirector.MoveScale = MathF.Min( 4f, DevDirector.MoveScale + 0.1f ) )>+</div>
+							<div class="button small" onclick=@( () => DevDirector.MoveScale = 1f )>reset</div>
+						</div>
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- the tape *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "tape" ) )>@( Arrow( "tape" ) ) Tape <span class="dim">(@( TapeState ))</span></div>
+					@if ( Open( "tape" ) )
+					{
+						<div class="row">
+							<div class="button @( WorldTape.Armed ? "on" : "" )" onclick=@( () => WorldTape.Toggle() )>@( WorldTape.Armed ? "Recording (stop)" : "Record" )</div>
+							<div class="button @( WorldTape.Replaying ? "on" : "" )" onclick=@( () => { if ( WorldTape.Replaying ) WorldTape.ExitReplay(); else WorldTape.EnterReplay(); } )>@( WorldTape.Replaying ? "Back to live" : "Go back in time" )</div>
+							<div class="label">keep</div>
+							@foreach ( var s in new[] { 20f, 45f, 90f } )
+							{
+								var secs = s;
+								<div class="button small @( MathF.Abs( WorldTape.Length - secs ) < 0.1f ? "on" : "" )" onclick=@( () => WorldTape.Length = secs )>@( secs + " s" )</div>
+							}
+						</div>
+						@if ( WorldTape.Replaying )
+						{
+							<div class="row">
+								<div class="label">Scrub</div>
+								<div class="button small" onclick=@( () => WorldTape.SeekBack( WorldTape.Seconds ) )>|&lt;</div>
+								<div class="button small" onclick=@( () => WorldTape.Step( -5f ) )>−5 s</div>
+								<div class="button small" onclick=@( () => WorldTape.Step( -1f ) )>−1 s</div>
+								<div class="button small" onclick=@( () => WorldTape.Step( -1f / 30f ) )>−1 fr</div>
+								<div class="value">@( WorldTape.Back.ToString( "0.00" ) + " s ago" )</div>
+								<div class="button small" onclick=@( () => WorldTape.Step( 1f / 30f ) )>+1 fr</div>
+								<div class="button small" onclick=@( () => WorldTape.Step( 1f ) )>+1 s</div>
+								<div class="button small" onclick=@( () => WorldTape.Step( 5f ) )>+5 s</div>
+								<div class="button small" onclick=@( () => WorldTape.SeekBack( 0f ) )>&gt;|</div>
+							</div>
+							<div class="row">
+								<div class="label">Play</div>
+								@foreach ( var s in new[] { -1f, -0.25f, 0.1f, 0.25f, 0.5f, 1f, 2f } )
+								{
+									var speed = s;
+									<div class="button small @( WorldTape.Playing && MathF.Abs( WorldTape.PlaySpeed - speed ) < 0.001f ? "on" : "" )" onclick=@( () => WorldTape.Play( speed ) )>@( ( speed < 0f ? "◀ x" : "x" ) + MathF.Abs( speed ) )</div>
+								}
+								<div class="button small @( WorldTape.Replaying && !WorldTape.Playing ? "on" : "" )" onclick=@( () => WorldTape.Pause() )>Hold</div>
+							</div>
+						}
+						<div class="hint">Record, play, then Go back in time: the world freezes and the tape can be scrubbed while you fly.</div>
+						<div class="hint">R plays/holds, mouse 4/5 scrub. Particles and sounds do not rewind. Back to live puts the present back.</div>
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- camera path *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "path" ) )>@( Arrow( "path" ) ) Camera path <span class="dim">(@( CameraPath.Keys.Count + " keys, " + CameraPath.Duration.ToString( "0.0" ) + " s" + ( CameraPath.Playing ? ", flying" : "" ) ))</span></div>
+					@if ( Open( "path" ) )
+					{
+						<div class="row">
+							<div class="button small" onclick=@( () => CameraPath.AddKey( _keySeconds ) )>Add key here</div>
+							<div class="label">leg</div>
+							@foreach ( var s in new[] { 1f, 2f, 4f, 8f } )
+							{
+								var secs = s;
+								<div class="button small @( MathF.Abs( _keySeconds - secs ) < 0.01f ? "on" : "" )" onclick=@( () => _keySeconds = secs )>@( secs + " s" )</div>
+							}
+							<div class="button small" onclick=@( () => CameraPath.RemoveLast() )>Drop last</div>
+							<div class="button small" onclick=@( () => CameraPath.Clear() )>Clear</div>
+						</div>
+						<div class="row">
+							<div class="button small @( CameraPath.Playing ? "on" : "" )" onclick=@( () => { if ( CameraPath.Playing ) CameraPath.Pause(); else CameraPath.Play( fromStart: false ); } )>@( CameraPath.Playing ? "Pause" : "Play" )</div>
+							<div class="button small" onclick=@( () => CameraPath.Play( fromStart: true ) )>From start</div>
+							<div class="button small" onclick=@( () => CameraPath.Stop() )>Stop</div>
+							<div class="button small @( CameraPath.Loop ? "on" : "" )" onclick=@( () => CameraPath.Loop = !CameraPath.Loop )>Loop</div>
+							<div class="button small @( CameraPath.GameTime ? "on" : "" )" onclick=@( () => CameraPath.GameTime = !CameraPath.GameTime )>Game time</div>
+							<div class="label">speed</div>
+							@foreach ( var s in new[] { 0.25f, 0.5f, 1f, 2f } )
+							{
+								var speed = s;
+								<div class="button small @( MathF.Abs( CameraPath.PlaySpeed - speed ) < 0.01f ? "on" : "" )" onclick=@( () => CameraPath.PlaySpeed = speed )>@( "x" + speed )</div>
+							}
+						</div>
+						<div class="row">
+							<div class="label">Scrub</div>
+							<div class="button small" onclick=@( () => CameraPath.Scrub( 0f ) )>|&lt;</div>
+							<div class="button small" onclick=@( () => CameraPath.Scrub( CameraPath.PathTime - 0.5f ) )>−0.5</div>
+							<div class="value">@( CameraPath.PathTime.ToString( "0.0" ) + " / " + CameraPath.Duration.ToString( "0.0" ) )</div>
+							<div class="button small" onclick=@( () => CameraPath.Scrub( CameraPath.PathTime + 0.5f ) )>+0.5</div>
+							<div class="button small" onclick=@( () => CameraPath.Scrub( CameraPath.Duration ) )>&gt;|</div>
+							@if ( CameraPath.Keys.Count > 0 )
+							{
+								<div class="button small" onclick=@( () => CameraPath.UpdateKey( CameraPath.AtKey ) )>@( "Rewrite key " + ( CameraPath.AtKey + 1 ) + " here" )</div>
+							}
+						</div>
+						@foreach ( var chunk in Chunks( Enumerable.Range( 0, CameraPath.Keys.Count ), 8 ) )
+						{
+							<div class="row">
+								<div class="label">Keys</div>
+								@foreach ( var i in chunk )
+								{
+									var index = i;
+									var key = CameraPath.Keys[i];
+									<div class="button small @( CameraPath.Mode == CamMode.Path && CameraPath.AtKey == index ? "on" : "" )" onclick=@( () => CameraPath.GoToKey( index ) )>@( ( index + 1 ) + " · " + key.Seconds.ToString( "0.#" ) + "s" )</div>
+								}
+							</div>
+						}
+						<div class="row">
+							<div class="label">Save to key</div>
+							@for ( var k = CameraPath.FirstKey; k <= CameraPath.LastKey; k++ )
+							{
+								var key = k;
+								<div class="button small" onclick=@( () => CameraPath.SaveToKey( key ) )>@( key )</div>
+							}
+							<div class="label">Load key</div>
+							@for ( var k = CameraPath.FirstKey; k <= CameraPath.LastKey; k++ )
+							{
+								var key = k;
+								<div class="button small @( CameraPath.KeyUsed( key ) ? "on" : "" )" onclick=@( () => CameraPath.LoadKey( key ) )>@( key )</div>
+							}
+						</div>
+						<div class="hint">Fly with F and Add key at each spot. A path saved to a number key flies when you press that key (lit = saved).</div>
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- orbit / follow *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "orbit" ) )>@( Arrow( "orbit" ) ) Orbit &amp; follow <span class="dim">(@( CameraPath.Mode ))</span></div>
+					@if ( Open( "orbit" ) )
+					{
+						<div class="row">
+							<div class="label">Around</div>
+							@foreach ( var t in Enum.GetValues<CamTarget>() )
+							{
+								var target = t;
+								<div class="button small @( CameraPath.Target == target ? "on" : "" )" onclick=@( () => CameraPath.Target = target )>@( target.ToString() )</div>
+							}
+							<div class="button small" onclick=@( () => CameraPath.PickPoint() )>Pick where I look</div>
+							<div class="button small" onclick=@( () => CameraPath.FreeHand() )>Free hand</div>
+						</div>
+						<div class="row">
+							<div class="button small @( CameraPath.Mode == CamMode.Orbit ? "on" : "" )" onclick=@( () => CameraPath.StartOrbit() )>Orbit</div>
+							<div class="label">rate</div>
+							<div class="button small" onclick=@( () => CameraPath.OrbitRate -= 6f )>−</div>
+							<div class="value">@( CameraPath.OrbitRate.ToString( "0" ) + "°/s" )</div>
+							<div class="button small" onclick=@( () => CameraPath.OrbitRate += 6f )>+</div>
+							<div class="label">radius</div>
+							<div class="button small" onclick=@( () => CameraPath.OrbitRadius = MathF.Max( 30f, CameraPath.OrbitRadius - 40f ) )>−</div>
+							<div class="value">@( CameraPath.OrbitRadius.ToString( "0" ) )</div>
+							<div class="button small" onclick=@( () => CameraPath.OrbitRadius += 40f )>+</div>
+							<div class="label">height</div>
+							<div class="button small" onclick=@( () => CameraPath.OrbitHeight -= 30f )>−</div>
+							<div class="value">@( CameraPath.OrbitHeight.ToString( "0" ) )</div>
+							<div class="button small" onclick=@( () => CameraPath.OrbitHeight += 30f )>+</div>
+						</div>
+						<div class="row">
+							<div class="button small @( CameraPath.Mode == CamMode.Follow ? "on" : "" )" onclick=@( () => CameraPath.StartFollow() )>Follow</div>
+							<div class="label">back</div>
+							<div class="button small" onclick=@( () => CameraPath.FollowBack = MathF.Max( 0f, CameraPath.FollowBack - 30f ) )>−</div>
+							<div class="value">@( CameraPath.FollowBack.ToString( "0" ) )</div>
+							<div class="button small" onclick=@( () => CameraPath.FollowBack += 30f )>+</div>
+							<div class="label">up</div>
+							<div class="button small" onclick=@( () => CameraPath.FollowUp -= 15f )>−</div>
+							<div class="value">@( CameraPath.FollowUp.ToString( "0" ) )</div>
+							<div class="button small" onclick=@( () => CameraPath.FollowUp += 15f )>+</div>
+							<div class="label">side</div>
+							<div class="button small" onclick=@( () => CameraPath.FollowSide -= 20f )>−</div>
+							<div class="value">@( CameraPath.FollowSide.ToString( "0" ) )</div>
+							<div class="button small" onclick=@( () => CameraPath.FollowSide += 20f )>+</div>
+						</div>
+						<div class="row">
+							<div class="label">Look at (height on the target)</div>
+							<div class="button small" onclick=@( () => CameraPath.LookHeight -= 10f )>−</div>
+							<div class="value">@( CameraPath.LookHeight.ToString( "0" ) )</div>
+							<div class="button small" onclick=@( () => CameraPath.LookHeight += 10f )>+</div>
+						</div>
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- look *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "look" ) )>@( Arrow( "look" ) ) Look &amp; sound</div>
+					@if ( Open( "look" ) )
+					{
+						<div class="row">
+							<div class="button @( DevDirector.HudHidden ? "on" : "" )" onclick=@( () => DevDirector.SetHud( !DevDirector.HudHidden ) )>Hide HUD</div>
+							<div class="button @( DevActions.ArmsHidden ? "on" : "" )" onclick=@( () => DevActions.ArmsHidden = !DevActions.ArmsHidden )>Hide arms</div>
+							<div class="button @( DevActions.BodyHidden ? "on" : "" )" onclick=@( () => DevActions.BodyHidden = !DevActions.BodyHidden )>Hide body</div>
+							<div class="label">Bars</div>
+							@foreach ( var (name, ratio) in Letterboxes )
+							{
+								var r = ratio;
+								<div class="button small @( MathF.Abs( _letterbox - r ) < 0.001f ? "on" : "" )" onclick=@( () => _letterbox = r )>@( name )</div>
+							}
+						</div>
+						<div class="row">
+							<div class="button @( Retro is { Blend: > 0.01f } ? "on" : "" )" onclick=@( () => { if ( Retro.IsValid() ) Retro.Blend = Retro.Blend > 0.01f ? 0f : 1f; } )>Retro filter</div>
+							<div class="button @( Retro is { Crt: true } ? "on" : "" )" onclick=@( () => { if ( Retro.IsValid() ) Retro.Crt = !Retro.Crt; } )>CRT</div>
+							<div class="button @( Retro is { LowResolution: true } ? "on" : "" )" onclick=@( () => { if ( Retro.IsValid() ) Retro.LowResolution = !Retro.LowResolution; } )>Low res</div>
+							<div class="button @( Retro is { DepthFog: true } ? "on" : "" )" onclick=@( () => { if ( Retro.IsValid() ) Retro.DepthFog = !Retro.DepthFog; } )>Depth fog</div>
+						</div>
+						<div class="row">
+							<div class="button @( VoidMage.Audio.MusicDirector.Enabled ? "on" : "" )" onclick=@( () => DevActions.SetMusic( !VoidMage.Audio.MusicDirector.Enabled ) )>Background music</div>
+							<div class="button" onclick=@( () => DevActions.SetMusic( false ) )>Music off now</div>
+							<div class="button @( VoidMage.Audio.DungeonAmbience.Enabled ? "on" : "" )" onclick=@( () => VoidMage.Audio.DungeonAmbience.Enabled = !VoidMage.Audio.DungeonAmbience.Enabled )>Ambience</div>
+							<div class="button" onclick=@( () => DevActions.Screenshot() )>Screenshot</div>
+							<div class="button" onclick=@( () => DevActions.ScreenshotHiRes() )>Hi-res shot</div>
+						</div>
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- player *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "player" ) )>@( Arrow( "player" ) ) Player <span class="dim">(@( "mana " + DevActions.ManaText ))</span></div>
+					@if ( Open( "player" ) )
+					{
+						<div class="row">
+							<div class="button @( PlayerHealth.God ? "on" : "" )" onclick=@( () => PlayerHealth.God = !PlayerHealth.God )>God</div>
+							<div class="button @( PlayerMana.Infinite ? "on" : "" )" onclick=@( () => PlayerMana.Infinite = !PlayerMana.Infinite )>Infinite mana</div>
+							<div class="button" onclick=@( () => DevActions.Heal() )>Heal + mana</div>
+							<div class="button" onclick=@( () => DevActions.RefillMana() )>Refill mana</div>
+							<div class="button" onclick=@( () => DevActions.Kill() )>Kill me</div>
+						</div>
+						<div class="row">
+							<div class="button" onclick=@( () => DevActions.Potions( 3, 3 ) )>Potions 3+3</div>
+							<div class="button" onclick=@( () => DevActions.Shards( 200 ) )>+200 shards</div>
+							<div class="button" onclick=@( () => DevActions.TrailerBuild() )>Trailer build</div>
+							<div class="button" onclick=@( () => DevActions.UnlockAll() )>Unlock all</div>
+						</div>
+						<div class="row">
+							<div class="button @( VoidMage.Spells.SpellDebug.Verbose ? "on" : "" )" onclick=@( () => VoidMage.Spells.SpellDebug.Verbose = !VoidMage.Spells.SpellDebug.Verbose )>Spell debug log</div>
+							<div class="button @( VoidMage.Spells.SpellCaster.Instant ? "on" : "" )" onclick=@( () => VoidMage.Spells.SpellCaster.Instant = !VoidMage.Spells.SpellCaster.Instant )>Instant cast</div>
+							<div class="button @( SpellLoadout.AnimSpeed < 1f ? "on" : "" )" onclick=@( () => SpellLoadout.AnimSpeed = SpellLoadout.AnimSpeed < 1f ? 1f : 0.25f )>Slow menu anims</div>
+						</div>
+						<div class="row">
+							<div class="button" onclick=@( () => DevActions.GiveRandomScrolls( 1 ) )>Take a random scroll</div>
+							<div class="button" onclick=@( () => DevActions.GiveRandomScrolls( 5 ) )>Take five</div>
+							<div class="button" onclick=@( () => DevActions.GiveAllScrolls() )>One of every scroll</div>
+							<div class="button" onclick=@( () => DevActions.ClearStaff() )>Clear staff</div>
+						</div>
+						<div class="row">
+							<div class="button" onclick=@( () => DevActions.ClearBoons() )>Clear boons</div>
+							<div class="button" onclick=@( () => DevActions.FindAllSkins() )>Find all skins</div>
+							<div class="button" onclick=@( () => DevActions.ResetInventory() )>Reset inventory</div>
+						</div>
+						<div class="readout">@( DevActions.CastReadout )</div>
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- go to *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "go" ) )>@( Arrow( "go" ) ) Go to</div>
+					@if ( Open( "go" ) )
+					{
+						<div class="row">
+							<div class="button" onclick=@( () => DevActions.GoVillage() )>Village</div>
+							@for ( var f = 1; f <= RunManager.LastFloor; f++ )
+							{
+								var floor = f;
+								<div class="button @( Run is { Floor: var cur } && cur == floor ? "on" : "" )" onclick=@( () => DevActions.GoFloor( floor ) )>@( floor + " " + RunManager.FloorName( floor ) )</div>
+							}
+						</div>
+						<div class="row">
+							<div class="button @( Run is { State: RunState.Boss } ? "on" : "" )" onclick=@( () => DevActions.GoFloor( RunManager.BossFloor ) )>Boss</div>
+							<div class="button" onclick=@( () => DevActions.GoNextFloor() )>Next floor</div>
+							<div class="button small @( DevActions.SkipCards ? "on" : "" )" onclick=@( () => DevActions.SkipCards = !DevActions.SkipCards )>Skip the cards</div>
+							<div class="label">Seed</div>
+							<div class="value">@( DevActions.Seed > 0 ? DevActions.Seed.ToString() : "run's own" )</div>
+							<div class="button small" onclick=@( () => DevActions.UseCurrentSeed() )>@( "keep this floor's (" + DevActions.CurrentSeed + ")" )</div>
+							<div class="button small" onclick=@( () => DevActions.Seed = 0 )>clear</div>
+						</div>
+						<div class="row">
+							<div class="label">Here</div>
+							<div class="button small" onclick=@( () => DevActions.TeleportToAim() )>Where I look</div>
+							<div class="button small" onclick=@( () => DevActions.TeleportToTag( VoidMage.Dungeon.TierTag.Spawn ) )>Spawn</div>
+							<div class="button small" onclick=@( () => DevActions.TeleportToExit() )>Exit</div>
+							<div class="button small" onclick=@( () => DevActions.TeleportToShrine() )>Shrine</div>
+							<div class="button small" onclick=@( () => DevActions.TeleportToTag( VoidMage.Dungeon.TierTag.Ambush ) )>Ambush</div>
+							<div class="button small" onclick=@( () => DevActions.TeleportToTag( VoidMage.Dungeon.TierTag.Loot ) )>Loot</div>
+							<div class="button small" onclick=@( () => DevActions.TeleportToArenaSpawn() )>Arena spawn</div>
+						</div>
+						@foreach ( var chunk in Chunks( DevActions.Rooms.Take( 10 ), 5 ) )
+						{
+							<div class="row">
+								<div class="label">Rooms</div>
+								@foreach ( var r in chunk )
+								{
+									var room = r;
+									<div class="button small" onclick=@( () => DevActions.TeleportToTier( room ) )>@( room.Kind + " " + room.Cells.Count )</div>
+								}
+							</div>
+						}
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- spawn *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "spawn" ) )>@( Arrow( "spawn" ) ) Spawn <span class="dim">(@( DevActions.EnemiesAlive + " alive" ))</span></div>
+					@if ( Open( "spawn" ) )
+					{
+						<div class="row">
+							<div class="label">Count</div>
+							@foreach ( var n in new[] { 1, 3, 5, 10 } )
+							{
+								var count = n;
+								<div class="button small @( _count == count ? "on" : "" )" onclick=@( () => _count = count )>@( count )</div>
+							}
+							<div class="button small @( _ally ? "on" : "" )" onclick=@( () => _ally = !_ally )>on my side</div>
+							<div class="button small" onclick=@( () => DevActions.SpawnWave( _count ) )>Mixed wave</div>
+							<div class="button small" onclick=@( () => DevActions.KillAllEnemies() )>Kill all</div>
+							<div class="button small" onclick=@( () => DevActions.SleepAll( true ) )>Sleep all</div>
+							<div class="button small" onclick=@( () => DevActions.SleepAll( false ) )>Wake all</div>
+						</div>
+						@foreach ( var chunk in Chunks( DevActions.SkeletonKinds, 6 ) )
+						{
+							<div class="row">
+								@foreach ( var k in chunk )
+								{
+									var kind = k;
+									<div class="button small" onclick=@( () => DevActions.SpawnEnemies( kind, _count, _ally ) )>@( kind )</div>
+								}
+							</div>
+						}
+						@foreach ( var chunk in Chunks( DevActions.MonsterKindNames, 8 ) )
+						{
+							<div class="row">
+								@foreach ( var k in chunk )
+								{
+									var kind = k;
+									<div class="button small" onclick=@( () => DevActions.SpawnEnemies( kind, _count, _ally ) )>@( kind.Substring( 8 ) )</div>
+								}
+							</div>
+						}
+						<div class="row">
+							<div class="label">Drop</div>
+							<div class="button small" onclick=@( () => DevActions.DropRandomScroll() )>scroll</div>
+							<div class="button small" onclick=@( () => DevActions.DropSpellScroll() )>spell scroll</div>
+							<div class="button small" onclick=@( () => DevActions.DropPotion( PlayerPotions.Kind.Heal ) )>heal potion</div>
+							<div class="button small" onclick=@( () => DevActions.DropPotion( PlayerPotions.Kind.Mana ) )>mana potion</div>
+							<div class="button small" onclick=@( () => DevActions.DropShards( 12 ) )>shards</div>
+							<div class="button small" onclick=@( () => DevActions.DropSkin() )>skin</div>
+						</div>
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- boss *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "boss" ) )>@( Arrow( "boss" ) ) Boss <span class="dim">(@( DevActions.BossState ))</span></div>
+					@if ( Open( "boss" ) )
+					{
+						<div class="row">
+							<div class="button small" onclick=@( () => DevActions.BuildArena() )>Build arena here</div>
+							<div class="button small" onclick=@( () => DevActions.ResetBoss() )>Reset boss</div>
+							<div class="button small" onclick=@( () => DevActions.WakeBoss() )>Wake</div>
+							<div class="button small" onclick=@( () => DevActions.BossPhase( 1 ) )>Phase 1</div>
+							<div class="button small" onclick=@( () => DevActions.BossPhase( 2 ) )>Phase 2</div>
+							<div class="button small" onclick=@( () => DevActions.BossLaugh() )>Laugh</div>
+							<div class="button small" onclick=@( () => DevActions.ClearArena() )>Clear arena</div>
+						</div>
+						<div class="row">
+							<div class="button small" onclick=@( () => DevActions.BossKill( "l" ) )>Kill left hand</div>
+							<div class="button small" onclick=@( () => DevActions.BossKill( "r" ) )>Kill right hand</div>
+							<div class="button small" onclick=@( () => DevActions.BossKill( "skull" ) )>Kill skull (death scene)</div>
+							<div class="label">Hand for moves</div>
+							<div class="button small @( _hand == "l" ? "on" : "" )" onclick=@( () => _hand = "l" )>left</div>
+							<div class="button small @( _hand == "r" ? "on" : "" )" onclick=@( () => _hand = "r" )>right</div>
+						</div>
+						@foreach ( var chunk in Chunks( DevActions.BossMoves, 7 ) )
+						{
+							<div class="row">
+								<div class="label">Move</div>
+								@foreach ( var m in chunk )
+								{
+									var move = m;
+									<div class="button small" onclick=@( () => DevActions.BossAttack( move, _hand ) )>@( move )</div>
+								}
+							</div>
+						}
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- world *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "world" ) )>@( Arrow( "world" ) ) World</div>
+					@if ( Open( "world" ) )
+					{
+						<div class="row">
+							<div class="button small" onclick=@( () => DevActions.OpenAllDoors() )>Open doors</div>
+							<div class="button small" onclick=@( () => DevActions.CloseAllDoors() )>Close doors</div>
+							<div class="button small" onclick=@( () => DevActions.FireAllTraps() )>Fire traps</div>
+							<div class="button small" onclick=@( () => DevActions.BreakAllSecretWalls() )>Break secret walls</div>
+							<div class="button small" onclick=@( () => DevActions.RestockShop() )>Restock shop</div>
+						</div>
+						<div class="row">
+							<div class="button small @( DevActions.Night ? "on" : "" )" onclick=@( () => DevActions.SetNight( !DevActions.Night ) )>Night</div>
+							<div class="button small @( DevActions.Raining ? "on" : "" )" onclick=@( () => DevActions.SetRain( !DevActions.Raining ) )>Rain</div>
+							<div class="button small" onclick=@( () => DevActions.LightningNow() )>Lightning now</div>
+							<div class="label">Frogs</div>
+							<div class="button small" onclick=@( () => DevActions.Frogs( 0 ) )>0</div>
+							<div class="button small" onclick=@( () => DevActions.Frogs( 25 ) )>25</div>
+							<div class="button small" onclick=@( () => DevActions.Frogs( 200 ) )>200</div>
+						</div>
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- loadout *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "loadout" ) )>@( Arrow( "loadout" ) ) Loadout</div>
+					@if ( Open( "loadout" ) )
+					{
+						<div class="row">
+							<div class="label">Spell</div>
+							@foreach ( var s in VoidMage.Spells.SpellDatabase.All )
+							{
+								var spell = s;
+								<div class="button small" onclick=@( () => DevActions.SetSpell( spell.Id ) )>@( spell.Name )</div>
+							}
+						</div>
+						@foreach ( var chunk in Chunks( VoidMage.Inventory.Scroll.AllModifiers, 6 ) )
+						{
+							<div class="row">
+								<div class="label">Scroll +1</div>
+								@foreach ( var s in chunk )
+								{
+									var scroll = s;
+									<div class="button small" onclick=@( () => DevActions.GiveScroll( scroll ) )>@( scroll.Name )</div>
+								}
+							</div>
+						}
+						@foreach ( var chunk in Chunks( VoidMage.Boons.BoonDatabase.All, 6 ) )
+						{
+							<div class="row">
+								<div class="label">Boon</div>
+								@foreach ( var b in chunk )
+								{
+									var boon = b;
+									<div class="button small" onclick=@( () => DevActions.GiveBoon( boon.Id ) )>@( boon.Name )</div>
+								}
+							</div>
+						}
+					}
+				</div>
+
+				@* ---------------------------------------------------------------- intro *@
+				<div class="sec">
+					<div class="sechead" onclick=@( () => Flip( "intro" ) )>@( Arrow( "intro" ) ) Trailer intro</div>
+					@if ( Open( "intro" ) )
+					{
+						<div class="row">
+							<div class="button" onclick=@( () => DevActions.PlayTrailerIntro() )>Play the intro (dive into the portal)</div>
+							<div class="button" onclick=@( () => DevActions.BackToMenu() )>Back to the menu</div>
+						</div>
+						<div class="row">
+							<div class="label">Ends</div>
+							<div class="button small" onclick=@( () => MainMenuPanel.DiveEnd = MathF.Max( 0f, MainMenuPanel.DiveEnd - 10f ) )>−</div>
+							<div class="value">@( MainMenuPanel.DiveEnd.ToString( "0" ) + " u out" )</div>
+							<div class="button small" onclick=@( () => MainMenuPanel.DiveEnd = MathF.Min( 400f, MainMenuPanel.DiveEnd + 10f ) )>+</div>
+							<div class="label">Pull starts</div>
+							<div class="button small" onclick=@( () => MainMenuPanel.DivePullAt = MathF.Max( 60f, MainMenuPanel.DivePullAt - 40f ) )>−</div>
+							<div class="value">@( MainMenuPanel.DivePullAt.ToString( "0" ) + " u out" )</div>
+							<div class="button small" onclick=@( () => MainMenuPanel.DivePullAt = MathF.Min( 1500f, MainMenuPanel.DivePullAt + 40f ) )>+</div>
+							<div class="label">Wait before Play</div>
+							<div class="button small" onclick=@( () => MainMenuPanel.AutoPlayWait = MathF.Max( 0f, MainMenuPanel.AutoPlayWait - 0.5f ) )>−</div>
+							<div class="value">@( MainMenuPanel.AutoPlayWait.ToString( "0.0" ) + " s" )</div>
+							<div class="button small" onclick=@( () => MainMenuPanel.AutoPlayWait = MathF.Min( 10f, MainMenuPanel.AutoPlayWait + 0.5f ) )>+</div>
+						</div>
+						<div class="hint">Reloads into the menu, presses Play by itself, and the camera keeps flying into the portal to black.</div>
+					}
+				</div>
+
+			</div>
+		</div>
+	}
+	else if ( DevDirector.Armed && ( DevDirector.Paused || DevDirector.FreeCam || DevDirector.HudHidden || WorldTape.Armed || MathF.Abs( DevDirector.Speed - 1f ) > 0.001f ) )
+	{
+		<div class="dock">@( State )</div>
+	}
+</root>
+
+@code {
+	// Every dev tool as a button (user, 2026-09-23), on the director's own screen layer so it stays when the HUD is
+	// hidden. Sections fold; the cursor is out while it is up (Q locks it to fly the free camera with the panel
+	// showing). Buttons call DevDirector (time, camera, hud) and DevActions (everything else): the same static
+	// methods the console commands call. Rows never wrap (the layout gave wrapped rows no height, so sections rode
+	// over each other): long lists are cut into rows of a few by Chunks.
+
+	public static bool IsOpen { get; private set; }
+	/// <summary>The sword and the staff ignore clicks while the panel has the cursor.</summary>
+	public static bool Blocking => IsOpen && MouseLock.Release;
+
+	private static DevPanel _instance;
+	private readonly HashSet<string> _closed = new() { "loadout", "world", "boss", "intro", "orbit", "path" };
+	private int _count = 1;
+	private bool _ally;
+	private string _hand = "l";
+	private float _keySeconds = 2f;
+
+	private static IEnumerable<T[]> Chunks<T>( IEnumerable<T> items, int size )
+	{
+		var list = items.ToList();
+		for ( var i = 0; i < list.Count; i += size ) yield return list.Skip( i ).Take( size ).ToArray();
+	}
+
+	// the letterbox: black bars top and bottom to the picture's aspect (0 = none); the screen's own aspect is read each frame
+	private static readonly (string name, float ratio)[] Letterboxes = { ("none", 0f), ("2.39", 2.39f), ("2.0", 2f), ("1.85", 1.85f) };
+	private float _letterbox;
+	private float BarPercent
+	{
+		get
+		{
+			if ( _letterbox <= 0f || Screen.Height <= 0f ) return 0f;
+			var screen = Screen.Width / Screen.Height;
+			if ( _letterbox <= screen ) return 0f;
+			return (1f - screen / _letterbox) * 50f;
+		}
+	}
+
+	private static RunManager Run => RunManager.Instance;
+	private static VoidMage.Rendering.RetroFilter Retro => DevActions.Retro;
+
+	public static void Toggle() => SetOpen( !IsOpen );
+
+	public static void SetOpen( bool open )
+	{
+		// the published game has no director: the panel never opens there (no key, no command, no button)
+		if ( open && !DevDirector.Available ) return;
+		if ( open == IsOpen ) return;
+		IsOpen = open;
+		if ( open ) MouseLock.Release = true;
+		else MouseLock.Release = SpellLoadout.IsOpen;
+		if ( open && !DevDirector.Current.IsValid() && Game.ActiveScene.IsValid() ) DevDirector.Ensure( Game.ActiveScene );
+	}
+
+	private bool Open( string key ) => !_closed.Contains( key );
+	private void Flip( string key ) { if ( !_closed.Remove( key ) ) _closed.Add( key ); }
+	private string Arrow( string key ) => Open( key ) ? "▾" : "▸";
+
+	private static string TapeState => WorldTape.Replaying ? $"replay, {WorldTape.Back:0.0} s ago{( WorldTape.Playing ? $", x{WorldTape.PlaySpeed:0.##}" : "" )}"
+		: WorldTape.Armed ? $"recording, {WorldTape.Seconds:0} s held, {WorldTape.MegaBytes:0} MB, {WorldTape.ParkedCount} parked" : "off";
+
+	private string State
+	{
+		get
+		{
+			var parts = new List<string>();
+			if ( WorldTape.Replaying ) parts.Add( $"TAPE {WorldTape.Back:0.0}s ago" );
+			else if ( WorldTape.Armed ) parts.Add( "REC" );
+			if ( DevDirector.Paused && !WorldTape.Replaying ) parts.Add( "PAUSED" );
+			else if ( MathF.Abs( DevDirector.Speed - 1f ) > 0.001f ) parts.Add( $"x{DevDirector.Speed:0.##}" );
+			if ( DevDirector.FreeCam ) parts.Add( "FREE CAM" + ( MouseLock.Release ? " (Q to look)" : "" ) );
+			if ( DevDirector.HudHidden ) parts.Add( "HUD OFF" );
+			if ( PlayerHealth.God ) parts.Add( "god" );
+			if ( DevDirector.CleanFx ) parts.Add( "clean" );
+			if ( Run.IsValid() ) parts.Add( Run.State == RunState.Village ? "village" : Run.State == RunState.Boss ? "boss" : Run.Floor > 0 ? $"floor {Run.Floor}" : Run.State.ToString().ToLowerInvariant() );
+			return string.Join( " · ", parts );
+		}
+	}
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+		_instance = this;
+	}
+
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
+		if ( _instance == this ) { _instance = null; IsOpen = false; }
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( !IsOpen ) return;
+		// a run card or a death takes the screen; the panel gives it back
+		if ( Input.EscapePressed ) { Input.EscapePressed = false; SetOpen( false ); }
+	}
+
+	protected override int BuildHash() => HashCode.Combine( IsOpen, DevDirector.Paused, DevDirector.FreeCam, DevDirector.HudHidden, MouseLock.Release, _closed.Count, (int)( RealTime.Now * ( WorldTape.Replaying ? 20f : 3f ) ), WorldTape.Replaying );
+}

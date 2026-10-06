@@ -1,0 +1,10 @@
+// Alpha-blended unlit FX mesh material (solids: crystals, shards, smoke lumps). Colour comes from the renderer's Tint.
+Layer0
+{
+	shader "shaders/fx_unlit.shader"
+	F_ADDITIVE 0
+	g_vColor "[1.000000 1.000000 1.000000]"
+	g_flBrightness "1.000000"
+	g_flOpacity "0.850000"
+	g_flRimFade "0.000000"
+}

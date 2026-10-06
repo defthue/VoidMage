@@ -1,0 +1,39 @@
+POLYGON Fantasy Rivals toonified (Blender 5.0 headless)
+static: source 40 FBX (after skips) | toonified 40 | normal mode auto 31 / smooth 9
+static material families: FantasyRivalsShader 41
+characters: 23 rigged FBX, each with a coincident <mesh>_Outline shell object
+outline: exact copy, FantasyKingdomOutline material, no baked offset, smooth normals, not flipped -- heden_outline.shader inflates it
+units: source already cm (NOT scaled) -> static vmdl import_scale 0.3937, characters ScaleAndMirror 0.3937
+
+=== characters (23) ===
+arms_lower_01.fbx        32 bones  root root       15.1 cm tall  189.6 wide  slots FantasyRivalsGhost  (root bone added)
+arms_upper_01.fbx        32 bones  root root       15.1 cm tall  189.6 wide  slots FantasyRivalsGhost  (root bone added)
+barbariangiant_01.fbx    50 bones  root root      183.4 cm tall  288.9 wide  slots FantasyRivalsShader  (root bone added)
+big_ork_01.fbx           51 bones  root root      186.1 cm tall  288.9 wide  slots FantasyRivalsShader  (root bone added)
+dwarf_01.fbx             51 bones  root root      198.6 cm tall  288.9 wide  slots FantasyRivalsShader  (root bone added)
+elementalgolem_01.fbx    51 bones  root root      182.4 cm tall  289.3 wide  slots FantasyRivalsShader  (root bone added)
+fortgolem_01.fbx         51 bones  root root      188.3 cm tall  289.0 wide  slots FantasyRivalsShader  (root bone added)
+mechanicalgolem_01.fbx   51 bones  root root      179.1 cm tall  288.9 wide  slots FantasyRivalsShader  (root bone added)
+mutantguy_01.fbx         50 bones  root root      195.2 cm tall  306.9 wide  slots FantasyRivalsShader  (root bone added)
+pig_butcher_01.fbx       51 bones  root root      182.2 cm tall  288.9 wide  slots FantasyRivalsShader  (root bone added)
+reddemon_01.fbx          51 bones  root root      205.3 cm tall  288.9 wide  slots FantasyRivalsShader  (root bone added)
+slayer_01.fbx            51 bones  root root      185.3 cm tall  288.9 wide  slots FantasyRivalsShader  (root bone added)
+troll_01.fbx             51 bones  root root      181.8 cm tall  288.9 wide  slots FantasyRivalsShader  (root bone added)
+ancientqueen_01.fbx      50 bones  root root      198.4 cm tall  204.1 wide  slots FantasyRivalsShader  (root bone added)
+ancient_warrior_01.fbx   50 bones  root root      209.3 cm tall  204.8 wide  slots FantasyRivalsShader  (root bone added)
+darkelf_01.fbx           50 bones  root root      183.1 cm tall  204.8 wide  slots FantasyRivalsShader  (root bone added)
+evilgod_01.fbx           50 bones  root root      189.8 cm tall  203.8 wide  slots FantasyRivalsShader  (root bone added)
+forestguardian_01.fbx    50 bones  root root      219.4 cm tall  204.1 wide  slots FantasyRivalsShader  (root bone added)
+forestwitch_01.fbx       50 bones  root root      190.6 cm tall  204.1 wide  slots FantasyRivalsShader  (root bone added)
+medusa_01.fbx            50 bones  root root      187.2 cm tall  210.8 wide  slots FantasyRivalsShader  (root bone added)
+mystic_01.fbx            50 bones  root root      185.9 cm tall  204.8 wide  slots FantasyRivalsShader  (root bone added)
+spiritdemon.fbx          50 bones  root root      194.1 cm tall  204.1 wide  slots FantasyRivalsGhost,FantasyRivalsShader  (root bone added)
+medusasnakes_01.fbx      29 bones  root root       45.3 cm tall   69.6 wide  slots FantasyRivalsShader  (root bone added)
+
+=== static node names differing from filename (1) ===
+SM_Prop_TrollHelmet_01.fbx -> node ['SM_Prop_TrollHelmet']
+
+=== degenerate faces dropped on import (1, harmless) ===
+SM_Wep_PigButcher_01.fbx: 1 of 556 faces dropped (1 duplicate/degenerate in the source)
+
+=== problems (0) ===

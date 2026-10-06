@@ -1,0 +1,22 @@
+{
+  "kind": "snake",
+  "scale": 0.11198998584044818,
+  "fbx_size": [
+    105.35167455673218,
+    303.59857396928066,
+    287.9793065692555
+  ],
+  "width": 11.8,
+  "height": 34.0,
+  "depth": 32.3,
+  "units_per_bu": 11.19899858404482,
+  "root_bone": "Root",
+  "bones": 15,
+  "clips": [
+    "attack",
+    "death",
+    "idle",
+    "jump",
+    "walk"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "frog",
+  "scale": 0.05140615312083928,
+  "fbx_size": [
+    350.1526355743408,
+    150.13748200745155,
+    321.1566335188679
+  ],
+  "width": 18.0,
+  "height": 7.7,
+  "depth": 16.5,
+  "units_per_bu": 5.140615312083928,
+  "root_bone": "root",
+  "bones": 28,
+  "clips": [
+    "attack",
+    "death",
+    "idle",
+    "jump"
+  ]
+}

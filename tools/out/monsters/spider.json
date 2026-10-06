@@ -1,0 +1,123 @@
+{
+  "kind": "spider",
+  "title": "Spider",
+  "blend": "C:\\Users\\skipp\\Desktop\\Speelboord Studios\\Easy Animated Enemy Pack - Jan 2019\\Easy Animated Enemy Pack - Jan 2019\\Blends\\Spider.blend",
+  "fps": 24.0,
+  "armature": "HumanArmature",
+  "root_bone": "Root",
+  "bones": [
+    "Root",
+    "Body",
+    "FrontLeg.L",
+    "FrontLeg2.L",
+    "FrontLeg3.L",
+    "MidFrontLeg.L",
+    "MidFrontLeg2.L",
+    "MidFrontLeg3.L",
+    "BackLeg.L",
+    "BackLeg2.L",
+    "BackLeg3.L",
+    "MidBackLeg.L",
+    "MidBackLeg2.L",
+    "MidBackLeg3.L",
+    "FrontLeg.R",
+    "FrontLeg2.R",
+    "FrontLeg3.R",
+    "MidFrontLeg.R",
+    "MidFrontLeg2.R",
+    "MidFrontLeg3.R",
+    "BackLeg.R",
+    "BackLeg2.R",
+    "BackLeg3.R",
+    "MidBackLeg.R",
+    "MidBackLeg2.R",
+    "MidBackLeg3.R",
+    "Abdomen",
+    "Thorax",
+    "Head",
+    "PoleTarget.L",
+    "FrontFoot.L",
+    "MidFrontFoot.L",
+    "BackFoot.L",
+    "MidBackFoot.L",
+    "PoleTarget.R",
+    "FrontFoot2.R",
+    "MidFrontFoot.R",
+    "BackFoot.R",
+    "MidBackFoot.R"
+  ],
+  "body_mesh": "Spider",
+  "outline_mesh": "Spider_Outline",
+  "materials": {
+    "MonsterSpiderBody": {
+      "pack_slot": "Material",
+      "linear": [
+        0.052217,
+        0.052217,
+        0.052217
+      ]
+    },
+    "MonsterSpiderMarkings": {
+      "pack_slot": "Material.001",
+      "linear": [
+        0.367235,
+        0.024688,
+        0.024688
+      ]
+    }
+  },
+  "mat_prefix": "MonsterSpider",
+  "rest_min": [
+    -2.9593,
+    -2.7252,
+    -0.0001
+  ],
+  "rest_max": [
+    2.9518,
+    2.3536,
+    2.0021
+  ],
+  "rest_size": [
+    5.9112,
+    5.0788,
+    2.0023
+  ],
+  "rest_max_dim": 5.9112,
+  "clips": [
+    {
+      "name": "attack",
+      "action": "Spider_Attack",
+      "start": 0,
+      "end": 18,
+      "seconds": 0.75
+    },
+    {
+      "name": "death",
+      "action": "Spider_Death",
+      "start": 0,
+      "end": 25,
+      "seconds": 1.042
+    },
+    {
+      "name": "idle",
+      "action": "Spider_Idle",
+      "start": 0,
+      "end": 100,
+      "seconds": 4.167
+    },
+    {
+      "name": "jump",
+      "action": "Spider_Jump",
+      "start": 0,
+      "end": 17,
+      "seconds": 0.708
+    },
+    {
+      "name": "walk",
+      "action": "Spider_Walk",
+      "start": 0,
+      "end": 20,
+      "seconds": 0.833
+    }
+  ]
+}

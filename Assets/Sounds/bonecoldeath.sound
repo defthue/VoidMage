@@ -1,0 +1,55 @@
+{
+  "UI": false,
+  "Volume": "1",
+  "Pitch": "1.0",
+  "Decibels": 76,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/bonecoldeath.vsnd"
+  ],
+  "OcclusionEnabled": false,
+  "Occlusion": false,
+  "ReverbEnabled": true,
+  "Reflections": true,
+  "AirAbsorption": false,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "Distance": 20000,
+  "Falloff": [
+    {
+      "x": 0,
+      "y": 1,
+      "in": 0,
+      "out": -1.2,
+      "mode": "Mirrored"
+    },
+    {
+      "x": 0.1,
+      "y": 0.5,
+      "in": 2,
+      "out": -2,
+      "mode": "Mirrored"
+    },
+    {
+      "x": 0.35,
+      "y": 0.1,
+      "in": 0.16,
+      "out": -0.16,
+      "mode": "Mirrored"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "in": 0,
+      "out": 0,
+      "mode": "Mirrored"
+    }
+  ],
+  "DefaultMixer": {
+    "Name": "unknown",
+    "Id": "00000000-0000-0000-0000-000000000000"
+  },
+  "__references": [],
+  "__version": 1
+}

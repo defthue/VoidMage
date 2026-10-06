@@ -1,0 +1,143 @@
+@using System
+@using System.Collections.Generic
+@using Sandbox
+@using Sandbox.UI
+@inherits PanelComponent
+@namespace VoidMage.UI
+@attribute [StyleSheet]
+
+<root>
+	@foreach ( var e in _entries )
+	{
+		var screen = Project( e.Position );
+		if ( screen is null ) continue;
+
+		// Only the anchor's screen position is computed per frame; the climb, sideways drift, grow-in, crit pop
+		// and fade are stylesheet animations started once at spawn (DamageNumbers.razor.scss). The drift rides a
+		// margin-left transition: the first render lands at 0 so the second render's target has something to
+		// transition from.
+		var drift = e.Seen ? e.DriftCss : "0px";
+		e.Seen = true;
+
+		<div class="popup @e.Classes" style="left: @(screen.Value.x.ToString("0.##"))%; top: @(screen.Value.y.ToString("0.##"))%; margin-left: @drift;">
+			<div class="inner">@e.Text</div>
+		</div>
+	}
+</root>
+
+@code {
+	// Floating damage numbers over the enemy: dark red for the sword, dark purple for magic, a bigger yellow-orange
+	// "25!" for a crit. Only hits on enemies; the player's own damage is the vignette and the shake.
+	// The number is posted by the host (SkeletonNpc.ShowDamage) after it subtracted the damage, so it is what
+	// actually landed: a blocked hit shows nothing.
+
+	// Every keyframe in the .scss is timed to this; keep them in step when retuning.
+	public const float LifetimeSeconds = 0.8f;
+
+	// Each number picks a fixed sideways heading in this range at spawn, so a flurry fans out instead of stacking.
+	public const float DriftRangePixels = 40f;
+
+	public const float MaxVisibleDistance = 1500f;
+
+	private sealed class Entry
+	{
+		public Vector3 Position;
+		public string Text;
+		public string Classes;
+		public string DriftCss;
+		public float SpawnTime;
+		public bool Seen;
+	}
+
+	private static DamageNumbers _current;
+	private readonly List<Entry> _entries = new();
+
+	// What the wall check looks through: the enemy that was hit, the player, corpses, breakable rubble and the other
+	// non-solid helpers. Only the dungeon itself (walls, floors, doors, props with colliders) hides a number.
+	private static readonly string[] OcclusionIgnore = { "player", "viewmodel", "posesource", "spellfire", "trigger", "npc", "enemy", "ragdoll", VoidMage.Combat.Debris.Tag, VoidMage.Npc.SkeletonCorpse.RagdollTag };
+
+	// The ray stops this short of the number: a hit on an enemy pressed against a wall sits on the wall's surface.
+	private const float OcclusionSlack = 8f;
+
+	/// <summary>Post a number at a world position. A no-op on a peer without a HUD (a dedicated host), and dropped when a wall stands between the camera and the hit: a trap going off in the next room is not this player's fight.</summary>
+	public static void Push( int damage, Vector3 position, bool crit, bool magic )
+	{
+		var panel = _current;
+		if ( !panel.IsValid() ) return;
+		if ( panel.IsOccluded( position ) ) return;
+
+		panel._entries.Add( new Entry
+		{
+			Position = position,
+			Text = crit ? $"{damage}!" : damage.ToString(),
+			Classes = (magic ? "magic" : "physical") + (crit ? " crit" : ""),
+			DriftCss = $"{Game.Random.Float( -DriftRangePixels, DriftRangePixels ):0.#}px",
+			SpawnTime = Time.Now,
+		} );
+	}
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+		_current = this;
+	}
+
+	protected override void OnDisabled()
+	{
+		base.OnDisabled();
+		if ( _current == this ) _current = null;
+		_entries.Clear();
+	}
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+
+		var expiry = Time.Now - LifetimeSeconds;
+
+		// reverse for-loop rather than RemoveAll: no closure allocated every frame
+		var removed = 0;
+		for ( var i = _entries.Count - 1; i >= 0; i-- )
+		{
+			if ( _entries[i].SpawnTime > expiry ) continue;
+			_entries.RemoveAt( i );
+			removed++;
+		}
+
+		// rebuilt every frame while anything is in flight: the world-to-screen position changes continuously
+		if ( _entries.Count > 0 || removed > 0 )
+			StateHasChanged();
+	}
+
+	// One ray from the camera toward the number, checked once at spawn (the number lives under a second; a per-frame
+	// check would make it blink on a doorframe). Anything solid short of the point hides it.
+	private bool IsOccluded( Vector3 world )
+	{
+		var camera = Scene?.Camera;
+		if ( !camera.IsValid() ) return false;
+
+		var from = camera.WorldPosition;
+		var delta = world - from;
+		var length = delta.Length;
+		if ( length <= OcclusionSlack ) return false;
+
+		var to = from + delta / length * (length - OcclusionSlack);
+		var tr = Scene.Trace.Ray( from, to ).WithoutTags( OcclusionIgnore ).Run();
+		return tr.Hit;
+	}
+
+	// Percent-of-screen coordinates, or null when the point is behind the camera or beyond the visible range.
+	private Vector2? Project( Vector3 world )
+	{
+		var camera = Scene?.Camera;
+		if ( !camera.IsValid() ) return null;
+
+		// a point behind the viewer projects onto the screen just as happily as one in front
+		var toPoint = world - camera.WorldPosition;
+		if ( camera.WorldRotation.Forward.Dot( toPoint ) <= 0f ) return null;
+		if ( toPoint.LengthSquared > MaxVisibleDistance * MaxVisibleDistance ) return null;
+
+		var screen = camera.PointToScreenNormal( world );
+		return new Vector2( screen.x * 100f, screen.y * 100f );
+	}
+}
